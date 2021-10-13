@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStyle } from '../utils/util'
+import { createStyle } from '../utils/style'
 
 const divStyle = createStyle({
   height: '70px'
