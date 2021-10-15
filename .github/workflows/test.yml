@@ -1,0 +1,24 @@
+name: Test
+on:
+  push:
+    branches-ignore:
+      - "data"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build website
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build
+  
+  lint:
+    name: Run linters
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run lint
