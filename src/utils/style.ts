@@ -1,6 +1,6 @@
 import * as CSS from 'csstype'
 
-export const baseStyle: CSS.Properties = {
+const baseStyle: CSS.Properties = {
   fontFamily: 'verdana'
 }
 

@@ -22,3 +22,11 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm install
       - run: npm run lint
+
+  exports:
+    name: Check unused exports
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run exports
