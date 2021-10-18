@@ -10,7 +10,7 @@ export default function App() {
   const [loadingError, showError] = useState<[string, Error] | []>([])
 
   useEffect(() => {
-    if (!questions)
+    if (questions)
       getRandomQuestions()
         .then(loadQuestions)
         .catch((e) => {
