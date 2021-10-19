@@ -1,5 +1,10 @@
 name: Database
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/database.yml
   workflow_dispatch:
 
 jobs:
@@ -21,6 +26,7 @@ jobs:
       - run: |
           [ ! -f temp/database.json ] || mv temp/database.json data/database.json
           cd data
+          ls
       - uses: EndBug/add-and-commit@v7
         with:
           add: database.json
