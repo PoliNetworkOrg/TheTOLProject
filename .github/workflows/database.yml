@@ -33,4 +33,5 @@ jobs:
           cwd: ./data/
           branch: data
           message: "[auto] build: update database"
+          pathspec_error_handling: exitImmediately
       
