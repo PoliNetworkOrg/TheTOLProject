@@ -1,0 +1,30 @@
+name: Database
+on:
+  workflow_dispatch:
+
+jobs:
+  database:
+    name: Build database
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          ref: data
+          path: ./data/
+      - run: npm install
+      - run: npm run build:db
+        env:
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          GOOGLE_DATABASE_SHEET_ID: ${{ secrets.GOOGLE_DATABASE_SHEET_ID }}
+      - run: |
+          [ ! -f temp/database.json ] || mv temp/database.json data/database.json
+          cd data
+      - uses: EndBug/add-and-commit@v7
+        with:
+          add: data/database.json
+          cwd: ./data/
+          branch: data
+          message: "[auto] build: update database"
+      
