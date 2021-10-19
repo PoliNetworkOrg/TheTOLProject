@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "react-scripts build",
-    "build:database": "ts-node scripts/database.ts",
+    "build:db": "ts-node scripts/database.ts",
     "eject": "react-scripts eject",
     "exports": "ts-prune -e",
     "lint": "eslint ./src ./scripts",

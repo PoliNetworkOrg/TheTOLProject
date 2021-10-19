@@ -32,6 +32,31 @@ interface Question {
 
 type QuestionsData = Record<category, Question[]>
 
+interface Database extends QuestionsData {
+  meta: {
+    version: string
+    lastUpdate: string
+  }
+}
+
+generateJSON().catch(console.error)
+
+async function generateJSON() {
+  const sheets = await getParsedSheets(),
+    db: Database = {
+      meta: {
+        version: process.env.npm_package_version || '???',
+        lastUpdate: new Date().toISOString()
+      },
+      ...sheets
+    }
+
+  fs.writeFileSync(
+    path.join(__dirname, '..', 'temp/database.json'),
+    JSON.stringify(db, null, 2)
+  )
+}
+
 async function readSpreadsheet() {
   const {
     GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -112,6 +137,7 @@ async function getParsedSheets() {
         correct: r.rispostaCorretta,
         attachments: ((r.immaginiQuesito as string) || '')
           .split('\n')
+          .filter((e) => !!e)
           .map((s) => s.replace(/\d+: /g, ''))
       }))
 
@@ -136,14 +162,3 @@ async function getParsedSheets() {
 
   return res as QuestionsData
 }
-
-async function generateJSON() {
-  const db = await getParsedSheets()
-
-  fs.writeFileSync(
-    path.join(__dirname, '..', 'temp/database.json'),
-    JSON.stringify(db, null, 2)
-  )
-}
-
-generateJSON().catch(console.error)
