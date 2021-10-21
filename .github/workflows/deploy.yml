@@ -1,0 +1,20 @@
+name: Deploy
+on:
+  push:
+    paths:
+      - .github/workflows/deploy.yml
+      - src/**
+  workflow_dispatch:
+
+jobs:
+  gh-pages:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm run deploy -- -u "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
