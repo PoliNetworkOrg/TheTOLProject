@@ -2,6 +2,7 @@
   "name": "the-tol-project",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://polinetworkorg.github.io/TheTOLProject/",
   "scripts": {
     "build": "react-scripts build",
     "build:db": "([ -d temp ] || mkdir temp) && ts-node scripts/database.ts",
