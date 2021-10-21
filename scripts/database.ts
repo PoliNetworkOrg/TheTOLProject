@@ -5,38 +5,12 @@ import {
   GoogleSpreadsheet,
   GoogleSpreadsheetWorksheet
 } from 'google-spreadsheet'
+import { categoryDict, Database, QuestionsData } from '../src/utils/database'
 
 dotenv.config()
 
-const categoryDict = {
-  quesiti_ING: 'ing',
-  quesiti_MAT: 'mat',
-  quesiti_COM: 'com',
-  quesiti_FIS: 'fis'
-} as const
-type category = typeof categoryDict[keyof typeof categoryDict]
-
 interface QuestionSheet extends GoogleSpreadsheetWorksheet {
   title: keyof typeof categoryDict
-}
-
-type answerLetter = 'a' | 'b' | 'c' | 'd' | 'e'
-
-interface Question {
-  id: string
-  text: string
-  answers: Record<answerLetter, string>
-  correct: answerLetter
-  attachments: string[]
-}
-
-type QuestionsData = Record<category, Question[]>
-
-interface Database extends QuestionsData {
-  meta: {
-    version: string
-    lastUpdate: string
-  }
 }
 
 generateJSON().catch(console.error)
