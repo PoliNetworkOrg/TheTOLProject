@@ -6,6 +6,7 @@ import {
   readDatabase,
   selectRandomQuestions
 } from '../utils/database'
+import DBPreview from './DBPreview'
 import ErrorView from './ErrorView'
 import Header from './Header'
 import QuestionsForm from './QuestionsForm/QuestionsForm'
@@ -23,7 +24,7 @@ type view = 'dbPreview'
 export default function App() {
   const [database, loadDatabase] = useState<Database>()
   const [questions, selectQuestions] = useState<QuestionsData>()
-  const [view, selectView] = useState<view>('dbPreview')
+  const [view] = useState<view>('dbPreview')
   const [loadingError, showError] = useState<[string, Error] | []>([])
 
   useEffect(() => {
@@ -51,7 +52,12 @@ export default function App() {
         internal={loadingError[1]}
       />
       {/* <p>App start</p> */}
-      <QuestionsForm questions={questions} />
+
+      {view == 'dbPreview' && database ? (
+        <DBPreview db={database} />
+      ) : (
+        <QuestionsForm questions={questions} />
+      )}
       {/* <p>App end</p> */}
       <Separator text="Placeholder bottom separator text" />
     </div>

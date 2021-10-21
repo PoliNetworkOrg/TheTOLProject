@@ -12,7 +12,7 @@ export type category = typeof categoryDict[keyof typeof categoryDict]
 
 type answerLetter = 'a' | 'b' | 'c' | 'd' | 'e'
 
-interface Question {
+export interface Question {
   id: string
   text: string
   answers: Record<answerLetter, string>
