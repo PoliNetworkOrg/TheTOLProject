@@ -120,14 +120,14 @@ async function getParsedSheets() {
           (e) => e.id == q.id && e.text
         )
 
-        if (sameText.length != 1)
+        if (sameText.length > 1)
           throw new Error(
             `Issue with COM question: there are ${sameText.length} complete questions with ID ${q.id}.`
           )
 
         return {
           ...q,
-          text: sameText[0].text
+          text: (sameText[0] || q).text
         }
       } else return q
     })
