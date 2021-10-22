@@ -1,5 +1,7 @@
 import React from 'react'
-import { QuestionsData } from '../../utils/database'
+import { category, QuestionsData } from '../../utils/database'
+import { statePair } from '../../utils/types'
+import { AnswersData, view } from '../App'
 import AnswerForm from './AnswerForm'
 import BottomControls from './BottomControls'
 import QuestionView from './QuestionView'
@@ -7,18 +9,20 @@ import RecapBar from './RecapBar'
 import TopControls from './TopControls'
 
 interface QuestionsFormProps {
-  questions?: QuestionsData
+  questions: QuestionsData
+  viewState: statePair<view>
+  sectionState: statePair<category>
+  answersState: statePair<AnswersData>
 }
 export default function QuestionsForm(props: QuestionsFormProps) {
   return (
     <div hidden={!props.questions}>
-      <code>
-        {props.questions &&
-          Object.entries(props.questions)
-            .map(([key, value]) => `${key}: ${value.length}`)
-            .join('\n')}
-      </code>
-      <TopControls />
+      <TopControls
+        sectionState={props.sectionState}
+        viewState={props.viewState}
+        questions={props.questions}
+        answers={props.answersState[0]}
+      />
       <RecapBar />
       <QuestionView />
       <AnswerForm />

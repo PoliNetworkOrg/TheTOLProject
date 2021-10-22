@@ -5,12 +5,12 @@ import {
   GoogleSpreadsheet,
   GoogleSpreadsheetWorksheet
 } from 'google-spreadsheet'
-import { categoryDict, Database, QuestionsData } from '../src/utils/database'
+import { sheetDict, Database, QuestionsData } from '../src/utils/database'
 
 dotenv.config()
 
 interface QuestionSheet extends GoogleSpreadsheetWorksheet {
-  title: keyof typeof categoryDict
+  title: keyof typeof sheetDict
 }
 
 generateJSON().catch(console.error)
@@ -45,7 +45,7 @@ async function readSpreadsheet() {
     throw new Error('Google database sheet id missing')
 
   const doc = new GoogleSpreadsheet(GOOGLE_DATABASE_SHEET_ID),
-    sheetTitles = Object.keys(categoryDict)
+    sheetTitles = Object.keys(sheetDict)
 
   await doc.useServiceAccountAuth({
     client_email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -96,7 +96,7 @@ async function getParsedSheets() {
         `Invalid database structure: check structure of the ${sheet.title} sheet.`
       )
 
-    res[categoryDict[sheet.title]] = rows.map((r) => ({
+    res[sheetDict[sheet.title]] = rows.map((r) => ({
       id: r.ID,
       sub: r.sub,
       track: r.brano,

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
+  answerLetter,
   category,
   Database,
   QuestionsData,
@@ -19,12 +20,28 @@ const sampleSize: Record<category, number> = {
   fis: 5
 }
 
-export type view = 'dbPreview' | 'TOL-inizioTol'
+export type view = 'dbPreview' | 'TOL-startSec' | 'TOL-end'
+
+interface Answer {
+  id: number
+  sub?: number
+  letter: answerLetter | '?'
+  flagged: boolean
+}
+
+export type AnswersData = Record<category, Answer[]>
 
 export default function App() {
   const [database, loadDatabase] = useState<Database>()
   const [questions, selectQuestions] = useState<QuestionsData>()
   const [view, selectView] = useState<view>('dbPreview')
+  const sectionState = useState<category>('ing')
+  const answersState = useState<AnswersData>({
+    ing: [],
+    mat: [],
+    com: [],
+    fis: []
+  })
   const [loadingError, showError] = useState<[string, Error] | []>([])
 
   useEffect(() => {
@@ -55,9 +72,14 @@ export default function App() {
 
       {view == 'dbPreview' && database ? (
         <DBPreview db={database} />
-      ) : (
-        <QuestionsForm questions={questions} />
-      )}
+      ) : questions ? (
+        <QuestionsForm
+          questions={questions as QuestionsData}
+          viewState={[view, selectView]}
+          sectionState={sectionState}
+          answersState={answersState}
+        />
+      ) : undefined}
       {/* <p>App end</p> */}
       <Separator text="Placeholder bottom separator text" />
     </div>

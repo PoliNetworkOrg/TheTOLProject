@@ -30,7 +30,7 @@ export default function Header({ viewState }: HeaderProps) {
         label="Toggle demo view"
         onClick={() => {
           const [currentView, selectView] = viewState
-          if (currentView == 'dbPreview') selectView('TOL-inizioTol')
+          if (currentView == 'dbPreview') selectView('TOL-startSec')
           else selectView('dbPreview')
         }}
       />

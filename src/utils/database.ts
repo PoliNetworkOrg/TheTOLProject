@@ -2,15 +2,15 @@ import axios from 'axios'
 import _ from 'underscore'
 import packageJson from '../../package.json'
 
-export const categoryDict = {
+export const sheetDict = {
   quesiti_ING: 'ing',
   quesiti_MAT: 'mat',
   quesiti_COM: 'com',
   quesiti_FIS: 'fis'
 } as const
-export type category = typeof categoryDict[keyof typeof categoryDict]
+export type category = typeof sheetDict[keyof typeof sheetDict]
 
-type answerLetter = 'a' | 'b' | 'c' | 'd' | 'e'
+export type answerLetter = 'a' | 'b' | 'c' | 'd' | 'e'
 
 export interface Question {
   id: string
@@ -57,9 +57,7 @@ export function selectRandomQuestions(
     // Manipulate db entries
     (Object.entries(db) as [category /* or "meta" */, Question[]][])
       // Select only entries associated with a category <=> exclude "meta"
-      .filter(([key]) =>
-        (Object.values(categoryDict) as string[]).includes(key)
-      )
+      .filter(([key]) => (Object.values(sheetDict) as string[]).includes(key))
       .map(([key, questions]) => {
         // Select only validated questions
         const validQuestions = questions.filter((q) => q.validated)
