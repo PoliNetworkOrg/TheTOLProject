@@ -98,6 +98,8 @@ async function getParsedSheets() {
 
     res[categoryDict[sheet.title]] = rows.map((r) => ({
       id: r.ID,
+      sub: r.sub,
+      track: r.brano,
       text: r.quesito,
       answers: {
         a: r.rispostaA,
@@ -115,17 +117,17 @@ async function getParsedSheets() {
     }))
 
     res['com'] = res['com']?.map((q, _, arr) => {
-      if (!q.text) {
-        const sameText = arr.filter((e) => e.id == q.id && e.text)
+      if (!q.track) {
+        const sameTrack = arr.filter((e) => e.id == q.id && e.track)
 
-        if (sameText.length > 1)
+        if (sameTrack.length > 1)
           throw new Error(
-            `Issue with COM question: there are ${sameText.length} complete questions with ID ${q.id}.`
+            `Issue with COM question: there are ${sameTrack.length} complete questions with ID ${q.id}.`
           )
 
         return {
           ...q,
-          text: (sameText[0] || q).text
+          track: (sameTrack[0] || q).track
         }
       } else return q
     })

@@ -19,6 +19,10 @@ export interface Question {
   correct: answerLetter
   attachments: string[]
   validated: boolean
+
+  // These are only present for COM questions
+  sub?: string
+  track?: string
 }
 
 export type QuestionsData = Record<category, Question[]>
