@@ -1,7 +1,7 @@
 import React from 'react'
 import { category, Database, Question } from '../utils/database'
 
-import RenderedText from './QuestionsForm/RenderedText'
+import RenderedText from './Util/RenderedText'
 
 interface DBPreviewProps {
   db: Database

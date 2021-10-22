@@ -10,7 +10,7 @@ import DBPreview from './DBPreview'
 import ErrorView from './ErrorView'
 import Header from './Header'
 import QuestionsForm from './QuestionsForm/QuestionsForm'
-import Separator from './Separator'
+import Separator from './Util/Separator'
 
 const sampleSize: Record<category, number> = {
   ing: 30,
@@ -19,12 +19,12 @@ const sampleSize: Record<category, number> = {
   fis: 5
 }
 
-type view = 'dbPreview'
+export type view = 'dbPreview' | 'TOL-inizioTol'
 
 export default function App() {
   const [database, loadDatabase] = useState<Database>()
   const [questions, selectQuestions] = useState<QuestionsData>()
-  const [view] = useState<view>('dbPreview')
+  const [view, selectView] = useState<view>('dbPreview')
   const [loadingError, showError] = useState<[string, Error] | []>([])
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function App() {
 
   return (
     <div>
-      <Header />
+      <Header viewState={[view, selectView]} />
       <Separator text="Placeholder top separator text" />
       <ErrorView
         hidden={!loadingError[0]}

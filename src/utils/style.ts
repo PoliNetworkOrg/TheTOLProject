@@ -1,5 +1,7 @@
 import * as CSS from 'csstype'
 
+export type cssLike = CSS.Properties
+
 const baseStyle: CSS.Properties = {
   fontFamily: 'verdana'
 }
