@@ -96,25 +96,23 @@ async function getParsedSheets() {
         `Invalid database structure: check structure of the ${sheet.title} sheet.`
       )
 
-    res[categoryDict[sheet.title]] = rows
-      .filter((r) => r.validato == 'Sì')
-      .map((r) => ({
-        id: r.ID,
-        text: r.quesito,
-        answers: {
-          a: r.rispostaA,
-          b: r.rispostaB,
-          c: r.rispostaC,
-          d: r.rispostaD,
-          e: r.rispostaE
-        },
-        correct: r.rispostaCorretta,
-        attachments: ((r.immaginiQuesito as string) || '')
-          .split('\n')
-          .filter((e) => !!e)
-          .map((s) => s.replace(/\d+: /g, '')),
-        validated: (r.validato as string | undefined)?.toLowerCase() == 'sì'
-      }))
+    res[categoryDict[sheet.title]] = rows.map((r) => ({
+      id: r.ID,
+      text: r.quesito,
+      answers: {
+        a: r.rispostaA,
+        b: r.rispostaB,
+        c: r.rispostaC,
+        d: r.rispostaD,
+        e: r.rispostaE
+      },
+      correct: r.rispostaCorretta,
+      attachments: ((r.immaginiQuesito as string) || '')
+        .split('\n')
+        .filter((e) => !!e)
+        .map((s) => s.replace(/\d+: /g, '')),
+      validated: (r.validato as string | undefined)?.toLowerCase() == 'sì'
+    }))
 
     res['com']?.map((q) => {
       if (!q.text) {
