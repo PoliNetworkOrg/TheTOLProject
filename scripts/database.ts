@@ -114,11 +114,9 @@ async function getParsedSheets() {
       validated: (r.validato as string | undefined)?.toLowerCase() == 'sì'
     }))
 
-    res['com']?.map((q) => {
+    res['com'] = res['com']?.map((q, _, arr) => {
       if (!q.text) {
-        const sameText = (res['com'] || []).filter(
-          (e) => e.id == q.id && e.text
-        )
+        const sameText = arr.filter((e) => e.id == q.id && e.text)
 
         if (sameText.length > 1)
           throw new Error(
