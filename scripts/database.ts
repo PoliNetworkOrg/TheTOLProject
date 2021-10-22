@@ -112,7 +112,8 @@ async function getParsedSheets() {
         attachments: ((r.immaginiQuesito as string) || '')
           .split('\n')
           .filter((e) => !!e)
-          .map((s) => s.replace(/\d+: /g, ''))
+          .map((s) => s.replace(/\d+: /g, '')),
+        validated: (r.validato as string | undefined)?.toLowerCase() == 'sì'
       }))
 
     res['com']?.map((q) => {

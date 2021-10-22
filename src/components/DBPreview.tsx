@@ -23,6 +23,8 @@ export default function DBPreview({ db }: DBPreviewProps) {
               <div key={key + q.id}>
                 <RenderedText text={q.text} />
                 <br />
+                <p>Valid: {q.validated}</p>
+                <br />
                 <RenderedText text={q.answers.a} />
                 <br />
                 <RenderedText text={q.answers.b} />

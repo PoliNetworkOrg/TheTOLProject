@@ -18,6 +18,7 @@ export interface Question {
   answers: Record<answerLetter, string>
   correct: answerLetter
   attachments: string[]
+  validated: boolean
 }
 
 export type QuestionsData = Record<category, Question[]>
@@ -46,7 +47,7 @@ export async function readDatabase() {
 
 export function selectRandomQuestions(
   db: Database,
-  options: Record<category, number | 'all'> | 'all'
+  options: Record<category, number>
 ): QuestionsData {
   return Object.fromEntries(
     // Manipulate db entries
@@ -56,17 +57,17 @@ export function selectRandomQuestions(
         (Object.values(categoryDict) as string[]).includes(key)
       )
       .map(([key, questions]) => {
-        // If we want all the questions, return all of them
-        if (options == 'all' || options[key] == 'all') return [key, questions]
+        // Select only validated questions
+        const validQuestions = questions.filter((q) => q.validated)
 
-        // Otherwise, get the question ids, remove duplicates, shuffle them, and select the appropriate number of questions.
-        const resIds = _.shuffle(_.uniq(questions.map((v) => v.id))).slice(
+        // Get the question ids, remove duplicates, shuffle them, and select the appropriate number of questions.
+        const resIds = _.shuffle(_.uniq(validQuestions.map((v) => v.id))).slice(
           0,
           options[key] as number
         )
 
-        // Return only the questions
-        return [key, questions.filter((q) => resIds.includes(q.id))]
+        // Return only the questions with a selected ID
+        return [key, validQuestions.filter((q) => resIds.includes(q.id))]
       })
   ) as QuestionsData
 }
