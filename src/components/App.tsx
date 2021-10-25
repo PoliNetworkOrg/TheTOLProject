@@ -22,7 +22,7 @@ const sampleSize: Record<category, number> = {
 
 export type view = 'dbPreview' | 'TOL-startSec' | 'TOL-end'
 
-interface Answer {
+export interface Answer {
   id: string
   sub?: string
   letter: answerLetter | undefined

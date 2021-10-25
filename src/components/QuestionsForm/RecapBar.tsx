@@ -28,7 +28,7 @@ export default function RecapBar(props: RecapBarProps) {
         return (
           <AnswerCell
             key={i}
-            index={i + ''}
+            index={i}
             letter={answer?.letter}
             flagged={answer?.flagged || false}
             onClick={() => {
@@ -52,8 +52,8 @@ const cellContainerStyle = createStyle({
 })
 
 const cellSubStyle = createStyle({
-  flex: 1,
   padding: '0.3em',
+  height: '1.2em',
   boxShadow:
     '1px 0 0 0 #606060, 0 1px 0 0 #606060, 1px 1px 0 0 #606060, /* corner */ 1px 0 0 0 #606060 inset, 0 1px 0 0 #606060 inset'
 })
@@ -64,8 +64,12 @@ const selectedCell = createStyle({
   color: 'black'
 })
 
+const pStyle = createStyle({
+  margin: 'auto'
+})
+
 interface AnswerCellProps {
-  index: string
+  index: number
   letter: answerLetter | undefined
   flagged: boolean
   onClick: () => void
@@ -88,18 +92,18 @@ function AnswerCell(props: AnswerCellProps) {
           ...(props.selected ? { fontWeight: 'bold' } : {})
         }}
       >
-        <span>{props.index}</span>
+        <p style={pStyle}>{props.index + 1}</p>
       </div>
       <div
         style={{
           ...cellSubStyle,
-          backgroundColor: props.flagged ? 'yellow' : 'white'
+          backgroundColor: props.flagged ? theme.questionYellow : 'white'
         }}
       >
-        <span>
-          {props.letter || 'jjj'}
+        <p style={pStyle}>
+          {props.letter || ' '}
           {props.flagged && '?'}
-        </span>
+        </p>
       </div>
     </div>
   )

@@ -4,6 +4,7 @@ import { statePair } from '../../utils/types'
 import { AnswersData, view } from '../App'
 import AnswerForm from './AnswerForm'
 import BottomControls from './BottomControls'
+import QuestionHeader from './QuestionHeader'
 import QuestionView from './QuestionView'
 import RecapBar from './RecapBar'
 import TopControls from './TopControls'
@@ -18,8 +19,10 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   const currentQuestionIndexState = useState(0),
     [currentSection, setSection] = props.sectionState
 
+  if (!props.questions) return <span>Loading...</span>
+
   return (
-    <div hidden={!props.questions}>
+    <div>
       <TopControls
         sectionState={[
           currentSection,
@@ -36,6 +39,13 @@ export default function QuestionsForm(props: QuestionsFormProps) {
         currentQuestionIndexState={currentQuestionIndexState}
         sectionAnswers={props.answersState[0][props.sectionState[0]]}
         sectionQuestions={props.questions[props.sectionState[0]]}
+      />
+      <QuestionHeader
+        currentAnswer={
+          props.answersState[0][currentSection][currentQuestionIndexState[0]]
+        }
+        questionIndexState={currentQuestionIndexState}
+        questions={props.questions}
       />
       <QuestionView />
       <AnswerForm />

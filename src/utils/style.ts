@@ -15,5 +15,6 @@ export function createStyle(...styles: CSS.Properties[]) {
 
 export const theme = {
   primary: '#069',
-  lightBackground: '#F3F3EE'
+  lightBackground: '#F3F3EE',
+  questionYellow: 'yellow'
 }
