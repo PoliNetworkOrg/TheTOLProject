@@ -23,9 +23,9 @@ const sampleSize: Record<category, number> = {
 export type view = 'dbPreview' | 'TOL-startSec' | 'TOL-end'
 
 interface Answer {
-  id: number
-  sub?: number
-  letter: answerLetter | '?'
+  id: string
+  sub?: string
+  letter: answerLetter | undefined
   flagged: boolean
 }
 

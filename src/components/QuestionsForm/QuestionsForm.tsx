@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { category, QuestionsData } from '../../utils/database'
 import { statePair } from '../../utils/types'
 import { AnswersData, view } from '../App'
@@ -15,15 +15,28 @@ interface QuestionsFormProps {
   answersState: statePair<AnswersData>
 }
 export default function QuestionsForm(props: QuestionsFormProps) {
+  const currentQuestionIndexState = useState(0),
+    [currentSection, setSection] = props.sectionState
+
   return (
     <div hidden={!props.questions}>
       <TopControls
-        sectionState={props.sectionState}
+        sectionState={[
+          currentSection,
+          (...args) => {
+            currentQuestionIndexState[1](0)
+            setSection(...args)
+          }
+        ]}
         viewState={props.viewState}
         questions={props.questions}
         answers={props.answersState[0]}
       />
-      <RecapBar />
+      <RecapBar
+        currentQuestionIndexState={currentQuestionIndexState}
+        sectionAnswers={props.answersState[0][props.sectionState[0]]}
+        sectionQuestions={props.questions[props.sectionState[0]]}
+      />
       <QuestionView />
       <AnswerForm />
       <BottomControls />

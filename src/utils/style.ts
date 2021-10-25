@@ -6,10 +6,14 @@ const baseStyle: CSS.Properties = {
   fontFamily: 'verdana'
 }
 
-export function createStyle(style: CSS.Properties) {
-  return { ...baseStyle, ...style }
+export function createStyle(...styles: CSS.Properties[]) {
+  return {
+    ...baseStyle,
+    ...styles.reduce((acc, curr) => ({ ...acc, ...curr }), {})
+  }
 }
 
 export const theme = {
-  primary: '#069'
+  primary: '#069',
+  lightBackground: '#F3F3EE'
 }

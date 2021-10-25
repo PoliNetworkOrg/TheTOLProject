@@ -22,7 +22,7 @@ export default function DBPreview({ db }: DBPreviewProps) {
             {questions
               .filter((q) => q.text || key == 'com')
               .map((q) => (
-                <div key={key + q.id}>
+                <div key={key + q.id + (q.sub || '')}>
                   <RenderedText text={q.text} />
                   <br />
                   <p>Valid: {q.validated + ''}</p>
