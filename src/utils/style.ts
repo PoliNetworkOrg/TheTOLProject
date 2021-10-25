@@ -2,8 +2,16 @@ import * as CSS from 'csstype'
 
 export type cssLike = CSS.Properties
 
+export const theme = {
+  primary: '#069',
+  lightBackground: '#F3F3EE',
+  questionYellow: 'yellow',
+  softBlack: '#333'
+}
+
 const baseStyle: CSS.Properties = {
-  fontFamily: 'verdana'
+  fontFamily: 'verdana',
+  color: theme.softBlack
 }
 
 export function createStyle(...styles: CSS.Properties[]) {
@@ -11,10 +19,4 @@ export function createStyle(...styles: CSS.Properties[]) {
     ...baseStyle,
     ...styles.reduce((acc, curr) => ({ ...acc, ...curr }), {})
   }
-}
-
-export const theme = {
-  primary: '#069',
-  lightBackground: '#F3F3EE',
-  questionYellow: 'yellow'
 }

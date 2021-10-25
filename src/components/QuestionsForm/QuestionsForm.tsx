@@ -21,6 +21,8 @@ export default function QuestionsForm(props: QuestionsFormProps) {
 
   if (!props.questions) return <span>Loading...</span>
 
+  const sectionQuestions = props.questions[props.sectionState[0]]
+
   return (
     <div>
       <TopControls
@@ -38,16 +40,16 @@ export default function QuestionsForm(props: QuestionsFormProps) {
       <RecapBar
         currentQuestionIndexState={currentQuestionIndexState}
         sectionAnswers={props.answersState[0][props.sectionState[0]]}
-        sectionQuestions={props.questions[props.sectionState[0]]}
+        sectionQuestions={sectionQuestions}
       />
       <QuestionHeader
         currentAnswer={
           props.answersState[0][currentSection][currentQuestionIndexState[0]]
         }
         questionIndexState={currentQuestionIndexState}
-        questions={props.questions}
+        sectionQuestions={sectionQuestions}
       />
-      <QuestionView />
+      <QuestionView question={sectionQuestions[currentQuestionIndexState[0]]} />
       <AnswerForm />
       <BottomControls />
     </div>
