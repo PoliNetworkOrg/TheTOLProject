@@ -1,6 +1,6 @@
 import React from 'react'
 import { Question } from '../../utils/database'
-import { createStyle } from '../../utils/style'
+import { createStyle, theme } from '../../utils/style'
 import { Answer } from '../App'
 import { FcLeft, FcRight } from 'react-icons/fc'
 import Button from '../Util/Button'
@@ -47,7 +47,16 @@ export default function QuestionHeader(props: QuestionHeaderProps) {
         <p style={{ ...pStyle, fontWeight: 'bold', width: '11em' }}>
           Domanda {props.questionIndex + 1}
         </p>
-        <p style={pStyle}>
+        <p
+          style={{
+            ...pStyle,
+            backgroundColor: props.currentAnswer?.flagged
+              ? theme.questionYellow
+              : props.currentAnswer?.letter
+              ? theme.questionGreen
+              : 'inherit'
+          }}
+        >
           {(props.currentAnswer?.letter?.toUpperCase() || '') +
             (props.currentAnswer?.flagged ? '?' : '') || ' '}
         </p>
