@@ -1,7 +1,6 @@
 import React from 'react'
 import { Question } from '../../utils/database'
 import { createStyle } from '../../utils/style'
-import { statePair } from '../../utils/types'
 import { Answer } from '../App'
 import { FcLeft, FcRight } from 'react-icons/fc'
 import Button from '../Util/Button'
@@ -36,18 +35,17 @@ const iconStyle = createStyle({
 })
 
 interface QuestionHeaderProps {
-  questionIndexState: statePair<number>
+  questionIndex: number
+  shiftQuestionIndex: (offset: number) => void
   sectionQuestions: Question[]
   currentAnswer: Answer
 }
 export default function QuestionHeader(props: QuestionHeaderProps) {
-  const [qIndex, setQIndex] = props.questionIndexState
-
   return (
     <div style={containerStyle}>
       <div style={leftContainer}>
         <p style={{ ...pStyle, fontWeight: 'bold', width: '11em' }}>
-          Domanda {qIndex + 1}
+          Domanda {props.questionIndex + 1}
         </p>
         <p style={pStyle}>
           {(props.currentAnswer?.letter?.toUpperCase() || '') +
@@ -60,22 +58,12 @@ export default function QuestionHeader(props: QuestionHeaderProps) {
       <div style={rightContainer}>
         <Button
           label="precedente"
-          onClick={() => {
-            const prev =
-              (qIndex - 1 + props.sectionQuestions.length) %
-              props.sectionQuestions.length
-            setQIndex(prev)
-          }}
+          onClick={() => props.shiftQuestionIndex(-1)}
           leftIcon={() => <FcLeft style={iconStyle} />}
         />
         <Button
           label="successiva"
-          onClick={() => {
-            const next =
-              (qIndex + 1 + props.sectionQuestions.length) %
-              props.sectionQuestions.length
-            setQIndex(next)
-          }}
+          onClick={() => props.shiftQuestionIndex(1)}
           rightIcon={() => <FcRight style={iconStyle} />}
         />
       </div>
