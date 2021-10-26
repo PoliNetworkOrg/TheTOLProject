@@ -23,7 +23,7 @@ export default function RecapBar(props: RecapBarProps) {
     <a style={barStyle} href="#">
       {props.sectionQuestions.map((q, i) => {
         const answer = props.sectionAnswers.find(
-          (a) => a.id == q.id && (q.sub ? q.sub == a.sub : true)
+          (a) => a && a.id == q.id && (q.sub ? q.sub == a.sub : true)
         )
         return (
           <AnswerCell
@@ -97,11 +97,15 @@ function AnswerCell(props: AnswerCellProps) {
       <div
         style={{
           ...cellSubStyle,
-          backgroundColor: props.flagged ? theme.questionYellow : 'white'
+          backgroundColor: props.flagged
+            ? theme.questionYellow
+            : props.letter
+            ? theme.questionGreen
+            : 'white'
         }}
       >
         <p style={pStyle}>
-          {props.letter || ' '}
+          {props.letter?.toUpperCase() || ' '}
           {props.flagged && '?'}
         </p>
       </div>

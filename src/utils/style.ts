@@ -6,6 +6,7 @@ export const theme = {
   primary: '#069',
   lightBackground: '#F3F3EE',
   questionYellow: 'yellow',
+  questionGreen: '#00D700',
   softBlack: '#333'
 }
 
