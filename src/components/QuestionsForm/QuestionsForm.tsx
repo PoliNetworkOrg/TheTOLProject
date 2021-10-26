@@ -31,7 +31,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
 
   const shiftQIndex = (offset: number) => {
     const next =
-      (qIndex + offset + sectionQuestions.length) % sectionQuestions.length
+      (qIndex + offset + sectionQuestions.length) % sectionQuestions.length || 0
     return setQIndex(next)
   }
 

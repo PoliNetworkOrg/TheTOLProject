@@ -18,7 +18,13 @@ interface AnswerFormProps {
 export default function AnswerForm(props: AnswerFormProps) {
   const letterState = props.tmpAnswerState
 
-  if (!props.currentQuestion) return <span>Loading...</span>
+  if (!props.currentQuestion)
+    return (
+      <span style={baseText}>
+        <br />
+        No answers to display ¯\_(ツ)_/¯
+      </span>
+    )
 
   return (
     <div>

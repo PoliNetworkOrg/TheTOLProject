@@ -27,6 +27,8 @@ interface BottomControlsProps {
 export default function BottomControls(props: BottomControlsProps) {
   const [flagged, setFlagged] = props.tmpFlaggedState
 
+  if (!props.currentQuestion) return <div style={controlsDiv} />
+
   return (
     <div style={controlsDiv}>
       <label style={labelStyle}>
