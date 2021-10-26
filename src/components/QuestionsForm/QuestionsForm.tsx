@@ -71,6 +71,10 @@ export default function QuestionsForm(props: QuestionsFormProps) {
         currentAnswer={currentAnswer}
         currentQuestion={currentQuestion}
         tmpAnswerState={tmpAnswerState}
+      />
+      <BottomControls
+        currentQuestion={currentQuestion}
+        tmpAnswerState={tmpAnswerState}
         tmpFlaggedState={tmpFlaggedState}
         updateAnswer={(a) => {
           const next = props.answersState[0]
@@ -79,7 +83,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
           shiftQIndex(1)
         }}
       />
-      <BottomControls />
     </div>
   )
 }

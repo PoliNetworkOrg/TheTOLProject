@@ -1,37 +1,22 @@
 import React from 'react'
-import { FaCheck } from 'react-icons/fa'
 import { Question } from '../../utils/database'
 import { createStyle } from '../../utils/style'
 import { statePair } from '../../utils/types'
 import { Answer } from '../App'
-import Button from '../Util/Button'
 import RenderedText from '../Util/RenderedText'
 
 const baseText = createStyle({
   fontSize: '11pt'
 })
 
-const controlsDiv = createStyle({
-  display: 'flex',
-  flex: 1,
-  justifyContent: 'flex-end',
-  fontSize: '9.5pt',
-  verticalAlign: 'middle',
-  gap: '10px'
-})
-
-const labelStyle = createStyle({ display: 'flex', alignItems: 'center' })
 interface AnswerFormProps {
   currentAnswer: Answer | undefined
   currentQuestion: Question
-  tmpFlaggedState: statePair<boolean>
   tmpAnswerState: statePair<Answer['letter']>
-  updateAnswer: (updatedAnswer: Answer) => void
 }
 
 export default function AnswerForm(props: AnswerFormProps) {
-  const letterState = props.tmpAnswerState,
-    [flagged, setFlagged] = props.tmpFlaggedState
+  const letterState = props.tmpAnswerState
 
   if (!props.currentQuestion) return <span>Loading...</span>
 
@@ -63,31 +48,6 @@ export default function AnswerForm(props: AnswerFormProps) {
         text={props.currentQuestion.answers.e}
       />
       <RadioRow letter={undefined} letterState={letterState} text="Non so" />
-      <br />
-      <div style={controlsDiv}>
-        <label style={labelStyle}>
-          <input
-            type="checkbox"
-            checked={flagged}
-            onChange={() => {
-              setFlagged(!flagged)
-            }}
-          />
-          <span>Da rivedere</span>
-        </label>
-        <Button
-          label="Conferma e vai alla successiva"
-          leftIcon={() => <FaCheck />}
-          onClick={() => {
-            props.updateAnswer({
-              id: props.currentQuestion.id,
-              sub: props.currentQuestion.sub,
-              letter: letterState[0],
-              flagged
-            })
-          }}
-        />
-      </div>
     </div>
   )
 }
