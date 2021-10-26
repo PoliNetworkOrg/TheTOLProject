@@ -19,8 +19,7 @@ async function generateJSON() {
   const sheets = await getParsedSheets(),
     db: Database = {
       meta: {
-        version: process.env.npm_package_version || '???',
-        lastUpdate: new Date().toISOString()
+        version: process.env.npm_package_version || '???'
       },
       ...sheets
     }

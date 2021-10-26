@@ -30,7 +30,6 @@ export type QuestionsData = Record<category, Question[]>
 export interface Database extends QuestionsData {
   meta: {
     version: string
-    lastUpdate: string
   }
 }
 
