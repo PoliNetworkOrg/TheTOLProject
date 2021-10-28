@@ -1,9 +1,8 @@
 import React from 'react'
-import { categoryDict, getNextSection } from '../../utils/constants'
-import { category, QuestionsData } from '../../utils/database'
+import { getSectionName } from '../../utils/constants'
+import { section, QuestionsData } from '../../utils/database'
 import { createStyle } from '../../utils/style'
-import { statePair } from '../../utils/types'
-import { AnswersData, view } from '../App'
+import { AnswersData } from '../App'
 import Button from '../Util/Button'
 
 const outerDiv = createStyle({
@@ -20,21 +19,22 @@ const innerDiv = createStyle({
 })
 
 interface TopControlsProps {
-  sectionState: statePair<category>
-  viewState: statePair<view>
-  questions: QuestionsData
+  active: boolean
   answers: AnswersData
+  closeSection: () => void
+  currentSection: section
+  questions: QuestionsData
 }
 
 export default function TopControls(props: TopControlsProps) {
-  const [currentSection, setSection] = props.sectionState
+  const { currentSection } = props
 
   return (
     <div style={outerDiv}>
       <div style={innerDiv}>
         <div>
           <p>
-            Sezione: {categoryDict[currentSection]} <br />
+            Sezione: <b>{getSectionName(currentSection)}</b> <br />
             Riposte: {props.answers[currentSection].length} /{' '}
             {props.questions[currentSection].length} (
             {props.answers[currentSection].reduce(
@@ -44,14 +44,9 @@ export default function TopControls(props: TopControlsProps) {
             da rivedere)
           </p>
         </div>
-        <Button
-          label="Chiudi sezione"
-          onClick={() => {
-            const next = getNextSection(currentSection)
-            if (next) setSection(next)
-            else props.viewState[1]('TOL-end')
-          }}
-        />
+        {props.active && (
+          <Button label="Chiudi sezione" onClick={props.closeSection} />
+        )}
       </div>
       <p>Placeholder: timer</p>
     </div>

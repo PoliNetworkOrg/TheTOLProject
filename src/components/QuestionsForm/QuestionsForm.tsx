@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { category, QuestionsData } from '../../utils/database'
+import { section, QuestionsData } from '../../utils/database'
 import { statePair } from '../../utils/types'
 import { Answer, AnswersData, view } from '../App'
 import AnswerForm from './AnswerForm'
@@ -7,22 +7,25 @@ import BottomControls from './BottomControls'
 import QuestionHeader from './QuestionHeader'
 import QuestionView from './QuestionView'
 import RecapBar from './RecapBar'
+import SectionStart from './SectionStart'
 import TopControls from './TopControls'
 
 interface QuestionsFormProps {
   questions: QuestionsData
   viewState: statePair<view>
-  sectionState: statePair<category>
+  sectionState: statePair<section>
   answersState: statePair<AnswersData>
 }
 export default function QuestionsForm(props: QuestionsFormProps) {
   const [qIndex, originalSetQIndex] = useState(0),
     [currentSection, setSection] = props.sectionState,
+    [view, setView] = props.viewState,
+    [answers, setAnswers] = props.answersState,
     tmpFlaggedState = useState(false),
     tmpAnswerState = useState<Answer['letter']>()
 
   const setQIndex = (index: React.SetStateAction<number>) => {
-    const curr = props.answersState[0][currentSection][index as number]
+    const curr = answers[currentSection][index as number]
     tmpFlaggedState[1](curr?.flagged || false)
     tmpAnswerState[1](curr?.letter || undefined)
     return originalSetQIndex(index)
@@ -39,50 +42,81 @@ export default function QuestionsForm(props: QuestionsFormProps) {
 
   const sectionQuestions = props.questions[props.sectionState[0]],
     currentQuestion = sectionQuestions[qIndex],
-    currentAnswer = props.answersState[0][currentSection][qIndex]
+    currentAnswer = answers[currentSection][qIndex]
+
+  const getViewElement = () => {
+    if (view == 'TOL-startSec')
+      return (
+        <SectionStart
+          section={currentSection}
+          startSection={() => {
+            setView('TOL-testing')
+          }}
+        />
+      )
+    else if (view == 'TOL-testing')
+      return (
+        <div>
+          <QuestionHeader
+            currentAnswer={currentAnswer}
+            questionIndex={qIndex}
+            shiftQuestionIndex={shiftQIndex}
+            sectionQuestions={sectionQuestions}
+          />
+          <QuestionView question={currentQuestion} />
+          <AnswerForm
+            currentAnswer={currentAnswer}
+            currentQuestion={currentQuestion}
+            tmpAnswerState={tmpAnswerState}
+          />
+          <BottomControls
+            currentQuestion={currentQuestion}
+            tmpAnswerState={tmpAnswerState}
+            tmpFlaggedState={tmpFlaggedState}
+            updateAnswer={(a) => {
+              const next = answers
+              next[currentSection][qIndex] = a
+              setAnswers(next)
+              shiftQIndex(1)
+            }}
+          />
+        </div>
+      )
+    else if (view == 'TOL-secRecap') return <div></div>
+    else if (view == 'TOL-end') return <div />
+    else return <div />
+  }
 
   return (
     <div>
       <TopControls
-        sectionState={[
-          currentSection,
-          (...args) => {
-            setQIndex(0)
-            setSection(...args)
-          }
-        ]}
-        viewState={props.viewState}
+        active={view == 'TOL-testing'}
+        closeSection={() => {
+          // const next = getNextSection(currentSection)
+          // if (next) setSection(next)
+          // else props.viewState[1]('TOL-end')
+          setView('TOL-secRecap')
+          setQIndex(0)
+          const nextAnswers = answers
+          nextAnswers[currentSection] = nextAnswers[currentSection].map(
+            (a) => ({
+              ...a,
+              flagged: false
+            })
+          )
+          setAnswers(nextAnswers)
+        }}
+        currentSection={currentSection}
         questions={props.questions}
-        answers={props.answersState[0]}
+        answers={answers}
       />
       <RecapBar
+        active={view == 'TOL-testing'}
         currentQuestionIndexState={currentQuestionIndexState}
-        sectionAnswers={props.answersState[0][props.sectionState[0]]}
+        sectionAnswers={answers[currentSection]}
         sectionQuestions={sectionQuestions}
       />
-      <QuestionHeader
-        currentAnswer={currentAnswer}
-        questionIndex={qIndex}
-        shiftQuestionIndex={shiftQIndex}
-        sectionQuestions={sectionQuestions}
-      />
-      <QuestionView question={currentQuestion} />
-      <AnswerForm
-        currentAnswer={currentAnswer}
-        currentQuestion={currentQuestion}
-        tmpAnswerState={tmpAnswerState}
-      />
-      <BottomControls
-        currentQuestion={currentQuestion}
-        tmpAnswerState={tmpAnswerState}
-        tmpFlaggedState={tmpFlaggedState}
-        updateAnswer={(a) => {
-          const next = props.answersState[0]
-          next[currentSection][qIndex] = a
-          props.answersState[1](next)
-          shiftQIndex(1)
-        }}
-      />
+      {getViewElement()}
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import _ from 'underscore'
 import packageJson from '../../package.json'
+import { sectioninfo } from './constants'
 
 export const sheetDict = {
   quesiti_ING: 'ing',
@@ -8,7 +9,7 @@ export const sheetDict = {
   quesiti_COM: 'com',
   quesiti_FIS: 'fis'
 } as const
-export type category = typeof sheetDict[keyof typeof sheetDict]
+export type section = typeof sheetDict[keyof typeof sheetDict]
 
 export type answerLetter = 'a' | 'b' | 'c' | 'd' | 'e'
 
@@ -25,7 +26,7 @@ export interface Question {
   track?: string
 }
 
-export type QuestionsData = Record<category, Question[]>
+export type QuestionsData = Record<section, Question[]>
 
 export interface Database extends QuestionsData {
   meta: {
@@ -48,14 +49,11 @@ export async function readDatabase() {
   return db
 }
 
-export function selectRandomQuestions(
-  db: Database,
-  options: Record<category, number>
-): QuestionsData {
+export function selectRandomQuestions(db: Database): QuestionsData {
   return Object.fromEntries(
     // Manipulate db entries
-    (Object.entries(db) as [category /* or "meta" */, Question[]][])
-      // Select only entries associated with a category <=> exclude "meta"
+    (Object.entries(db) as [section /* or "meta" */, Question[]][])
+      // Select only entries associated with a section <=> exclude "meta"
       .filter(([key]) => (Object.values(sheetDict) as string[]).includes(key))
       .map(([key, questions]) => {
         // Select only validated questions
@@ -64,7 +62,7 @@ export function selectRandomQuestions(
         // Get the question ids, remove duplicates, shuffle them, and select the appropriate number of questions.
         const resIds = _.shuffle(_.uniq(validQuestions.map((v) => v.id))).slice(
           0,
-          options[key] as number
+          sectioninfo[key].sample
         )
 
         // Return only the questions with a selected ID

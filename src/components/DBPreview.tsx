@@ -1,5 +1,5 @@
 import React from 'react'
-import { category, Database, Question } from '../utils/database'
+import { section, Database, Question } from '../utils/database'
 
 import RenderedText from './Util/RenderedText'
 
@@ -12,12 +12,12 @@ export default function DBPreview({ db }: DBPreviewProps) {
     <div>
       {(
         Object.entries(db).filter(([key]) => key != 'meta') as [
-          category,
+          section,
           Question[]
         ][]
       ).map(([key, questions]) => (
         <div key={key}>
-          <h3>Category: {key}</h3>
+          <h3>Section: {key}</h3>
           <ul>
             {questions
               .filter((q) => q.text || key == 'com')

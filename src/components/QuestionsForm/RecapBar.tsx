@@ -1,5 +1,5 @@
 import React from 'react'
-import { answerLetter, category, QuestionsData } from '../../utils/database'
+import { answerLetter, section, QuestionsData } from '../../utils/database'
 import { createStyle, theme } from '../../utils/style'
 import { statePair } from '../../utils/types'
 import { AnswersData } from '../App'
@@ -14,13 +14,14 @@ const barStyle = createStyle({
 })
 
 interface RecapBarProps {
-  sectionAnswers: AnswersData[category]
+  active: boolean
   currentQuestionIndexState: statePair<number>
-  sectionQuestions: QuestionsData[category]
+  sectionAnswers: AnswersData[section]
+  sectionQuestions: QuestionsData[section]
 }
 export default function RecapBar(props: RecapBarProps) {
   return (
-    <a style={barStyle} href="#">
+    <a style={barStyle} {...(props.active ? { href: '#' } : {})}>
       {props.sectionQuestions.map((q, i) => {
         const answer = props.sectionAnswers.find(
           (a) => a && a.id == q.id && (q.sub ? q.sub == a.sub : true)
@@ -32,9 +33,9 @@ export default function RecapBar(props: RecapBarProps) {
             letter={answer?.letter}
             flagged={answer?.flagged || false}
             onClick={() => {
-              props.currentQuestionIndexState[1](i)
+              if (props.active) props.currentQuestionIndexState[1](i)
             }}
-            selected={props.currentQuestionIndexState[0] == i}
+            selected={props.active && props.currentQuestionIndexState[0] == i}
           />
         )
       })}
