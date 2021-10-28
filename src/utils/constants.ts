@@ -15,7 +15,7 @@ interface sectionInfoElement {
   score: number
 }
 
-export const sectioninfo: Record<section, sectionInfoElement> = {
+export const sectionInfo: Record<section, sectionInfoElement> = {
   ing: {
     name: 'Inglese',
     order: 1,
@@ -48,11 +48,11 @@ export const sectioninfo: Record<section, sectionInfoElement> = {
 }
 
 export function getSectionName(key: section) {
-  return sectioninfo[key].name
+  return sectionInfo[key].name
 }
 
 export function getNextSection(currentSection: section): section {
-  const sortedInfo = Object.entries(sectioninfo).sort(
+  const sortedInfo = Object.entries(sectionInfo).sort(
     (a, b) => a[1].order - b[1].order
   ) as [section, sectionInfoElement][]
   const i = sortedInfo.findIndex((e) => e[0] == currentSection)

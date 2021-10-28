@@ -1,5 +1,5 @@
 import React from 'react'
-import { sectioninfo } from '../../utils/constants'
+import { sectionInfo } from '../../utils/constants'
 import { section } from '../../utils/database'
 import { createStyle } from '../../utils/style'
 import Button from '../Util/Button'
@@ -17,7 +17,7 @@ interface SectionStartProps {
   startSection: () => void
 }
 export default function SectionStart(props: SectionStartProps) {
-  const info = sectioninfo[props.section]
+  const info = sectionInfo[props.section]
 
   return (
     <div style={baseStyle}>

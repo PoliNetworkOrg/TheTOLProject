@@ -1,7 +1,7 @@
 import axios from 'axios'
 import _ from 'underscore'
 import packageJson from '../../package.json'
-import { sectioninfo } from './constants'
+import { sectionInfo } from './constants'
 
 export const sheetDict = {
   quesiti_ING: 'ing',
@@ -62,7 +62,7 @@ export function selectRandomQuestions(db: Database): QuestionsData {
         // Get the question ids, remove duplicates, shuffle them, and select the appropriate number of questions.
         const resIds = _.shuffle(_.uniq(validQuestions.map((v) => v.id))).slice(
           0,
-          sectioninfo[key].sample
+          sectionInfo[key].sample
         )
 
         // Return only the questions with a selected ID

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useTimer } from 'react-timer-hook'
+import { sectionInfo } from '../../utils/constants'
 import { section, QuestionsData } from '../../utils/database'
 import { statePair } from '../../utils/types'
 import { Answer, AnswersData, view } from '../App'
@@ -18,11 +20,25 @@ interface QuestionsFormProps {
 }
 export default function QuestionsForm(props: QuestionsFormProps) {
   const [qIndex, originalSetQIndex] = useState(0),
-    [currentSection, setSection] = props.sectionState,
-    [view, setView] = props.viewState,
-    [answers, setAnswers] = props.answersState,
     tmpFlaggedState = useState(false),
-    tmpAnswerState = useState<Answer['letter']>()
+    tmpAnswerState = useState<Answer['letter']>(),
+    tmpTimerExpiredState = useState(false)
+
+  const [currentSection, setSection] = props.sectionState,
+    [view, setView] = props.viewState,
+    [answers, setAnswers] = props.answersState
+
+  const closeSection = () => {
+    setView('TOL-secRecap')
+    setQIndex(0)
+    const nextAnswers = answers
+    nextAnswers[currentSection] = nextAnswers[currentSection].map((a) => ({
+      ...a,
+      flagged: false
+    }))
+    setAnswers(nextAnswers)
+    timer.restart(new Date(), false)
+  }
 
   const setQIndex = (index: React.SetStateAction<number>) => {
     const curr = answers[currentSection][index as number]
@@ -30,7 +46,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     tmpAnswerState[1](curr?.letter || undefined)
     return originalSetQIndex(index)
   }
-  const currentQuestionIndexState: statePair<number> = [qIndex, setQIndex]
 
   const shiftQIndex = (offset: number) => {
     const next =
@@ -38,6 +53,20 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     return setQIndex(next)
   }
 
+  const tmpTime = new Date()
+  tmpTime.setSeconds(
+    tmpTime.getSeconds() + sectionInfo[currentSection].minutes * 60
+  )
+  const timer = useTimer({
+    expiryTimestamp: tmpTime,
+    autoStart: false,
+    onExpire: () => {
+      closeSection()
+      tmpTimerExpiredState[1](true)
+    }
+  })
+
+  const currentQuestionIndexState: statePair<number> = [qIndex, setQIndex]
   if (!props.questions) return <span>Loading...</span>
 
   const sectionQuestions = props.questions[props.sectionState[0]],
@@ -51,6 +80,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
           section={currentSection}
           startSection={() => {
             setView('TOL-testing')
+            timer.start()
           }}
         />
       )
@@ -91,24 +121,12 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     <div>
       <TopControls
         active={view == 'TOL-testing'}
-        closeSection={() => {
-          // const next = getNextSection(currentSection)
-          // if (next) setSection(next)
-          // else props.viewState[1]('TOL-end')
-          setView('TOL-secRecap')
-          setQIndex(0)
-          const nextAnswers = answers
-          nextAnswers[currentSection] = nextAnswers[currentSection].map(
-            (a) => ({
-              ...a,
-              flagged: false
-            })
-          )
-          setAnswers(nextAnswers)
-        }}
+        answers={answers}
+        closeSection={closeSection}
         currentSection={currentSection}
         questions={props.questions}
-        answers={answers}
+        timer={timer}
+        timerExpired={tmpTimerExpiredState[0]}
       />
       <RecapBar
         active={view == 'TOL-testing'}

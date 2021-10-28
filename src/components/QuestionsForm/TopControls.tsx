@@ -1,12 +1,15 @@
 import React from 'react'
+import { TimerResult } from 'react-timer-hook'
 import { getSectionName } from '../../utils/constants'
 import { section, QuestionsData } from '../../utils/database'
 import { createStyle } from '../../utils/style'
 import { AnswersData } from '../App'
 import Button from '../Util/Button'
+import Timer from './Timer'
 
 const outerDiv = createStyle({
   display: 'flex',
+  alignItems: 'center',
   justifyContent: 'space-between'
 })
 
@@ -23,6 +26,8 @@ interface TopControlsProps {
   answers: AnswersData
   closeSection: () => void
   currentSection: section
+  timer: TimerResult
+  timerExpired: boolean
   questions: QuestionsData
 }
 
@@ -48,7 +53,7 @@ export default function TopControls(props: TopControlsProps) {
           <Button label="Chiudi sezione" onClick={props.closeSection} />
         )}
       </div>
-      <p>Placeholder: timer</p>
+      <Timer timer={props.timer} expired={props.timerExpired} />
     </div>
   )
 }

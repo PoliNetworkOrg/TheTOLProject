@@ -7,7 +7,9 @@ export const theme = {
   lightBackground: '#F3F3EE',
   questionYellow: 'yellow',
   questionGreen: '#00D700',
-  softBlack: '#333'
+  softBlack: '#333',
+  timerGreen: '#009527',
+  timerRed: 'red'
 }
 
 const baseStyle: CSS.Properties = {
