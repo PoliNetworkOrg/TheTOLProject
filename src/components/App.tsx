@@ -29,6 +29,8 @@ export interface Answer {
 
 export type AnswersData = Record<section, Answer[]>
 
+export type TimeRecord = Partial<Record<section, number>>
+
 export default function App() {
   const [database, loadDatabase] = useState<Database>()
   const [questions, selectQuestions] = useState<QuestionsData>()
@@ -40,6 +42,7 @@ export default function App() {
     com: [],
     fis: []
   })
+  const timeRecordState = useState<TimeRecord>({})
   const [loadingError, showError] = useState<[string, Error] | []>([])
 
   useEffect(() => {
@@ -70,10 +73,11 @@ export default function App() {
         <DBPreview db={database} />
       ) : questions ? (
         <QuestionsForm
-          questions={questions as QuestionsData}
-          viewState={[view, selectView]}
-          sectionState={sectionState}
           answersState={answersState}
+          questions={questions as QuestionsData}
+          sectionState={sectionState}
+          timeRecordState={timeRecordState}
+          viewState={[view, selectView]}
         />
       ) : undefined}
       <Separator text="Placeholder bottom separator text" />

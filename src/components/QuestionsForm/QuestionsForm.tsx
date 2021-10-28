@@ -1,22 +1,24 @@
 import React, { useState } from 'react'
 import { useTimer } from 'react-timer-hook'
-import { sectionInfo } from '../../utils/constants'
+import { getNextSection, sectionInfo } from '../../utils/constants'
 import { section, QuestionsData } from '../../utils/database'
 import { statePair } from '../../utils/types'
-import { Answer, AnswersData, view } from '../App'
+import { Answer, AnswersData, TimeRecord, view } from '../App'
 import AnswerForm from './AnswerForm'
 import BottomControls from './BottomControls'
 import QuestionHeader from './QuestionHeader'
 import QuestionView from './QuestionView'
 import RecapBar from './RecapBar'
+import SectionRecap from './SectionRecap'
 import SectionStart from './SectionStart'
 import TopControls from './TopControls'
 
 interface QuestionsFormProps {
-  questions: QuestionsData
-  viewState: statePair<view>
-  sectionState: statePair<section>
   answersState: statePair<AnswersData>
+  questions: QuestionsData
+  sectionState: statePair<section>
+  timeRecordState: statePair<TimeRecord>
+  viewState: statePair<view>
 }
 export default function QuestionsForm(props: QuestionsFormProps) {
   const [qIndex, originalSetQIndex] = useState(0),
@@ -26,17 +28,26 @@ export default function QuestionsForm(props: QuestionsFormProps) {
 
   const [currentSection, setSection] = props.sectionState,
     [view, setView] = props.viewState,
-    [answers, setAnswers] = props.answersState
+    [answers, setAnswers] = props.answersState,
+    [timeRecord, setTimeRecord] = props.timeRecordState
 
   const closeSection = () => {
     setView('TOL-secRecap')
     setQIndex(0)
+
     const nextAnswers = answers
     nextAnswers[currentSection] = nextAnswers[currentSection].map((a) => ({
       ...a,
       flagged: false
     }))
     setAnswers(nextAnswers)
+
+    const nextTR = timeRecord
+    nextTR[currentSection] =
+      sectionInfo[currentSection].minutes * 60 -
+      ((timer.hours * 60 + timer.minutes) * 60 + timer.seconds)
+    setTimeRecord(nextTR)
+
     timer.restart(new Date(), false)
   }
 
@@ -53,12 +64,8 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     return setQIndex(next)
   }
 
-  const tmpTime = new Date()
-  tmpTime.setSeconds(
-    tmpTime.getSeconds() + sectionInfo[currentSection].minutes * 60
-  )
   const timer = useTimer({
-    expiryTimestamp: tmpTime,
+    expiryTimestamp: getTimerExpDate(sectionInfo[currentSection].minutes),
     autoStart: false,
     onExpire: () => {
       closeSection()
@@ -112,7 +119,24 @@ export default function QuestionsForm(props: QuestionsFormProps) {
           />
         </div>
       )
-    else if (view == 'TOL-secRecap') return <div></div>
+    else if (view == 'TOL-secRecap')
+      return (
+        <SectionRecap
+          goToNextSection={() => {
+            const nextSection = getNextSection(currentSection)
+            setSection(nextSection)
+            timer.restart(
+              getTimerExpDate(sectionInfo[nextSection].minutes),
+              false
+            )
+            setView('TOL-startSec')
+          }}
+          section={currentSection}
+          secondsUsed={timeRecord[currentSection] || 0}
+          sectionAnswers={answers[currentSection]}
+          sectionQuestions={props.questions[currentSection]}
+        />
+      )
     else if (view == 'TOL-end') return <div />
     else return <div />
   }
@@ -137,4 +161,10 @@ export default function QuestionsForm(props: QuestionsFormProps) {
       {getViewElement()}
     </div>
   )
+}
+
+function getTimerExpDate(minutes: number) {
+  const res = new Date()
+  res.setSeconds(res.getSeconds() + minutes * 60)
+  return res
 }

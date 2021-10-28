@@ -31,14 +31,17 @@ export default function Timer(props: TimerProps) {
     <div
       style={{
         ...divStyle,
-        ...(timer.minutes * 60 + timer.seconds < alertThreshold &&
-        !(timer.minutes + timer.seconds == 0 && !props.expired)
+        ...((timer.hours * 60 + timer.minutes) * 60 + timer.seconds <
+          alertThreshold &&
+        !(timer.hours + timer.minutes + timer.seconds == 0 && !props.expired)
           ? expiring
           : {})
       }}
     >
-      {timer.minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 })}:
-      {timer.seconds.toLocaleString(undefined, { minimumIntegerDigits: 2 })}
+      {(timer.hours * 60 + timer.minutes).toLocaleString(undefined, {
+        minimumIntegerDigits: 2
+      })}
+      :{timer.seconds.toLocaleString(undefined, { minimumIntegerDigits: 2 })}
     </div>
   )
 }
