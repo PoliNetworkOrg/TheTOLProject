@@ -36,7 +36,7 @@ export interface Database extends QuestionsData {
 export async function readDatabase() {
   const db = (
     await axios.get(
-      'https://raw.githubusercontent.com/PoliNetworkOrg/TheTOLProject/data/database.json'
+      'https://raw.githubusercontent.com/PoliNetworkOrg/TheTOLProjectData/main/database.json'
     )
   )?.data as Database
 

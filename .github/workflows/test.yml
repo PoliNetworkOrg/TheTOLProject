@@ -30,3 +30,11 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm install
       - run: npm run exports
+
+  database:
+    name: Build database
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build:db
