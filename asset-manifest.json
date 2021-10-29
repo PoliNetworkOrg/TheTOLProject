@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/TheTOLProject/static/js/main.77607238.chunk.js",
-    "main.js.map": "/TheTOLProject/static/js/main.77607238.chunk.js.map",
+    "main.js": "/TheTOLProject/static/js/main.d5cad962.chunk.js",
+    "main.js.map": "/TheTOLProject/static/js/main.d5cad962.chunk.js.map",
     "runtime-main.js": "/TheTOLProject/static/js/runtime-main.280c1cff.js",
     "runtime-main.js.map": "/TheTOLProject/static/js/runtime-main.280c1cff.js.map",
-    "static/js/2.4c002bff.chunk.js": "/TheTOLProject/static/js/2.4c002bff.chunk.js",
-    "static/js/2.4c002bff.chunk.js.map": "/TheTOLProject/static/js/2.4c002bff.chunk.js.map",
+    "static/js/2.6dc7b508.chunk.js": "/TheTOLProject/static/js/2.6dc7b508.chunk.js",
+    "static/js/2.6dc7b508.chunk.js.map": "/TheTOLProject/static/js/2.6dc7b508.chunk.js.map",
     "index.html": "/TheTOLProject/index.html",
-    "static/js/2.4c002bff.chunk.js.LICENSE.txt": "/TheTOLProject/static/js/2.4c002bff.chunk.js.LICENSE.txt"
+    "static/js/2.6dc7b508.chunk.js.LICENSE.txt": "/TheTOLProject/static/js/2.6dc7b508.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.280c1cff.js",
-    "static/js/2.4c002bff.chunk.js",
-    "static/js/main.77607238.chunk.js"
+    "static/js/2.6dc7b508.chunk.js",
+    "static/js/main.d5cad962.chunk.js"
   ]
 }
