@@ -3,8 +3,9 @@ import * as CSS from 'csstype'
 export type cssLike = CSS.Properties
 
 export const theme = {
-  primary: '#069',
   lightBackground: '#F3F3EE',
+  lightBorder: '#D5DFE4',
+  primary: '#069',
   questionYellow: 'yellow',
   questionGreen: '#00D700',
   softBlack: '#333',

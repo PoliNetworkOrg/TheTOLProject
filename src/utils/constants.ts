@@ -11,7 +11,7 @@ interface sectionInfoElement {
   sub?: number
   /** The maximum number of minutes that the user can use to complete a section */
   minutes: number
-  /** The maximum number of points the section can account for (test total is 100) */
+  /** The maximum number of points the section can account for (test total is {@link testTotalScore}) */
   score: number
 }
 
@@ -47,14 +47,20 @@ export const sectionInfo: Record<section, sectionInfoElement> = {
   }
 }
 
+export const testTotalScore = 100
+/** Minimum score to pass the test */
+export const testPassThreshold = 60
+/** Minimum number of correct questions to pass the test */
+export const tengPassThreshold = 24
+
 export function getSectionName(key: section) {
   return sectionInfo[key].name
 }
 
-export function getNextSection(currentSection: section): section {
+export function getNextSection(currentSection: section): section | undefined {
   const sortedInfo = Object.entries(sectionInfo).sort(
     (a, b) => a[1].order - b[1].order
   ) as [section, sectionInfoElement][]
   const i = sortedInfo.findIndex((e) => e[0] == currentSection)
-  return sortedInfo[i + 1][0]
+  return (sortedInfo[i + 1] || [])[0]
 }

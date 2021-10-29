@@ -10,15 +10,17 @@ import {
 import DBPreview from './DBPreview'
 import ErrorView from './ErrorView'
 import Header from './Header'
+import InfoView from './InfoView/InfoView'
 import QuestionsForm from './QuestionsForm/QuestionsForm'
 import Separator from './Util/Separator'
 
 export type view =
   | 'dbPreview'
+  | 'INFO-start'
   | 'TOL-startSec'
   | 'TOL-testing'
   | 'TOL-secRecap'
-  | 'TOL-end'
+  | 'INFO-end'
 
 export interface Answer {
   id: string
@@ -33,8 +35,8 @@ export type TimeRecord = Partial<Record<section, number>>
 
 export default function App() {
   const [database, loadDatabase] = useState<Database>()
-  const [questions, selectQuestions] = useState<QuestionsData>()
-  const [view, selectView] = useState<view>('dbPreview')
+  const [questions, setQuestions] = useState<QuestionsData>()
+  const [view, setView] = useState<view>('dbPreview')
   const sectionState = useState<section>('ing')
   const answersState = useState<AnswersData>({
     ing: [],
@@ -50,7 +52,7 @@ export default function App() {
       readDatabase()
         .then((db) => {
           loadDatabase(db)
-          selectQuestions(selectRandomQuestions(db))
+          setQuestions(selectRandomQuestions(db))
         })
         .catch((e) => {
           showError([
@@ -62,7 +64,7 @@ export default function App() {
 
   return (
     <div>
-      <Header viewState={[view, selectView]} />
+      <Header viewState={[view, setView]} />
       <Separator text="Placeholder top separator text" />
       <ErrorView
         hidden={!loadingError[0]}
@@ -71,13 +73,19 @@ export default function App() {
       />
       {view == 'dbPreview' && database ? (
         <DBPreview db={database} />
-      ) : questions ? (
+      ) : view.startsWith('TOL') && questions ? (
         <QuestionsForm
           answersState={answersState}
           questions={questions as QuestionsData}
           sectionState={sectionState}
           timeRecordState={timeRecordState}
-          viewState={[view, selectView]}
+          viewState={[view, setView]}
+        />
+      ) : view.startsWith('INFO') && questions ? (
+        <InfoView
+          answers={answersState[0]}
+          questions={questions}
+          viewState={[view, setView]}
         />
       ) : undefined}
       <Separator text="Placeholder bottom separator text" />

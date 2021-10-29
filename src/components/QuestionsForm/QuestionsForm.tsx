@@ -124,12 +124,17 @@ export default function QuestionsForm(props: QuestionsFormProps) {
         <SectionRecap
           goToNextSection={() => {
             const nextSection = getNextSection(currentSection)
-            setSection(nextSection)
-            timer.restart(
-              getTimerExpDate(sectionInfo[nextSection].minutes),
-              false
-            )
-            setView('TOL-startSec')
+            if (nextSection) {
+              setSection(nextSection)
+              timer.restart(
+                getTimerExpDate(sectionInfo[nextSection].minutes),
+                false
+              )
+              tmpTimerExpiredState[1](false)
+              setView('TOL-startSec')
+            } else {
+              setView('INFO-end')
+            }
           }}
           section={currentSection}
           secondsUsed={timeRecord[currentSection] || 0}
@@ -137,7 +142,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
           sectionQuestions={props.questions[currentSection]}
         />
       )
-    else if (view == 'TOL-end') return <div />
     else return <div />
   }
 
