@@ -1,6 +1,7 @@
 import React from 'react'
 import { Question } from '../../utils/database'
 import { createStyle } from '../../utils/style'
+import CollapsibleText from '../Util/CollapsibleText'
 import RenderedText from '../Util/RenderedText'
 
 interface QuestionViewProps {
@@ -15,6 +16,14 @@ export default function QuestionView({ question }: QuestionViewProps) {
 
   return (
     <div style={textStyle}>
+      {question.track ? (
+        <CollapsibleText
+          label="mostra/nascondi traccia"
+          longText={question.track}
+        />
+      ) : (
+        <span />
+      )}
       <RenderedText text={question.text}></RenderedText>
       <br />
       <br />
