@@ -187,7 +187,7 @@ class DriveClient {
 
   /** Matches ALL file ids from Google Drive URLs in the given string. */
   static matchFileIds(string: string) {
-    return string.match(/[-\w]{25,}(?!.*[-\w]{25,})/) || []
+    return string.match(/[-\w]{25,}(?!.*[-\w]{25,})/g) || []
   }
 
   /**
