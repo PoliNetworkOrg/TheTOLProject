@@ -1,3 +1,4 @@
+import Fraction from 'fraction.js'
 import React from 'react'
 import {
   getSectionName,
@@ -9,6 +10,7 @@ import {
 import { Question, QuestionsData, section } from '../../utils/database'
 import { createStyle, theme } from '../../utils/style'
 import { AnswersData } from '../App'
+import CollapsibleText from '../Util/CollapsibleText'
 
 const divStyle = createStyle({
   display: 'flex',
@@ -34,6 +36,10 @@ const tableHeader = createStyle(tableCell, {
   fontWeight: 'bold',
   backgroundColor: theme.lightBackground,
   textAlign: 'left'
+})
+
+const centeredTextStyle = createStyle({
+  textAlign: 'center'
 })
 
 interface InfoEndProps {
@@ -73,24 +79,19 @@ export default function InfoEnd(props: InfoEndProps) {
     )
   )
 
-  const score =
-    Math.round(
-      (
-        Object.entries(correctionGrid) as [
-          section,
-          typeof correctionGrid[string]
-        ][]
-      )
-        .map(([section, correction]) =>
-          correction.total
-            ? ((correction.correct - 0.25 * correction.wrong) /
-                correction.total) *
-              sectionInfo[section].score
-            : 0
-        )
-        .reduce((acc, curr) => acc + curr, 0) * 100
-    ) / 100
-  const testPassed = score >= testPassThreshold,
+  const score = (
+    Object.entries(correctionGrid) as [section, typeof correctionGrid[string]][]
+  )
+    .map(([section, correction]) =>
+      correction.total
+        ? new Fraction(sectionInfo[section].coeff as Fraction).mul(
+            correction.correct - 0.25 * correction.wrong
+          )
+        : new Fraction(0)
+    )
+    .reduce((acc, curr) => acc.add(curr), new Fraction(0))
+
+  const testPassed = score.compare(testPassThreshold) >= 0,
     tengPassed = correctionGrid.ing?.correct >= tengPassThreshold
 
   return (
@@ -123,10 +124,9 @@ export default function InfoEnd(props: InfoEndProps) {
             ))}
         </table>
       </div>
-      <p>
-        Punteggio calcolato: {score.toFixed(2)} / {testTotalScore}
-      </p>
-      <p>
+      <p style={centeredTextStyle}>
+        Punteggio calcolato: {score.round(2).toString()} / {testTotalScore}
+        <br />
         Esito:{' '}
         {testPassed
           ? `Superato${!tengPassed ? ' (OFA TENG)' : ''}`
@@ -134,6 +134,24 @@ export default function InfoEnd(props: InfoEndProps) {
               !tengPassed ? '(OFA TEST + OFA TENG)' : '(OFA TEST)'
             }`}
       </p>
+      <CollapsibleText
+        label="Come viene calcolato il punteggio"
+        startOpen={false}
+        longText={`
+      Per ogni sezione viene conteggiato +1 per ogni risposta corretta, -0,25 per ogni risposta errata e 0 per ogni risposta non data.
+      Il punteggio complessivo della sezione viene poi pesato in base al punteggio massimo ottenibile (rispetto all'intero test) e al numero di quesiti:
+      ${Object.entries(sectionInfo)
+        .map(
+          ([section, info]) =>
+            `- ${info.name}: peso ${
+              typeof info.coeff == 'number'
+                ? info.coeff
+                : info.coeff.toFraction()
+            }, ${props.questions[section as section].length} quesiti`
+        )
+        .join('\n')}
+      `}
+      />
     </div>
   )
 }

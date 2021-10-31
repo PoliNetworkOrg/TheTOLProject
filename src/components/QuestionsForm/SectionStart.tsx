@@ -29,7 +29,8 @@ export default function SectionStart(props: SectionStartProps) {
           : ''}
         {info.sample} domande
         <br />- {info.minutes} minuti
-        <br />- Punteggio massimo: {info.score}/100
+        <br />- Peso sezione:{' '}
+        {typeof info.coeff == 'number' ? info.coeff : info.coeff.toFraction()}
       </p>
       <Button label="Inzia sezione" onClick={props.startSection} />
     </div>

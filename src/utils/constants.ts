@@ -1,4 +1,5 @@
 import { section } from './database'
+import Fraction from 'fraction.js'
 
 interface sectionInfoElement {
   /** The readable name of the section */
@@ -11,8 +12,8 @@ interface sectionInfoElement {
   sub?: number
   /** The maximum number of minutes that the user can use to complete a section */
   minutes: number
-  /** The maximum number of points the section can account for (test total is {@link testTotalScore}) */
-  score: number
+  /** The weight that this section's score has on the total score ({@link testTotalScore}) */
+  coeff: number | Fraction
 }
 
 export const sectionInfo: Record<section, sectionInfoElement> = {
@@ -21,14 +22,14 @@ export const sectionInfo: Record<section, sectionInfoElement> = {
     order: 1,
     sample: 30,
     minutes: 15,
-    score: 10
+    coeff: new Fraction('1/3')
   },
   mat: {
     name: 'Matematica',
     order: 2,
     sample: 25,
     minutes: 75,
-    score: 65
+    coeff: 2.6
   },
   com: {
     name: 'Comprensione',
@@ -36,14 +37,14 @@ export const sectionInfo: Record<section, sectionInfoElement> = {
     sample: 1,
     sub: 5,
     minutes: 10,
-    score: 15
+    coeff: 3
   },
   fis: {
     name: 'Fisica',
     order: 4,
     sample: 5,
     minutes: 10,
-    score: 10
+    coeff: 2
   }
 }
 
