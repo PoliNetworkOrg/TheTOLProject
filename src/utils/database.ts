@@ -66,7 +66,14 @@ export function selectRandomQuestions(db: Database): QuestionsData {
         )
 
         // Return only the questions with a selected ID
-        return [key, validQuestions.filter((q) => resIds.includes(q.id))]
+        return [
+          key,
+          _.shuffle(validQuestions.filter((q) => resIds.includes(q.id)))
+        ]
       })
   ) as QuestionsData
+}
+
+export function getImageURL(fileName: string) {
+  return `https://raw.githubusercontent.com/PoliNetworkOrg/TheTOLProjectData/main/img/${fileName}`
 }
