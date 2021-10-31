@@ -66,7 +66,15 @@ export default function SectionRecap(props: SectionRecapProps) {
         )}{' '}
         rimanente)
       </p>
-      <Button label="Prossima sezione" onClick={props.goToNextSection} />
+      <Button
+        label={
+          info.order ==
+          Math.max(...Object.values(sectionInfo).map((i) => i.order))
+            ? 'Vedi esito del test'
+            : 'Prossima sezione'
+        }
+        onClick={props.goToNextSection}
+      />
     </div>
   )
 }
