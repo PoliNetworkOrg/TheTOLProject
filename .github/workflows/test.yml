@@ -7,34 +7,91 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build website
+  cache:
+    name: Cache dependencies
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
+
+
+  build:
+    name: Build website
+    needs: cache
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
       - run: npm run build
   
   lint:
     name: Run linters
+    needs: cache
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
       - run: npm run lint
 
   exports:
     name: Check unused exports
+    needs: cache
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
       - run: npm run exports
 
   database:
     name: Build database
+    needs: cache
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: ./node_modules
+          key: modules-${{ hashFiles('package-lock.json') }}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
       - run: npm run build:db
