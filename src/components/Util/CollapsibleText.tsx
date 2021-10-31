@@ -8,7 +8,7 @@ const pStyle = createStyle({
   textAlign: 'justify'
 })
 
-const innerPStyle = createStyle({ padding: 0, margin: 0 })
+const innerPStyle = createStyle({ padding: '1px', margin: 0 })
 
 interface CollapsibleTextProps {
   label: string
@@ -17,7 +17,7 @@ interface CollapsibleTextProps {
 }
 export default function CollapsibleText(props: CollapsibleTextProps) {
   return (
-    <GeneralPurposeCollapsible label={props.label}>
+    <GeneralPurposeCollapsible label={props.label} startOpen={props.startOpen}>
       <div style={pStyle}>
         {props.longText
           .trim()
