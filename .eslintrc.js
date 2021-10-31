@@ -20,6 +20,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'react/no-unescaped-entities': 'off'
+    'react/no-unescaped-entities': 'off',
+    'spaced-comment': 'warn'
   }
 }

@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv'
 import * as fs from 'fs'
 import * as path from 'path'
+import { google } from 'googleapis'
 import {
   GoogleSpreadsheet,
   GoogleSpreadsheetWorksheet
@@ -13,23 +14,46 @@ interface QuestionSheet extends GoogleSpreadsheetWorksheet {
   title: keyof typeof sheetDict
 }
 
-generateJSON().catch(console.error)
-
 async function generateJSON() {
-  const sheets = await getParsedSheets(),
-    db: Database = {
-      meta: {
-        version: process.env.npm_package_version || '???'
-      },
-      ...sheets
-    }
+  const rootPath = path.join(__dirname, '..', 'temp'),
+    dbPath = path.join(rootPath, 'database.json'),
+    imgFolderPath = path.join(rootPath, 'img')
 
-  fs.writeFileSync(
-    path.join(__dirname, '..', 'temp/database.json'),
-    JSON.stringify(db, null, 2)
+  const drive = new DriveClient()
+
+  let sheets = await getParsedSheets()
+
+  sheets = Object.fromEntries(
+    await Promise.all(
+      Object.entries(sheets).map(async ([section, questions]) => [
+        section,
+        await Promise.all(
+          questions.map(async ({ attachments, ...q }) => ({
+            ...q,
+            attachments:
+              attachments && attachments.length
+                ? await Promise.all(
+                    attachments.map((a) => drive.downloadFile(a, imgFolderPath))
+                  )
+                : undefined
+          }))
+        )
+      ])
+    )
   )
+
+  const db: Database = {
+    meta: {
+      version: process.env.npm_package_version || '???'
+    },
+    ...sheets
+  }
+
+  fs.writeFileSync(dbPath, JSON.stringify(db, null, 2))
 }
 
+// #region Sheets
+/** Reads the spreadsheet and checks the existing sheets. */
 async function readSpreadsheet() {
   const {
     GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -69,6 +93,7 @@ async function readSpreadsheet() {
   return questionSheets as QuestionSheet[]
 }
 
+/** Reads the spreadsheet and parses the data into a database-like format. */
 async function getParsedSheets() {
   const rawSheets = await readSpreadsheet(),
     res: Partial<QuestionsData> = {}
@@ -108,10 +133,8 @@ async function getParsedSheets() {
         e: r.rispostaE
       },
       correct: r.rispostaCorretta,
-      attachments: ((r.immaginiQuesito as string) || '')
-        .split('\n')
-        .filter((e) => !!e)
-        .map((s) => s.replace(/\d+: /g, '')),
+      attachments:
+        DriveClient.matchFileIds(r.immaginiQuesito || '') || undefined,
       validated: (r.validato as string | undefined)?.toLowerCase() == 'sì'
     }))
 
@@ -134,3 +157,78 @@ async function getParsedSheets() {
 
   return res as QuestionsData
 }
+// #endregion
+
+// #region Drive
+/** Utility class containign everything that's Drive-related. */
+export class DriveClient {
+  /** JWT client that handles the authentication with the Google API. */
+  auth
+  /** Google API's Drive client. */
+  drive
+
+  constructor() {
+    const { GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_PRIVATE_KEY } = process.env
+    const SCOPES = [
+      'https://www.googleapis.com/auth/drive.readonly',
+      'https://www.googleapis.com/auth/drive.metadata.readonly'
+    ]
+
+    this.auth = new google.auth.JWT({
+      email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      key: GOOGLE_PRIVATE_KEY,
+      scopes: SCOPES
+    })
+
+    this.drive = google.drive({ version: 'v3', auth: this.auth })
+
+    return this
+  }
+
+  /** Matches ALL file ids from Google Drive URLs in the given string. */
+  static matchFileIds(string: string) {
+    return string.match(/[-\w]{25,}(?!.*[-\w]{25,})/) || []
+  }
+
+  /**
+   * Gets a file from the API.
+   * @param fileId The ID of the file, which can be found by parsing the Google Drive URL using {@link DriveClient.matchFileIds}.
+   * @returns The file's {@link fs.WriteStream} and its extension.
+   */
+  async getFile(fileId: string): Promise<[fs.WriteStream, string | undefined]> {
+    const stream = (
+      await this.drive.files.get(
+        {
+          fileId,
+          alt: 'media'
+        },
+        { responseType: 'stream' }
+      )
+    ).data as fs.WriteStream
+    const extension = (
+      await this.drive.files.get({ fileId, fields: 'fullFileExtension' })
+    ).data.fullFileExtension
+
+    return [stream, extension]
+  }
+
+  /**
+   * Gets a file from the API and writes its contents.
+   * @param fileId The ID of the file, which can be found by parsing the Google Drive URL using {@link DriveClient.matchFileIds}.
+   * @returns The resulting file name
+   */
+  async downloadFile(fileId: string, folderPath: string): Promise<string> {
+    const [stream, extension] = await this.getFile(fileId),
+      fileName = `${fileId}.${extension}`,
+      dest = fs.createWriteStream(path.join(folderPath, fileName))
+
+    return new Promise((res, rej) => {
+      stream.on('error', rej)
+      stream.on('end', () => res(fileName))
+      stream.pipe(dest)
+    })
+  }
+}
+// #endregion
+
+generateJSON().catch(console.error)
