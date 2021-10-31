@@ -1,16 +1,6 @@
-import React, { useState } from 'react'
-import Collapsible from 'react-collapsible'
-import { createStyle, theme } from '../../utils/style'
-import Button from './Button'
-
-const outerDivStyle = createStyle({
-  margin: '10px'
-})
-
-const collapsibleStyle = createStyle({
-  background: theme.lightBackground,
-  margin: '5px'
-})
+import React from 'react'
+import { createStyle } from '../../utils/style'
+import GeneralPurposeCollapsible from './GeneralPurposeCollapsible'
 
 const pStyle = createStyle({
   margin: '2px',
@@ -23,24 +13,9 @@ interface CollapsibleTextProps {
   startOpen?: boolean
 }
 export default function CollapsibleText(props: CollapsibleTextProps) {
-  const [isOpen, setOpen] = useState(props.startOpen ?? true)
-
   return (
-    <div style={outerDivStyle}>
-      <Collapsible
-        trigger={
-          <Button
-            label="mostra/nascondi testo"
-            onClick={() => setOpen(!isOpen)}
-          />
-        }
-        open={isOpen}
-        easing="ease-in-out"
-      >
-        <div style={collapsibleStyle}>
-          <p style={pStyle}>{props.longText}</p>
-        </div>
-      </Collapsible>
-    </div>
+    <GeneralPurposeCollapsible label={props.label}>
+      <p style={pStyle}>{props.longText}</p>
+    </GeneralPurposeCollapsible>
   )
 }
