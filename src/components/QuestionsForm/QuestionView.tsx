@@ -22,7 +22,7 @@ export default function QuestionView({ question }: QuestionViewProps) {
     return <span style={textStyle}>No question to display ¯\_(ツ)_/¯</span>
 
   return (
-    <div>
+    <div style={textStyle}>
       {question.track ? (
         <CollapsibleText
           label="mostra/nascondi traccia"
