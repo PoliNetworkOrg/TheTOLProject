@@ -161,7 +161,7 @@ async function getParsedSheets() {
 
 // #region Drive
 /** Utility class containign everything that's Drive-related. */
-export class DriveClient {
+class DriveClient {
   /** JWT client that handles the authentication with the Google API. */
   auth
   /** Google API's Drive client. */
