@@ -38,7 +38,11 @@ export default function Timer(props: TimerProps) {
           : {})
       }}
     >
-      {(timer.hours * 60 + timer.minutes).toLocaleString(undefined, {
+      {timer.hours.toLocaleString(undefined, {
+        minimumIntegerDigits: 2
+      })}
+      :
+      {timer.minutes.toLocaleString(undefined, {
         minimumIntegerDigits: 2
       })}
       :{timer.seconds.toLocaleString(undefined, { minimumIntegerDigits: 2 })}

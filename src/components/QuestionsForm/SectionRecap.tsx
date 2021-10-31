@@ -34,6 +34,10 @@ export default function SectionRecap(props: SectionRecapProps) {
         )}{' '}
         / {props.sectionQuestions.length} risposte date
         <br />- Tempo utilizzato:{' '}
+        {Math.floor((props.secondsUsed / 60) % 60).toLocaleString(undefined, {
+          minimumIntegerDigits: 2
+        })}
+        :
         {Math.floor(props.secondsUsed / 60).toLocaleString(undefined, {
           minimumIntegerDigits: 2
         })}
@@ -41,9 +45,15 @@ export default function SectionRecap(props: SectionRecapProps) {
         {(props.secondsUsed % 60).toLocaleString(undefined, {
           minimumIntegerDigits: 2
         })}{' '}
-        / {info.minutes}:00 (
+        / {Math.floor(info.minutes / 60)}:{info.minutes % 60}:00 (
         {Math.floor(
-          (info.minutes * 60 - props.secondsUsed) / 60
+          (info.minutes * 60 - props.secondsUsed) / 60 / 60
+        ).toLocaleString(undefined, {
+          minimumIntegerDigits: 2
+        })}
+        :
+        {Math.floor(
+          ((info.minutes * 60 - props.secondsUsed) / 60) % 60
         ).toLocaleString(undefined, {
           minimumIntegerDigits: 2
         })}
@@ -54,7 +64,7 @@ export default function SectionRecap(props: SectionRecapProps) {
             minimumIntegerDigits: 2
           }
         )}{' '}
-        rimanenti)
+        rimanente)
       </p>
       <Button label="Prossima sezione" onClick={props.goToNextSection} />
     </div>
