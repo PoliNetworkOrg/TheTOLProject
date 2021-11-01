@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/TheTOLProject/static/js/main.e7174c26.chunk.js",
-    "main.js.map": "/TheTOLProject/static/js/main.e7174c26.chunk.js.map",
+    "main.js": "/TheTOLProject/static/js/main.c817ebcd.chunk.js",
+    "main.js.map": "/TheTOLProject/static/js/main.c817ebcd.chunk.js.map",
     "runtime-main.js": "/TheTOLProject/static/js/runtime-main.280c1cff.js",
     "runtime-main.js.map": "/TheTOLProject/static/js/runtime-main.280c1cff.js.map",
     "static/js/2.c22b982d.chunk.js": "/TheTOLProject/static/js/2.c22b982d.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.280c1cff.js",
     "static/js/2.c22b982d.chunk.js",
-    "static/js/main.e7174c26.chunk.js"
+    "static/js/main.c817ebcd.chunk.js"
   ]
 }
