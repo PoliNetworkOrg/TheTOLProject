@@ -1,11 +1,14 @@
 import React from 'react'
 import { section, Database, Question } from '../utils/database'
+import { createStyle } from '../utils/style'
 
 import RenderedText from './Util/RenderedText'
 
 interface DBPreviewProps {
   db: Database
 }
+
+const baseStyle = createStyle()
 
 export default function DBPreview({ db }: DBPreviewProps) {
   return (
@@ -16,7 +19,7 @@ export default function DBPreview({ db }: DBPreviewProps) {
           Question[]
         ][]
       ).map(([key, questions]) => (
-        <div key={key}>
+        <div key={key} style={baseStyle}>
           <h3>Section: {key}</h3>
           <ul>
             {questions

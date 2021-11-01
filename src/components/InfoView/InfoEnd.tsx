@@ -96,7 +96,7 @@ export default function InfoEnd(props: InfoEndProps) {
 
   return (
     <div style={divStyle}>
-      <p>La simulazione è finita, questo è il punteggio: </p>
+      <p>La simulazione è finita, questo è il risultato: </p>
       <div style={tableDivStyle}>
         <table style={tableStyle}>
           <tr>
