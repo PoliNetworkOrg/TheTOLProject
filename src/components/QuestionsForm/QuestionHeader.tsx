@@ -35,10 +35,10 @@ const iconStyle = createStyle({
 })
 
 interface QuestionHeaderProps {
-  questionIndex: number
-  shiftQuestionIndex: (offset: number) => void
-  sectionQuestions: Question[]
   currentAnswer: Answer
+  questionIndex: number
+  sectionQuestions: Question[]
+  shiftQuestionIndex: (offset: number) => void
 }
 export default function QuestionHeader(props: QuestionHeaderProps) {
   return (

@@ -24,14 +24,33 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   const [qIndex, originalSetQIndex] = useState(0),
     tmpFlaggedState = useState(false),
     tmpAnswerState = useState<Answer['letter']>(),
-    tmpTimerExpiredState = useState(false)
+    tmpTimerExpiredState = useState(false),
+    alertDisplayedState = useState(false)
 
   const [currentSection, setSection] = props.sectionState,
     [view, setView] = props.viewState,
     [answers, setAnswers] = props.answersState,
     [timeRecord, setTimeRecord] = props.timeRecordState
 
+  const sectionQuestions = props.questions[props.sectionState[0]],
+    currentQuestion = sectionQuestions[qIndex],
+    currentAnswer = answers[currentSection][qIndex],
+    shouldShowAlert =
+      !alertDisplayedState[0] &&
+      (tmpAnswerState[0] != currentAnswer?.letter ||
+        tmpFlaggedState[0] != (currentAnswer?.flagged || false))
+
+  const showAlert = () => {
+    alert(
+      `Se prima non premi "Conferma e vai alla successiva" la risposta non verrà salvata.`
+    )
+    alertDisplayedState[1](true)
+  }
+
   const closeSection = () => {
+    if (shouldShowAlert) return showAlert()
+    // else it's already reset by setQIndex
+
     setView('TOL-secRecap')
     setQIndex(0)
 
@@ -51,17 +70,27 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     timer.restart(new Date(), false)
   }
 
-  const setQIndex = (index: React.SetStateAction<number>) => {
-    const curr = answers[currentSection][index as number]
-    tmpFlaggedState[1](curr?.flagged || false)
-    tmpAnswerState[1](curr?.letter || undefined)
-    return originalSetQIndex(index)
+  const setQIndex = (
+    index: React.SetStateAction<number>,
+    ignoreAlert = false
+  ) => {
+    if (shouldShowAlert && !ignoreAlert) {
+      showAlert()
+    } else {
+      const next = answers[currentSection][index as number]
+
+      tmpFlaggedState[1](next?.flagged || false)
+      tmpAnswerState[1](next?.letter || undefined)
+      alertDisplayedState[1](false)
+
+      originalSetQIndex(index)
+    }
   }
 
-  const shiftQIndex = (offset: number) => {
+  const shiftQIndex = (offset: number, ignoreAlert = false) => {
     const next =
       (qIndex + offset + sectionQuestions.length) % sectionQuestions.length || 0
-    return setQIndex(next)
+    return setQIndex(next, ignoreAlert)
   }
 
   const timer = useTimer({
@@ -75,10 +104,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
 
   const currentQuestionIndexState: statePair<number> = [qIndex, setQIndex]
   if (!props.questions) return <span>Loading...</span>
-
-  const sectionQuestions = props.questions[props.sectionState[0]],
-    currentQuestion = sectionQuestions[qIndex],
-    currentAnswer = answers[currentSection][qIndex]
 
   const getViewElement = () => {
     if (view == 'TOL-startSec')
@@ -114,7 +139,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
               const next = answers
               next[currentSection][qIndex] = a
               setAnswers(next)
-              shiftQIndex(1)
+              shiftQIndex(1, true)
             }}
           />
         </div>
