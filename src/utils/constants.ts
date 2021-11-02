@@ -53,6 +53,12 @@ export const testTotalScore = 100
 export const testPassThreshold = 60
 /** Minimum number of correct questions to pass the test */
 export const tengPassThreshold = 24
+/** How to weight answer when calculating the section score */
+export const correctionWeight = {
+  correct: 1,
+  wrong: -0.25,
+  notGiven: 0
+}
 
 export function getSectionName(key: section) {
   return sectionInfo[key].name
