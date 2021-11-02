@@ -53,6 +53,8 @@ export default function QuestionsForm(props: QuestionsFormProps) {
 
     setView('TOL-secRecap')
     setQIndex(0)
+    tmpAnswerState[1](undefined)
+    tmpFlaggedState[1](false)
 
     const nextAnswers = answers
     nextAnswers[currentSection] = nextAnswers[currentSection].map((a) => ({
