@@ -132,7 +132,7 @@ async function getParsedSheets() {
         d: r.rispostaD,
         e: r.rispostaE
       },
-      correct: r.rispostaCorretta,
+      correct: r.rispostaCorretta?.toLowerCase(),
       attachments:
         DriveClient.matchFileIds(r.immaginiQuesito || '') || undefined,
       validated: (r.validato as string | undefined)?.toLowerCase() == 'sì'
