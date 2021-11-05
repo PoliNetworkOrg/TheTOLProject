@@ -69,6 +69,7 @@ export default function InfoEnd(props: InfoEndProps) {
 
         const total = secQuestions.length,
           sample = sectionInfo[section].sample,
+          sub = sectionInfo[section].sub || 1,
           weight = sectionInfo[section].coeff
 
         return [
@@ -85,14 +86,13 @@ export default function InfoEnd(props: InfoEndProps) {
                 correctionWeight.notGiven * notGiven
             )
               .div(total)
-              .mul(sample)
+              .mul(sample * sub)
           }
         ]
       }
     )
   )
 
-  // TODO: il puntegigo va calcolato per sezione
   const score = (
     Object.entries(correctionGrid) as [section, typeof correctionGrid[string]][]
   )
