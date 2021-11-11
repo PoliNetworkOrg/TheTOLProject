@@ -27,7 +27,8 @@ export default function SectionStart(props: SectionStartProps) {
         {props.section == 'com'
           ? `${formatNumber(info.sample)} bran${info.sample > 1 ? 'i' : 'o'}, `
           : ''}
-        {formatNumber(info.sample)} domande
+        {formatNumber(props.section == 'com' ? info.sub || 0 : info.sample)}{' '}
+        domande
         <br />- {formatNumber(info.minutes)} minuti
         <br />- Peso sezione:{' '}
         {typeof info.coeff == 'number'
