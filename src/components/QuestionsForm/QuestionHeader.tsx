@@ -2,7 +2,7 @@ import React from 'react'
 import { Question } from '../../utils/database'
 import { createStyle, theme } from '../../utils/style'
 import { Answer } from '../App'
-import { FcLeft, FcRight } from 'react-icons/fc'
+import { IoMdArrowRoundBack, IoMdArrowRoundForward } from 'react-icons/io'
 import Button from '../Util/Button'
 
 const containerStyle = createStyle({
@@ -40,8 +40,13 @@ const answerLetterStyle = createStyle(pStyle, {
 })
 
 const iconStyle = createStyle({
-  height: '17,5px',
-  width: '17,5px'
+  height: '17.5px',
+  width: '17.5px',
+  color: theme.primary
+})
+
+const buttonStyle = createStyle({
+  paddingBlock: 0
 })
 
 interface QuestionHeaderProps {
@@ -76,12 +81,14 @@ export default function QuestionHeader(props: QuestionHeaderProps) {
         <Button
           label="precedente"
           onClick={() => props.shiftQuestionIndex(-1)}
-          leftIcon={() => <FcLeft style={iconStyle} />}
+          style={buttonStyle}
+          leftIcon={() => <IoMdArrowRoundBack style={iconStyle} />}
         />
         <Button
           label="successiva"
           onClick={() => props.shiftQuestionIndex(1)}
-          rightIcon={() => <FcRight style={iconStyle} />}
+          style={buttonStyle}
+          rightIcon={() => <IoMdArrowRoundForward style={iconStyle} />}
         />
       </div>
     </div>

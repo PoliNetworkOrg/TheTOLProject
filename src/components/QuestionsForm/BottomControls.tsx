@@ -1,5 +1,5 @@
 import React from 'react'
-import { createStyle } from '../../utils/style'
+import { createStyle, theme } from '../../utils/style'
 import { FaCheck } from 'react-icons/fa'
 import Button from '../Util/Button'
 import { statePair } from '../../utils/types'
@@ -17,6 +17,10 @@ const controlsDiv = createStyle({
 })
 
 const labelStyle = createStyle({ display: 'flex', alignItems: 'center' })
+
+const iconStyle = createStyle({
+  color: theme.timerGreen
+})
 
 interface BottomControlsProps {
   currentQuestion: Question
@@ -43,7 +47,7 @@ export default function BottomControls(props: BottomControlsProps) {
       </label>
       <Button
         label="Conferma e vai alla successiva"
-        leftIcon={() => <FaCheck />}
+        leftIcon={() => <FaCheck style={iconStyle} />}
         onClick={() => {
           props.updateAnswer({
             id: props.currentQuestion.id,
