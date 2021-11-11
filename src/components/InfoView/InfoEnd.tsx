@@ -9,9 +9,9 @@ import {
   testTotalScore
 } from '../../utils/constants'
 import { Question, QuestionsData, section } from '../../utils/database'
-import { createStyle, theme } from '../../utils/style'
+import { createStyle, formatNumber, theme } from '../../utils/style'
 import { AnswersData } from '../App'
-import CollapsibleText from '../Util/CollapsibleText'
+import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
 
 const divStyle = createStyle({
   display: 'flex',
@@ -41,6 +41,12 @@ const tableHeader = createStyle(tableCell, {
 
 const centeredTextStyle = createStyle({
   textAlign: 'center'
+})
+
+const collapsibleStyle = createStyle({
+  margin: '2px',
+  padding: '10px',
+  textAlign: 'justify'
 })
 
 interface InfoEndProps {
@@ -126,7 +132,7 @@ export default function InfoEnd(props: InfoEndProps) {
               <tr key={section}>
                 <td style={tableHeader}>{getSectionName(section)}</td>
                 <td style={tableCell}>
-                  {correction.score.round(2).toString()}
+                  {formatNumber(correction.score, true)}
                 </td>
                 <td style={tableCell}>{correction.total}</td>
                 <td style={tableCell}>{correction.correct}</td>
@@ -136,8 +142,13 @@ export default function InfoEnd(props: InfoEndProps) {
             ))}
         </table>
       </div>
+
       <p style={centeredTextStyle}>
-        Punteggio calcolato: {score.round(2).toString()} / {testTotalScore}
+        Punteggio calcolato: {formatNumber(score, true)} /{' '}
+        {formatNumber(testTotalScore, true)}
+        <br />
+        Punteggio arrotondato: {formatNumber(score)} /{' '}
+        {formatNumber(testTotalScore)}
         <br />
         Esito:{' '}
         {testPassed
@@ -146,30 +157,56 @@ export default function InfoEnd(props: InfoEndProps) {
               !tengPassed ? '(OFA TEST + OFA TENG)' : '(OFA TEST)'
             }`}
       </p>
-      <CollapsibleText
+
+      <GeneralPurposeCollapsible
         label="Come viene calcolato il punteggio"
         startOpen={false}
-        longText={`
-      Per ogni sezione viene conteggiato ${
-        correctionWeight.correct
-      } per ogni risposta corretta, ${
-          correctionWeight.wrong
-        } per ogni risposta errata e ${
-          correctionWeight.notGiven
-        } per ogni risposta non data.
-      Il punteggio complessivo della sezione viene poi pesato in base al numero di quesiti e al punteggio massimo ottenibile (rispetto all'intero test):
-      ${Object.entries(sectionInfo)
-        .map(
-          ([, info]) =>
-            `- ${info.name}: peso ${
-              typeof info.coeff == 'number'
-                ? info.coeff
-                : info.coeff.toFraction()
-            }`
-        )
-        .join('\n')}
-      `}
-      />
+      >
+        <p style={collapsibleStyle}>
+          Il <b>punteggio massimo</b> conseguibile{' '}
+          <b>è di {formatNumber(testTotalScore, true)}</b> e viene espresso fino
+          alla seconda cifra decimale.
+          <br />
+          L'attribuzione di <b>OFA TEST</b> (Obblighi Formativi Aggiunti)
+          avviene quando il punteggio test, arrotondato all'intero più vicino,{' '}
+          <b>è minore di {formatNumber(testPassThreshold)}</b>.<br />
+          L'attribuzione di <b>OFA TENG</b> avviene quando, considerando la sola
+          sezione di {sectionInfo.ing.name}, il numero di risposte corrette{' '}
+          <b>è inferiore a {formatNumber(tengPassThreshold)}</b>.
+          <br />
+          <br />
+          Il <b>punteggio</b> della prova viene calcolato attribuendo:
+          <ul>
+            <li>
+              {formatNumber(correctionWeight.correct)} punto ad ogni risposta
+              esatta
+            </li>
+            <li>
+              {formatNumber(correctionWeight.wrong)} punti ad ogni risposta
+              errata
+            </li>
+            <li>
+              {formatNumber(correctionWeight.notGiven)} punti per ogni risposta
+              non data
+            </li>
+          </ul>
+          e assegnando
+          <ul>
+            {Object.entries(sectionInfo).map(([, info], index) => (
+              <li key={index}>
+                {info.name}: peso{' '}
+                {typeof info.coeff == 'number'
+                  ? formatNumber(info.coeff)
+                  : info.coeff.toFraction()}{' '}
+                ad ogni quesito di {info.name}
+              </li>
+            ))}
+          </ul>
+          Il <b>punteggio</b> complessivo viene arrotondato all'intero più
+          vicino (es: il punteggio 59,49 viene arrotondato a 59, il punteggio
+          59,50 a 60)
+        </p>
+      </GeneralPurposeCollapsible>
     </div>
   )
 }

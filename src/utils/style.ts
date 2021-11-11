@@ -1,4 +1,5 @@
 import * as CSS from 'csstype'
+import Fraction from 'fraction.js'
 
 export type cssLike = CSS.Properties
 
@@ -23,4 +24,17 @@ export function createStyle(...styles: CSS.Properties[]) {
     ...baseStyle,
     ...styles.reduce((acc, curr) => ({ ...acc, ...curr }), {})
   }
+}
+
+export function formatNumber(num: number | Fraction, addDecimals = false) {
+  return (
+    typeof num == 'number'
+      ? num
+      : parseFloat(num.round(addDecimals ? 2 : 0).toString())
+  )
+    .toLocaleString('it-IT', {
+      minimumFractionDigits: addDecimals ? 2 : 0,
+      maximumFractionDigits: 2
+    })
+    .replace(/\./g, ',')
 }
