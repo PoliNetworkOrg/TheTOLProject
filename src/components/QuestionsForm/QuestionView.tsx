@@ -7,7 +7,8 @@ import RenderedText from '../Util/RenderedText'
 
 const containerStyle = createStyle({
   marginBottom: '15px',
-  display: 'flex'
+  display: 'flex',
+  flexDirection: 'column'
 })
 
 const imageStyle = createStyle({
