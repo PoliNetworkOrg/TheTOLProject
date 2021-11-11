@@ -29,7 +29,7 @@ export default function QuestionView({ question }: QuestionViewProps) {
     <div style={containerStyle}>
       {question.track ? (
         <CollapsibleText
-          label="mostra/nascondi traccia"
+          label="mostra/nascondi brano"
           longText={question.track}
         />
       ) : (

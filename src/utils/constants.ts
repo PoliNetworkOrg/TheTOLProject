@@ -32,7 +32,7 @@ export const sectionInfo: Record<section, sectionInfoElement> = {
     coeff: 2.6
   },
   com: {
-    name: 'Comprensione',
+    name: 'Comprensione verbale',
     order: 3,
     sample: 1,
     sub: 5,
