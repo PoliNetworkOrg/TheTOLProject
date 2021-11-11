@@ -5,24 +5,28 @@ import CollapsibleText from '../Util/CollapsibleText'
 import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
 import RenderedText from '../Util/RenderedText'
 
-const textStyle = createStyle({
-  marginBottom: '5px'
+const containerStyle = createStyle({
+  marginBottom: '15px',
+  display: 'flex'
 })
 
 const imageStyle = createStyle({
   maxHeight: '500px'
 })
 
+const questionStyle = createStyle({
+  paddingInline: '7.5px'
+})
 interface QuestionViewProps {
   question: Question
 }
 
 export default function QuestionView({ question }: QuestionViewProps) {
   if (!question)
-    return <span style={textStyle}>No question to display ¯\_(ツ)_/¯</span>
+    return <span style={containerStyle}>No question to display ¯\_(ツ)_/¯</span>
 
   return (
-    <div style={textStyle}>
+    <div style={containerStyle}>
       {question.track ? (
         <CollapsibleText
           label="mostra/nascondi traccia"
@@ -31,14 +35,15 @@ export default function QuestionView({ question }: QuestionViewProps) {
       ) : (
         <span />
       )}
-      <RenderedText text={question.text}></RenderedText>
-      <br />
-      <br />
+      <div style={questionStyle}>
+        <RenderedText text={question.text}></RenderedText>
+      </div>
+
       {question.attachments?.length && (
         <GeneralPurposeCollapsible label="mostra/nascondi allegati">
           {question.attachments.map((fileName, index) => (
             <span key={index + 1}>
-              <p style={textStyle}>Allegato {index + 1}:</p>
+              <p style={containerStyle}>Allegato {index + 1}:</p>
               <img src={getImageURL(fileName)} style={imageStyle} />
             </span>
           ))}
