@@ -36,7 +36,7 @@ export type TimeRecord = Partial<Record<section, number>>
 export default function App() {
   const [database, loadDatabase] = useState<Database>()
   const [questions, setQuestions] = useState<QuestionsData>()
-  const [view, setView] = useState<view>('dbPreview')
+  const [view, setView] = useState<view>('INFO-start')
   const sectionState = useState<section>('ing')
   const answersState = useState<AnswersData>({
     ing: [],
