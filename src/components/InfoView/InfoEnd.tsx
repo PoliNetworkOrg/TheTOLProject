@@ -1,3 +1,4 @@
+import { PDFViewer } from '@react-pdf/renderer'
 import Fraction from 'fraction.js'
 import React from 'react'
 import {
@@ -12,6 +13,8 @@ import { Question, QuestionsData, section } from '../../utils/database'
 import { createStyle, theme } from '../../utils/style'
 import { AnswersData } from '../App'
 import CollapsibleText from '../Util/CollapsibleText'
+import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
+import ExtendedCorrection from './ExtendedCorrection/ExtendedCorrection'
 
 const divStyle = createStyle({
   display: 'flex',
@@ -170,6 +173,15 @@ export default function InfoEnd(props: InfoEndProps) {
         .join('\n')}
       `}
       />
+
+      <GeneralPurposeCollapsible label="Correzione extesa">
+        <PDFViewer showToolbar={true} width="100%" height="1000px">
+          <ExtendedCorrection
+            answers={props.answers}
+            questions={props.questions}
+          />
+        </PDFViewer>
+      </GeneralPurposeCollapsible>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import { PDFViewer } from '@react-pdf/renderer'
 import React, { useEffect, useState } from 'react'
 import {
   answerLetter,
@@ -10,6 +11,7 @@ import {
 import DBPreview from './DBPreview'
 import ErrorView from './ErrorView'
 import Header from './Header'
+import ExtendedCorrection from './InfoView/ExtendedCorrection/ExtendedCorrection'
 import InfoView from './InfoView/InfoView'
 import QuestionsForm from './QuestionsForm/QuestionsForm'
 import Separator from './Util/Separator'
@@ -71,6 +73,11 @@ export default function App() {
         display={loadingError[0] || ''}
         internal={loadingError[1]}
       />
+      {questions && (
+        <PDFViewer showToolbar={true} width="100%" height="1000px">
+          <ExtendedCorrection answers={answersState[0]} questions={questions} />
+        </PDFViewer>
+      )}
       {view == 'dbPreview' && database ? (
         <DBPreview db={database} />
       ) : view.startsWith('TOL') && questions ? (

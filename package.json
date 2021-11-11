@@ -17,6 +17,7 @@
     "test": "npm run build && npm run lint && npm run exports"
   },
   "devDependencies": {
+    "@react-pdf/renderer": "^2.0.20",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
