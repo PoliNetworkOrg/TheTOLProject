@@ -65,7 +65,7 @@ export default function App() {
   return (
     <div>
       <Header viewState={[view, setView]} />
-      <Separator text="Placeholder top separator text" />
+      <Separator />
       <ErrorView
         hidden={!loadingError[0]}
         display={loadingError[0] || ''}
@@ -88,7 +88,7 @@ export default function App() {
           viewState={[view, setView]}
         />
       ) : undefined}
-      <Separator text="Placeholder bottom separator text" />
+      <Separator />
     </div>
   )
 }
