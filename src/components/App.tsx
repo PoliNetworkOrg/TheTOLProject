@@ -66,28 +66,30 @@ export default function App() {
     <div>
       <Header viewState={[view, setView]} />
       <Separator />
-      <ErrorView
-        hidden={!loadingError[0]}
-        display={loadingError[0] || ''}
-        internal={loadingError[1]}
-      />
-      {view == 'dbPreview' && database ? (
-        <DBPreview db={database} />
-      ) : view.startsWith('TOL') && questions ? (
-        <QuestionsForm
-          answersState={answersState}
-          questions={questions as QuestionsData}
-          sectionState={sectionState}
-          timeRecordState={timeRecordState}
-          viewState={[view, setView]}
+      <div style={{ paddingInline: '7.5px' }}>
+        <ErrorView
+          hidden={!loadingError[0]}
+          display={loadingError[0] || ''}
+          internal={loadingError[1]}
         />
-      ) : view.startsWith('INFO') && questions ? (
-        <InfoView
-          answers={answersState[0]}
-          questions={questions}
-          viewState={[view, setView]}
-        />
-      ) : undefined}
+        {view == 'dbPreview' && database ? (
+          <DBPreview db={database} />
+        ) : view.startsWith('TOL') && questions ? (
+          <QuestionsForm
+            answersState={answersState}
+            questions={questions as QuestionsData}
+            sectionState={sectionState}
+            timeRecordState={timeRecordState}
+            viewState={[view, setView]}
+          />
+        ) : view.startsWith('INFO') && questions ? (
+          <InfoView
+            answers={answersState[0]}
+            questions={questions}
+            viewState={[view, setView]}
+          />
+        ) : undefined}
+      </div>
       <Separator />
     </div>
   )

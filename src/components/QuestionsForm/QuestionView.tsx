@@ -15,9 +15,6 @@ const imageStyle = createStyle({
   maxHeight: '500px'
 })
 
-const questionStyle = createStyle({
-  paddingInline: '7.5px'
-})
 interface QuestionViewProps {
   question: Question
 }
@@ -36,9 +33,7 @@ export default function QuestionView({ question }: QuestionViewProps) {
       ) : (
         <span />
       )}
-      <div style={questionStyle}>
-        <RenderedText text={question.text}></RenderedText>
-      </div>
+      <RenderedText text={question.text}></RenderedText>
 
       {question.attachments?.length && (
         <GeneralPurposeCollapsible label="mostra/nascondi allegati">
