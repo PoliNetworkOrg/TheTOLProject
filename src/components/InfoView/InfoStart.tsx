@@ -23,9 +23,9 @@ export default function InfoStart(props: InfoStartProps) {
       <p>Paragrafo sullo scopo del progetto etc. etc.</p>
       <p>
         <span style={centered}>DISCLAIMER</span>
-        The TOL Project" (Progetto) non è in alcun modo collegato al Politecnico
-        di Milano ma è gestito gratuitamente da studenti. Gli autori del
-        Progetto non si assumono alcuna responsabilità, né garantiscono
+        "The TOL Project" (Progetto) non è in alcun modo collegato al
+        Politecnico di Milano ma è gestito gratuitamente da studenti. Gli autori
+        del Progetto non si assumono alcuna responsabilità, né garantiscono
         espressamente o implicitamente l'accuratezza o l'affidabilità dei
         contenuti di questo sito ai fini del superamento del test di ammissione
         del Politecnico di Milano.
