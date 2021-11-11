@@ -4,6 +4,8 @@ import Fraction from 'fraction.js'
 export type cssLike = CSS.Properties
 
 export const theme = {
+  boxShadow:
+    '1px 0 0 0 #606060, 0 1px 0 0 #606060, 1px 1px 0 0 #606060, /* corner */ 1px 0 0 0 #606060 inset, 0 1px 0 0 #606060 inset',
   lightBackground: '#F3F3EE',
   lightBorder: '#D5DFE4',
   primary: '#069',

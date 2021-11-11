@@ -55,8 +55,7 @@ const cellContainerStyle = createStyle({
 const cellSubStyle = createStyle({
   padding: '0.3em',
   height: '1.2em',
-  boxShadow:
-    '1px 0 0 0 #606060, 0 1px 0 0 #606060, 1px 1px 0 0 #606060, /* corner */ 1px 0 0 0 #606060 inset, 0 1px 0 0 #606060 inset'
+  boxShadow: theme.boxShadow
 })
 
 const selectedCell = createStyle({

@@ -21,8 +21,6 @@ const rightContainer = createStyle({
 })
 
 const pStyle = createStyle({
-  flexGrow: 1,
-  flexShrink: 1,
   textAlign: 'left',
   fontSize: '11pt',
   minWidth: '4em',
@@ -31,7 +29,14 @@ const pStyle = createStyle({
 
 const questionStyle = createStyle(pStyle, {
   fontWeight: 'bold',
-  width: '11em'
+  width: '7.1em',
+  paddingLeft: 0
+})
+
+const answerLetterStyle = createStyle(pStyle, {
+  textAlign: 'center',
+  marginInline: '5px',
+  boxShadow: theme.boxShadow
 })
 
 const iconStyle = createStyle({
@@ -52,7 +57,7 @@ export default function QuestionHeader(props: QuestionHeaderProps) {
         <p style={questionStyle}>Domanda {props.questionIndex + 1}</p>
         <p
           style={{
-            ...pStyle,
+            ...answerLetterStyle,
             backgroundColor: props.currentAnswer?.flagged
               ? theme.questionYellow
               : props.currentAnswer?.letter
