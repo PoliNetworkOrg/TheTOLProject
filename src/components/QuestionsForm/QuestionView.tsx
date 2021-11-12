@@ -6,13 +6,27 @@ import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
 import RenderedText from '../Util/RenderedText'
 
 const containerStyle = createStyle({
-  marginBottom: '15px',
+  marginBlock: 0,
   display: 'flex',
   flexDirection: 'column'
 })
 
+const collapsibleContentStyle = createStyle({
+  padding: '10px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '15px'
+})
+
+const attachmentStyle = createStyle({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '5px'
+})
+
 const imageStyle = createStyle({
-  maxHeight: '500px'
+  maxHeight: '500px',
+  width: 'fit-content'
 })
 
 interface QuestionViewProps {
@@ -36,9 +50,12 @@ export default function QuestionView({ question }: QuestionViewProps) {
       <RenderedText text={question.text}></RenderedText>
 
       {question.attachments?.length && (
-        <GeneralPurposeCollapsible label="mostra/nascondi allegati">
+        <GeneralPurposeCollapsible
+          label="mostra/nascondi allegati"
+          contentStyle={collapsibleContentStyle}
+        >
           {question.attachments.map((fileName, index) => (
-            <span key={index + 1}>
+            <span key={index + 1} style={attachmentStyle}>
               <p style={containerStyle}>Allegato {index + 1}:</p>
               <img src={getImageURL(fileName)} style={imageStyle} />
             </span>
