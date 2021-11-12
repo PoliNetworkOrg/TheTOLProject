@@ -37,7 +37,10 @@ interface ButtonProps {
 
 export default function Button(props: ButtonProps) {
   return (
-    <button style={buttonStyle} onClick={props.onClick}>
+    <button
+      style={createStyle(buttonStyle, props.style || {})}
+      onClick={props.onClick}
+    >
       <span style={leftIcon}>{props.leftIcon && props.leftIcon()}</span>
       <p style={pStyle}>{props.label}</p>
       <span style={rightIcon}>{props.rightIcon && props.rightIcon()}</span>
