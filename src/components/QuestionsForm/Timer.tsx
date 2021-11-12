@@ -31,8 +31,8 @@ const expiring = createStyle({
 
 const iconStyle = createStyle({
   color: 'inherit',
-  height: '1.75em',
-  width: '1.75em'
+  height: '2.5em',
+  width: 'auto'
 })
 
 const pStyle = createStyle({
