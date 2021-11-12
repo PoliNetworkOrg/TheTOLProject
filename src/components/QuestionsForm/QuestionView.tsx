@@ -38,30 +38,30 @@ export default function QuestionView({ question }: QuestionViewProps) {
     return <span style={containerStyle}>No question to display ¯\_(ツ)_/¯</span>
 
   return (
-    <div style={containerStyle}>
-      {question.track ? (
+    <div style={{ marginBottom: question.attachments?.length ? 0 : '15px' }}>
+      {question.track && (
         <CollapsibleText
           label="mostra/nascondi brano"
           longText={question.track}
         />
-      ) : (
-        <span />
       )}
-      <RenderedText text={question.text}></RenderedText>
+      <div style={containerStyle}>
+        <RenderedText text={question.text}></RenderedText>
 
-      {question.attachments?.length && (
-        <GeneralPurposeCollapsible
-          label="mostra/nascondi allegati"
-          contentStyle={collapsibleContentStyle}
-        >
-          {question.attachments.map((fileName, index) => (
-            <span key={index + 1} style={attachmentStyle}>
-              <p style={containerStyle}>Allegato {index + 1}:</p>
-              <img src={getImageURL(fileName)} style={imageStyle} />
-            </span>
-          ))}
-        </GeneralPurposeCollapsible>
-      )}
+        {question.attachments?.length && (
+          <GeneralPurposeCollapsible
+            label="mostra/nascondi allegati"
+            contentStyle={collapsibleContentStyle}
+          >
+            {question.attachments.map((fileName, index) => (
+              <span key={index + 1} style={attachmentStyle}>
+                <p style={containerStyle}>Allegato {index + 1}:</p>
+                <img src={getImageURL(fileName)} style={imageStyle} />
+              </span>
+            ))}
+          </GeneralPurposeCollapsible>
+        )}
+      </div>
     </div>
   )
 }

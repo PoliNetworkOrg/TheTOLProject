@@ -21,10 +21,10 @@ const baseStyle: CSS.Properties = {
   color: theme.softBlack
 }
 
-export function createStyle(...styles: CSS.Properties[]) {
+export function createStyle(...styles: (CSS.Properties | undefined)[]) {
   return {
     ...baseStyle,
-    ...styles.reduce((acc, curr) => ({ ...acc, ...curr }), {})
+    ...styles.filter((f) => f).reduce((acc, curr) => ({ ...acc, ...curr }), {})
   }
 }
 
