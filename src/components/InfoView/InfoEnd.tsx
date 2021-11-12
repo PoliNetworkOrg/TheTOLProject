@@ -110,7 +110,23 @@ export default function InfoEnd(props: InfoEndProps) {
 
   return (
     <div style={divStyle}>
-      <p>La simulazione è finita, questo è il risultato: </p>
+      <p style={centeredTextStyle}>
+        <br />
+        Esito:{' '}
+        {testPassed
+          ? `Superato${!tengPassed ? ' (OFA TENG)' : ''}`
+          : `Non superato ${
+              !tengPassed ? '(OFA TEST + OFA TENG)' : '(OFA TEST)'
+            }`}
+        <br />
+        Punteggio calcolato: {formatNumber(score, true)} /{' '}
+        {formatNumber(testTotalScore, true)}
+        <br />
+        Punteggio arrotondato: {formatNumber(score)} /{' '}
+        {formatNumber(testTotalScore)}
+      </p>
+      <br />
+
       <div style={tableDivStyle}>
         <table style={tableStyle}>
           <tr>
@@ -142,21 +158,7 @@ export default function InfoEnd(props: InfoEndProps) {
             ))}
         </table>
       </div>
-
-      <p style={centeredTextStyle}>
-        Punteggio calcolato: {formatNumber(score, true)} /{' '}
-        {formatNumber(testTotalScore, true)}
-        <br />
-        Punteggio arrotondato: {formatNumber(score)} /{' '}
-        {formatNumber(testTotalScore)}
-        <br />
-        Esito:{' '}
-        {testPassed
-          ? `Superato${!tengPassed ? ' (OFA TENG)' : ''}`
-          : `Non superato ${
-              !tengPassed ? '(OFA TEST + OFA TENG)' : '(OFA TEST)'
-            }`}
-      </p>
+      <br />
 
       <GeneralPurposeCollapsible
         label="Come viene calcolato il punteggio"
@@ -194,7 +196,7 @@ export default function InfoEnd(props: InfoEndProps) {
           <ul>
             {Object.entries(sectionInfo).map(([, info], index) => (
               <li key={index}>
-                {info.name}: peso{' '}
+                peso{' '}
                 {typeof info.coeff == 'number'
                   ? formatNumber(info.coeff)
                   : info.coeff.toFraction()}{' '}
