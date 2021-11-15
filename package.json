@@ -9,6 +9,7 @@
     "prebuild:db": "npx rimraf temp && npx mkdirp temp/img",
     "deploy": "gh-pages -d build",
     "predeploy": "npm run build",
+    "depcheck": "depcheck",
     "eject": "react-scripts eject",
     "exports": "ts-prune -e",
     "lint": "eslint ./src ./scripts",
@@ -17,12 +18,7 @@
     "test": "npm run build && npm run lint && npm run exports"
   },
   "devDependencies": {
-    "@react-pdf/renderer": "^2.0.20",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
     "@types/google-spreadsheet": "^3.1.5",
-    "@types/jest": "^27.0.2",
     "@types/node": "^16.10.3",
     "@types/react": "^17.0.27",
     "@types/react-dom": "^17.0.9",
@@ -32,6 +28,7 @@
     "@typescript-eslint/parser": "^4.33.0",
     "axios": "^0.24.0",
     "csstype": "^3.0.9",
+    "depcheck": "^1.4.2",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -54,8 +51,7 @@
     "ts-node": "^10.3.0",
     "ts-prune": "^0.10.1",
     "typescript": "^4.4.3",
-    "underscore": "^1.13.1",
-    "web-vitals": "^1.1.2"
+    "underscore": "^1.13.1"
   },
   "eslintConfig": {
     "extends": [
