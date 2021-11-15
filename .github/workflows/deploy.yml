@@ -5,6 +5,8 @@ on:
       - .github/workflows/deploy.yml
       - src/**
       - public/**
+    branches:
+      - "main"
   workflow_dispatch:
 
 jobs:
