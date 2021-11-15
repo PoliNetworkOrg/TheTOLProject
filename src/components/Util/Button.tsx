@@ -18,7 +18,7 @@ const rightIcon = createStyle({
 
 interface ButtonProps {
   label: string
-  onClick: () => void
+  onClick?: () => void
   style?: cssLike
   leftIcon?: () => JSX.Element
   rightIcon?: () => JSX.Element
