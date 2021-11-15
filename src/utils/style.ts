@@ -17,7 +17,7 @@ export const theme = {
 }
 
 const baseStyle: CSS.Properties = {
-  fontFamily: 'verdana',
+  fontFamily: 'Verdana, Roboto',
   color: theme.softBlack
 }
 

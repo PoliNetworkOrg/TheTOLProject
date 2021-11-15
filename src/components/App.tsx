@@ -10,7 +10,6 @@ import {
 import DBPreview from './DBPreview'
 import ErrorView from './ErrorView'
 import Header from './Header'
-import ExtendedCorrection from './InfoView/ExtendedCorrection/ExtendedCorrection'
 import InfoView from './InfoView/InfoView'
 import QuestionsForm from './QuestionsForm/QuestionsForm'
 import Separator from './Util/Separator'
@@ -66,9 +65,6 @@ export default function App() {
   return (
     <div>
       <Header viewState={[view, setView]} />
-      {questions && (
-        <ExtendedCorrection answers={answersState[0]} questions={questions} />
-      )}
       <Separator />
       <div style={{ paddingInline: '7.5px' }}>
         <ErrorView

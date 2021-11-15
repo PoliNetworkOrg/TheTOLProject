@@ -109,8 +109,8 @@ export default function InfoEnd(props: InfoEndProps) {
   const testPassed = score.compare(testPassThreshold) >= 0,
     tengPassed = correctionGrid.ing?.correct >= tengPassThreshold
 
-  return (
-    <div style={divStyle}>
+  const resultTable = () => (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <p style={centeredTextStyle}>
         <br />
         Esito:{' '}
@@ -160,6 +160,12 @@ export default function InfoEnd(props: InfoEndProps) {
         </table>
       </div>
       <br />
+    </div>
+  )
+
+  return (
+    <div style={divStyle}>
+      {resultTable()}
 
       <GeneralPurposeCollapsible
         label="Come viene calcolato il punteggio"
@@ -211,7 +217,11 @@ export default function InfoEnd(props: InfoEndProps) {
         </p>
       </GeneralPurposeCollapsible>
 
-      <ExtendedCorrection answers={props.answers} questions={props.questions} />
+      <ExtendedCorrection
+        answers={props.answers}
+        questions={props.questions}
+        resultTable={resultTable()}
+      />
     </div>
   )
 }
