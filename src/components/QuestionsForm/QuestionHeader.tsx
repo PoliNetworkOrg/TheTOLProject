@@ -2,7 +2,7 @@ import React from 'react'
 import { Question } from '../../utils/database'
 import { createStyle, theme } from '../../utils/style'
 import { Answer } from '../App'
-import { FcLeft, FcRight } from 'react-icons/fc'
+import { IoMdArrowRoundBack, IoMdArrowRoundForward } from 'react-icons/io'
 import Button from '../Util/Button'
 
 const containerStyle = createStyle({
@@ -21,17 +21,32 @@ const rightContainer = createStyle({
 })
 
 const pStyle = createStyle({
-  flexGrow: 1,
-  flexShrink: 1,
-  textAlign: 'center',
+  textAlign: 'left',
   fontSize: '11pt',
   minWidth: '4em',
   padding: '7.5px'
 })
 
+const questionStyle = createStyle(pStyle, {
+  fontWeight: 'bold',
+  width: '7.1em',
+  paddingLeft: 0
+})
+
+const answerLetterStyle = createStyle(pStyle, {
+  textAlign: 'center',
+  marginInline: '5px',
+  boxShadow: theme.boxShadow
+})
+
 const iconStyle = createStyle({
-  height: '17,5px',
-  width: '17,5px'
+  height: '17.5px',
+  width: '17.5px',
+  color: theme.primary
+})
+
+const buttonStyle = createStyle({
+  paddingBlock: 0
 })
 
 interface QuestionHeaderProps {
@@ -44,12 +59,10 @@ export default function QuestionHeader(props: QuestionHeaderProps) {
   return (
     <div style={containerStyle}>
       <div style={leftContainer}>
-        <p style={{ ...pStyle, fontWeight: 'bold', width: '11em' }}>
-          Domanda {props.questionIndex + 1}
-        </p>
+        <p style={questionStyle}>Domanda {props.questionIndex + 1}</p>
         <p
           style={{
-            ...pStyle,
+            ...answerLetterStyle,
             backgroundColor: props.currentAnswer?.flagged
               ? theme.questionYellow
               : props.currentAnswer?.letter
@@ -68,12 +81,14 @@ export default function QuestionHeader(props: QuestionHeaderProps) {
         <Button
           label="precedente"
           onClick={() => props.shiftQuestionIndex(-1)}
-          leftIcon={() => <FcLeft style={iconStyle} />}
+          style={buttonStyle}
+          leftIcon={() => <IoMdArrowRoundBack style={iconStyle} />}
         />
         <Button
           label="successiva"
           onClick={() => props.shiftQuestionIndex(1)}
-          rightIcon={() => <FcRight style={iconStyle} />}
+          style={buttonStyle}
+          rightIcon={() => <IoMdArrowRoundForward style={iconStyle} />}
         />
       </div>
     </div>

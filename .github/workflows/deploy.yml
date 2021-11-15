@@ -4,6 +4,7 @@ on:
     paths:
       - .github/workflows/deploy.yml
       - src/**
+      - public/**
     branches:
       - "main"
   workflow_dispatch:
@@ -19,7 +20,6 @@ jobs:
         with:
           node-version: 16
       - run: npm ci --ignore-scripts
-      - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+      - run: npm run deploy -- -r https://${DEPLOYMENT_PAT}@github.com/thetolproject/thetolproject.github.io.git -u "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: npm run deploy -- -u "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
+          DEPLOYMENT_PAT: ${{ secrets.DEPLOYMENT_PAT }}

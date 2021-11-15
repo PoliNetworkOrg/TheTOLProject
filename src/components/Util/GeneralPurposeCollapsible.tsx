@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react'
 import Collapsible from 'react-collapsible'
-import { createStyle, theme } from '../../utils/style'
+import { createStyle, cssLike, theme } from '../../utils/style'
 import Button from './Button'
 
 const outerDivStyle = createStyle({
@@ -16,6 +16,10 @@ interface GeneralPurposeCollapsibleProps {
   label: string
   children: ReactNode
   startOpen?: boolean
+  contentStyle?: cssLike
+  outerDivStyle?: cssLike
+  onOpen?: () => void
+  onClose?: () => void
 }
 export default function GeneralPurposeCollapsible(
   props: GeneralPurposeCollapsibleProps
@@ -23,15 +27,19 @@ export default function GeneralPurposeCollapsible(
   const [isOpen, setOpen] = useState(props.startOpen ?? true)
 
   return (
-    <div style={outerDivStyle}>
+    <div style={createStyle(outerDivStyle, props.outerDivStyle)}>
       <Collapsible
         trigger={
           <Button label={props.label} onClick={() => setOpen(!isOpen)} />
         }
         open={isOpen}
+        onOpen={props.onOpen}
+        onClose={props.onClose}
         easing="ease-in-out"
       >
-        <div style={collapsibleStyle}>{props.children}</div>
+        <div style={createStyle(collapsibleStyle, props.contentStyle)}>
+          {props.children}
+        </div>
       </Collapsible>
     </div>
   )

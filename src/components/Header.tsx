@@ -55,7 +55,7 @@ export default function Header({ viewState }: HeaderProps) {
       <h1 style={centeredText}>The TOL Project</h1>
       <div style={buttonDivStyle}>
         <Button
-          label="Toggle demo view"
+          label="Toggle database view"
           onClick={() => {
             const [currentView, selectView] = viewState
             if (currentView == 'dbPreview') selectView('INFO-start')

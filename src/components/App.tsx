@@ -37,7 +37,7 @@ export type TimeRecord = Partial<Record<section, number>>
 export default function App() {
   const [database, loadDatabase] = useState<Database>()
   const [questions, setQuestions] = useState<QuestionsData>()
-  const [view, setView] = useState<view>('dbPreview')
+  const [view, setView] = useState<view>('INFO-start')
   const sectionState = useState<section>('ing')
   const answersState = useState<AnswersData>({
     ing: [],
@@ -66,33 +66,35 @@ export default function App() {
   return (
     <div>
       <Header viewState={[view, setView]} />
-      <Separator text="Placeholder top separator text" />
-      <ErrorView
-        hidden={!loadingError[0]}
-        display={loadingError[0] || ''}
-        internal={loadingError[1]}
-      />
       {questions && (
         <ExtendedCorrection answers={answersState[0]} questions={questions} />
       )}
-      {view == 'dbPreview' && database ? (
-        <DBPreview db={database} />
-      ) : view.startsWith('TOL') && questions ? (
-        <QuestionsForm
-          answersState={answersState}
-          questions={questions as QuestionsData}
-          sectionState={sectionState}
-          timeRecordState={timeRecordState}
-          viewState={[view, setView]}
+      <Separator />
+      <div style={{ paddingInline: '7.5px' }}>
+        <ErrorView
+          hidden={!loadingError[0]}
+          display={loadingError[0] || ''}
+          internal={loadingError[1]}
         />
-      ) : view.startsWith('INFO') && questions ? (
-        <InfoView
-          answers={answersState[0]}
-          questions={questions}
-          viewState={[view, setView]}
-        />
-      ) : undefined}
-      <Separator text="Placeholder bottom separator text" />
+        {view == 'dbPreview' && database ? (
+          <DBPreview db={database} />
+        ) : view.startsWith('TOL') && questions ? (
+          <QuestionsForm
+            answersState={answersState}
+            questions={questions as QuestionsData}
+            sectionState={sectionState}
+            timeRecordState={timeRecordState}
+            viewState={[view, setView]}
+          />
+        ) : view.startsWith('INFO') && questions ? (
+          <InfoView
+            answers={answersState[0]}
+            questions={questions}
+            viewState={[view, setView]}
+          />
+        ) : undefined}
+      </div>
+      <Separator />
     </div>
   )
 }

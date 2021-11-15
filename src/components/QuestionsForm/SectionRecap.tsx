@@ -1,7 +1,7 @@
 import React from 'react'
 import { sectionInfo } from '../../utils/constants'
 import { QuestionsData, section } from '../../utils/database'
-import { createStyle } from '../../utils/style'
+import { createStyle, formatNumber } from '../../utils/style'
 import { AnswersData } from '../App'
 import Button from '../Util/Button'
 
@@ -28,11 +28,13 @@ export default function SectionRecap(props: SectionRecapProps) {
       <p>
         Sezione conclusa: {info.name}
         <br />-{' '}
-        {props.sectionAnswers.reduce(
-          (acc, curr) => (curr.letter ? acc + 1 : acc),
-          0
+        {formatNumber(
+          props.sectionAnswers.reduce(
+            (acc, curr) => (curr.letter ? acc + 1 : acc),
+            0
+          )
         )}{' '}
-        / {props.sectionQuestions.length} risposte date
+        / {formatNumber(props.sectionQuestions.length)} risposte date
         <br />- Tempo utilizzato:{' '}
         {Math.floor((props.secondsUsed / 60) % 60).toLocaleString(undefined, {
           minimumIntegerDigits: 2

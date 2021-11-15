@@ -1,7 +1,7 @@
 import React from 'react'
 import { sectionInfo } from '../../utils/constants'
 import { section } from '../../utils/database'
-import { createStyle } from '../../utils/style'
+import { createStyle, formatNumber } from '../../utils/style'
 import Button from '../Util/Button'
 
 const baseStyle = createStyle({
@@ -25,12 +25,15 @@ export default function SectionStart(props: SectionStartProps) {
         Stai per iniziare: {info.name}
         <br />-{' '}
         {props.section == 'com'
-          ? `${info.sample} bran${info.sample > 1 ? 'i' : 'o'}, `
+          ? `${formatNumber(info.sample)} bran${info.sample > 1 ? 'i' : 'o'}, `
           : ''}
-        {info.sample} domande
-        <br />- {info.minutes} minuti
+        {formatNumber(props.section == 'com' ? info.sub || 0 : info.sample)}{' '}
+        domande
+        <br />- {formatNumber(info.minutes)} minuti
         <br />- Peso sezione:{' '}
-        {typeof info.coeff == 'number' ? info.coeff : info.coeff.toFraction()}
+        {typeof info.coeff == 'number'
+          ? formatNumber(info.coeff)
+          : info.coeff.toFraction()}
       </p>
       <Button label="Inzia sezione" onClick={props.startSection} />
     </div>
