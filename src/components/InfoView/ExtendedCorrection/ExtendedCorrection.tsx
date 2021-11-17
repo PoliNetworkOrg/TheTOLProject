@@ -3,24 +3,24 @@ import ReactToPrint from 'react-to-print'
 import { Question, QuestionsData, section } from '../../../utils/database'
 import { AnswersData } from '../../App'
 import { sectionInfo } from '../../../utils/constants'
-import { createStyle } from '../../../utils/style'
+import { StyleSheet } from '../../../utils/style'
 import RenderedText from '../../Util/RenderedText'
 import GeneralPurposeCollapsible from '../../Util/GeneralPurposeCollapsible'
 import Button from '../../Util/Button'
 import './ExtendedCorrection.css'
 
-const collapsibleStyle = createStyle({
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '15px',
-  gap: '10px'
-})
-
-const docStyle = createStyle()
-
-const printButton = createStyle({
-  display: 'flex',
-  justifyContent: 'center'
+const styles = StyleSheet.create({
+  collapsible: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '15px',
+    gap: '10px'
+  },
+  doc: {},
+  printButton: {
+    display: 'flex',
+    justifyContent: 'center'
+  }
 })
 
 interface ExtendedCorrectionProps {
@@ -35,17 +35,17 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
 
   return (
     <GeneralPurposeCollapsible label="Correzione estesa" startOpen={false}>
-      <div style={collapsibleStyle}>
+      <div style={styles.collapsible}>
         <ReactToPrint
           documentTitle={`TheTOLProject ${new Date().toLocaleString()}`}
           content={() => ref.current}
           trigger={() => (
-            <div style={printButton}>
+            <div style={styles.printButton}>
               <Button label="Stampa/salva correzione" />
             </div>
           )}
         />
-        <div ref={ref} style={docStyle}>
+        <div ref={ref} style={styles.doc}>
           <div>
             {(Object.entries(props.questions) as [section, Question[]][])
               .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)

@@ -1,25 +1,23 @@
 import React from 'react'
-import { createStyle, theme } from '../../utils/style'
+import { StyleSheet, theme } from '../../utils/style'
 import { FaCheck } from 'react-icons/fa'
 import Button from '../Util/Button'
 import { statePair } from '../../utils/types'
 import { Answer } from '../App'
 import { Question } from '../../utils/database'
 
-const controlsDiv = createStyle({
-  display: 'flex',
-  flex: 1,
-  justifyContent: 'flex-end',
-  fontSize: '9.5pt',
-  verticalAlign: 'middle',
-  gap: '10px',
-  paddingBlock: '10px'
-})
-
-const labelStyle = createStyle({ display: 'flex', alignItems: 'center' })
-
-const iconStyle = createStyle({
-  color: theme.timerGreen
+const styles = StyleSheet.create({
+  controlsDiv: {
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'flex-end',
+    fontSize: '9.5pt',
+    verticalAlign: 'middle',
+    gap: '10px',
+    paddingBlock: '10px'
+  },
+  label: { display: 'flex', alignItems: 'center' },
+  icon: { color: theme.timerGreen }
 })
 
 interface BottomControlsProps {
@@ -31,11 +29,11 @@ interface BottomControlsProps {
 export default function BottomControls(props: BottomControlsProps) {
   const [flagged, setFlagged] = props.tmpFlaggedState
 
-  if (!props.currentQuestion) return <div style={controlsDiv} />
+  if (!props.currentQuestion) return <div style={styles.controlsDiv} />
 
   return (
-    <div style={controlsDiv}>
-      <label style={labelStyle}>
+    <div style={styles.controlsDiv}>
+      <label style={styles.label}>
         <input
           type="checkbox"
           checked={flagged}
@@ -47,7 +45,7 @@ export default function BottomControls(props: BottomControlsProps) {
       </label>
       <Button
         label="Conferma e vai alla successiva"
-        leftIcon={() => <FaCheck style={iconStyle} />}
+        leftIcon={() => <FaCheck style={styles.icon} />}
         onClick={() => {
           props.updateAnswer({
             id: props.currentQuestion.id,

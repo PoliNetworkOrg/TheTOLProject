@@ -1,14 +1,12 @@
 import React from 'react'
 import { section, Database, Question } from '../utils/database'
-import { createStyle } from '../utils/style'
+import { baseStyle } from '../utils/style'
 
 import RenderedText from './Util/RenderedText'
 
 interface DBPreviewProps {
   db: Database
 }
-
-const baseStyle = createStyle()
 
 export default function DBPreview({ db }: DBPreviewProps) {
   return (
