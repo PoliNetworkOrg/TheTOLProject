@@ -7,7 +7,7 @@ const containerStyle = createStyle({
   display: 'flex',
   justifyContent: 'center',
   margin: '15px',
-  gap: '15px',
+  gap: '50px',
   fontSize: '10pt',
   color: theme.softBlack
 })
@@ -20,8 +20,9 @@ const linkStyle = createStyle({
 const textStyle = createStyle()
 
 export default function Footer() {
-  const aboutModalState = useState(false)
-  const licenseModalState = useState(false)
+  const aboutModalState = useState(false),
+    licenseModalState = useState(false),
+    privacyModalState = useState(false)
 
   return (
     <div style={containerStyle}>
@@ -39,8 +40,12 @@ export default function Footer() {
       <a href="#" style={linkStyle} onClick={() => licenseModalState[1](true)}>
         License
       </a>
+      <a href="#" style={linkStyle} onClick={() => privacyModalState[1](true)}>
+        Privacy
+      </a>
       {About(aboutModalState)}
       {License(licenseModalState)}
+      {Privacy(privacyModalState)}
     </div>
   )
 }
@@ -110,6 +115,41 @@ function License(state: statePair<boolean>) {
           https://github.com/PoliNetworkOrg/TheTOLProject/blob/main/LICENSE
         </a>
       </div>
+    </Modal>
+  )
+}
+
+function Privacy(state: statePair<boolean>) {
+  return (
+    <Modal openState={state}>
+      <p style={textStyle}>
+        Questo sito utilizza un tracker non invasivo per tener traccia della sua
+        performance, nel rispetto delle norme GDPR. Il sito non salva nessun
+        cookie permanente: ogni dato trasmesso è in forma anonima e non
+        riconducibile all'utente. Per maggiori informazioni, visita la pagina{' '}
+        <a
+          href="https://panelbear.com/cookie-free-analytics/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          "Cookie Free Website Analytics" di PanelBear
+        </a>
+        .
+        <br />
+        <br />
+        This website uses a non-invasive tracker to keep track of its
+        performance, complying with GDPR. The website does not store any
+        permanent cookie: transmitted data is anonymized and not traceable to
+        the user. For more info, check out{' '}
+        <a
+          href="https://panelbear.com/cookie-free-analytics/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          PanelBear's "Cookie Free Website Analytics"
+        </a>{' '}
+        web page.
+      </p>
     </Modal>
   )
 }
