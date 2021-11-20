@@ -9,6 +9,7 @@ import {
 } from '../utils/database'
 import DBPreview from './DBPreview'
 import ErrorView from './ErrorView'
+import Footer from './Footer'
 import Header from './Header'
 import InfoView from './InfoView/InfoView'
 import QuestionsForm from './QuestionsForm/QuestionsForm'
@@ -91,6 +92,7 @@ export default function App() {
         ) : undefined}
       </div>
       <Separator />
+      <Footer />
     </div>
   )
 }
