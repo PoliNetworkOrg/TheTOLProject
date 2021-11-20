@@ -23,12 +23,13 @@ const centeredText = createStyle(textStyle, {
   justifyContent: 'center'
 })
 
-const logoDivStyle = createStyle({
+const logoLinkStyle = createStyle({
   flex: 1,
   display: 'flex',
   alignItems: 'center',
   gap: '10px',
-  margin: '5px'
+  margin: '5px',
+  textDecoration: 'none'
 })
 
 const logoStyle = createStyle({
@@ -48,10 +49,15 @@ interface HeaderProps {
 export default function Header({ viewState }: HeaderProps) {
   return (
     <div style={divStyle}>
-      <div style={logoDivStyle}>
+      <a
+        style={logoLinkStyle}
+        href="https://polinetwork.github.io"
+        rel="noreferrer noopener"
+        target="_blank"
+      >
         <img src={logo} alt="logo" style={logoStyle} />
         <h1 style={textStyle}>PoliNetwork</h1>
-      </div>
+      </a>
       <h1 style={centeredText}>The TOL Project</h1>
       <div style={buttonDivStyle}>
         <Button
