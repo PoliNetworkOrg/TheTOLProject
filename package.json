@@ -18,9 +18,6 @@
     "test": "npm run build && npm run lint && npm run exports"
   },
   "devDependencies": {
-    "@emotion/react": "^11.6.0",
-    "@emotion/styled": "^11.6.0",
-    "@mui/material": "^5.1.1",
     "@types/google-spreadsheet": "^3.1.5",
     "@types/node": "^16.10.3",
     "@types/react": "^17.0.27",
@@ -47,6 +44,7 @@
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-latex": "^2.0.0",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "react-timer-hook": "^3.0.5",
     "react-to-print": "^2.14.0",
