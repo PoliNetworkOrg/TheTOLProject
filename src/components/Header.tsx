@@ -51,9 +51,13 @@ export default function Header({ viewState }: HeaderProps) {
     <div style={divStyle}>
       <a
         style={logoLinkStyle}
-        href="https://polinetwork.github.io"
-        rel="noreferrer noopener"
-        target="_blank"
+        {...(!viewState[0].startsWith('TOL')
+          ? {
+              rel: 'noreferrer noopener',
+              target: '_blank',
+              href: 'https://polinetwork.github.io'
+            }
+          : {})}
       >
         <img src={logo} alt="logo" style={logoStyle} />
         <h1 style={textStyle}>PoliNetwork</h1>

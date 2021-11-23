@@ -108,7 +108,7 @@ export default function App() {
         </Routes>
       </div>
       <Separator />
-      <Footer />
+      {!view.startsWith('TOL') && <Footer />}
     </div>
   )
 }
