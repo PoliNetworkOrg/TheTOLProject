@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     display: 'inline-block'
   },
   get centeredText() {
-    return StyleSheet.extend(this.text, {
+    return StyleSheet.compose(this.text, {
       display: 'flex',
       justifyContent: 'center'
     })

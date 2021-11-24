@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     fontSize: '9.5pt'
   },
   get tableHeader() {
-    return StyleSheet.extend(this.tableCell, {
+    return StyleSheet.compose(this.tableCell, {
       fontWeight: 'bold',
       backgroundColor: theme.lightBackground,
       textAlign: 'left'

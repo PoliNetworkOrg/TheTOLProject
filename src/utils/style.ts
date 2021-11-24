@@ -44,16 +44,6 @@ export class StyleSheet {
   static compose(...styles: React.CSSProperties[]) {
     return styles.reduce((acc, curr) => ({ ...acc, ...curr }), {})
   }
-
-  static extend<T1 extends React.CSSProperties, T2 extends React.CSSProperties>(
-    style1: T1,
-    style2: T2
-  ) {
-    return {
-      ...style1,
-      ...style2
-    }
-  }
 }
 
 export function formatNumber(num: number | Fraction, addDecimals = false) {

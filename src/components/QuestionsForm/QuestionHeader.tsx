@@ -25,14 +25,14 @@ const styles = StyleSheet.create({
     padding: '7.5px'
   },
   get question() {
-    return StyleSheet.extend(this.p, {
+    return StyleSheet.compose(this.p, {
       fontWeight: 'bold',
       width: '7.1em',
       paddingLeft: 0
     })
   },
   get answerLetter() {
-    return StyleSheet.extend(this.p, {
+    return StyleSheet.compose(this.p, {
       textAlign: 'center',
       marginInline: '5px',
       boxShadow: theme.boxShadow
