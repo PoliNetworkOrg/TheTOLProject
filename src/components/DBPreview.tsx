@@ -5,13 +5,13 @@ import { createStyle } from '../utils/style'
 import RenderedText from './Util/RenderedText'
 
 interface DBPreviewProps {
-  db: Database
+  db?: Database
 }
 
 const baseStyle = createStyle()
 
 export default function DBPreview({ db }: DBPreviewProps) {
-  return (
+  return db ? (
     <div>
       {(
         Object.entries(db).filter(([key]) => key != 'meta') as [
@@ -48,5 +48,7 @@ export default function DBPreview({ db }: DBPreviewProps) {
         </div>
       ))}
     </div>
+  ) : (
+    <div style={baseStyle}>Loading...</div>
   )
 }

@@ -20,7 +20,6 @@ import QuestionsForm from './QuestionsForm/QuestionsForm'
 import Separator from './Util/Separator'
 
 export type view =
-  | 'dbPreview'
   | 'INFO-start'
   | 'TOL-startSec'
   | 'TOL-testing'
@@ -82,9 +81,7 @@ export default function App() {
                   display={loadingError[0] || ''}
                   internal={loadingError[1]}
                 />
-                {view == 'dbPreview' && database ? (
-                  <DBPreview db={database} />
-                ) : view.startsWith('TOL') && questions ? (
+                {view.startsWith('TOL') && questions ? (
                   <QuestionsForm
                     answersState={answersState}
                     questions={questions as QuestionsData}
@@ -105,6 +102,7 @@ export default function App() {
           <Route path="about" element={<About />} />
           <Route path="license" element={<License />} />
           <Route path="privacy" element={<Privacy />} />
+          <Route path="dbpreview" element={<DBPreview db={database} />} />
         </Routes>
       </div>
       <Separator />
