@@ -6,6 +6,9 @@
   .page-break {
     display: none;
   }
+  .print-only {
+    display: none;
+  }
 }
 
 @media print {
@@ -21,8 +24,10 @@
   .page-break {
     margin-top: 1rem;
     display: block;
-    page-break-before: auto;
-    page-break-after: auto;
+    page-break-before: always;
+  }
+  .print-only {
+    display: block;
   }
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import {
   answerLetter,
   section,
@@ -9,13 +10,16 @@ import {
 } from '../utils/database'
 import DBPreview from './DBPreview'
 import ErrorView from './ErrorView'
+import Footer from './Footer'
 import Header from './Header'
 import InfoView from './InfoView/InfoView'
+import About from './pages/About'
+import { License } from './pages/License'
+import Privacy from './pages/Privacy'
 import QuestionsForm from './QuestionsForm/QuestionsForm'
 import Separator from './Util/Separator'
 
 export type view =
-  | 'dbPreview'
   | 'INFO-start'
   | 'TOL-startSec'
   | 'TOL-testing'
@@ -67,30 +71,42 @@ export default function App() {
       <Header viewState={[view, setView]} />
       <Separator />
       <div style={{ paddingInline: '7.5px' }}>
-        <ErrorView
-          hidden={!loadingError[0]}
-          display={loadingError[0] || ''}
-          internal={loadingError[1]}
-        />
-        {view == 'dbPreview' && database ? (
-          <DBPreview db={database} />
-        ) : view.startsWith('TOL') && questions ? (
-          <QuestionsForm
-            answersState={answersState}
-            questions={questions as QuestionsData}
-            sectionState={sectionState}
-            timeRecordState={timeRecordState}
-            viewState={[view, setView]}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div>
+                <ErrorView
+                  hidden={!loadingError[0]}
+                  display={loadingError[0] || ''}
+                  internal={loadingError[1]}
+                />
+                {view.startsWith('TOL') && questions ? (
+                  <QuestionsForm
+                    answersState={answersState}
+                    questions={questions as QuestionsData}
+                    sectionState={sectionState}
+                    timeRecordState={timeRecordState}
+                    viewState={[view, setView]}
+                  />
+                ) : view.startsWith('INFO') && questions ? (
+                  <InfoView
+                    answers={answersState[0]}
+                    questions={questions}
+                    viewState={[view, setView]}
+                  />
+                ) : undefined}
+              </div>
+            }
           />
-        ) : view.startsWith('INFO') && questions ? (
-          <InfoView
-            answers={answersState[0]}
-            questions={questions}
-            viewState={[view, setView]}
-          />
-        ) : undefined}
+          <Route path="about" element={<About />} />
+          <Route path="license" element={<License />} />
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="dbpreview" element={<DBPreview db={database} />} />
+        </Routes>
       </div>
       <Separator />
+      {!view.startsWith('TOL') && <Footer />}
     </div>
   )
 }
