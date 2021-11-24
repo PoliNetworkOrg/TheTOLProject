@@ -3,11 +3,12 @@ import ReactToPrint from 'react-to-print'
 import { Question, QuestionsData, section } from '../../../utils/database'
 import { AnswersData } from '../../App'
 import { sectionInfo } from '../../../utils/constants'
-import { createStyle } from '../../../utils/style'
+import { createStyle, theme } from '../../../utils/style'
 import RenderedText from '../../Util/RenderedText'
 import GeneralPurposeCollapsible from '../../Util/GeneralPurposeCollapsible'
 import Button from '../../Util/Button'
 import './ExtendedCorrection.css'
+import DocumentHeader from './DocumentHeader'
 
 const collapsibleStyle = createStyle({
   display: 'flex',
@@ -23,6 +24,18 @@ const printButton = createStyle({
   justifyContent: 'center'
 })
 
+const linkStyle = createStyle({
+  color: theme.primary
+})
+
+const centeredStyle = createStyle({
+  textAlign: 'center'
+})
+
+const liStyle = createStyle({
+  margin: '10px'
+})
+
 interface ExtendedCorrectionProps {
   answers: AnswersData
   questions: QuestionsData
@@ -31,13 +44,17 @@ interface ExtendedCorrectionProps {
 
 export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const ref = useRef<any>()
+  const ref = useRef<any>(),
+    date = new Date()
 
   return (
     <GeneralPurposeCollapsible label="Correzione estesa" startOpen={false}>
       <div style={collapsibleStyle}>
         <ReactToPrint
-          documentTitle={`TheTOLProject ${new Date().toLocaleString()}`}
+          documentTitle={`TheTOLProject ${date
+            .toLocaleString()
+            .replace(/\/|:/g, '-')
+            .replace(/,/g, '')}`}
           content={() => ref.current}
           trigger={() => (
             <div style={printButton}>
@@ -47,25 +64,54 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
         />
         <div ref={ref} style={docStyle}>
           <div>
-            {(Object.entries(props.questions) as [section, Question[]][])
-              .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)
-              .map(([section, values]) => (
+            <div className="print-only">
+              <DocumentHeader />
+              <p style={centeredStyle}>
+                Simulazione del {date.toLocaleString()}
+              </p>
+              {props.resultTable}
+            </div>
+            <br />
+            Hai delle domande sui quesiti e la loro risoluzione? Falle sul{' '}
+            <a
+              href="https://t.me/joinchat/_zugEikozmcyMzA0"
+              target="_blank"
+              rel="noreferrer noopener"
+              style={linkStyle}
+            >
+              Gruppo preparazione TOL di PoliNetwork
+            </a>
+            !
+            <br />
+            Per fare riferimento alla domanda scrivi, assieme al testo, anche
+            l'ID (il numero che trovi fra [] dopo il testo).
+            <br />
+            <br />
+            <br />
+            <span className="print-only">
+              Nelle pagine successive troverai, suddivisi per sezione, i quesiti
+              che ti sono stati proposti con il relativo esito.
+            </span>
+          </div>
+          {(Object.entries(props.questions) as [section, Question[]][])
+            .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)
+            .map(([section, values]) => (
+              <>
+                <div className="page-break" />
                 <div key={section}>
-                  <div className="page-break" />
                   <div>
                     <b>{sectionInfo[section].name}</b>
                     <ol>
                       {values.map((question) => (
                         <div key={question.id + (question.sub || 0)}>
-                          <li>
+                          <li style={liStyle}>
                             <RenderedText
                               text={`
-                            ${question.text} [${question.id}${
-                                question.sub ? '-' + question.sub : ''
-                              }]
+                            ${question.text} 
                             `.trim()}
-                            />{' '}
-                            <u>
+                            />
+                            &emsp;
+                            <u style={{ whiteSpace: 'nowrap' }}>
                               {(() => {
                                 const letter = props.answers[section].find(
                                   (a) =>
@@ -79,32 +125,17 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
                                     : 'Errata'
                                   : 'Senza risposta'
                               })()}
-                            </u>
+                            </u>{' '}
+                            [{question.id}
+                            {question.sub ? '-' + question.sub : ''}]
                           </li>
                         </div>
                       ))}
                     </ol>
                   </div>
                 </div>
-              ))}{' '}
-            <div className="page-break" />
-            <div>
-              {props.resultTable}
-              <br />
-              Hai delle domande sui quesiti e la loro risoluzione? Falle sul{' '}
-              <a
-                href="https://t.me/joinchat/_zugEikozmcyMzA0"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                Gruppo preparazione TOL di PoliNetwork
-              </a>
-              !
-              <br />
-              Per fare riferimento alla domanda manda, assieme al testo, anche
-              l'ID (il numero che trovi fra [] dopo il testo).
-            </div>
-          </div>
+              </>
+            ))}
         </div>
       </div>
     </GeneralPurposeCollapsible>
