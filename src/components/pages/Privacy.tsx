@@ -1,4 +1,5 @@
 import React from 'react'
+import { links } from '../../utils/constants'
 import { baseStyle } from '../../utils/style'
 
 export default function Privacy() {
@@ -9,7 +10,7 @@ export default function Privacy() {
       cookie permanente: ogni dato trasmesso è in forma anonima e non
       riconducibile all'utente. Per maggiori informazioni, visita la pagina{' '}
       <a
-        href="https://panelbear.com/cookie-free-analytics/"
+        href={links.privacyPanelbear}
         target="_blank"
         rel="noreferrer noopener"
       >
@@ -23,7 +24,7 @@ export default function Privacy() {
       transmitted data is anonymized and not traceable to the user. For more
       info, check out{' '}
       <a
-        href="https://panelbear.com/cookie-free-analytics/"
+        href={links.privacyPanelbear}
         target="_blank"
         rel="noreferrer noopener"
       >

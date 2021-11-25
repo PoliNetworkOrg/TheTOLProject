@@ -1,6 +1,14 @@
 import { section } from './database'
 import Fraction from 'fraction.js'
 
+export const links = {
+  githubSource: 'https://github.com/PoliNetworkOrg/TheTOLProject/',
+  polinetwork: 'https://polinetwork.github.io',
+  privacyPanelbear: 'https://panelbear.com/cookie-free-analytics/',
+  telegramPreparazioneTOL: 'https://t.me/joinchat/_zugEikozmcyMzA0',
+  telegramTheTOLProject: undefined
+}
+
 interface sectionInfoElement {
   /** The readable name of the section */
   name: string

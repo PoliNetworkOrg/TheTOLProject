@@ -2,7 +2,7 @@ import React, { ReactNode, useRef } from 'react'
 import ReactToPrint from 'react-to-print'
 import { Question, QuestionsData, section } from '../../../utils/database'
 import { AnswersData } from '../../App'
-import { sectionInfo } from '../../../utils/constants'
+import { links, sectionInfo } from '../../../utils/constants'
 import { StyleSheet, theme } from '../../../utils/style'
 import RenderedText from '../../Util/RenderedText'
 import Button from '../../Util/Button'
@@ -75,7 +75,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           <br />
           Hai delle domande sui quesiti e la loro risoluzione? Falle sul{' '}
           <a
-            href="https://t.me/joinchat/_zugEikozmcyMzA0"
+            href={links.telegramPreparazioneTOL}
             target="_blank"
             rel="noreferrer noopener"
             style={styles.link}

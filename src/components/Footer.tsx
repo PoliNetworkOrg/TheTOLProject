@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { links } from '../utils/constants'
 import { StyleSheet, theme } from '../utils/style'
 
 const styles = StyleSheet.create({
@@ -24,7 +25,7 @@ export default function Footer() {
   return (
     <div style={styles.container}>
       <a
-        href="https://github.com/PoliNetworkOrg/TheTOLProject/"
+        href={links.githubSource}
         style={styles.link}
         target="_blank"
         rel="noreferrer noopener"

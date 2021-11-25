@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet } from '../../../utils/style'
 import logo from '../../../static/logo.webp'
+import { links } from '../../../utils/constants'
 
 const styles = StyleSheet.create({
   div: {
@@ -39,7 +40,7 @@ export default function DocumentHeader() {
         style={styles.logoLink}
         rel="noreferrer noopener"
         target="_blank"
-        href="https://polinetwork.github.io"
+        href={links.polinetwork}
       >
         <img src={logo} alt="logo" style={styles.logo} />
         <h1 style={styles.text}>PoliNetwork</h1>

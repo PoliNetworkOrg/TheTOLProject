@@ -3,6 +3,7 @@ import { StyleSheet } from '../utils/style'
 import { statePair } from '../utils/types'
 import { view } from './App'
 import logo from '../static/logo.webp'
+import { links } from '../utils/constants'
 
 const styles = StyleSheet.create({
   div: {
@@ -56,7 +57,7 @@ export default function Header({ viewState }: HeaderProps) {
           ? {
               rel: 'noreferrer noopener',
               target: '_blank',
-              href: 'https://polinetwork.github.io'
+              href: links.polinetwork
             }
           : {})}
       >
