@@ -16,7 +16,7 @@ export default function InfoView(props: InfoViewProps) {
   return view == 'INFO-start' ? (
     <InfoStart
       startTest={() => {
-        props.viewState[1]('TOL-startSec')
+        props.viewState[1]('TOL-testing')
       }}
     />
   ) : view == 'INFO-end' ? (

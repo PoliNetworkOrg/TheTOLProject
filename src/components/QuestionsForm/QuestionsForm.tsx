@@ -11,7 +11,6 @@ import QuestionHeader from './QuestionHeader'
 import QuestionView from './QuestionView'
 import RecapBar from './RecapBar'
 import SectionRecap from './SectionRecap'
-import SectionStart from './SectionStart'
 import TopControls from './TopControls'
 
 const styles = StyleSheet.create({
@@ -102,7 +101,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
 
   const timer = useTimer({
     expiryTimestamp: getTimerExpDate(sectionInfo[currentSection].minutes),
-    autoStart: false,
     onExpire: () => {
       closeSection()
       tmpTimerExpiredState[1](true)
@@ -113,17 +111,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   if (!props.questions) return <span>Loading...</span>
 
   const getViewElement = () => {
-    if (view == 'TOL-startSec')
-      return (
-        <SectionStart
-          section={currentSection}
-          startSection={() => {
-            setView('TOL-testing')
-            timer.start()
-          }}
-        />
-      )
-    else if (view == 'TOL-testing')
+    if (view == 'TOL-testing')
       return (
         <div style={styles.testing}>
           <QuestionHeader
@@ -158,12 +146,9 @@ export default function QuestionsForm(props: QuestionsFormProps) {
             const nextSection = getNextSection(currentSection)
             if (nextSection) {
               setSection(nextSection)
-              timer.restart(
-                getTimerExpDate(sectionInfo[nextSection].minutes),
-                false
-              )
+              timer.restart(getTimerExpDate(sectionInfo[nextSection].minutes))
               tmpTimerExpiredState[1](false)
-              setView('TOL-startSec')
+              setView('TOL-testing')
             } else {
               setView('INFO-end')
             }

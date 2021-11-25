@@ -20,12 +20,7 @@ import Privacy from './pages/Privacy'
 import QuestionsForm from './QuestionsForm/QuestionsForm'
 import Separator from './Util/Separator'
 
-export type view =
-  | 'INFO-start'
-  | 'TOL-startSec'
-  | 'TOL-testing'
-  | 'TOL-secRecap'
-  | 'INFO-end'
+export type view = 'INFO-start' | 'TOL-testing' | 'TOL-secRecap' | 'INFO-end'
 
 export interface Answer {
   id: string
