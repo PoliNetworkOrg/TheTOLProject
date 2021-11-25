@@ -23,11 +23,10 @@ const styles = StyleSheet.create({
   },
   get logoDiv() {
     return StyleSheet.compose(this.spacer, {
-      flex: 1,
-      display: 'flex',
       alignItems: 'center',
       gap: '10px',
-      margin: '5px'
+      margin: '5px',
+      textDecoration: 'none'
     })
   },
   logo: {
