@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useTimer } from 'react-timer-hook'
 import { getNextSection, sectionInfo } from '../../utils/constants'
 import { section, QuestionsData } from '../../utils/database'
-import { createStyle } from '../../utils/style'
+import { StyleSheet } from '../../utils/style'
 import { statePair } from '../../utils/types'
 import { Answer, AnswersData, TimeRecord, view } from '../App'
 import AnswerForm from './AnswerForm'
@@ -14,7 +14,9 @@ import SectionRecap from './SectionRecap'
 import SectionStart from './SectionStart'
 import TopControls from './TopControls'
 
-const testingStyle = createStyle({ display: 'flex', flexDirection: 'column' })
+const styles = StyleSheet.create({
+  testing: { display: 'flex', flexDirection: 'column' }
+})
 
 interface QuestionsFormProps {
   answersState: statePair<AnswersData>
@@ -123,7 +125,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
       )
     else if (view == 'TOL-testing')
       return (
-        <div style={testingStyle}>
+        <div style={styles.testing}>
           <QuestionHeader
             currentAnswer={currentAnswer}
             questionIndex={qIndex}

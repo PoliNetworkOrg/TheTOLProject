@@ -1,7 +1,5 @@
-import * as CSS from 'csstype'
 import Fraction from 'fraction.js'
-
-export type cssLike = CSS.Properties
+import React from 'react'
 
 export const theme = {
   boxShadow:
@@ -16,15 +14,33 @@ export const theme = {
   timerRed: 'red'
 }
 
-const baseStyle: CSS.Properties = {
+export const baseStyle: React.CSSProperties = {
   fontFamily: 'Verdana, Roboto',
   color: theme.softBlack
 }
 
-export function createStyle(...styles: (CSS.Properties | undefined)[]) {
-  return {
-    ...baseStyle,
-    ...styles.filter((f) => f).reduce((acc, curr) => ({ ...acc, ...curr }), {})
+type CSSProperties = {
+  [key: string]: React.CSSProperties
+}
+
+/** Basic implementation of the StyleSheet class present in React Native */
+export class StyleSheet {
+  static create<Styles extends CSSProperties>(styles: Styles): Styles {
+    return Object.fromEntries(
+      Object.entries(styles).map(([key, value]) => [
+        key,
+        { ...baseStyle, ...value }
+      ])
+    ) as Styles
+  }
+
+  static compose(
+    ...styles: (React.CSSProperties | undefined | false)[]
+  ): React.CSSProperties {
+    return styles.reduce(
+      (acc, curr) => ({ ...acc, ...(curr || {}) }),
+      {}
+    ) as React.CSSProperties
   }
 }
 

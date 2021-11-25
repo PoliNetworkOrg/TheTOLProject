@@ -1,8 +1,6 @@
 import React from 'react'
-import { createStyle } from '../../utils/style'
-
-const textStyle = createStyle()
+import { baseStyle } from '../../utils/style'
 
 export default function About() {
-  return <p style={textStyle}>This is a paragraph about the project.</p>
+  return <p style={baseStyle}>This is a paragraph about the project.</p>
 }

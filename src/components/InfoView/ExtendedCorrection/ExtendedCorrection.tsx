@@ -3,37 +3,35 @@ import ReactToPrint from 'react-to-print'
 import { Question, QuestionsData, section } from '../../../utils/database'
 import { AnswersData } from '../../App'
 import { sectionInfo } from '../../../utils/constants'
-import { createStyle, theme } from '../../../utils/style'
+import { StyleSheet, theme } from '../../../utils/style'
 import RenderedText from '../../Util/RenderedText'
 import GeneralPurposeCollapsible from '../../Util/GeneralPurposeCollapsible'
 import Button from '../../Util/Button'
 import './ExtendedCorrection.css'
 import DocumentHeader from './DocumentHeader'
 
-const collapsibleStyle = createStyle({
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '15px',
-  gap: '10px'
-})
-
-const docStyle = createStyle()
-
-const printButton = createStyle({
-  display: 'flex',
-  justifyContent: 'center'
-})
-
-const linkStyle = createStyle({
-  color: theme.primary
-})
-
-const centeredStyle = createStyle({
-  textAlign: 'center'
-})
-
-const liStyle = createStyle({
-  margin: '10px'
+const styles = StyleSheet.create({
+  collapsible: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '15px',
+    gap: '10px'
+  },
+  doc: {},
+  printButton: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  link: {
+    color: theme.primary
+  },
+  centered: {
+    textAlign: 'center'
+  },
+  li: {
+    margin: '10px'
+  },
+  nowrap: { whiteSpace: 'nowrap' }
 })
 
 interface ExtendedCorrectionProps {
@@ -49,7 +47,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
 
   return (
     <GeneralPurposeCollapsible label="Correzione estesa" startOpen={false}>
-      <div style={collapsibleStyle}>
+      <div style={styles.collapsible}>
         <ReactToPrint
           documentTitle={`TheTOLProject ${date
             .toLocaleString()
@@ -57,16 +55,16 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
             .replace(/,/g, '')}`}
           content={() => ref.current}
           trigger={() => (
-            <div style={printButton}>
+            <div style={styles.printButton}>
               <Button label="Stampa/salva correzione" />
             </div>
           )}
         />
-        <div ref={ref} style={docStyle}>
+        <div ref={ref} style={styles.doc}>
           <div>
             <div className="print-only">
               <DocumentHeader />
-              <p style={centeredStyle}>
+              <p style={styles.centered}>
                 Simulazione del {date.toLocaleString()}
               </p>
               {props.resultTable}
@@ -77,7 +75,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
               href="https://t.me/joinchat/_zugEikozmcyMzA0"
               target="_blank"
               rel="noreferrer noopener"
-              style={linkStyle}
+              style={styles.link}
             >
               Gruppo preparazione TOL di PoliNetwork
             </a>
@@ -104,14 +102,14 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
                     <ol>
                       {values.map((question) => (
                         <div key={question.id + (question.sub || 0)}>
-                          <li style={liStyle}>
+                          <li style={styles.li}>
                             <RenderedText
                               text={`
                             ${question.text} 
                             `.trim()}
                             />
                             &emsp;
-                            <u style={{ whiteSpace: 'nowrap' }}>
+                            <u style={styles.nowrap}>
                               {(() => {
                                 const letter = props.answers[section].find(
                                   (a) =>

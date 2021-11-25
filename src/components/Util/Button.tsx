@@ -1,36 +1,40 @@
 import React from 'react'
-import { createStyle, cssLike } from '../../utils/style'
+import { StyleSheet } from '../../utils/style'
 
-const buttonStyle = createStyle({
-  display: 'flex',
-  fontFamily: ' Arial',
-  fontSize: '9.5pt',
-  alignItems: 'center'
-})
-
-const pStyle = createStyle({
-  display: 'inline-block',
-  marginBlock: 0,
-  margin: 0,
-  fontFamily: 'Arial'
-})
-
-const iconStyle = createStyle({
-  display: 'flex'
-})
-const leftIcon = createStyle(iconStyle, {
-  float: 'left',
-  marginRight: '2px'
-})
-const rightIcon = createStyle(iconStyle, {
-  float: 'right',
-  marginLeft: '2px'
+const styles = StyleSheet.create({
+  button: {
+    display: 'flex',
+    fontFamily: ' Arial',
+    fontSize: '9.5pt',
+    alignItems: 'center'
+  },
+  p: {
+    display: 'inline-block',
+    marginBlock: 0,
+    margin: 0,
+    fontFamily: 'Arial'
+  },
+  icon: {
+    display: 'flex'
+  },
+  get leftIcon() {
+    return StyleSheet.compose(this.icon, {
+      float: 'left',
+      marginRight: '2px'
+    })
+  },
+  get rightIcon() {
+    return StyleSheet.compose(this.icon, {
+      float: 'right',
+      marginRight: '2px'
+    })
+  }
 })
 
 interface ButtonProps {
   label: string
   onClick?: () => void
-  style?: cssLike
+  style?: React.CSSProperties
   leftIcon?: () => JSX.Element
   rightIcon?: () => JSX.Element
 }
@@ -38,12 +42,14 @@ interface ButtonProps {
 export default function Button(props: ButtonProps) {
   return (
     <button
-      style={createStyle(buttonStyle, props.style || {})}
+      style={StyleSheet.compose(styles.button, props.style || {})}
       onClick={props.onClick}
     >
-      <span style={leftIcon}>{props.leftIcon && props.leftIcon()}</span>
-      <p style={pStyle}>{props.label}</p>
-      <span style={rightIcon}>{props.rightIcon && props.rightIcon()}</span>
+      <span style={styles.leftIcon}>{props.leftIcon && props.leftIcon()}</span>
+      <p style={styles.p}>{props.label}</p>
+      <span style={styles.rightIcon}>
+        {props.rightIcon && props.rightIcon()}
+      </span>
     </button>
   )
 }

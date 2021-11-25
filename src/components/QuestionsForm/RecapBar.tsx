@@ -1,16 +1,39 @@
 import React from 'react'
 import { answerLetter, section, QuestionsData } from '../../utils/database'
-import { createStyle, theme } from '../../utils/style'
+import { StyleSheet, theme } from '../../utils/style'
 import { statePair } from '../../utils/types'
 import { AnswersData } from '../App'
 
-const defaultBorder = 'thin solid #606060'
-
-const barStyle = createStyle({
-  display: 'flex',
-  fontSize: '9.5pt',
-  textDecoration: 'none',
-  color: theme.primary
+const styles = StyleSheet.create({
+  bordered: {
+    borderBottom: 'thin solid #606060'
+  },
+  bar: {
+    display: 'flex',
+    fontSize: '9.5pt',
+    textDecoration: 'none',
+    color: theme.primary
+  },
+  cellContainer: {
+    display: 'flex',
+    flexShrink: 1,
+    flexDirection: 'column',
+    alignContent: 'baseline',
+    textAlign: 'center',
+    width: '4em',
+    backgroundColor: theme.lightBackground
+  },
+  cellSub: {
+    padding: '0.3em',
+    height: '1.2em',
+    boxShadow: theme.boxShadow
+  },
+  selectedCell: {
+    outline: `5px solid ${theme.primary}`,
+    marginInline: '4px',
+    color: 'black'
+  },
+  p: { margin: 'auto' }
 })
 
 interface RecapBarProps {
@@ -21,7 +44,7 @@ interface RecapBarProps {
 }
 export default function RecapBar(props: RecapBarProps) {
   return (
-    <a style={barStyle} {...(props.active ? { href: '#' } : {})}>
+    <a style={styles.bar} {...(props.active ? { href: '#' } : {})}>
       {props.sectionQuestions.map((q, i) => {
         const answer = props.sectionAnswers.find(
           (a) => a && a.id == q.id && (q.sub ? q.sub == a.sub : true)
@@ -43,31 +66,6 @@ export default function RecapBar(props: RecapBarProps) {
   )
 }
 
-const cellContainerStyle = createStyle({
-  display: 'flex',
-  flexShrink: 1,
-  flexDirection: 'column',
-  alignContent: 'baseline',
-  textAlign: 'center',
-  width: '4em'
-})
-
-const cellSubStyle = createStyle({
-  padding: '0.3em',
-  height: '1.2em',
-  boxShadow: theme.boxShadow
-})
-
-const selectedCell = createStyle({
-  outline: `5px solid ${theme.primary}`,
-  marginInline: '4px',
-  color: 'black'
-})
-
-const pStyle = createStyle({
-  margin: 'auto'
-})
-
 interface AnswerCellProps {
   index: number
   letter: answerLetter | undefined
@@ -78,33 +76,31 @@ interface AnswerCellProps {
 function AnswerCell(props: AnswerCellProps) {
   return (
     <div
-      style={{
-        ...cellContainerStyle,
-        backgroundColor: theme.lightBackground,
-        ...(props.selected ? selectedCell : {})
-      }}
+      style={StyleSheet.compose(
+        styles.cellContainer,
+        props.selected && styles.selectedCell
+      )}
       onClick={props.onClick}
     >
       <div
-        style={{
-          ...cellSubStyle,
-          borderBottom: defaultBorder,
-          ...(props.selected ? { fontWeight: 'bold' } : {})
-        }}
+        style={StyleSheet.compose(
+          styles.cellSub,
+          styles.bordered,
+          props.selected && { fontWeight: 'bold' }
+        )}
       >
-        <p style={pStyle}>{props.index + 1}</p>
+        <p style={styles.p}>{props.index + 1}</p>
       </div>
       <div
-        style={{
-          ...cellSubStyle,
+        style={StyleSheet.compose(styles.cellSub, {
           backgroundColor: props.flagged
             ? theme.questionYellow
             : props.letter
             ? theme.questionGreen
             : 'white'
-        }}
+        })}
       >
-        <p style={pStyle}>
+        <p style={styles.p}>
           {props.letter?.toUpperCase() || ' '}
           {props.flagged && '?'}
         </p>

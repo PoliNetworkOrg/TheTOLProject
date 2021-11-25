@@ -1,12 +1,25 @@
 import React from 'react'
 import { Question } from '../../utils/database'
-import { createStyle } from '../../utils/style'
+import { StyleSheet } from '../../utils/style'
 import { statePair } from '../../utils/types'
 import { Answer } from '../App'
 import RenderedText from '../Util/RenderedText'
 
-const baseText = createStyle({
-  fontSize: '11pt'
+const styles = StyleSheet.create({
+  baseText: {
+    fontSize: '11pt'
+  },
+  radioText: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    paddingInline: '10px'
+  },
+  radioSpan: {
+    width: '2em',
+    float: 'left',
+    display: 'inline-block'
+  }
 })
 
 interface AnswerFormProps {
@@ -20,7 +33,7 @@ export default function AnswerForm(props: AnswerFormProps) {
 
   if (!props.currentQuestion)
     return (
-      <span style={baseText}>
+      <span style={styles.baseText}>
         <br />
         No answers to display ¯\_(ツ)_/¯
       </span>
@@ -64,23 +77,13 @@ interface RadioRowProps {
   text: string
 }
 function RadioRow(props: RadioRowProps) {
-  const textStyle = createStyle({
-    fontWeight: 'bold',
-    textAlign: 'center',
-    verticalAlign: 'middle',
-    paddingInline: '10px'
-  })
-  const spanStyle = createStyle({
-    width: '2em',
-    float: 'left',
-    display: 'inline-block'
-  })
-
   return (
-    <tr style={baseText}>
+    <tr style={styles.baseText}>
       <label>
-        <td style={textStyle}>
-          <span style={spanStyle}>{props.letter?.toUpperCase() || '?'} </span>
+        <td style={styles.radioText}>
+          <span style={styles.radioSpan}>
+            {props.letter?.toUpperCase() || '?'}{' '}
+          </span>
           <input
             type="radio"
             value={props.letter}

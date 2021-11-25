@@ -27,7 +27,6 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "axios": "^0.24.0",
-    "csstype": "^3.0.9",
     "depcheck": "^1.4.2",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",

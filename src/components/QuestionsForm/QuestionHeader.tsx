@@ -1,52 +1,51 @@
 import React from 'react'
 import { Question } from '../../utils/database'
-import { createStyle, theme } from '../../utils/style'
+import { StyleSheet, theme } from '../../utils/style'
 import { Answer } from '../App'
 import { IoMdArrowRoundBack, IoMdArrowRoundForward } from 'react-icons/io'
 import Button from '../Util/Button'
 
-const containerStyle = createStyle({
-  display: 'flex',
-  justifyContent: 'space-between'
-})
-
-const leftContainer = createStyle({
-  display: 'flex'
-})
-
-const rightContainer = createStyle({
-  display: 'flex',
-  padding: '1em',
-  gap: '5px'
-})
-
-const pStyle = createStyle({
-  textAlign: 'left',
-  fontSize: '11pt',
-  minWidth: '4em',
-  padding: '7.5px'
-})
-
-const questionStyle = createStyle(pStyle, {
-  fontWeight: 'bold',
-  width: '7.1em',
-  paddingLeft: 0
-})
-
-const answerLetterStyle = createStyle(pStyle, {
-  textAlign: 'center',
-  marginInline: '5px',
-  boxShadow: theme.boxShadow
-})
-
-const iconStyle = createStyle({
-  height: '17.5px',
-  width: '17.5px',
-  color: theme.primary
-})
-
-const buttonStyle = createStyle({
-  paddingBlock: 0
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  leftContainer: {
+    display: 'flex'
+  },
+  rightContainer: {
+    display: 'flex',
+    padding: '1em',
+    gap: '5px'
+  },
+  p: {
+    textAlign: 'left',
+    fontSize: '11pt',
+    minWidth: '4em',
+    padding: '7.5px'
+  },
+  get question() {
+    return StyleSheet.compose(this.p, {
+      fontWeight: 'bold',
+      width: '7.1em',
+      paddingLeft: 0
+    })
+  },
+  get answerLetter() {
+    return StyleSheet.compose(this.p, {
+      textAlign: 'center',
+      marginInline: '5px',
+      boxShadow: theme.boxShadow
+    })
+  },
+  icon: {
+    height: '17.5px',
+    width: '17.5px',
+    color: theme.primary
+  },
+  button: {
+    paddingBlock: 0
+  }
 })
 
 interface QuestionHeaderProps {
@@ -57,38 +56,37 @@ interface QuestionHeaderProps {
 }
 export default function QuestionHeader(props: QuestionHeaderProps) {
   return (
-    <div style={containerStyle}>
-      <div style={leftContainer}>
-        <p style={questionStyle}>Domanda {props.questionIndex + 1}</p>
+    <div style={styles.container}>
+      <div style={styles.leftContainer}>
+        <p style={styles.question}>Domanda {props.questionIndex + 1}</p>
         <p
-          style={{
-            ...answerLetterStyle,
+          style={StyleSheet.compose(styles.answerLetter, {
             backgroundColor: props.currentAnswer?.flagged
               ? theme.questionYellow
               : props.currentAnswer?.letter
               ? theme.questionGreen
               : 'inherit'
-          }}
+          })}
         >
           {(props.currentAnswer?.letter?.toUpperCase() || '') +
             (props.currentAnswer?.flagged ? '?' : '') || ' '}
         </p>
-        <p style={pStyle}>
+        <p style={styles.p}>
           Risposta {props.currentAnswer?.letter ? '' : 'non '}data
         </p>
       </div>
-      <div style={rightContainer}>
+      <div style={styles.rightContainer}>
         <Button
           label="precedente"
           onClick={() => props.shiftQuestionIndex(-1)}
-          style={buttonStyle}
-          leftIcon={() => <IoMdArrowRoundBack style={iconStyle} />}
+          style={styles.button}
+          leftIcon={() => <IoMdArrowRoundBack style={styles.icon} />}
         />
         <Button
           label="successiva"
           onClick={() => props.shiftQuestionIndex(1)}
-          style={buttonStyle}
-          rightIcon={() => <IoMdArrowRoundForward style={iconStyle} />}
+          style={styles.button}
+          rightIcon={() => <IoMdArrowRoundForward style={styles.icon} />}
         />
       </div>
     </div>

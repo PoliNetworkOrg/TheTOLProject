@@ -1,11 +1,9 @@
 import React from 'react'
-import { createStyle } from '../../utils/style'
-
-const textStyle = createStyle()
+import { baseStyle } from '../../utils/style'
 
 export default function Privacy() {
   return (
-    <p style={textStyle}>
+    <p style={baseStyle}>
       Questo sito utilizza un tracker non invasivo per tener traccia della sua
       performance, nel rispetto delle norme GDPR. Il sito non salva nessun
       cookie permanente: ogni dato trasmesso è in forma anonima e non

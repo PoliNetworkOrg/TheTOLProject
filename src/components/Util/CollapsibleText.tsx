@@ -1,14 +1,15 @@
 import React from 'react'
-import { createStyle } from '../../utils/style'
+import { StyleSheet } from '../../utils/style'
 import GeneralPurposeCollapsible from './GeneralPurposeCollapsible'
 
-const pStyle = createStyle({
-  margin: '2px',
-  padding: '10px',
-  textAlign: 'justify'
+const styles = StyleSheet.create({
+  p: {
+    margin: '2px',
+    padding: '10px',
+    textAlign: 'justify'
+  },
+  innerP: { padding: '1px', margin: 0 }
 })
-
-const innerPStyle = createStyle({ padding: '1px', margin: 0 })
 
 interface CollapsibleTextProps {
   label: string
@@ -18,12 +19,12 @@ interface CollapsibleTextProps {
 export default function CollapsibleText(props: CollapsibleTextProps) {
   return (
     <GeneralPurposeCollapsible label={props.label} startOpen={props.startOpen}>
-      <div style={pStyle}>
+      <div style={styles.p}>
         {props.longText
           .trim()
           .split('\n')
           .map((t, i) => (
-            <p style={innerPStyle} key={i}>
+            <p style={styles.innerP} key={i}>
               {t}
             </p>
           ))}

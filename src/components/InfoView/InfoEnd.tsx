@@ -9,45 +9,44 @@ import {
   testTotalScore
 } from '../../utils/constants'
 import { Question, QuestionsData, section } from '../../utils/database'
-import { createStyle, formatNumber, theme } from '../../utils/style'
+import { formatNumber, StyleSheet, theme } from '../../utils/style'
 import { AnswersData } from '../App'
 import ExtendedCorrection from './ExtendedCorrection/ExtendedCorrection'
 import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
 
-const divStyle = createStyle({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  fontSize: '11pt'
-})
-
-const tableDivStyle = createStyle({ alignSelf: 'center' })
-
-const tableStyle = createStyle({ borderSpacing: 0 })
-
-const tableCell = createStyle({
-  padding: '5px',
-  paddingInline: '10px',
-  textAlign: 'center',
-  border: `thin solid ${theme.lightBorder}`,
-  borderSpacing: '0px',
-  fontSize: '9.5pt'
-})
-
-const tableHeader = createStyle(tableCell, {
-  fontWeight: 'bold',
-  backgroundColor: theme.lightBackground,
-  textAlign: 'left'
-})
-
-const centeredTextStyle = createStyle({
-  textAlign: 'center'
-})
-
-const collapsibleStyle = createStyle({
-  margin: '2px',
-  padding: '10px',
-  textAlign: 'justify'
+const styles = StyleSheet.create({
+  div: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    fontSize: '11pt'
+  },
+  tableDiv: { alignSelf: 'center' },
+  table: { borderSpacing: 0 },
+  tableCell: {
+    padding: '5px',
+    paddingInline: '10px',
+    textAlign: 'center',
+    border: `thin solid ${theme.lightBorder}`,
+    borderSpacing: '0px',
+    fontSize: '9.5pt'
+  },
+  get tableHeader() {
+    return StyleSheet.compose(this.tableCell, {
+      fontWeight: 'bold',
+      backgroundColor: theme.lightBackground,
+      textAlign: 'left'
+    })
+  },
+  centeredText: {
+    textAlign: 'center'
+  },
+  collapsible: {
+    margin: '2px',
+    padding: '10px',
+    textAlign: 'justify'
+  },
+  resultTable: { display: 'flex', flexDirection: 'column' }
 })
 
 interface InfoEndProps {
@@ -110,8 +109,8 @@ export default function InfoEnd(props: InfoEndProps) {
     tengPassed = correctionGrid.ing?.correct >= tengPassThreshold
 
   const resultTable = () => (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <p style={centeredTextStyle}>
+    <div style={styles.resultTable}>
+      <p style={styles.centeredText}>
         <br />
         Esito:{' '}
         {testPassed
@@ -128,15 +127,15 @@ export default function InfoEnd(props: InfoEndProps) {
       </p>
       <br />
 
-      <div style={tableDivStyle}>
-        <table style={tableStyle}>
+      <div style={styles.tableDiv}>
+        <table style={styles.table}>
           <tr>
             <td></td>
-            <td style={tableHeader}>Punteggio sezione</td>
-            <td style={tableHeader}>N° quesiti</td>
-            <td style={tableHeader}>Esatti</td>
-            <td style={tableHeader}>Errati</td>
-            <td style={tableHeader}>Senza risposta</td>
+            <td style={styles.tableHeader}>Punteggio sezione</td>
+            <td style={styles.tableHeader}>N° quesiti</td>
+            <td style={styles.tableHeader}>Esatti</td>
+            <td style={styles.tableHeader}>Errati</td>
+            <td style={styles.tableHeader}>Senza risposta</td>
           </tr>
           {(
             Object.entries(correctionGrid) as [
@@ -147,14 +146,14 @@ export default function InfoEnd(props: InfoEndProps) {
             .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)
             .map(([section, correction]) => (
               <tr key={section}>
-                <td style={tableHeader}>{getSectionName(section)}</td>
-                <td style={tableCell}>
+                <td style={styles.tableHeader}>{getSectionName(section)}</td>
+                <td style={styles.tableCell}>
                   {formatNumber(correction.score, true)}
                 </td>
-                <td style={tableCell}>{correction.total}</td>
-                <td style={tableCell}>{correction.correct}</td>
-                <td style={tableCell}>{correction.wrong}</td>
-                <td style={tableCell}>{correction.notGiven}</td>
+                <td style={styles.tableCell}>{correction.total}</td>
+                <td style={styles.tableCell}>{correction.correct}</td>
+                <td style={styles.tableCell}>{correction.wrong}</td>
+                <td style={styles.tableCell}>{correction.notGiven}</td>
               </tr>
             ))}
         </table>
@@ -164,14 +163,14 @@ export default function InfoEnd(props: InfoEndProps) {
   )
 
   return (
-    <div style={divStyle}>
+    <div style={styles.div}>
       {resultTable()}
 
       <GeneralPurposeCollapsible
         label="Come viene calcolato il punteggio"
         startOpen={false}
       >
-        <p style={collapsibleStyle}>
+        <p style={styles.collapsible}>
           Il <b>punteggio massimo</b> conseguibile{' '}
           <b>è di {formatNumber(testTotalScore, true)}</b> e viene espresso fino
           alla seconda cifra decimale.
