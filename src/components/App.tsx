@@ -9,7 +9,7 @@ import {
   selectRandomQuestions
 } from '../utils/database'
 import { StyleSheet } from '../utils/style'
-import DBPreview from './DBPreview'
+import DBPreview from './pages/DBPreview'
 import ErrorView from './ErrorView'
 import Footer from './Footer'
 import Header from './Header'

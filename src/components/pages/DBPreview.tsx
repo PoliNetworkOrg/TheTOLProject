@@ -1,10 +1,10 @@
 import React from 'react'
-import { sectionInfo } from '../utils/constants'
-import { section, Database, Question } from '../utils/database'
-import { baseStyle } from '../utils/style'
-import GeneralPurposeCollapsible from './Util/GeneralPurposeCollapsible'
+import { sectionInfo } from '../../utils/constants'
+import { section, Database, Question } from '../../utils/database'
+import { baseStyle } from '../../utils/style'
+import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
 
-import RenderedText from './Util/RenderedText'
+import RenderedText from '../Util/RenderedText'
 
 interface DBPreviewProps {
   db?: Database
