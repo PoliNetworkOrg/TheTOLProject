@@ -51,12 +51,12 @@ export default function QuestionView({ question }: QuestionViewProps) {
 
         {question.attachments?.length && (
           <GeneralPurposeCollapsible
-            label="mostra/nascondi allegati"
+            label="mostra/nascondi immagini"
             contentStyle={styles.collapsible}
           >
             {question.attachments.map((fileName, index) => (
               <span key={index + 1} style={styles.attachment}>
-                <p style={styles.container}>Allegato {index + 1}:</p>
+                <p style={styles.container}>Immagine {index + 1}:</p>
                 <img src={getImageURL(fileName)} style={styles.image} />
               </span>
             ))}
