@@ -1,13 +1,21 @@
 import React from 'react'
-import { createStyle } from '../../utils/style'
+import { StyleSheet } from '../../utils/style'
 
-const divStyle = createStyle({
-  paddingBlock: '15px'
+const styles = StyleSheet.create({
+  div: {
+    paddingBlock: '15px'
+  },
+  licenseImg: {
+    borderWidth: 0,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    display: 'block'
+  }
 })
 
 export function License() {
   return (
-    <div style={divStyle}>
+    <div style={styles.div}>
       <a
         rel="license noreferrer noopener"
         href="http://creativecommons.org/licenses/by-sa/4.0/"
@@ -15,12 +23,7 @@ export function License() {
       >
         <img
           alt="Creative Commons License"
-          style={{
-            borderWidth: 0,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            display: 'block'
-          }}
+          style={styles.licenseImg}
           src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
         />
       </a>

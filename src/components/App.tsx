@@ -8,6 +8,7 @@ import {
   readDatabase,
   selectRandomQuestions
 } from '../utils/database'
+import { StyleSheet } from '../utils/style'
 import DBPreview from './DBPreview'
 import ErrorView from './ErrorView'
 import Footer from './Footer'
@@ -36,6 +37,10 @@ export interface Answer {
 export type AnswersData = Record<section, Answer[]>
 
 export type TimeRecord = Partial<Record<section, number>>
+
+const styles = StyleSheet.create({
+  routeContainer: { paddingInline: '7.5px' }
+})
 
 export default function App() {
   const [database, loadDatabase] = useState<Database>()
@@ -70,7 +75,7 @@ export default function App() {
     <div>
       <Header viewState={[view, setView]} />
       <Separator />
-      <div style={{ paddingInline: '7.5px' }}>
+      <div style={styles.routeContainer}>
         <Routes>
           <Route
             path="/"

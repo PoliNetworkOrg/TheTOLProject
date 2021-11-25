@@ -2,23 +2,24 @@ import React from 'react'
 import { TimerResult } from 'react-timer-hook'
 import { getSectionName } from '../../utils/constants'
 import { section, QuestionsData } from '../../utils/database'
-import { createStyle } from '../../utils/style'
+import { StyleSheet } from '../../utils/style'
 import { AnswersData } from '../App'
 import Button from '../Util/Button'
 import Timer from './Timer'
 
-const outerDiv = createStyle({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between'
-})
-
-const innerDiv = createStyle({
-  display: 'flex',
-  alignItems: 'baseline',
-  flexDirection: 'row',
-  gap: '15px',
-  fontSize: '11pt'
+const styles = StyleSheet.create({
+  outerDiv: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  innerDiv: {
+    display: 'flex',
+    alignItems: 'baseline',
+    flexDirection: 'row',
+    gap: '15px',
+    fontSize: '11pt'
+  }
 })
 
 interface TopControlsProps {
@@ -35,8 +36,8 @@ export default function TopControls(props: TopControlsProps) {
   const { currentSection } = props
 
   return (
-    <div style={outerDiv}>
-      <div style={innerDiv}>
+    <div style={styles.outerDiv}>
+      <div style={styles.innerDiv}>
         <div>
           <p>
             Sezione: <b>{getSectionName(currentSection)}</b> <br />

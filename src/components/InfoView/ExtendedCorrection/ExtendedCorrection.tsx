@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
   },
   li: {
     margin: '10px'
-  }
+  },
+  nowrap: { whiteSpace: 'nowrap' }
 })
 
 interface ExtendedCorrectionProps {
@@ -108,7 +109,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
                             `.trim()}
                             />
                             &emsp;
-                            <u style={{ whiteSpace: 'nowrap' }}>
+                            <u style={styles.nowrap}>
                               {(() => {
                                 const letter = props.answers[section].find(
                                   (a) =>

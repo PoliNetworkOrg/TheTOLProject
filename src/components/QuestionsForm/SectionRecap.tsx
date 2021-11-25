@@ -1,16 +1,18 @@
 import React from 'react'
 import { sectionInfo } from '../../utils/constants'
 import { QuestionsData, section } from '../../utils/database'
-import { createStyle, formatNumber } from '../../utils/style'
+import { StyleSheet, formatNumber } from '../../utils/style'
 import { AnswersData } from '../App'
 import Button from '../Util/Button'
 
-const baseStyle = createStyle({
-  display: 'flex',
-  paddingTop: '10px',
-  paddingBottom: '20px',
-  alignItems: 'center',
-  flexDirection: 'column'
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    paddingTop: '10px',
+    paddingBottom: '20px',
+    alignItems: 'center',
+    flexDirection: 'column'
+  }
 })
 
 interface SectionRecapProps {
@@ -24,7 +26,7 @@ export default function SectionRecap(props: SectionRecapProps) {
   const info = sectionInfo[props.section]
 
   return (
-    <div style={baseStyle}>
+    <div style={styles.container}>
       <p>
         Sezione conclusa: {info.name}
         <br />-{' '}

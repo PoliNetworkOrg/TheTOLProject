@@ -19,13 +19,6 @@ export const baseStyle: React.CSSProperties = {
   color: theme.softBlack
 }
 
-export function createStyle(...styles: (React.CSSProperties | undefined)[]) {
-  return {
-    ...baseStyle,
-    ...styles.filter((f) => f).reduce((acc, curr) => ({ ...acc, ...curr }), {})
-  }
-}
-
 type CSSProperties = {
   [key: string]: React.CSSProperties
 }
@@ -41,8 +34,13 @@ export class StyleSheet {
     ) as Styles
   }
 
-  static compose(...styles: React.CSSProperties[]) {
-    return styles.reduce((acc, curr) => ({ ...acc, ...curr }), {})
+  static compose(
+    ...styles: (React.CSSProperties | undefined | false)[]
+  ): React.CSSProperties {
+    return styles.reduce(
+      (acc, curr) => ({ ...acc, ...(curr || {}) }),
+      {}
+    ) as React.CSSProperties
   }
 }
 

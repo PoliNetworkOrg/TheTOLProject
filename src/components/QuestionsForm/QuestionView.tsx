@@ -1,32 +1,31 @@
 import React from 'react'
 import { getImageURL, Question } from '../../utils/database'
-import { createStyle } from '../../utils/style'
+import { StyleSheet } from '../../utils/style'
 import CollapsibleText from '../Util/CollapsibleText'
 import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
 import RenderedText from '../Util/RenderedText'
 
-const containerStyle = createStyle({
-  marginBlock: 0,
-  display: 'flex',
-  flexDirection: 'column'
-})
-
-const collapsibleContentStyle = createStyle({
-  padding: '10px',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '15px'
-})
-
-const attachmentStyle = createStyle({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '5px'
-})
-
-const imageStyle = createStyle({
-  maxHeight: '500px',
-  width: 'fit-content'
+const styles = StyleSheet.create({
+  container: {
+    marginBlock: 0,
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  collapsible: {
+    padding: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '15px'
+  },
+  attachment: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '5px'
+  },
+  image: {
+    maxHeight: '500px',
+    width: 'fit-content'
+  }
 })
 
 interface QuestionViewProps {
@@ -35,7 +34,9 @@ interface QuestionViewProps {
 
 export default function QuestionView({ question }: QuestionViewProps) {
   if (!question)
-    return <span style={containerStyle}>No question to display ¯\_(ツ)_/¯</span>
+    return (
+      <span style={styles.container}>No question to display ¯\_(ツ)_/¯</span>
+    )
 
   return (
     <div style={{ marginBottom: question.attachments?.length ? 0 : '15px' }}>
@@ -45,18 +46,18 @@ export default function QuestionView({ question }: QuestionViewProps) {
           longText={question.track}
         />
       )}
-      <div style={containerStyle}>
+      <div style={styles.container}>
         <RenderedText text={question.text}></RenderedText>
 
         {question.attachments?.length && (
           <GeneralPurposeCollapsible
             label="mostra/nascondi allegati"
-            contentStyle={collapsibleContentStyle}
+            contentStyle={styles.collapsible}
           >
             {question.attachments.map((fileName, index) => (
-              <span key={index + 1} style={attachmentStyle}>
-                <p style={containerStyle}>Allegato {index + 1}:</p>
-                <img src={getImageURL(fileName)} style={imageStyle} />
+              <span key={index + 1} style={styles.attachment}>
+                <p style={styles.container}>Allegato {index + 1}:</p>
+                <img src={getImageURL(fileName)} style={styles.image} />
               </span>
             ))}
           </GeneralPurposeCollapsible>

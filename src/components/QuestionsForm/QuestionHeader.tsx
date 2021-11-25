@@ -60,14 +60,13 @@ export default function QuestionHeader(props: QuestionHeaderProps) {
       <div style={styles.leftContainer}>
         <p style={styles.question}>Domanda {props.questionIndex + 1}</p>
         <p
-          style={{
-            ...styles.answerLetter,
+          style={StyleSheet.compose(styles.answerLetter, {
             backgroundColor: props.currentAnswer?.flagged
               ? theme.questionYellow
               : props.currentAnswer?.letter
               ? theme.questionGreen
               : 'inherit'
-          }}
+          })}
         >
           {(props.currentAnswer?.letter?.toUpperCase() || '') +
             (props.currentAnswer?.flagged ? '?' : '') || ' '}

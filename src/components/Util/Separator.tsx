@@ -1,14 +1,16 @@
 import React from 'react'
-import { createStyle, theme } from '../../utils/style'
+import { StyleSheet, theme } from '../../utils/style'
 
-const divStyle = createStyle({
-  height: '15px',
-  backgroundColor: theme.primary
-})
-const textStyle = createStyle({
-  color: 'white',
-  margin: 'auto .5em',
-  fontSize: '9.5pt'
+const styles = StyleSheet.create({
+  div: {
+    height: '15px',
+    backgroundColor: theme.primary
+  },
+  text: {
+    color: 'white',
+    margin: 'auto .5em',
+    fontSize: '9.5pt'
+  }
 })
 
 interface SeparatorProps {
@@ -16,8 +18,8 @@ interface SeparatorProps {
 }
 export default function Separator(props: SeparatorProps) {
   return (
-    <div style={divStyle}>
-      <p style={textStyle}>{props.text || ''}</p>
+    <div style={styles.div}>
+      <p style={styles.text}>{props.text || ''}</p>
     </div>
   )
 }

@@ -1,45 +1,46 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { createStyle, theme } from '../utils/style'
+import { StyleSheet, theme } from '../utils/style'
 
-const containerStyle = createStyle({
-  display: 'flex',
-  justifyContent: 'space-between',
-  paddingInline: '15em',
-  margin: '15px',
-  fontSize: '10pt',
-  color: theme.softBlack
-})
-
-const linkStyle = createStyle({
-  display: 'flex',
-  flex: 1,
-  justifyContent: 'center',
-  color: 'inherit',
-  textDecoration: 'none'
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingInline: '15em',
+    margin: '15px',
+    fontSize: '10pt',
+    color: theme.softBlack
+  },
+  link: {
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'center',
+    color: 'inherit',
+    textDecoration: 'none'
+  }
 })
 
 export default function Footer() {
   return (
-    <div style={containerStyle}>
+    <div style={styles.container}>
       <a
         href="https://github.com/PoliNetworkOrg/TheTOLProject/"
-        style={linkStyle}
+        style={styles.link}
         target="_blank"
         rel="noreferrer noopener"
       >
         Source
       </a>
-      <Link to="about" style={linkStyle}>
+      <Link to="about" style={styles.link}>
         About
       </Link>
-      <Link to="/" style={linkStyle}>
+      <Link to="/" style={styles.link}>
         Home
       </Link>
-      <Link to="license" style={linkStyle}>
+      <Link to="license" style={styles.link}>
         License
       </Link>
-      <Link to="privacy" style={linkStyle}>
+      <Link to="privacy" style={styles.link}>
         Privacy & cookies
       </Link>
     </div>

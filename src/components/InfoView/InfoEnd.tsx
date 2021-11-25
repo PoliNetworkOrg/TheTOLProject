@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     margin: '2px',
     padding: '10px',
     textAlign: 'justify'
-  }
+  },
+  resultTable: { display: 'flex', flexDirection: 'column' }
 })
 
 interface InfoEndProps {
@@ -108,7 +109,7 @@ export default function InfoEnd(props: InfoEndProps) {
     tengPassed = correctionGrid.ing?.correct >= tengPassThreshold
 
   const resultTable = () => (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div style={styles.resultTable}>
       <p style={styles.centeredText}>
         <br />
         Esito:{' '}
