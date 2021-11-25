@@ -12,7 +12,6 @@ import { Question, QuestionsData, section } from '../../utils/database'
 import { formatNumber, StyleSheet, theme } from '../../utils/style'
 import { AnswersData } from '../App'
 import ExtendedCorrection from './ExtendedCorrection/ExtendedCorrection'
-import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
 
 const styles = StyleSheet.create({
   div: {
@@ -42,11 +41,15 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   collapsible: {
-    margin: '2px',
     padding: '10px',
     textAlign: 'justify'
   },
-  resultTable: { display: 'flex', flexDirection: 'column' }
+  resultTable: { display: 'flex', flexDirection: 'column' },
+  get h3() {
+    return StyleSheet.compose(this.centeredText, {
+      marginBottom: 0
+    })
+  }
 })
 
 interface InfoEndProps {
@@ -112,18 +115,13 @@ export default function InfoEnd(props: InfoEndProps) {
     <div style={styles.resultTable}>
       <p style={styles.centeredText}>
         <br />
-        Esito:{' '}
+        TOL{' '}
         {testPassed
-          ? `Superato${!tengPassed ? ' (OFA TENG)' : ''}`
-          : `Non superato ${
-              !tengPassed ? '(OFA TEST + OFA TENG)' : '(OFA TEST)'
-            }`}
+          ? `superato${!tengPassed ? ' (OFA TENG)' : ''}`
+          : `non superato: OFA TEST${!tengPassed ? ' + OFA TENG' : ''}`}
         <br />
-        Punteggio calcolato: {formatNumber(score, true)} /{' '}
-        {formatNumber(testTotalScore, true)}
-        <br />
-        Punteggio arrotondato: {formatNumber(score)} /{' '}
-        {formatNumber(testTotalScore)}
+        Punteggio: {formatNumber(score)} / {formatNumber(testTotalScore)} (
+        {formatNumber(score, true)})
       </p>
       <br />
 
@@ -166,61 +164,55 @@ export default function InfoEnd(props: InfoEndProps) {
     <div style={styles.div}>
       {resultTable()}
 
-      <GeneralPurposeCollapsible
-        label="Come viene calcolato il punteggio"
-        startOpen={false}
-      >
-        <p style={styles.collapsible}>
-          Il <b>punteggio massimo</b> conseguibile{' '}
-          <b>è di {formatNumber(testTotalScore, true)}</b> e viene espresso fino
-          alla seconda cifra decimale.
-          <br />
-          L'attribuzione di <b>OFA TEST</b> (Obblighi Formativi Aggiunti)
-          avviene quando il punteggio test, arrotondato all'intero più vicino,{' '}
-          <b>è minore di {formatNumber(testPassThreshold)}</b>.<br />
-          L'attribuzione di <b>OFA TENG</b> avviene quando, considerando la sola
-          sezione di {sectionInfo.ing.name}, il numero di risposte corrette{' '}
-          <b>è inferiore a {formatNumber(tengPassThreshold)}</b>.
-          <br />
-          <br />
-          Il <b>punteggio</b> della prova viene calcolato attribuendo:
-          <ul>
-            <li>
-              {formatNumber(correctionWeight.correct)} punto ad ogni risposta
-              esatta
-            </li>
-            <li>
-              {formatNumber(correctionWeight.wrong)} punti ad ogni risposta
-              errata
-            </li>
-            <li>
-              {formatNumber(correctionWeight.notGiven)} punti per ogni risposta
-              non data
-            </li>
-          </ul>
-          e assegnando
-          <ul>
-            {Object.entries(sectionInfo).map(([, info], index) => (
-              <li key={index}>
-                peso{' '}
-                {typeof info.coeff == 'number'
-                  ? formatNumber(info.coeff)
-                  : info.coeff.toFraction()}{' '}
-                ad ogni quesito di {info.name}
-              </li>
-            ))}
-          </ul>
-          Il <b>punteggio</b> complessivo viene arrotondato all'intero più
-          vicino (es: il punteggio 59,49 viene arrotondato a 59, il punteggio
-          59,50 a 60)
-        </p>
-      </GeneralPurposeCollapsible>
-
       <ExtendedCorrection
         answers={props.answers}
         questions={props.questions}
         resultTable={resultTable()}
       />
+
+      <h3 style={styles.h3}>Come viene calcolato il punteggio</h3>
+      <p style={styles.collapsible}>
+        Il <b>punteggio massimo</b> conseguibile{' '}
+        <b>è di {formatNumber(testTotalScore, true)}</b> e viene espresso fino
+        alla seconda cifra decimale.
+        <br />
+        L'attribuzione di <b>OFA TEST</b> (Obblighi Formativi Aggiunti) avviene
+        quando il punteggio test, arrotondato all'intero più vicino,{' '}
+        <b>è minore di {formatNumber(testPassThreshold)}</b>.<br />
+        L'attribuzione di <b>OFA TENG</b> avviene quando, considerando la sola
+        sezione di {sectionInfo.ing.name}, il numero di risposte corrette{' '}
+        <b>è inferiore a {formatNumber(tengPassThreshold)}</b>.
+        <br />
+        <br />
+        Il <b>punteggio</b> della prova viene calcolato attribuendo:
+        <ul>
+          <li>
+            {formatNumber(correctionWeight.correct)} punto ad ogni risposta
+            esatta
+          </li>
+          <li>
+            {formatNumber(correctionWeight.wrong)} punti ad ogni risposta errata
+          </li>
+          <li>
+            {formatNumber(correctionWeight.notGiven)} punti per ogni risposta
+            non data
+          </li>
+        </ul>
+        e assegnando
+        <ul>
+          {Object.entries(sectionInfo).map(([, info], index) => (
+            <li key={index}>
+              peso{' '}
+              {typeof info.coeff == 'number'
+                ? formatNumber(info.coeff)
+                : info.coeff.toFraction()}{' '}
+              ad ogni quesito di {info.name}
+            </li>
+          ))}
+        </ul>
+        Il <b>punteggio</b> complessivo viene arrotondato all'intero più vicino
+        (es: il punteggio 59,49 viene arrotondato a 59, il punteggio 59,50 a 60)
+      </p>
     </div>
   )
 }
