@@ -7,11 +7,15 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '10px'
+    margin: '10px',
+    marginBlock: '16px'
   },
   centered: {
     textAlign: 'center',
     display: 'block'
+  },
+  buttonDiv: {
+    margin: '16px'
   }
 })
 
@@ -21,9 +25,9 @@ interface InfoStartProps {
 export default function InfoStart(props: InfoStartProps) {
   return (
     <div style={styles.div}>
-      <p>Paragrafo sullo scopo del progetto etc. etc.</p>
       <p>
         <span style={styles.centered}>DISCLAIMER</span>
+        <br />
         "The TOL Project" (Progetto) non è in alcun modo collegato al
         Politecnico di Milano ma è gestito gratuitamente da studenti. Gli autori
         del Progetto non si assumono alcuna responsabilità, né garantiscono
@@ -38,7 +42,7 @@ export default function InfoStart(props: InfoStartProps) {
         site for the purpose of passing the admission test at Politecnico di
         Milano.
       </p>
-      <div>
+      <div style={styles.buttonDiv}>
         <Button label="Inizia il test" onClick={props.startTest} />
       </div>
     </div>
