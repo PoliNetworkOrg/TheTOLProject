@@ -19,9 +19,8 @@ export default function About() {
       Milano (PoliMi), le aspiranti matricole devono superare il test di
       ammissione (TOL). Tra le risorse che il PoliMi offre gratuitamente per
       prepararsi troviamo: il Politest, raccolta di esercizi commentati e
-      risolti, la DOL, una demo online con un numero ristretto di domande, e due
-      test di prova per la sola sezione di Matematica, Logica e Statistica (pdf
-      con domande, xls con risposte esatte).
+      risolti, la DOL, una demo online con un numero ridotto di domande, e due
+      test di prova (pdf con domande, xls con risposte esatte).
       <br />
       Ad oggi, non esiste una simulazione completa TOL via web, ovvero nello
       stesso ambiente in cui le future matricole svolgeranno il test di
@@ -29,7 +28,7 @@ export default function About() {
       <br />
       <br />
       TheTOLProject si è posto l'obbiettivo di creare una simulazione del TOL
-      compelta e gratuita, al fine di fornire alle aspiranti matricole un
+      completa e gratuita, al fine di fornire alle aspiranti matricole un
       ambiente famigliare per esercitarsi, del tutto simile a quello che
       incontreranno al test di ammissione.
       <br />
