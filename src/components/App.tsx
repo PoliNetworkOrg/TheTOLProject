@@ -66,39 +66,39 @@ export default function App() {
         })
   })
 
+  const RootComponent = () => (
+    <div>
+      <ErrorView
+        hidden={!loadingError[0]}
+        display={loadingError[0] || ''}
+        internal={loadingError[1]}
+      />
+      {view.startsWith('TOL') && questions ? (
+        <QuestionsForm
+          answersState={answersState}
+          questions={questions as QuestionsData}
+          sectionState={sectionState}
+          timeRecordState={timeRecordState}
+          viewState={[view, setView]}
+        />
+      ) : view.startsWith('INFO') && questions ? (
+        <InfoView
+          answers={answersState[0]}
+          questions={questions}
+          viewState={[view, setView]}
+        />
+      ) : undefined}
+    </div>
+  )
+
   return (
     <div>
       <Header viewState={[view, setView]} />
       <Separator />
       <div style={styles.routeContainer}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <div>
-                <ErrorView
-                  hidden={!loadingError[0]}
-                  display={loadingError[0] || ''}
-                  internal={loadingError[1]}
-                />
-                {view.startsWith('TOL') && questions ? (
-                  <QuestionsForm
-                    answersState={answersState}
-                    questions={questions as QuestionsData}
-                    sectionState={sectionState}
-                    timeRecordState={timeRecordState}
-                    viewState={[view, setView]}
-                  />
-                ) : view.startsWith('INFO') && questions ? (
-                  <InfoView
-                    answers={answersState[0]}
-                    questions={questions}
-                    viewState={[view, setView]}
-                  />
-                ) : undefined}
-              </div>
-            }
-          />
+          <Route path="/" element={<RootComponent />} />
+          <Route path="results" element={<RootComponent />} />
           <Route path="about" element={<About />} />
           <Route path="license" element={<License />} />
           <Route path="privacy" element={<Privacy />} />

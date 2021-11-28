@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router'
 import { useTimer } from 'react-timer-hook'
 import { getNextSection, sectionInfo } from '../../utils/constants'
 import { section, QuestionsData } from '../../utils/database'
@@ -109,6 +110,8 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   if (!props.questions) return <span>Loading...</span>
 
   const getViewElement = () => {
+    const navigate = useNavigate()
+
     if (view == 'TOL-testing')
       return (
         <div style={styles.testing}>
@@ -148,6 +151,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
               setView('TOL-testing')
             } else {
               setView('INFO-end')
+              navigate('results')
             }
           }}
           section={currentSection}

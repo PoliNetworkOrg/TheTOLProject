@@ -1,4 +1,5 @@
 import React from 'react'
+import { Navigate, useLocation } from 'react-router'
 import { QuestionsData } from '../../utils/database'
 import { statePair } from '../../utils/types'
 import { AnswersData, view } from '../App'
@@ -11,7 +12,13 @@ interface InfoViewProps {
   viewState: statePair<view>
 }
 export default function InfoView(props: InfoViewProps) {
-  const view = props.viewState[0]
+  const view = props.viewState[0],
+    location = useLocation()
+
+  if (location.pathname.endsWith('results') && view != 'INFO-end') {
+    props.viewState[1]('INFO-start')
+    return <Navigate to="/" />
+  }
 
   return view == 'INFO-start' ? (
     <InfoStart
