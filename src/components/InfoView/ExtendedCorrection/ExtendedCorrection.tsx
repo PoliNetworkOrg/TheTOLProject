@@ -8,6 +8,7 @@ import RenderedText from '../../Util/RenderedText'
 import Button from '../../Util/Button'
 import './ExtendedCorrection.css'
 import DocumentHeader from './DocumentHeader'
+import { PanelBear } from '../../..'
 
 const styles = StyleSheet.create({
   collapsible: {
@@ -58,6 +59,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
             <Button label="Salva risultati simulazione" />
           </div>
         )}
+        onBeforePrint={() => PanelBear.track('DisplayExtendedCorrection')}
       />
       <div
         {...(props.visible ? {} : { className: 'print-only' })}

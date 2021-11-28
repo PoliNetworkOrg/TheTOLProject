@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router'
+import { PanelBear } from '../..'
 import { QuestionsData } from '../../utils/database'
 import { statePair } from '../../utils/types'
 import { AnswersData, view } from '../App'
@@ -29,6 +30,7 @@ export default function InfoView(props: InfoViewProps) {
       startTest={() => {
         setView('TOL-testing')
         navigate('/test')
+        PanelBear.track('TestStart')
       }}
     />
   ) : view == 'INFO-end' ? (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useTimer } from 'react-timer-hook'
+import { PanelBear } from '../..'
 import { getNextSection, sectionInfo } from '../../utils/constants'
 import { section, QuestionsData } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
@@ -55,6 +56,8 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     if (shouldShowAlert) return showAlert()
     // else it's already reset by setQIndex
 
+    PanelBear.track(`EndSection: ${currentSection}`)
+
     setView('TOL-secRecap')
     setQIndex(0)
     tmpAnswerState[1](undefined)
@@ -102,6 +105,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   const timer = useTimer({
     expiryTimestamp: getTimerExpDate(sectionInfo[currentSection].minutes),
     onExpire: () => {
+      PanelBear.track(`TimerExpired: ${currentSection}`)
       closeSection()
     }
   })
@@ -152,6 +156,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
             } else {
               setView('INFO-end')
               navigate('/results')
+              PanelBear.track('ViewResults')
             }
           }}
           section={currentSection}
@@ -168,7 +173,10 @@ export default function QuestionsForm(props: QuestionsFormProps) {
       <TopControls
         active={view == 'TOL-testing'}
         answers={answers}
-        closeSection={closeSection}
+        closeSection={() => {
+          PanelBear.track(`EarlyEndSection: ${currentSection}`)
+          closeSection()
+        }}
         currentSection={currentSection}
         questions={props.questions}
         timer={timer}
