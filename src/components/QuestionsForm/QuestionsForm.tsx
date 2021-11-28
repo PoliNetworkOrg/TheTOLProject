@@ -151,7 +151,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
               setView('TOL-testing')
             } else {
               setView('INFO-end')
-              navigate('results')
+              navigate('/results')
             }
           }}
           section={currentSection}

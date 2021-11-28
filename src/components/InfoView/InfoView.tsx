@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, useLocation } from 'react-router'
+import { Navigate, useLocation, useNavigate } from 'react-router'
 import { QuestionsData } from '../../utils/database'
 import { statePair } from '../../utils/types'
 import { AnswersData, view } from '../App'
@@ -12,18 +12,23 @@ interface InfoViewProps {
   viewState: statePair<view>
 }
 export default function InfoView(props: InfoViewProps) {
-  const view = props.viewState[0],
-    location = useLocation()
+  const [view, setView] = props.viewState,
+    location = useLocation(),
+    navigate = useNavigate()
 
-  if (location.pathname.endsWith('results') && view != 'INFO-end') {
-    props.viewState[1]('INFO-start')
+  if (
+    (location.pathname == '/test' && !view.startsWith('TOL')) ||
+    (location.pathname == '/results' && view != 'INFO-end')
+  ) {
+    setView('INFO-start')
     return <Navigate to="/" />
   }
 
   return view == 'INFO-start' ? (
     <InfoStart
       startTest={() => {
-        props.viewState[1]('TOL-testing')
+        setView('TOL-testing')
+        navigate('/test')
       }}
     />
   ) : view == 'INFO-end' ? (

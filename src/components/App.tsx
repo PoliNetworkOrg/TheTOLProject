@@ -98,11 +98,12 @@ export default function App() {
       <div style={styles.routeContainer}>
         <Routes>
           <Route path="/" element={<RootComponent />} />
-          <Route path="results" element={<RootComponent />} />
-          <Route path="about" element={<About />} />
-          <Route path="license" element={<License />} />
-          <Route path="privacy" element={<Privacy />} />
-          <Route path="dbpreview" element={<DBPreview db={database} />} />
+          <Route path="/test" element={<RootComponent />} />
+          <Route path="/results" element={<RootComponent />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/license" element={<License />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/dbpreview" element={<DBPreview db={database} />} />
         </Routes>
       </div>
       <Separator />
