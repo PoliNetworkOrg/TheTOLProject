@@ -28,7 +28,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   const [qIndex, originalSetQIndex] = useState(0),
     tmpFlaggedState = useState(false),
     tmpAnswerState = useState<Answer['letter']>(),
-    tmpTimerExpiredState = useState(false),
     alertDisplayedState = useState(false)
 
   const [currentSection, setSection] = props.sectionState,
@@ -103,7 +102,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     expiryTimestamp: getTimerExpDate(sectionInfo[currentSection].minutes),
     onExpire: () => {
       closeSection()
-      tmpTimerExpiredState[1](true)
     }
   })
 
@@ -147,7 +145,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
             if (nextSection) {
               setSection(nextSection)
               timer.restart(getTimerExpDate(sectionInfo[nextSection].minutes))
-              tmpTimerExpiredState[1](false)
               setView('TOL-testing')
             } else {
               setView('INFO-end')
@@ -171,7 +168,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
         currentSection={currentSection}
         questions={props.questions}
         timer={timer}
-        timerExpired={tmpTimerExpiredState[0]}
       />
       <RecapBar
         active={view == 'TOL-testing'}

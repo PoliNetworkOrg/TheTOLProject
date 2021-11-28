@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
 
 interface TimerProps {
   timer: TimerResult
-  expired: boolean
 }
 export default function Timer(props: TimerProps) {
   const { timer } = props
@@ -53,11 +52,7 @@ export default function Timer(props: TimerProps) {
       style={StyleSheet.compose(
         styles.container,
         (timer.hours * 60 + timer.minutes) * 60 + timer.seconds <
-          alertThreshold &&
-          !(
-            timer.hours + timer.minutes + timer.seconds == 0 && !props.expired
-          ) &&
-          styles.expiring
+          alertThreshold && styles.expiring
       )}
     >
       <FiClock style={styles.icon} />

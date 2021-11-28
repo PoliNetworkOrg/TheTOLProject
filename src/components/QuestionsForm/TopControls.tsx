@@ -28,7 +28,6 @@ interface TopControlsProps {
   closeSection: () => void
   currentSection: section
   timer: TimerResult
-  timerExpired: boolean
   questions: QuestionsData
 }
 
@@ -54,7 +53,7 @@ export default function TopControls(props: TopControlsProps) {
           <Button label="Chiudi sezione" onClick={props.closeSection} />
         )}
       </div>
-      <Timer timer={props.timer} expired={props.timerExpired} />
+      <Timer timer={props.timer} />
     </div>
   )
 }
