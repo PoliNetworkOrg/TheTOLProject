@@ -55,7 +55,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
         content={() => ref.current}
         trigger={() => (
           <div style={styles.printButton}>
-            <Button label="Scarica/salva correzione estesa" />
+            <Button label="Salva risultati simulazione" />
           </div>
         )}
       />
