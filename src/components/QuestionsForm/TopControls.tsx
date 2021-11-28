@@ -42,12 +42,12 @@ export default function TopControls(props: TopControlsProps) {
           <p>
             Sezione: <b>{getSectionName(currentSection)}</b> <br />
             Riposte: {props.answers[currentSection].length} /{' '}
-            {props.questions[currentSection].length} (
-            {props.answers[currentSection].reduce(
-              (acc, curr) => acc + (curr.flagged ? 1 : 0),
-              0
-            )}{' '}
-            da rivedere)
+            {props.questions[currentSection].length}
+            {props.active &&
+              ` (${props.answers[currentSection].reduce(
+                (acc, curr) => acc + (curr.flagged ? 1 : 0),
+                0
+              )} da rivedere)`}
           </p>
         </div>
         {props.active && (
