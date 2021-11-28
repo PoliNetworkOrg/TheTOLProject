@@ -57,7 +57,7 @@ export default function About() {
         rel="noreferrer noopener"
         style={styles.link}
       >
-        Gruppo TheTOLProject (link ancora da mettere)
+        Gruppo TheTOLProject
       </a>
       <br />
       <br />

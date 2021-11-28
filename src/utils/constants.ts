@@ -6,7 +6,7 @@ export const links = {
   polinetwork: 'https://polinetwork.github.io',
   privacyPanelbear: 'https://panelbear.com/cookie-free-analytics/',
   telegramPreparazioneTOL: 'https://t.me/joinchat/_zugEikozmcyMzA0',
-  telegramTheTOLProject: undefined
+  telegramTheTOLProject: 'https://t.me/+amLdTd-EoHw1MWRk'
 }
 
 interface sectionInfoElement {
