@@ -40,15 +40,14 @@ const styles = StyleSheet.create({
   centeredText: {
     textAlign: 'center'
   },
-  collapsible: {
+  p: {
     padding: '10px',
     textAlign: 'justify'
   },
   resultTable: { display: 'flex', flexDirection: 'column' },
-  get h3() {
-    return StyleSheet.compose(this.centeredText, {
-      marginBottom: 0
-    })
+  h3: {
+    marginBottom: 0,
+    paddingInline: '10px'
   }
 })
 
@@ -171,7 +170,7 @@ export default function InfoEnd(props: InfoEndProps) {
       />
 
       <h3 style={styles.h3}>Come viene calcolato il punteggio</h3>
-      <p style={styles.collapsible}>
+      <p style={styles.p}>
         Il <b>punteggio massimo</b> conseguibile{' '}
         <b>è di {formatNumber(testTotalScore, true)}</b> e viene espresso fino
         alla seconda cifra decimale.
