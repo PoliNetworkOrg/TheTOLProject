@@ -79,3 +79,39 @@ export function getNextSection(currentSection: section): section | undefined {
   const i = sortedInfo.findIndex((e) => e[0] == currentSection)
   return (sortedInfo[i + 1] || [])[0]
 }
+
+interface Member {
+  name: string
+  tg: string
+}
+
+export const members: Member[] = [
+  {
+    name: 'Gabriele Zanini',
+    tg: 'zagbc'
+  },
+  {
+    name: 'Federico Grandi',
+    tg: 'federico_grandi'
+  },
+  {
+    name: 'Ilaria Corcelli',
+    tg: 'iilaria01'
+  },
+  {
+    name: 'Matteo Salicandro',
+    tg: 'Mattysal'
+  },
+  {
+    name: 'Nicolas Facchin',
+    tg: 'RollyNoka'
+  },
+  {
+    name: 'Elia Maggioni (ad hoc)',
+    tg: 'EliaMaggioni'
+  },
+  {
+    name: 'Diego Aldarese (ad hoc)',
+    tg: 'diegoaldarese'
+  }
+]

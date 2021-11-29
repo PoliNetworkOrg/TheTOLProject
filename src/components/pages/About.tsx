@@ -1,6 +1,7 @@
 import React from 'react'
-import { links } from '../../utils/constants'
+import { links, members } from '../../utils/constants'
 import { StyleSheet, theme } from '../../utils/style'
+import telegramLogo from '../../static/telegram_logo.svg'
 
 const styles = StyleSheet.create({
   p: {
@@ -9,6 +10,17 @@ const styles = StyleSheet.create({
   },
   link: {
     color: theme.primary
+  },
+  liDiv: {
+    display: 'flex',
+    gap: '5px',
+    alignItems: 'center'
+  },
+  telegramLink: {
+    display: 'flex'
+  },
+  telegramLogo: {
+    height: '17.5px'
   }
 })
 
@@ -62,7 +74,23 @@ export default function About() {
       <br />
       <b>Membri del progetto</b>
       <br />
-      TODO
+      <ul>
+        {members.map((m, i) => (
+          <li key={i}>
+            <div style={styles.liDiv}>
+              {m.name}{' '}
+              <a
+                href={`https://t.me/${m.tg}`}
+                target="_blank"
+                rel="noreferrer noopener"
+                style={styles.telegramLink}
+              >
+                <img src={telegramLogo} style={styles.telegramLogo}></img>
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
     </p>
   )
 }
