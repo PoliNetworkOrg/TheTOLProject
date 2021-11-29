@@ -106,6 +106,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     expiryTimestamp: getTimerExpDate(sectionInfo[currentSection].minutes),
     onExpire: () => {
       PanelBear.track(`TimerExpired: ${currentSection}`)
+      timer.seconds = 0
       closeSection()
     }
   })
