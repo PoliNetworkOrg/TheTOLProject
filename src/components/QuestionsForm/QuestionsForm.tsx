@@ -56,7 +56,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     if (shouldShowAlert) return showAlert()
     // else it's already reset by setQIndex
 
-    PanelBear.track(`EndSection: ${currentSection}`)
+    PanelBear.track(`EndSection:${currentSection.toUpperCase()}`)
 
     setView('TOL-secRecap')
     setQIndex(0)
@@ -105,7 +105,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   const timer = useTimer({
     expiryTimestamp: getTimerExpDate(sectionInfo[currentSection].minutes),
     onExpire: () => {
-      PanelBear.track(`TimerExpired: ${currentSection}`)
+      PanelBear.track(`TimerExpired:${currentSection.toUpperCase()}`)
       timer.seconds = 0
       closeSection()
     }
@@ -175,7 +175,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
         active={view == 'TOL-testing'}
         answers={answers}
         closeSection={() => {
-          PanelBear.track(`EarlyEndSection: ${currentSection}`)
+          PanelBear.track(`EarlyEndSection:${currentSection.toUpperCase()}`)
           closeSection()
         }}
         currentSection={currentSection}
