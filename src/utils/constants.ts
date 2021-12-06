@@ -83,6 +83,7 @@ export function getNextSection(currentSection: section): section | undefined {
 interface Member {
   name: string
   tg: string
+  ah?: boolean
 }
 
 export const members: Member[] = [
@@ -107,11 +108,13 @@ export const members: Member[] = [
     tg: 'RollyNoka'
   },
   {
-    name: 'Elia Maggioni (ad hoc)',
-    tg: 'EliaMaggioni'
+    name: 'Elia Maggioni',
+    tg: 'EliaMaggioni',
+    ah: true
   },
   {
-    name: 'Diego Aldarese (ad hoc)',
-    tg: 'diegoaldarese'
+    name: 'Diego Aldarese',
+    tg: 'diegoaldarese',
+    ah: true
   }
 ]
