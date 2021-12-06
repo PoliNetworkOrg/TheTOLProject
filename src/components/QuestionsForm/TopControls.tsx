@@ -40,8 +40,10 @@ export default function TopControls(props: TopControlsProps) {
         <div>
           <p>
             Sezione: <b>{getSectionName(currentSection)}</b> <br />
-            Riposte: {props.answers[currentSection].length} /{' '}
-            {props.questions[currentSection].length}
+            Riposte:{' '}
+            {
+              props.answers[currentSection].filter((a) => !!a.letter).length
+            } / {props.questions[currentSection].length}
             {props.active &&
               ` (${props.answers[currentSection].reduce(
                 (acc, curr) => acc + (curr.flagged ? 1 : 0),
