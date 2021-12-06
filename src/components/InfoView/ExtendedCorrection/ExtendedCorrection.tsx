@@ -56,7 +56,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
         content={() => ref.current}
         trigger={() => (
           <div style={styles.printButton}>
-            <Button label="Salva risultati simulazione" />
+            <Button label="Salva risultati della simulazione" />
           </div>
         )}
         onBeforePrint={() => PanelBear.track('DisplayExtendedCorrection')}
