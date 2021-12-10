@@ -1,10 +1,18 @@
 import React from 'react'
 import { links } from '../../utils/constants'
-import { baseStyle } from '../../utils/style'
+import { StyleSheet } from '../../utils/style'
+
+const styles = StyleSheet.create({
+  p: { paddingBlock: '15px' },
+  centered: {
+    textAlign: 'center',
+    display: 'block'
+  }
+})
 
 export default function Privacy() {
   return (
-    <p style={baseStyle}>
+    <p style={styles.p}>
       Questo sito utilizza un tracker non invasivo per tener traccia della sua
       performance, nel rispetto delle norme GDPR. Il sito non salva nessun
       cookie permanente: ogni dato trasmesso è in forma anonima e non
@@ -18,6 +26,8 @@ export default function Privacy() {
       </a>
       .
       <br />
+      <br />
+      <span style={styles.centered}>---</span>
       <br />
       This website uses a non-invasive tracker to keep track of its performance,
       complying with GDPR. The website does not store any permanent cookie:
