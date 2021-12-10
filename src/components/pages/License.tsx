@@ -48,7 +48,7 @@ export function License() {
         >
           PoliNetwork
         </a>{' '}
-        è rilasciato sotto una lincenza{' '}
+        è rilasciato sotto una licenza{' '}
         <a
           rel="license noreferrer noopener"
           href="http://creativecommons.org/licenses/by-sa/4.0/"
