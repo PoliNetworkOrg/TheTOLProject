@@ -1,4 +1,5 @@
 import Fraction from 'fraction.js'
+import fromEntries from 'fromentries'
 import React from 'react'
 import {
   correctionWeight,
@@ -58,7 +59,7 @@ interface InfoEndProps {
 export default function InfoEnd(props: InfoEndProps) {
   const { answers, questions } = props
 
-  const correctionGrid = Object.fromEntries(
+  const correctionGrid = fromEntries(
     (Object.entries(questions) as [section, Question[]][]).map(
       ([section, secQuestions]) => {
         let correct = 0,

@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv'
 import * as fs from 'fs'
 import * as path from 'path'
+import fromEntries from 'fromentries'
 import { google } from 'googleapis'
 import {
   GoogleSpreadsheet,
@@ -23,7 +24,8 @@ async function generateJSON() {
 
   let sheets = await getParsedSheets()
 
-  sheets = Object.fromEntries(
+  sheets = fromEntries(
+    // @ts-expect-error Trust me, it's the right type
     await Promise.all(
       Object.entries(sheets).map(async ([section, questions]) => [
         section,
@@ -40,7 +42,7 @@ async function generateJSON() {
         )
       ])
     )
-  )
+  ) as QuestionsData
 
   const db: Database = {
     meta: {

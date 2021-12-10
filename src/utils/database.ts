@@ -1,4 +1,5 @@
 import axios from 'axios'
+import fromEntries from 'fromentries'
 import _ from 'underscore'
 import packageJson from '../../package.json'
 import { sectionInfo } from './constants'
@@ -50,7 +51,7 @@ export async function readDatabase() {
 }
 
 export function selectRandomQuestions(db: Database): QuestionsData {
-  return Object.fromEntries(
+  return fromEntries(
     // Manipulate db entries
     (Object.entries(db) as [section /* or "meta" */, Question[]][])
       // Select only entries associated with a section <=> exclude "meta"

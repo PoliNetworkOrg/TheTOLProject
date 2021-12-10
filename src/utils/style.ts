@@ -1,4 +1,5 @@
 import Fraction from 'fraction.js'
+import fromEntries from 'fromentries'
 import React from 'react'
 
 export const theme = {
@@ -26,7 +27,7 @@ type CSSProperties = {
 /** Basic implementation of the StyleSheet class present in React Native */
 export class StyleSheet {
   static create<Styles extends CSSProperties>(styles: Styles): Styles {
-    return Object.fromEntries(
+    return fromEntries(
       Object.entries(styles).map(([key, value]) => [
         key,
         { ...baseStyle, ...value }
