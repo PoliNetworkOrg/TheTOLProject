@@ -2,6 +2,8 @@ import { section } from './database'
 import Fraction from 'fraction.js'
 
 export const links = {
+  githubLicense:
+    'https://github.com/PoliNetworkOrg/TheTOLProject/blob/main/LICENSE',
   githubSource: 'https://github.com/PoliNetworkOrg/TheTOLProject/',
   polinetwork: 'https://polinetwork.github.io',
   privacyPanelbear: 'https://panelbear.com/cookie-free-analytics/',

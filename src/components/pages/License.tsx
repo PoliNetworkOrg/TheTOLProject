@@ -1,4 +1,5 @@
 import React from 'react'
+import { links } from '../../utils/constants'
 import { StyleSheet } from '../../utils/style'
 
 const styles = StyleSheet.create({
@@ -47,7 +48,7 @@ export function License() {
         >
           PoliNetwork
         </a>{' '}
-        è rilasciato sotto una linceza{' '}
+        è rilasciato sotto una lincenza{' '}
         <a
           rel="license noreferrer noopener"
           href="http://creativecommons.org/licenses/by-sa/4.0/"
@@ -55,17 +56,15 @@ export function License() {
         >
           Creative Commons Attribution-ShareAlike 4.0 International License
         </a>
-        .
-        <br />
-        Permessi che vanno oltre l'ambito di questa licenza posso essere
-        disponibili qui:{' '}
+        . Permessi che vanno oltre l'ambito di questa licenza posso essere
+        disponibili{' '}
         <a
           {...{ 'xmlns:cc': 'http://creativecommons.org/ns#' }}
-          href="https://github.com/PoliNetworkOrg/TheTOLProject/blob/main/LICENSE"
+          href={links.githubLicense}
           rel="cc:morePermissions noreferrer noopener"
           target="_blank"
         >
-          https://github.com/PoliNetworkOrg/TheTOLProject/blob/main/LICENSE
+          qui
         </a>
         .
       </p>
@@ -95,16 +94,14 @@ export function License() {
         >
           Creative Commons Attribution-ShareAlike 4.0 International License
         </a>
-        .
-        <br />
-        Permissions beyond the scope of this license may be available at{' '}
+        . Permissions beyond the scope of this license may be available{' '}
         <a
           {...{ 'xmlns:cc': 'http://creativecommons.org/ns#' }}
-          href="https://github.com/PoliNetworkOrg/TheTOLProject/blob/main/LICENSE"
+          href={links.githubLicense}
           rel="cc:morePermissions noreferrer noopener"
           target="_blank"
         >
-          https://github.com/PoliNetworkOrg/TheTOLProject/blob/main/LICENSE
+          here
         </a>
         .
       </p>
