@@ -82,9 +82,9 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
             rel="noreferrer noopener"
             style={styles.link}
           >
-            Gruppo preparazione TOL di PoliNetwork
-          </a>
-          !
+            Gruppo preparazione TOL
+          </a>{' '}
+          di PoliNetwork!
           <br />
           Per fare riferimento alla domanda scrivi, assieme al testo, anche l'ID
           (il numero che trovi fra [] dopo il testo).
