@@ -88,7 +88,9 @@ export default function About() {
         <ul>
           {members
             .filter((m) => !m.ah)
-            .sort()
+            .sort((a, b) =>
+              a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1
+            )
             .map((m, i) => (
               <li key={i}>
                 <div style={styles.liDiv}>
@@ -109,7 +111,9 @@ export default function About() {
         <ul>
           {members
             .filter((m) => !!m.ah)
-            .sort()
+            .sort((a, b) =>
+              a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1
+            )
             .map((m, i) => (
               <li key={i}>
                 <div style={styles.liDiv}>
