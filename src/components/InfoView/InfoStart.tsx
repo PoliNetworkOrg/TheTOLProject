@@ -34,7 +34,10 @@ export default function InfoStart(props: InfoStartProps) {
         espressamente o implicitamente l'accuratezza o l'affidabilità dei
         contenuti di questo sito ai fini del superamento del test di ammissione
         del Politecnico di Milano.
+        <br />
+        <br />
         <span style={styles.centered}>---</span>
+        <br />
         "The TOL Project" (Project) is in no way connected to Politecnico di
         Milano but is managed free of charge by students. The authors of the
         Project do not assume any responsibility, nor do they expressly or
