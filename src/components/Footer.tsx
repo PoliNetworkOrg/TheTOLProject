@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     color: 'inherit',
-    textDecoration: 'none'
+    fontSize: '11pt'
   }
 })
 
