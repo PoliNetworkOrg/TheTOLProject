@@ -22,7 +22,7 @@ export function License() {
     <div style={styles.div}>
       <a
         rel="license noreferrer noopener"
-        href="http://creativecommons.org/licenses/by-sa/4.0/"
+        href="https://creativecommons.org/licenses/by-sa/4.0/"
         target="_blank"
       >
         <img
@@ -33,14 +33,14 @@ export function License() {
       </a>
       <p>
         <span
-          {...{ 'xmlns:dct': 'http://purl.org/dc/terms/' }}
+          {...{ 'xmlns:dct': 'https://purl.org/dc/terms/' }}
           property="dct:title"
         >
           TheTOLProject
         </span>{' '}
         by{' '}
         <a
-          {...{ 'xmlns:cc': 'http://creativecommons.org/ns#' }}
+          {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
           href="https://polinetwork.github.io/it/projects/"
           property="cc:attributionName"
           rel="cc:attributionURL noreferrer noopener"
@@ -51,7 +51,7 @@ export function License() {
         è rilasciato sotto una licenza{' '}
         <a
           rel="license noreferrer noopener"
-          href="http://creativecommons.org/licenses/by-sa/4.0/"
+          href="https://creativecommons.org/licenses/by-sa/4.0/"
           target="_blank"
         >
           Creative Commons Attribution-ShareAlike 4.0 International License
@@ -59,7 +59,7 @@ export function License() {
         . Permessi che vanno oltre l'ambito di questa licenza posso essere
         disponibili{' '}
         <a
-          {...{ 'xmlns:cc': 'http://creativecommons.org/ns#' }}
+          {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
           href={links.githubLicense}
           rel="cc:morePermissions noreferrer noopener"
           target="_blank"
@@ -71,14 +71,14 @@ export function License() {
       <p style={styles.centered}>---</p>
       <p>
         <span
-          {...{ 'xmlns:dct': 'http://purl.org/dc/terms/' }}
+          {...{ 'xmlns:dct': 'https://purl.org/dc/terms/' }}
           property="dct:title"
         >
           TheTOLProject
         </span>{' '}
         by{' '}
         <a
-          {...{ 'xmlns:cc': 'http://creativecommons.org/ns#' }}
+          {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
           href="https://polinetwork.github.io/it/projects/"
           property="cc:attributionName"
           rel="cc:attributionURL noreferrer noopener"
@@ -89,14 +89,14 @@ export function License() {
         is licensed under a{' '}
         <a
           rel="license noreferrer noopener"
-          href="http://creativecommons.org/licenses/by-sa/4.0/"
+          href="https://creativecommons.org/licenses/by-sa/4.0/"
           target="_blank"
         >
           Creative Commons Attribution-ShareAlike 4.0 International License
         </a>
         . Permissions beyond the scope of this license may be available{' '}
         <a
-          {...{ 'xmlns:cc': 'http://creativecommons.org/ns#' }}
+          {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
           href={links.githubLicense}
           rel="cc:morePermissions noreferrer noopener"
           target="_blank"
