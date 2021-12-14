@@ -41,7 +41,7 @@ export function License() {
         by{' '}
         <a
           {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
-          href="https://polinetwork.github.io/it/projects/"
+          href="https://polinetwork.org/it/projects/"
           property="cc:attributionName"
           rel="cc:attributionURL noreferrer noopener"
           target="_blank"
@@ -79,7 +79,7 @@ export function License() {
         by{' '}
         <a
           {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
-          href="https://polinetwork.github.io/it/projects/"
+          href="https://polinetwork.org/it/projects/"
           property="cc:attributionName"
           rel="cc:attributionURL noreferrer noopener"
           target="_blank"

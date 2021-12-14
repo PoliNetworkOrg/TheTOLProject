@@ -5,7 +5,7 @@ export const links = {
   githubLicense:
     'https://github.com/PoliNetworkOrg/TheTOLProject/blob/main/LICENSE',
   githubSource: 'https://github.com/PoliNetworkOrg/TheTOLProject/',
-  polinetwork: 'https://polinetwork.github.io',
+  polinetwork: 'https://polinetwork.org',
   privacyPanelbear: 'https://panelbear.com/cookie-free-analytics/',
   telegramPreparazioneTOL: 'https://t.me/joinchat/_zugEikozmcyMzA0',
   telegramTheTOLProject: 'https://t.me/+amLdTd-EoHw1MWRk'
