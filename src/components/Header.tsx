@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet } from '../utils/style'
 import { statePair } from '../utils/types'
 import { view } from './App'
-import logo from '../static/logo.webp'
+import logo from '../static/logo3000.webp'
 import { links } from '../utils/constants'
 
 const styles = StyleSheet.create({
