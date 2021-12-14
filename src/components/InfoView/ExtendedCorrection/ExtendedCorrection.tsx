@@ -49,7 +49,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
   return (
     <div style={styles.collapsible}>
       <ReactToPrint
-        documentTitle={`TheTOLProject ${date
+        documentTitle={`The TOL Project ${date
           .toLocaleString()
           .replace(/\/|:/g, '-')
           .replace(/,/g, '')}`}

@@ -36,7 +36,7 @@ export function License() {
           {...{ 'xmlns:dct': 'https://purl.org/dc/terms/' }}
           property="dct:title"
         >
-          TheTOLProject
+          The TOL Project
         </span>{' '}
         by{' '}
         <a
@@ -74,7 +74,7 @@ export function License() {
           {...{ 'xmlns:dct': 'https://purl.org/dc/terms/' }}
           property="dct:title"
         >
-          TheTOLProject
+          The TOL Project
         </span>{' '}
         by{' '}
         <a
