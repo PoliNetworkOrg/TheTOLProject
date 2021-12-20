@@ -8,7 +8,6 @@ import RenderedText from '../../Util/RenderedText'
 import Button from '../../Util/Button'
 import './ExtendedCorrection.css'
 import DocumentHeader from './DocumentHeader'
-import { PanelBear } from '../../..'
 
 const styles = StyleSheet.create({
   collapsible: {
