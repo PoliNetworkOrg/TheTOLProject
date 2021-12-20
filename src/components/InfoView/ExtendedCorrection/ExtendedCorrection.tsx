@@ -59,7 +59,6 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
             <Button label="Salva risultati della simulazione" />
           </div>
         )}
-        onBeforePrint={() => PanelBear.track('DisplayExtendedCorrection')}
       />
       <div
         {...(props.visible ? {} : { className: 'print-only' })}
