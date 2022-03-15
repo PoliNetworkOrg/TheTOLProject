@@ -5,8 +5,11 @@ on:
       - .github/workflows/deploy.yml
       - src/**
       - public/**
+      - package.json
     branches:
       - "main"
+  release:
+    types: [published]
   workflow_dispatch:
 
 jobs:
