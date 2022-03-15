@@ -35,10 +35,10 @@ export interface Database extends QuestionsData {
   }
 }
 
-export async function readDatabase() {
+export async function readDatabase(ref = 'stable') {
   const db = (
     await axios.get(
-      'https://raw.githubusercontent.com/PoliNetworkOrg/TheTOLProjectData/main/database.json'
+      `https://raw.githubusercontent.com/PoliNetworkOrg/TheTOLProjectData/${ref}/database.json`
     )
   )?.data as Database
 
@@ -75,6 +75,6 @@ export function selectRandomQuestions(db: Database): QuestionsData {
   ) as QuestionsData
 }
 
-export function getImageURL(fileName: string) {
-  return `https://raw.githubusercontent.com/PoliNetworkOrg/TheTOLProjectData/main/img/${fileName}`
+export function getImageURL(fileName: string, ref = 'stable') {
+  return `https://raw.githubusercontent.com/PoliNetworkOrg/TheTOLProjectData/${ref}/img/${fileName}`
 }
