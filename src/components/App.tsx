@@ -19,6 +19,7 @@ import { License } from './pages/License'
 import Privacy from './pages/Privacy'
 import QuestionsForm from './QuestionsForm/QuestionsForm'
 import Separator from './Util/Separator'
+import QPreview from './pages/QPreview'
 
 export type view = 'INFO-start' | 'TOL-testing' | 'TOL-secRecap' | 'INFO-end'
 
@@ -107,6 +108,7 @@ export default function App() {
           <Route path="/license" element={<License />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/dbpreview" element={<DBPreview db={database} />} />
+          <Route path="/qpreview" element={<QPreview />} />
         </Routes>
       </div>
       <Separator />
