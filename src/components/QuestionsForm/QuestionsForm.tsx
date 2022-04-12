@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useTimer } from 'react-timer-hook'
 import { PanelBear } from '../..'
@@ -44,6 +44,25 @@ export default function QuestionsForm(props: QuestionsFormProps) {
       !alertDisplayedState[0] &&
       (tmpAnswerState[0] != currentAnswer?.letter ||
         tmpFlaggedState[0] != (currentAnswer?.flagged || false))
+
+  useEffect(() => {
+    // called when the qIndex is updated (the user changes question)
+    // sets the scroll of the recap bar container to keep the selected question in view
+    const recapBarElement = document.getElementById('recap-bar-container')
+    if (!recapBarElement) return
+
+    // this width works ok considering margins, widths, and paddings of the elements
+    const width = recapBarElement.clientWidth - 40
+    // 25 is the min width of a question cell, 2px margin to see the cell before
+    const maxScroll = qIndex * 25 - 2
+    const minScroll = maxScroll - width
+
+    // the scrollLeft musth be kept between the two values
+    if (recapBarElement.scrollLeft < minScroll)
+      recapBarElement.scrollLeft = minScroll
+    if (recapBarElement.scrollLeft > maxScroll)
+      recapBarElement.scrollLeft = maxScroll
+  }, [qIndex])
 
   const showAlert = () => {
     alert(

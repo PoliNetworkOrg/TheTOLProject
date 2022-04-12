@@ -8,6 +8,12 @@ const styles = StyleSheet.create({
   bordered: {
     borderBottom: 'thin solid #606060'
   },
+  barContainer: {
+    width: '100%',
+    boxSizing: 'border-box',
+    overflow: 'auto hidden',
+    padding: '5px 2.5px 5px 0'
+  },
   bar: {
     display: 'flex',
     fontSize: '9.5pt',
@@ -16,11 +22,11 @@ const styles = StyleSheet.create({
   },
   cellContainer: {
     display: 'flex',
-    flexShrink: 1,
+    flex: '1 0 25px',
     flexDirection: 'column',
     alignContent: 'baseline',
     textAlign: 'center',
-    width: '4em',
+    maxWidth: '4em',
     backgroundColor: theme.lightBackground
   },
   cellSub: {
@@ -44,25 +50,32 @@ interface RecapBarProps {
 }
 export default function RecapBar(props: RecapBarProps) {
   return (
-    <a style={styles.bar} {...(props.active ? { href: '#' } : {})}>
-      {props.sectionQuestions.map((q, i) => {
-        const answer = props.sectionAnswers.find(
-          (a) => a && a.id == q.id && (q.sub ? q.sub == a.sub : true)
-        )
-        return (
-          <AnswerCell
-            key={i}
-            index={i}
-            letter={answer?.letter}
-            flagged={answer?.flagged || false}
-            onClick={() => {
-              if (props.active) props.currentQuestionIndexState[1](i)
-            }}
-            selected={props.active && props.currentQuestionIndexState[0] == i}
-          />
-        )
-      })}
-    </a>
+    <div style={styles.barContainer} id="recap-bar-container">
+      <a
+        style={StyleSheet.compose(styles.bar, {
+          minWidth: props.sectionQuestions.length * 25 + 10
+        })}
+        {...(props.active ? { href: '#' } : {})}
+      >
+        {props.sectionQuestions.map((q, i) => {
+          const answer = props.sectionAnswers.find(
+            (a) => a && a.id == q.id && (q.sub ? q.sub == a.sub : true)
+          )
+          return (
+            <AnswerCell
+              key={i}
+              index={i}
+              letter={answer?.letter}
+              flagged={answer?.flagged || false}
+              onClick={() => {
+                if (props.active) props.currentQuestionIndexState[1](i)
+              }}
+              selected={props.active && props.currentQuestionIndexState[0] == i}
+            />
+          )
+        })}
+      </a>
+    </div>
   )
 }
 

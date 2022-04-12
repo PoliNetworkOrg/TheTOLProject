@@ -21,6 +21,8 @@ import QuestionsForm from './QuestionsForm/QuestionsForm'
 import Separator from './Util/Separator'
 import QPreview from './pages/QPreview'
 
+import { MobileContext } from '../utils/contexts'
+
 export type view = 'INFO-start' | 'TOL-testing' | 'TOL-secRecap' | 'INFO-end'
 
 export interface Answer {
@@ -51,6 +53,7 @@ export default function App() {
   })
   const timeRecordState = useState<TimeRecord>({})
   const [loadingError, showError] = useState<[string, Error] | []>([])
+  const [mobile, setMobile] = useState<boolean>(false)
 
   useEffect(() => {
     if (!database)
@@ -65,54 +68,61 @@ export default function App() {
             e
           ])
         })
-  })
+
+    setMobile(window.innerWidth < 768)
+    window.addEventListener('resize', () => {
+      setMobile(window.innerWidth < 768)
+    })
+  }, [])
 
   return (
-    <div>
-      <Header viewState={[view, setView]} />
-      <Separator />
-      <div style={styles.routeContainer}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              // Don't ever think about moving this to an external component.
-              <div>
-                <ErrorView
-                  hidden={!loadingError[0]}
-                  display={loadingError[0] || ''}
-                  internal={loadingError[1]}
-                />
-                {view.startsWith('TOL') && questions ? (
-                  <QuestionsForm
-                    answersState={answersState}
-                    questions={questions as QuestionsData}
-                    sectionState={sectionState}
-                    timeRecordState={timeRecordState}
-                    viewState={[view, setView]}
+    <MobileContext.Provider value={{ mobile }}>
+      <div>
+        <Header viewState={[view, setView]} />
+        <Separator />
+        <div style={styles.routeContainer}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                // Don't ever think about moving this to an external component.
+                <div>
+                  <ErrorView
+                    hidden={!loadingError[0]}
+                    display={loadingError[0] || ''}
+                    internal={loadingError[1]}
                   />
-                ) : view.startsWith('INFO') && questions ? (
-                  <InfoView
-                    answers={answersState[0]}
-                    questions={questions}
-                    viewState={[view, setView]}
-                  />
-                ) : undefined}
-              </div>
-            }
-          >
-            <Route path="/test" element={<div />} />
-            <Route path="/results" element={<div />} />
-          </Route>
-          <Route path="/about" element={<About />} />
-          <Route path="/license" element={<License />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/dbpreview" element={<DBPreview db={database} />} />
-          <Route path="/qpreview" element={<QPreview />} />
-        </Routes>
+                  {view.startsWith('TOL') && questions ? (
+                    <QuestionsForm
+                      answersState={answersState}
+                      questions={questions as QuestionsData}
+                      sectionState={sectionState}
+                      timeRecordState={timeRecordState}
+                      viewState={[view, setView]}
+                    />
+                  ) : view.startsWith('INFO') && questions ? (
+                    <InfoView
+                      answers={answersState[0]}
+                      questions={questions}
+                      viewState={[view, setView]}
+                    />
+                  ) : undefined}
+                </div>
+              }
+            >
+              <Route path="/test" element={<div />} />
+              <Route path="/results" element={<div />} />
+            </Route>
+            <Route path="/about" element={<About />} />
+            <Route path="/license" element={<License />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/dbpreview" element={<DBPreview db={database} />} />
+            <Route path="/qpreview" element={<QPreview />} />
+          </Routes>
+        </div>
+        <Separator />
+        {!view.startsWith('TOL') && <Footer />}
       </div>
-      <Separator />
-      {!view.startsWith('TOL') && <Footer />}
-    </div>
+    </MobileContext.Provider>
   )
 }

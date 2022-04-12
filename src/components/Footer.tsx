@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { links } from '../utils/constants'
+import { MobileContext } from '../utils/contexts'
 import { StyleSheet, theme } from '../utils/style'
 
 const styles = StyleSheet.create({
@@ -16,32 +17,48 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     justifyContent: 'center',
+    textAlign: 'center',
     color: 'inherit',
     fontSize: '11pt'
   }
 })
 
+const mobileStyles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 16
+  },
+  link: StyleSheet.compose(styles.link, {
+    margin: 2
+  })
+})
+
 export default function Footer() {
+  const { mobile } = useContext(MobileContext)
+  const linkStyle = mobile ? mobileStyles.link : styles.link
   return (
-    <div style={styles.container}>
+    <div style={mobile ? mobileStyles.container : styles.container}>
       <a
         href={links.githubSource}
-        style={styles.link}
+        style={linkStyle}
         target="_blank"
         rel="noreferrer noopener"
       >
         Source
       </a>
-      <Link to="about" style={styles.link}>
+      <Link to="about" style={linkStyle}>
         About
       </Link>
-      <Link to="/" style={styles.link}>
+      <Link to="/" style={linkStyle}>
         Home
       </Link>
-      <Link to="license" style={styles.link}>
+      <Link to="license" style={linkStyle}>
         License
       </Link>
-      <Link to="privacy" style={styles.link}>
+      <Link to="privacy" style={linkStyle}>
         Privacy & cookies
       </Link>
     </div>

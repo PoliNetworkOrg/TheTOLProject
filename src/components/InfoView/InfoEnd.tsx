@@ -21,7 +21,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontSize: '11pt'
   },
-  tableDiv: { alignSelf: 'center' },
+  tableDiv: {
+    alignSelf: 'center',
+    width: '100%',
+    overflow: 'auto'
+  },
   table: { borderSpacing: 0 },
   tableCell: {
     padding: '5px',
