@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: 16
       - run: npm ci --ignore-scripts
-      - run: npm run deploy -- -r https://git:${DEPLOYMENT_PAT}@github.com/PoliNetworkOrg/TheTOLProject.github.io.git -u "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
+      - run: npm run deploy -- -r https://git:${DEPLOYMENT_PAT}@github.com/PoliNetworkOrg/TheTOLProject.git -u "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
         env:
           DEPLOYMENT_PAT: ${{ github.token }}
           THETOLPROJECT_DEV: true
