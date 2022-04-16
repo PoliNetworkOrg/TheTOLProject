@@ -9,7 +9,11 @@ const styles = StyleSheet.create({
   baseText: {
     fontSize: '11pt'
   },
+  label: {
+    display: 'flex'
+  },
   radioText: {
+    display: 'flex',
     fontWeight: 'bold',
     textAlign: 'center',
     verticalAlign: 'middle',
@@ -79,7 +83,7 @@ interface RadioRowProps {
 function RadioRow(props: RadioRowProps) {
   return (
     <tr style={styles.baseText}>
-      <label>
+      <label style={styles.label}>
         <td style={styles.radioText}>
           <span style={styles.radioSpan}>
             {props.letter?.toUpperCase() || '?'}{' '}

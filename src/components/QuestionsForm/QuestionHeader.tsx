@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Question } from '../../utils/database'
 import { StyleSheet, theme } from '../../utils/style'
 import { Answer } from '../App'
 import { IoMdArrowRoundBack, IoMdArrowRoundForward } from 'react-icons/io'
 import Button from '../Util/Button'
+import { MobileContext } from '../../utils/contexts'
 
 const styles = StyleSheet.create({
   container: {
@@ -48,6 +49,15 @@ const styles = StyleSheet.create({
   }
 })
 
+const mobileStyles = StyleSheet.create({
+  container: StyleSheet.compose(styles.container, {
+    flexDirection: 'column-reverse'
+  }),
+  rightContainer: StyleSheet.compose(styles.rightContainer, {
+    justifyContent: 'space-between'
+  })
+})
+
 interface QuestionHeaderProps {
   currentAnswer: Answer
   questionIndex: number
@@ -55,8 +65,9 @@ interface QuestionHeaderProps {
   shiftQuestionIndex: (offset: number) => void
 }
 export default function QuestionHeader(props: QuestionHeaderProps) {
+  const { mobile } = useContext(MobileContext)
   return (
-    <div style={styles.container}>
+    <div style={mobile ? mobileStyles.container : styles.container}>
       <div style={styles.leftContainer}>
         <p style={styles.question}>Domanda {props.questionIndex + 1}</p>
         <p
@@ -75,7 +86,7 @@ export default function QuestionHeader(props: QuestionHeaderProps) {
           Risposta {props.currentAnswer?.letter ? '' : 'non '}data
         </p>
       </div>
-      <div style={styles.rightContainer}>
+      <div style={mobile ? mobileStyles.rightContainer : styles.rightContainer}>
         <Button
           label="precedente"
           onClick={() => props.shiftQuestionIndex(-1)}
