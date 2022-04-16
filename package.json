@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "build:db": "ts-node scripts/database.ts",
     "prebuild:db": "npx rimraf temp && npx mkdirp temp/img",
-    "deploy": "gh-pages -d build -r https://github.com/thetolproject/thetolproject.github.io.git",
+    "deploy": "gh-pages -d build",
     "predeploy": "npm run build",
     "depcheck": "depcheck",
     "eject": "react-scripts eject",

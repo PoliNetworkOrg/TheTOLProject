@@ -8,14 +8,14 @@ on:
       - package.json
     branches:
       - "main"
-  release:
-    types: [published]
+      - "stable"
   workflow_dispatch:
 
 jobs:
-  gh-pages:
-    name: Deploy to GitHub Pages
+  prod:
+    name: Production
     runs-on: ubuntu-20.04
+    if: github.ref == 'refs/heads/stable'
 
     steps:
       - uses: actions/checkout@v2
@@ -26,3 +26,19 @@ jobs:
       - run: npm run deploy -- -r https://${DEPLOYMENT_PAT}@github.com/thetolproject/thetolproject.github.io.git -u "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
         env:
           DEPLOYMENT_PAT: ${{ secrets.DEPLOYMENT_PAT }}
+
+  dev:
+    name: Development
+    runs-on: ubuntu-20.04
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm ci --ignore-scripts
+      - run: npm run deploy -- -r https://${DEPLOYMENT_PAT}@github.com/PoliNetworkOrg/TheTOLProject.github.io.git -u "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
+        env:
+          DEPLOYMENT_PAT: ${{ github.token }}
+          THETOLPROJECT_DEV: true
