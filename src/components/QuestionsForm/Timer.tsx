@@ -60,9 +60,8 @@ export default function Timer(props: TimerProps) {
       style={
         mobile
           ? StyleSheet.compose(styles.container, {
-              flexDirection: 'row-reverse',
-              justifyContent: 'space-between',
-              width: '100%'
+              alignSelf: 'flex-end',
+              marginBottom: '1em'
             })
           : styles.container
       }
@@ -87,14 +86,12 @@ export default function Timer(props: TimerProps) {
           {timer.seconds.toLocaleString(undefined, { minimumIntegerDigits: 2 })}
         </div>
       </div>
-      <p
-        style={StyleSheet.compose(styles.p, {
-          alignSelf: mobile ? 'flex-end' : undefined
-        })}
-      >
-        Tempo rimanente
-        <br /> per la sezione corrente
-      </p>
+      {mobile ? undefined : (
+        <p style={styles.p}>
+          Tempo rimanente
+          <br /> per la sezione corrente
+        </p>
+      )}
     </div>
   )
 }
