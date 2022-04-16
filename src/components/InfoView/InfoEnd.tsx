@@ -24,7 +24,9 @@ const styles = StyleSheet.create({
   tableDiv: {
     alignSelf: 'center',
     width: '100%',
-    overflow: 'auto'
+    overflow: 'auto',
+    display: 'flex',
+    justifyContent: 'center'
   },
   table: { borderSpacing: 0 },
   tableCell: {
