@@ -1,0 +1,2 @@
+@page{margin:20mm 20mm 20mm 20mm!important}@media all{.page-break,.print-only{display:none}}@media print{body,html{height:auto!important;overflow:visible!important;overflow:initial!important;-webkit-print-color-adjust:exact}}@media print{.page-break{margin-top:1rem;page-break-before:always}.page-break,.print-only{display:block}}@page{size:auto;margin:20mm}
+/*# sourceMappingURL=main.6a862ddc.chunk.css.map */
