@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/TheTOLProject/static/css/main.6a862ddc.chunk.css",
-    "main.js": "/TheTOLProject/static/js/main.1e4da03d.chunk.js",
-    "main.js.map": "/TheTOLProject/static/js/main.1e4da03d.chunk.js.map",
+    "main.js": "/TheTOLProject/static/js/main.4c4a18f7.chunk.js",
+    "main.js.map": "/TheTOLProject/static/js/main.4c4a18f7.chunk.js.map",
     "runtime-main.js": "/TheTOLProject/static/js/runtime-main.280c1cff.js",
     "runtime-main.js.map": "/TheTOLProject/static/js/runtime-main.280c1cff.js.map",
-    "static/js/2.53265b08.chunk.js": "/TheTOLProject/static/js/2.53265b08.chunk.js",
-    "static/js/2.53265b08.chunk.js.map": "/TheTOLProject/static/js/2.53265b08.chunk.js.map",
+    "static/js/2.4518cd97.chunk.js": "/TheTOLProject/static/js/2.4518cd97.chunk.js",
+    "static/js/2.4518cd97.chunk.js.map": "/TheTOLProject/static/js/2.4518cd97.chunk.js.map",
     "index.html": "/TheTOLProject/index.html",
     "static/css/main.6a862ddc.chunk.css.map": "/TheTOLProject/static/css/main.6a862ddc.chunk.css.map",
-    "static/js/2.53265b08.chunk.js.LICENSE.txt": "/TheTOLProject/static/js/2.53265b08.chunk.js.LICENSE.txt",
+    "static/js/2.4518cd97.chunk.js.LICENSE.txt": "/TheTOLProject/static/js/2.4518cd97.chunk.js.LICENSE.txt",
     "static/media/logo3000.34b8e2e9.webp": "/TheTOLProject/static/media/logo3000.34b8e2e9.webp",
     "static/media/telegram_logo.1ca7c840.svg": "/TheTOLProject/static/media/telegram_logo.1ca7c840.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.280c1cff.js",
-    "static/js/2.53265b08.chunk.js",
+    "static/js/2.4518cd97.chunk.js",
     "static/css/main.6a862ddc.chunk.css",
-    "static/js/main.1e4da03d.chunk.js"
+    "static/js/main.4c4a18f7.chunk.js"
   ]
 }
