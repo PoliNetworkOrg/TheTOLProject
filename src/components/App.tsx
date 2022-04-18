@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { RibbonContainer, RightCornerRibbon } from 'react-ribbons'
 import {
   answerLetter,
   section,
@@ -37,6 +38,7 @@ export type AnswersData = Record<section, Answer[]>
 export type TimeRecord = Partial<Record<section, number>>
 
 const styles = StyleSheet.create({
+  app: { paddingInline: '8px' },
   routeContainer: { paddingInline: '7.5px' }
 })
 
@@ -77,52 +79,61 @@ export default function App() {
 
   return (
     <MobileContext.Provider value={{ mobile }}>
-      <div>
-        <Header viewState={[view, setView]} />
-        <Separator />
-        <div style={styles.routeContainer}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                // Don't ever think about moving this to an external component.
-                <div>
-                  <ErrorView
-                    hidden={!loadingError[0]}
-                    display={loadingError[0] || ''}
-                    internal={loadingError[1]}
-                  />
-                  {view.startsWith('TOL') && questions ? (
-                    <QuestionsForm
-                      answersState={answersState}
-                      questions={questions as QuestionsData}
-                      sectionState={sectionState}
-                      timeRecordState={timeRecordState}
-                      viewState={[view, setView]}
+      <RibbonContainer>
+        {window &&
+          new URL(window.location.href).hostname ==
+            'polinetworkorg.github.io' && (
+            <RightCornerRibbon backgroundColor="#cc0000" color="white">
+              DEV
+            </RightCornerRibbon>
+          )}
+        <div style={styles.app}>
+          <Header viewState={[view, setView]} />
+          <Separator />
+          <div style={styles.routeContainer}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  // Don't ever think about moving this to an external component.
+                  <div>
+                    <ErrorView
+                      hidden={!loadingError[0]}
+                      display={loadingError[0] || ''}
+                      internal={loadingError[1]}
                     />
-                  ) : view.startsWith('INFO') && questions ? (
-                    <InfoView
-                      answers={answersState[0]}
-                      questions={questions}
-                      viewState={[view, setView]}
-                    />
-                  ) : undefined}
-                </div>
-              }
-            >
-              <Route path="/test" element={<div />} />
-              <Route path="/results" element={<div />} />
-            </Route>
-            <Route path="/about" element={<About />} />
-            <Route path="/license" element={<License />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/dbpreview" element={<DBPreview db={database} />} />
-            <Route path="/qpreview" element={<QPreview />} />
-          </Routes>
+                    {view.startsWith('TOL') && questions ? (
+                      <QuestionsForm
+                        answersState={answersState}
+                        questions={questions as QuestionsData}
+                        sectionState={sectionState}
+                        timeRecordState={timeRecordState}
+                        viewState={[view, setView]}
+                      />
+                    ) : view.startsWith('INFO') && questions ? (
+                      <InfoView
+                        answers={answersState[0]}
+                        questions={questions}
+                        viewState={[view, setView]}
+                      />
+                    ) : undefined}
+                  </div>
+                }
+              >
+                <Route path="/test" element={<div />} />
+                <Route path="/results" element={<div />} />
+              </Route>
+              <Route path="/about" element={<About />} />
+              <Route path="/license" element={<License />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/dbpreview" element={<DBPreview db={database} />} />
+              <Route path="/qpreview" element={<QPreview />} />
+            </Routes>
+          </div>
+          <Separator />
+          {!view.startsWith('TOL') && <Footer />}
         </div>
-        <Separator />
-        {!view.startsWith('TOL') && <Footer />}
-      </div>
+      </RibbonContainer>
     </MobileContext.Provider>
   )
 }
