@@ -126,8 +126,6 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
                                 : 'Senza risposta'
                             })()}
                           </u>{' '}
-                          [{question.id}
-                          {question.sub ? '-' + question.sub : ''}]
                         </li>
                       </div>
                     ))}
