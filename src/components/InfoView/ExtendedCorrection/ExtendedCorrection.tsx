@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from 'react'
+import React, { ReactNode, useRef } from 'react'
 import ReactToPrint from 'react-to-print'
 import { Question, QuestionsData, section } from '../../../utils/database'
 import { AnswersData } from '../../App'
@@ -8,7 +8,6 @@ import RenderedText from '../../Util/RenderedText'
 import Button from '../../Util/Button'
 import './ExtendedCorrection.css'
 import DocumentHeader from './DocumentHeader'
-import Checkbox from '../../Util/Checkbox'
 
 const styles = StyleSheet.create({
   collapsible: {
@@ -52,8 +51,6 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
   const ref = useRef<any>(),
     date = new Date()
 
-  const [showCorrect, setShowCorrect] = useState(false)
-
   return (
     <div style={styles.collapsible}>
       <div style={styles.printButton}>
@@ -65,7 +62,6 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           content={() => ref.current}
           trigger={() => <Button label="Salva risultati della simulazione" />}
         />
-        <Checkbox onChange={setShowCorrect} label="Visualizza soluzioni" />
       </div>
       <div
         {...(props.visible ? {} : { className: 'print-only' })}
@@ -131,26 +127,24 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
                             />
                             &emsp;
                             <u style={styles.nowrap}>{result}</u>{' '}
-                            {showCorrect && (
-                              <ul style={styles.ul}>
-                                {result == 'Errata' && letter && (
-                                  <li>
-                                    <RenderedText
-                                      text={`R. data: ${question.answers[letter]}`}
-                                    />
-                                  </li>
-                                )}
-                                {result != 'Esatta' && (
-                                  <li>
-                                    <RenderedText
-                                      text={`R. esatta: ${
-                                        question.answers[question.correct]
-                                      }`}
-                                    />
-                                  </li>
-                                )}
-                              </ul>
-                            )}
+                            <ul style={styles.ul}>
+                              {result == 'Errata' && letter && (
+                                <li>
+                                  <RenderedText
+                                    text={`R. data: ${question.answers[letter]}`}
+                                  />
+                                </li>
+                              )}
+                              {result != 'Esatta' && (
+                                <li>
+                                  <RenderedText
+                                    text={`R. esatta: ${
+                                      question.answers[question.correct]
+                                    }`}
+                                  />
+                                </li>
+                              )}
+                            </ul>
                           </li>
                         </div>
                       )
