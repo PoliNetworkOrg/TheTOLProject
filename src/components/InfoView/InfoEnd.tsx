@@ -55,6 +55,19 @@ const styles = StyleSheet.create({
   h3: {
     marginBottom: 0,
     paddingInline: '10px'
+  },
+  restartDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
+  restartTitle: {
+    textAlign: 'center',
+    maxWidth: 500
+  },
+  restartButton: {
+    margin: '12px'
   }
 })
 
@@ -219,6 +232,20 @@ export default function InfoEnd(props: InfoEndProps) {
         Il <b>punteggio</b> complessivo viene arrotondato all'intero più vicino
         (es: il punteggio 59,49 viene arrotondato a 59, il punteggio 59,50 a 60)
       </p>
+      <div style={styles.restartDiv}>
+        <h3 style={styles.restartTitle}>
+          Ricordati di salvare i tuoi risultati prima di iniziare un nuovo test,
+          o andranno persi!
+        </h3>
+        <button
+          style={styles.restartButton}
+          onClick={() => {
+            window.location.reload()
+          }}
+        >
+          Inizia un nuovo test
+        </button>
+      </div>
     </div>
   )
 }

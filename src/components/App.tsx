@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { RibbonContainer, RightCornerRibbon } from 'react-ribbons'
 import {
   answerLetter,
@@ -77,6 +77,22 @@ export default function App() {
     })
   }, [])
 
+  const location = useLocation()
+
+  useEffect(() => {
+    const testPaths = ['/', '/test', '/results']
+    const testingURL = testPaths.includes(location.pathname)
+    if (!testingURL || view === 'INFO-start') {
+      // in other pages or on the start of the test, the listener shouldn't be set
+      window.onbeforeunload = null
+    } else if (view.startsWith('TOL')) {
+      // set the listener only if view is during a test, at the recap it is set in ExtendedCorrection.tsx
+      window.onbeforeunload = () => {
+        return 'Sicuro di voler uscire? Il test è ancora in corso'
+      }
+    }
+  }, [view, location])
+
   return (
     <MobileContext.Provider value={{ mobile }}>
       <RibbonContainer>
@@ -131,7 +147,7 @@ export default function App() {
             </Routes>
           </div>
           <Separator />
-          {!view.startsWith('TOL') && <Footer />}
+          {!view.startsWith('TOL') && <Footer view={view} />}
         </div>
       </RibbonContainer>
     </MobileContext.Provider>
