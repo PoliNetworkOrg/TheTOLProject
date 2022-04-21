@@ -25,10 +25,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '100%',
     overflow: 'auto',
-    display: 'flex',
-    justifyContent: 'center'
+    display: 'flex'
   },
-  table: { borderSpacing: 0 },
+  table: { borderSpacing: 0, margin: 'auto' },
   tableCell: {
     padding: '5px',
     paddingInline: '10px',
