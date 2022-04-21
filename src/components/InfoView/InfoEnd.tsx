@@ -12,6 +12,7 @@ import {
 import { Question, QuestionsData, section } from '../../utils/database'
 import { formatNumber, StyleSheet, theme } from '../../utils/style'
 import { AnswersData } from '../App'
+import Button from '../Util/Button'
 import ExtendedCorrection from './ExtendedCorrection/ExtendedCorrection'
 
 const styles = StyleSheet.create({
@@ -67,7 +68,8 @@ const styles = StyleSheet.create({
     maxWidth: 500
   },
   restartButton: {
-    margin: '12px'
+    margin: '12px',
+    marginBottom: '20px'
   }
 })
 
@@ -237,14 +239,13 @@ export default function InfoEnd(props: InfoEndProps) {
           Ricordati di salvare i tuoi risultati prima di iniziare un nuovo test,
           o andranno persi!
         </h3>
-        <button
+        <Button
+          label="Inizia un nuovo test"
           style={styles.restartButton}
           onClick={() => {
             window.location.reload()
           }}
-        >
-          Inizia un nuovo test
-        </button>
+        />
       </div>
     </div>
   )
