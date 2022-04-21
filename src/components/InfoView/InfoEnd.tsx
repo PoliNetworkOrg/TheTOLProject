@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   restartButton: {
     margin: '12px',
-    marginBottom: '20px'
+    marginBottom: '32px'
   }
 })
 
