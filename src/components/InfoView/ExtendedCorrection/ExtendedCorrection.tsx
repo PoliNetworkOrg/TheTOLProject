@@ -61,6 +61,10 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
             .replace(/,/g, '')}`}
           content={() => ref.current}
           trigger={() => <Button label="Salva risultati della simulazione" />}
+          onAfterPrint={() => {
+            // remove the onbeforeunload listener since results are saved
+            window.onbeforeunload = null
+          }}
         />
       </div>
       <div

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { links } from '../utils/constants'
 import { MobileContext } from '../utils/contexts'
 import { StyleSheet, theme } from '../utils/style'
+import { view } from './App'
 
 const styles = StyleSheet.create({
   container: {
@@ -36,7 +37,7 @@ const mobileStyles = StyleSheet.create({
   })
 })
 
-export default function Footer() {
+export default function Footer(props: { view: view }) {
   const { mobile } = useContext(MobileContext)
   const linkStyle = mobile ? mobileStyles.link : styles.link
   return (
@@ -52,7 +53,17 @@ export default function Footer() {
       <Link to="about" style={linkStyle}>
         About
       </Link>
-      <Link to="/" style={linkStyle}>
+      <Link
+        to="/"
+        style={linkStyle}
+        onClick={(e) => {
+          if (props.view === 'INFO-end') {
+            // reload the page if we are in the recap, easier then resetting the state
+            e.preventDefault()
+            location.href = '/'
+          }
+        }}
+      >
         Home
       </Link>
       <Link to="license" style={linkStyle}>

@@ -12,6 +12,7 @@ import {
 import { Question, QuestionsData, section } from '../../utils/database'
 import { formatNumber, StyleSheet, theme } from '../../utils/style'
 import { AnswersData } from '../App'
+import Button from '../Util/Button'
 import ExtendedCorrection from './ExtendedCorrection/ExtendedCorrection'
 
 const styles = StyleSheet.create({
@@ -54,6 +55,20 @@ const styles = StyleSheet.create({
   h3: {
     marginBottom: 0,
     paddingInline: '10px'
+  },
+  restartDiv: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
+  restartTitle: {
+    textAlign: 'center',
+    maxWidth: 500
+  },
+  restartButton: {
+    margin: '12px',
+    marginBottom: '32px'
   }
 })
 
@@ -218,6 +233,19 @@ export default function InfoEnd(props: InfoEndProps) {
         Il <b>punteggio</b> complessivo viene arrotondato all'intero più vicino
         (es: il punteggio 59,49 viene arrotondato a 59, il punteggio 59,50 a 60)
       </p>
+      <div style={styles.restartDiv}>
+        <h3 style={styles.restartTitle}>
+          Ricordati di salvare i tuoi risultati prima di iniziare un nuovo test,
+          o andranno persi!
+        </h3>
+        <Button
+          label="Inizia un nuovo test"
+          style={styles.restartButton}
+          onClick={() => {
+            window.location.reload()
+          }}
+        />
+      </div>
     </div>
   )
 }
