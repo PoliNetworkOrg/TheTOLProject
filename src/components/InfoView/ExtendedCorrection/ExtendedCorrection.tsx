@@ -88,9 +88,6 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           </a>{' '}
           di PoliNetwork!
           <br />
-          Per fare riferimento alla domanda scrivi, assieme al testo, anche l'ID
-          (il numero che trovi fra [] dopo il testo).
-          <br />
           <br />
           <br />
           <span className="print-only">
