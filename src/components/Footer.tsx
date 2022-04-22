@@ -60,7 +60,7 @@ export default function Footer(props: { view: view }) {
           if (props.view === 'INFO-end') {
             // reload the page if we are in the recap, easier then resetting the state
             e.preventDefault()
-            location.href = '/'
+            window.location.reload()
           }
         }}
       >
