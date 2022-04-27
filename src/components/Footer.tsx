@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { links } from '../utils/constants'
 import { MobileContext } from '../utils/contexts'
 import { StyleSheet, theme } from '../utils/style'
