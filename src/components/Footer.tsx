@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { links } from '../utils/constants'
 import { MobileContext } from '../utils/contexts'
 import { StyleSheet, theme } from '../utils/style'
@@ -50,7 +50,7 @@ export default function Footer(props: { view: view }) {
       >
         Source
       </a>
-      <Link to="about" style={linkStyle}>
+      <Link to="about" style={linkStyle} replace>
         About
       </Link>
       <Link
@@ -63,13 +63,14 @@ export default function Footer(props: { view: view }) {
             window.location.reload()
           }
         }}
+        replace
       >
         Home
       </Link>
-      <Link to="license" style={linkStyle}>
+      <Link to="license" style={linkStyle} replace>
         License
       </Link>
-      <Link to="privacy" style={linkStyle}>
+      <Link to="privacy" style={linkStyle} replace>
         Privacy & cookies
       </Link>
     </div>

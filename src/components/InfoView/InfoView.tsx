@@ -29,7 +29,7 @@ export default function InfoView(props: InfoViewProps) {
     <InfoStart
       startTest={() => {
         setView('TOL-testing')
-        navigate('/test')
+        navigate('/test', { replace: true })
         PanelBear.track('TestStart')
       }}
     />
