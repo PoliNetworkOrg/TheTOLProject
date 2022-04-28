@@ -118,5 +118,22 @@ export const members: Member[] = [
     name: 'Diego Aldarese',
     tg: 'diegoaldarese',
     ah: true
+  },
+  {
+    name: 'Tommaso Morganti',
+    tg: 'toto04_1'
+  },
+  {
+    name: 'Giovanni Menicucci',
+    tg: 'giova1211'
+  },
+  {
+    name: 'Prof.ssa Nadia Scappini',
+    tg: 'nscapp'
+  },
+  {
+    name: '@spyarect',
+    tg: 'spyarect',
+    ah: true
   }
 ]
