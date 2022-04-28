@@ -172,7 +172,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
               setView('TOL-testing')
             } else {
               setView('INFO-end')
-              navigate('/results')
+              navigate('/results', { replace: true })
               PanelBear.track('ViewResults')
             }
           }}
