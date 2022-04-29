@@ -147,7 +147,9 @@ export default function App() {
             </Routes>
           </div>
           <Separator />
-          {!view.startsWith('TOL') && <Footer view={view} />}
+          {!view.startsWith('TOL') && view != 'INFO-end' && (
+            <Footer view={view} />
+          )}
         </div>
       </RibbonContainer>
     </MobileContext.Provider>
