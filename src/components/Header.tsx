@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { StyleSheet } from '../utils/style'
 import { statePair } from '../utils/types'
 import { view } from './App'
 import logo from '../static/logo3000.webp'
 import { links } from '../utils/constants'
+import { MobileContext } from '../utils/contexts'
 
 const styles = StyleSheet.create({
   div: {
@@ -20,6 +21,12 @@ const styles = StyleSheet.create({
   get centeredText() {
     return StyleSheet.compose(this.text, this.spacer, {
       justifyContent: 'center'
+    })
+  },
+  get rightText() {
+    return StyleSheet.compose(this.text, this.spacer, {
+      justifyContent: 'flex-end',
+      marginRight: 8
     })
   },
   get logoDiv() {
@@ -49,10 +56,12 @@ interface HeaderProps {
 }
 
 export default function Header({ viewState }: HeaderProps) {
+  const { mobile } = useContext(MobileContext)
+
   return (
     <div style={styles.div}>
       <a
-        style={styles.logoDiv}
+        style={StyleSheet.compose(styles.logoDiv, { flex: mobile ? 0 : 1 })}
         {...(!viewState[0].startsWith('TOL')
           ? {
               rel: 'noreferrer noopener',
@@ -62,10 +71,12 @@ export default function Header({ viewState }: HeaderProps) {
           : {})}
       >
         <img src={logo} alt="logo" style={styles.logo} />
-        <h1 style={styles.text}>PoliNetwork</h1>
+        {mobile ? undefined : <h1 style={styles.text}>PoliNetwork</h1>}
       </a>
-      <h1 style={styles.centeredText}>The TOL Project</h1>
-      <div style={styles.spacer} />
+      <h1 style={mobile ? styles.rightText : styles.centeredText}>
+        The TOL Project
+      </h1>
+      {mobile ? undefined : <div style={styles.spacer} />}
     </div>
   )
 }

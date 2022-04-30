@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { TimerResult } from 'react-timer-hook'
 import { getSectionName } from '../../utils/constants'
+import { MobileContext } from '../../utils/contexts'
 import { section, QuestionsData } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import { AnswersData } from '../App'
@@ -15,11 +16,21 @@ const styles = StyleSheet.create({
   },
   innerDiv: {
     display: 'flex',
-    alignItems: 'baseline',
+    alignItems: 'center',
     flexDirection: 'row',
     gap: '15px',
     fontSize: '11pt'
   }
+})
+
+const mobileStyles = StyleSheet.create({
+  outerDiv: StyleSheet.compose(styles.outerDiv, {
+    flexDirection: 'column'
+  }),
+  innerDiv: StyleSheet.compose(styles.innerDiv, {
+    width: '100%',
+    justifyContent: 'space-between'
+  })
 })
 
 interface TopControlsProps {
@@ -32,11 +43,12 @@ interface TopControlsProps {
 }
 
 export default function TopControls(props: TopControlsProps) {
+  const { mobile } = useContext(MobileContext)
   const { currentSection } = props
 
   return (
-    <div style={styles.outerDiv}>
-      <div style={styles.innerDiv}>
+    <div style={mobile ? mobileStyles.outerDiv : styles.outerDiv}>
+      <div style={mobile ? mobileStyles.innerDiv : styles.innerDiv}>
         <div>
           <p>
             Sezione: <b>{getSectionName(currentSection)}</b> <br />
@@ -44,6 +56,7 @@ export default function TopControls(props: TopControlsProps) {
             {
               props.answers[currentSection].filter((a) => !!a.letter).length
             } / {props.questions[currentSection].length}
+            {mobile && <br />}
             {props.active &&
               ` (${props.answers[currentSection].reduce(
                 (acc, curr) => acc + (curr.flagged ? 1 : 0),

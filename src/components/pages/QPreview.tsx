@@ -1,14 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import {
   Database,
+  getImageURL,
   Question,
   readDatabase,
   section,
   sheetDict
 } from '../../utils/database'
-import { baseStyle } from '../../utils/style'
+import { baseStyle, StyleSheet } from '../../utils/style'
+import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
 import RenderedText from '../Util/RenderedText'
 import Select from '../Util/Select'
+
+const styles = StyleSheet.create({
+  container: {
+    marginBlock: 0,
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  collapsible: {
+    padding: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '15px'
+  },
+  attachment: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '5px'
+  },
+  image: {
+    maxHeight: '500px',
+    width: 'fit-content'
+  }
+})
 
 export default function QPreview() {
   const [questionType, setQuestionType] = useState('custom')
@@ -101,7 +126,8 @@ function DatabaseQ() {
           q: (dbs[dbRef] as Database)[section as section].find((q) => {
             const [i, s] = id.split(' - ')
             return q.id == i && (s ? q.sub == s : true)
-          })
+          }),
+          ref: dbRef
         })
       ) : (
         <div />
@@ -172,13 +198,31 @@ function CustomQ() {
 
 interface QuestionRenderProps {
   q?: Question
+  ref?: string
 }
 function QuestionRender(props: QuestionRenderProps) {
-  const { q } = props
+  const { q, ref } = props
 
   return q ? (
     <div>
       <RenderedText text={q.text || q.sub || ''} />
+      <br />
+      {q.attachments?.length && (
+        <GeneralPurposeCollapsible
+          label="mostra/nascondi immagini"
+          contentStyle={styles.collapsible}
+        >
+          {q.attachments.map((fileName, index) => (
+            <span key={index + 1} style={styles.attachment}>
+              <p style={styles.container}>Immagine {index + 1}:</p>
+              <img
+                src={getImageURL(fileName, ref || 'stable')}
+                style={styles.image}
+              />
+            </span>
+          ))}
+        </GeneralPurposeCollapsible>
+      )}
       <br />
       <p>Valid: {q.validated + ''}</p>
       {Object.entries(q.answers).map(([letter, text]) => (

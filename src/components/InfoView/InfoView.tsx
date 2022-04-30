@@ -22,14 +22,14 @@ export default function InfoView(props: InfoViewProps) {
     (location.pathname == '/results' && view != 'INFO-end')
   ) {
     setView('INFO-start')
-    return <Navigate to="/" />
+    return <Navigate to="/" replace />
   }
 
   return view == 'INFO-start' ? (
     <InfoStart
       startTest={() => {
         setView('TOL-testing')
-        navigate('/test')
+        navigate('/test', { replace: true })
         PanelBear.track('TestStart')
       }}
     />

@@ -18,8 +18,11 @@ const styles = StyleSheet.create({
   },
   doc: {},
   printButton: {
-    display: 'flex',
-    justifyContent: 'center'
+    display: 'inline-flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    alignSelf: 'center',
+    gap: '5px'
   },
   link: {
     color: theme.primary
@@ -29,6 +32,9 @@ const styles = StyleSheet.create({
   },
   li: {
     margin: '10px'
+  },
+  ul: {
+    listStyleType: 'none'
   },
   nowrap: { whiteSpace: 'nowrap' }
 })
@@ -47,18 +53,20 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
 
   return (
     <div style={styles.collapsible}>
-      <ReactToPrint
-        documentTitle={`The TOL Project ${date
-          .toLocaleString()
-          .replace(/\/|:/g, '-')
-          .replace(/,/g, '')}`}
-        content={() => ref.current}
-        trigger={() => (
-          <div style={styles.printButton}>
-            <Button label="Salva risultati della simulazione" />
-          </div>
-        )}
-      />
+      <div style={styles.printButton}>
+        <ReactToPrint
+          documentTitle={`The TOL Project ${date
+            .toLocaleString()
+            .replace(/\/|:/g, '-')
+            .replace(/,/g, '')}`}
+          content={() => ref.current}
+          trigger={() => <Button label="Salva risultati della simulazione" />}
+          onAfterPrint={() => {
+            // remove the onbeforeunload listener since results are saved
+            window.onbeforeunload = null
+          }}
+        />
+      </div>
       <div
         {...(props.visible ? {} : { className: 'print-only' })}
         ref={ref}
@@ -84,9 +92,6 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           </a>{' '}
           di PoliNetwork!
           <br />
-          Per fare riferimento alla domanda scrivi, assieme al testo, anche l'ID
-          (il numero che trovi fra [] dopo il testo).
-          <br />
           <br />
           <br />
           <span className="print-only">
@@ -103,34 +108,48 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
                 <div>
                   <b>{sectionInfo[section].name}</b>
                   <ol>
-                    {values.map((question) => (
-                      <div key={question.id + (question.sub || 0)}>
-                        <li style={styles.li}>
-                          <RenderedText
-                            text={`
+                    {values.map((question) => {
+                      const letter = props.answers[section].find(
+                          (a) => a?.id == question.id && a?.sub == question.sub
+                        )?.letter,
+                        result = letter
+                          ? letter == question.correct
+                            ? 'Esatta'
+                            : 'Errata'
+                          : 'Senza risposta'
+
+                      return (
+                        <div key={question.id + (question.sub || 0)}>
+                          <li style={styles.li}>
+                            <RenderedText
+                              text={`
                             ${question.text} 
                             `.trim()}
-                          />
-                          &emsp;
-                          <u style={styles.nowrap}>
-                            {(() => {
-                              const letter = props.answers[section].find(
-                                (a) =>
-                                  a?.id == question.id && a?.sub == question.sub
-                              )?.letter
-
-                              return letter
-                                ? letter == question.correct
-                                  ? 'Esatta'
-                                  : 'Errata'
-                                : 'Senza risposta'
-                            })()}
-                          </u>{' '}
-                          [{question.id}
-                          {question.sub ? '-' + question.sub : ''}]
-                        </li>
-                      </div>
-                    ))}
+                            />
+                            &emsp;
+                            <u style={styles.nowrap}>{result}</u>{' '}
+                            <ul style={styles.ul}>
+                              {result == 'Errata' && letter && (
+                                <li>
+                                  <RenderedText
+                                    text={`R. data: ${question.answers[letter]}`}
+                                  />
+                                </li>
+                              )}
+                              {result != 'Esatta' && (
+                                <li>
+                                  <RenderedText
+                                    text={`R. esatta: ${
+                                      question.answers[question.correct]
+                                    }`}
+                                  />
+                                </li>
+                              )}
+                            </ul>
+                          </li>
+                        </div>
+                      )
+                    })}
                   </ol>
                 </div>
               </div>
