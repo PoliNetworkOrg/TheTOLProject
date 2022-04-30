@@ -86,6 +86,7 @@ interface Member {
   name: string
   tg: string
   ah?: boolean
+  prefix?: string
 }
 
 export const members: Member[] = [
@@ -128,8 +129,9 @@ export const members: Member[] = [
     tg: 'giova1211'
   },
   {
-    name: 'Prof.ssa Nadia Scappini',
-    tg: 'nscapp'
+    name: 'Nadia Scappini',
+    tg: 'nscapp',
+    prefix: 'Prof.ssa'
   },
   {
     name: '@spyarect',

@@ -94,7 +94,7 @@ export default function About() {
             .map((m, i) => (
               <li key={i}>
                 <div style={styles.liDiv}>
-                  {m.name}{' '}
+                  {(m.prefix || '') + ' ' + m.name}{' '}
                   <a
                     href={`https://t.me/${m.tg}`}
                     target="_blank"
