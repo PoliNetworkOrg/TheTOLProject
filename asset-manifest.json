@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/TheTOLProject/static/css/main.6a862ddc.chunk.css",
-    "main.js": "/TheTOLProject/static/js/main.1e345e9c.chunk.js",
-    "main.js.map": "/TheTOLProject/static/js/main.1e345e9c.chunk.js.map",
+    "main.js": "/TheTOLProject/static/js/main.a06c9061.chunk.js",
+    "main.js.map": "/TheTOLProject/static/js/main.a06c9061.chunk.js.map",
     "runtime-main.js": "/TheTOLProject/static/js/runtime-main.41fbe2d7.js",
     "runtime-main.js.map": "/TheTOLProject/static/js/runtime-main.41fbe2d7.js.map",
     "static/js/2.72a39ad2.chunk.js": "/TheTOLProject/static/js/2.72a39ad2.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.41fbe2d7.js",
     "static/js/2.72a39ad2.chunk.js",
     "static/css/main.6a862ddc.chunk.css",
-    "static/js/main.1e345e9c.chunk.js"
+    "static/js/main.a06c9061.chunk.js"
   ]
 }
