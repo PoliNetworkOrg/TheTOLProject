@@ -137,5 +137,10 @@ export const members: Member[] = [
     name: '@spyarect',
     tg: 'spyarect',
     ah: true
+  },
+  {
+    name: 'Clelia Di Leo',
+    tg: 'cloelia',
+    prefix: 'Prof.ssa'
   }
 ]
