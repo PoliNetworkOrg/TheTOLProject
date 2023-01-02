@@ -48,7 +48,7 @@
     "react-latex": "^2.0.0",
     "react-ribbons": "github:EndBug/react-ribbons#custom",
     "react-router-dom": "^6.0.2",
-    "react-scripts": "4.0.3",
+    "react-scripts": "5.0.1",
     "react-timer-hook": "^3.0.5",
     "react-to-print": "^2.14.0",
     "rimraf": "^3.0.2",
