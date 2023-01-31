@@ -1,14 +1,8 @@
 name: Deploy
 on:
   push:
-    paths:
-      - .github/workflows/deploy.yml
-      - src/**
-      - public/**
-      - package.json
     branches:
-      - "main"
-      - "stable"
+      - 'stable'
   workflow_dispatch:
 
 jobs:
@@ -18,26 +12,12 @@ jobs:
     if: github.ref == 'refs/heads/stable'
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: npm
       - run: npm ci --ignore-scripts
       - run: npm run deploy:prod -- -r https://git:${DEPLOYMENT_PAT}@github.com/thetolproject/thetolproject.github.io.git -u "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
         env:
           DEPLOYMENT_PAT: ${{ secrets.DEPLOYMENT_PAT }}
-
-  dev:
-    name: Development
-    runs-on: ubuntu-20.04
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16
-      - run: npm ci --ignore-scripts
-      - run: npm run deploy:dev -- -r https://git:${DEPLOYMENT_PAT}@github.com/PoliNetworkOrg/TheTOLProject.git -u "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
-        env:
-          DEPLOYMENT_PAT: ${{ github.token }}
