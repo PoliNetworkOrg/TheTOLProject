@@ -10,14 +10,16 @@ const styles = StyleSheet.create({
     fontSize: '11pt'
   },
   label: {
-    display: 'flex'
+    display: 'flex',
+    marginBottom: '2px'
   },
   radioText: {
     display: 'flex',
     fontWeight: 'bold',
     textAlign: 'center',
     verticalAlign: 'middle',
-    paddingInline: '10px'
+    paddingInline: '10px',
+    alignItems: 'flex-start'
   },
   radioSpan: {
     width: '2em',
