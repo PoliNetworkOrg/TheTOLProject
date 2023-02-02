@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import Collapsible from 'react-collapsible'
 import { StyleSheet, theme } from '../../utils/style'
 import Button from './Button'

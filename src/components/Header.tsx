@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { StyleSheet } from '../utils/style'
 import { statePair } from '../utils/types'
 import { view } from './App'
@@ -59,7 +59,7 @@ export default function Header({ viewState }: HeaderProps) {
   const { mobile } = useContext(MobileContext)
 
   return (
-    <div style={styles.div}>
+    <div className="do-not-print" style={styles.div}>
       <a
         style={StyleSheet.compose(styles.logoDiv, { flex: mobile ? 0 : 1 })}
         {...(!viewState[0].startsWith('TOL')

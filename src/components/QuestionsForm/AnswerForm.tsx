@@ -1,4 +1,3 @@
-import React from 'react'
 import { Question } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import { statePair } from '../../utils/types'

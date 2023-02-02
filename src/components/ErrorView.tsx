@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface ErrorViewProps {
   hidden: boolean
   display: string

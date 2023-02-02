@@ -1,4 +1,3 @@
-import React from 'react'
 import { sectionInfo } from '../../utils/constants'
 import { section, Database, Question } from '../../utils/database'
 import { baseStyle } from '../../utils/style'

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Question } from '../../utils/database'
 import { StyleSheet, theme } from '../../utils/style'
 import { Answer } from '../App'

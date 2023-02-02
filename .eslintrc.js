@@ -21,6 +21,7 @@ module.exports = {
     'prettier/prettier': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/no-unescaped-entities': 'off',
-    'spaced-comment': 'warn'
+    'spaced-comment': 'warn',
+    'react/react-in-jsx-scope': 'off'
   }
 }

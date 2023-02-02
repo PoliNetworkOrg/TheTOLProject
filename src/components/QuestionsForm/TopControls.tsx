@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { TimerResult } from 'react-timer-hook'
 import { getSectionName } from '../../utils/constants'
 import { MobileContext } from '../../utils/contexts'

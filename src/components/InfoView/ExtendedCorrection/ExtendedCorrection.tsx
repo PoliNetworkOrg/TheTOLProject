@@ -1,4 +1,5 @@
-import React, { ReactNode, useRef } from 'react'
+/* eslint-disable react/prop-types */
+import { createRef, forwardRef, ReactNode, useEffect } from 'react'
 import ReactToPrint from 'react-to-print'
 import { Question, QuestionsData, section } from '../../../utils/database'
 import { AnswersData } from '../../App'
@@ -8,6 +9,9 @@ import RenderedText from '../../Util/RenderedText'
 import Button from '../../Util/Button'
 import './ExtendedCorrection.css'
 import DocumentHeader from './DocumentHeader'
+import firefoxImg1 from '../../../static/firefox_1.png'
+import firefoxImg2 from '../../../static/firefox_2.png'
+import firefoxImg3 from '../../../static/firefox_3.png'
 
 const styles = StyleSheet.create({
   collapsible: {
@@ -36,6 +40,17 @@ const styles = StyleSheet.create({
   ul: {
     listStyleType: 'none'
   },
+  ol: {
+    paddingLeft: 20
+  },
+  img: {
+    marginTop: 5,
+    marginBottom: 10,
+    maxWidth: 320,
+    width: '100%',
+    height: 'auto',
+    objectFit: 'cover'
+  },
   nowrap: { whiteSpace: 'nowrap' }
 })
 
@@ -43,42 +58,64 @@ interface ExtendedCorrectionProps {
   answers: AnswersData
   questions: QuestionsData
   resultTable: ReactNode
-  visible?: boolean
 }
 
 export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const ref = useRef<any>(),
-    date = new Date()
+  const ref = createRef<HTMLDivElement>()
+  const printSupported = 'print' in window
+
+  const getTitle = () =>
+    `The TOL Project ${new Date()
+      .toLocaleString()
+      .replace(/\/|:/g, '-')
+      .replace(/,/g, '')}`
+
+  useEffect(() => {
+    if (!printSupported) {
+      document.title = getTitle()
+    }
+  }, [])
 
   return (
     <div style={styles.collapsible}>
-      <div style={styles.printButton}>
-        <ReactToPrint
-          documentTitle={`The TOL Project ${date
-            .toLocaleString()
-            .replace(/\/|:/g, '-')
-            .replace(/,/g, '')}`}
-          content={() => ref.current}
-          trigger={() => <Button label="Salva risultati della simulazione" />}
-          onAfterPrint={() => {
-            // remove the onbeforeunload listener since results are saved
-            window.onbeforeunload = null
-          }}
-        />
-      </div>
-      <div
-        {...(props.visible ? {} : { className: 'print-only' })}
+      {printSupported ? (
+        <div style={styles.printButton} className="do-not-print">
+          <ReactToPrint
+            documentTitle={getTitle()}
+            content={() => ref.current}
+            trigger={() => <Button label="Salva risultati della simulazione" />}
+            onAfterPrint={() => {
+              // remove the onbeforeunload listener since results are saved
+              window.onbeforeunload = null
+            }}
+          />
+        </div>
+      ) : (
+        <FirefoxInstructions />
+      )}
+      <PrintDocument
         ref={ref}
-        style={styles.doc}
-      >
+        resultTable={props.resultTable}
+        questions={props.questions}
+        answers={props.answers}
+      />
+    </div>
+  )
+}
+
+const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
+  (props, ref) => {
+    const { resultTable, questions, answers } = props
+    return (
+      <div className="print-only" ref={ref} style={styles.doc}>
         <div>
-          <div className="print-only">
+          <div>
             <DocumentHeader />
             <p style={styles.centered}>
-              Simulazione del {date.toLocaleString()}
+              Simulazione del {new Date().toLocaleString()}
             </p>
-            {props.resultTable}
+            {resultTable}
           </div>
           <br />
           Hai delle domande sui quesiti e la loro risoluzione? Falle sul{' '}
@@ -94,12 +131,12 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           <br />
           <br />
           <br />
-          <span className="print-only">
+          <span>
             Nelle pagine successive troverai, suddivisi per sezione, i quesiti
             che ti sono stati proposti con il relativo esito.
           </span>
         </div>
-        {(Object.entries(props.questions) as [section, Question[]][])
+        {(Object.entries(questions) as [section, Question[]][])
           .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)
           .map(([section, values]) => (
             <>
@@ -109,7 +146,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
                   <b>{sectionInfo[section].name}</b>
                   <ol>
                     {values.map((question) => {
-                      const letter = props.answers[section].find(
+                      const letter = answers[section].find(
                           (a) => a?.id == question.id && a?.sub == question.sub
                         )?.letter,
                         result = letter
@@ -156,6 +193,27 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
             </>
           ))}
       </div>
+    )
+  }
+)
+PrintDocument.displayName = 'Document'
+
+function FirefoxInstructions() {
+  return (
+    <div className="do-not-print">
+      <h3>Salva i tuoi risultati</h3>
+      <p>Il tuo browser (Firefox Android) non supporta la stampa automatica.</p>
+      <p>Per salvare i risultati segui questi passaggi: </p>
+      <ol style={styles.ol}>
+        <li>Apri il menu di Firefox</li>
+        <img src={firefoxImg1} style={styles.img} />
+
+        <li>Premi il tasto per condividere</li>
+        <img src={firefoxImg2} style={styles.img} />
+
+        <li>Nel menu che si apre, premi su "Salva come PDF"</li>
+        <img src={firefoxImg3} style={styles.img} />
+      </ol>
     </div>
   )
 }

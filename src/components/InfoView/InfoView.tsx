@@ -1,4 +1,3 @@
-import React from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router'
 import { PanelBear } from '../..'
 import { QuestionsData } from '../../utils/database'
