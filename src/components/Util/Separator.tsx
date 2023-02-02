@@ -1,4 +1,3 @@
-import React from 'react'
 import { StyleSheet, theme } from '../../utils/style'
 
 const styles = StyleSheet.create({
@@ -18,7 +17,7 @@ interface SeparatorProps {
 }
 export default function Separator(props: SeparatorProps) {
   return (
-    <div style={styles.div}>
+    <div style={styles.div} className="do-not-print">
       <p style={styles.text}>{props.text || ''}</p>
     </div>
   )

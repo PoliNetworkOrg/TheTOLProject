@@ -1,4 +1,3 @@
-import React from 'react'
 import { links, members } from '../../utils/constants'
 import { StyleSheet, theme } from '../../utils/style'
 import telegramLogo from '../../static/telegram_logo.svg'
