@@ -1,4 +1,4 @@
-import { createRef, forwardRef, ReactNode, useEffect, useState } from 'react'
+import { createRef, forwardRef, ReactNode } from 'react'
 import ReactToPrint from 'react-to-print'
 import { Question, QuestionsData, section } from '../../../utils/database'
 import { AnswersData } from '../../App'
@@ -64,69 +64,56 @@ interface ExtendedCorrectionProps {
 }
 
 export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = createRef<HTMLDivElement>()
   // save date to variable to keep the date
   // when the test was taken
   const resultsDate = new Date()
-  const [printSupported, setPrintSupported] = useState<boolean | undefined>()
-  const [browser, setBrowser] = useState<Browser | undefined>()
+  const printSupported: boolean = 'print' in window
 
-  const getTitle = () =>
+  let browser: Browser = 'other'
+  const userAgent = navigator.userAgent
+  if (userAgent.includes('Firefox') && userAgent.includes('Android')) {
+    browser = 'FirefoxAndroid'
+  }
+
+  const getTitle = (): string =>
     `The TOL Project ${resultsDate
       .toLocaleString()
       .replace(/\/|:/g, '-')
       .replace(/,/g, '')}`
 
-  useEffect(() => {
-    if (!window) return
-    const userAgent = navigator.userAgent
-    if (userAgent.includes('Firefox') && userAgent.includes('Android')) {
-      setBrowser('FirefoxAndroid')
-    } else {
-      // fallback
-      setBrowser('other')
-    }
+  if (!printSupported) {
+    document.title = getTitle()
+  }
 
-    const exists = 'print' in window
-    setPrintSupported(exists)
-    if (!exists) {
-      document.title = getTitle()
-    }
-  }, [window])
-
-  if (printSupported === undefined || browser === undefined) return <></>
-  else
-    return (
-      <div style={styles.collapsible}>
-        {printSupported ? (
-          <div style={styles.printButton} className="do-not-print">
-            <ReactToPrint
-              documentTitle={getTitle()}
-              content={() => ref.current}
-              trigger={() => (
-                <Button label="Salva risultati della simulazione" />
-              )}
-              onAfterPrint={() => {
-                // remove the onbeforeunload listener since results are saved
-                window.onbeforeunload = null
-              }}
-            />
-          </div>
-        ) : (
-          <>
-            {browser === 'FirefoxAndroid' && <FirefoxInstructions />}
-            {browser === 'other' && <FallbackInstructions />}
-          </>
-        )}
-        <PrintDocument
-          ref={ref}
-          resultTable={props.resultTable}
-          questions={props.questions}
-          answers={props.answers}
-        />
-      </div>
-    )
+  return (
+    <div style={styles.collapsible}>
+      {printSupported ? (
+        <div style={styles.printButton} className="do-not-print">
+          <ReactToPrint
+            documentTitle={getTitle()}
+            content={() => ref.current}
+            trigger={() => <Button label="Salva risultati della simulazione" />}
+            onAfterPrint={() => {
+              // remove the onbeforeunload listener since results are saved
+              window.onbeforeunload = null
+            }}
+          />
+        </div>
+      ) : (
+        <>
+          {browser === 'FirefoxAndroid' && <FirefoxInstructions />}
+          {browser === 'other' && <FallbackInstructions />}
+        </>
+      )}
+      <PrintDocument
+        ref={ref}
+        resultTable={props.resultTable}
+        questions={props.questions}
+        answers={props.answers}
+      />
+    </div>
+  )
 }
 
 const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
