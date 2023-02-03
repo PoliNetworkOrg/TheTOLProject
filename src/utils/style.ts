@@ -1,6 +1,5 @@
 import Fraction from 'fraction.js'
 import fromEntries from 'fromentries'
-import React from 'react'
 
 export const theme = {
   boxShadow:

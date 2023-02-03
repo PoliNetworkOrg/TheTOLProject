@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { RibbonContainer, RightCornerRibbon } from 'react-ribbons'
 import {
@@ -90,6 +90,13 @@ export default function App() {
       window.onbeforeunload = () => {
         return 'Sicuro di voler uscire? Il test è ancora in corso'
       }
+    }
+
+    if (location.pathname !== '/results') {
+      // restore default title
+      // title was changed in '/results' to save pdf
+      // on firefox android with date in filename
+      document.title = 'The TOL Project'
     }
   }, [view, location])
 

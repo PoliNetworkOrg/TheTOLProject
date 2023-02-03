@@ -1,4 +1,3 @@
-import React from 'react'
 import { links } from '../../utils/constants'
 import { StyleSheet } from '../../utils/style'
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { answerLetter, section, QuestionsData } from '../../utils/database'
 import { StyleSheet, theme } from '../../utils/style'
 import { statePair } from '../../utils/types'

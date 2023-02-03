@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { TimerResult } from 'react-timer-hook'
 import { StyleSheet, theme } from '../../utils/style'
 import { FiClock } from 'react-icons/fi'

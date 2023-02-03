@@ -1,4 +1,3 @@
-import React from 'react'
 import { getImageURL, Question } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import CollapsibleText from '../Util/CollapsibleText'

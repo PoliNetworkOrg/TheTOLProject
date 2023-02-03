@@ -1,4 +1,3 @@
-import React from 'react'
 import { StyleSheet, theme } from '../../utils/style'
 import { FaCheck } from 'react-icons/fa'
 import Button from '../Util/Button'

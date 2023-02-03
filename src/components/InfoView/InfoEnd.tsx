@@ -1,6 +1,5 @@
 import Fraction from 'fraction.js'
 import fromEntries from 'fromentries'
-import React from 'react'
 import {
   correctionWeight,
   getSectionName,
@@ -182,7 +181,7 @@ export default function InfoEnd(props: InfoEndProps) {
 
   return (
     <div style={styles.div}>
-      {resultTable()}
+      <div className="do-not-print">{resultTable()}</div>
 
       <ExtendedCorrection
         answers={props.answers}
@@ -190,61 +189,65 @@ export default function InfoEnd(props: InfoEndProps) {
         resultTable={resultTable()}
       />
 
-      <h3 style={styles.h3}>Come viene calcolato il punteggio</h3>
-      <p style={styles.p}>
-        Il <b>punteggio massimo</b> conseguibile{' '}
-        <b>è di {formatNumber(testTotalScore, true)}</b> e viene espresso fino
-        alla seconda cifra decimale.
-        <br />
-        L'attribuzione di <b>OFA TEST</b> (Obblighi Formativi Aggiunti) avviene
-        quando il punteggio test, arrotondato all'intero più vicino,{' '}
-        <b>è minore di {formatNumber(testPassThreshold)}</b>.<br />
-        L'attribuzione di <b>OFA TENG</b> avviene quando, considerando la sola
-        sezione di {sectionInfo.ing.name}, il numero di risposte corrette{' '}
-        <b>è inferiore a {formatNumber(tengPassThreshold)}</b>.
-        <br />
-        <br />
-        Il <b>punteggio</b> della prova viene calcolato attribuendo:
-        <ul>
-          <li>
-            {formatNumber(correctionWeight.correct)} punto ad ogni risposta
-            esatta
-          </li>
-          <li>
-            {formatNumber(correctionWeight.wrong)} punti ad ogni risposta errata
-          </li>
-          <li>
-            {formatNumber(correctionWeight.notGiven)} punti per ogni risposta
-            non data
-          </li>
-        </ul>
-        e assegnando
-        <ul>
-          {Object.entries(sectionInfo).map(([, info], index) => (
-            <li key={index}>
-              peso{' '}
-              {typeof info.coeff == 'number'
-                ? formatNumber(info.coeff)
-                : info.coeff.toFraction()}{' '}
-              ad ogni quesito di {info.name}
+      <div className="do-not-print">
+        <h3 style={styles.h3}>Come viene calcolato il punteggio</h3>
+        <p style={styles.p}>
+          Il <b>punteggio massimo</b> conseguibile{' '}
+          <b>è di {formatNumber(testTotalScore, true)}</b> e viene espresso fino
+          alla seconda cifra decimale.
+          <br />
+          L'attribuzione di <b>OFA TEST</b> (Obblighi Formativi Aggiunti)
+          avviene quando il punteggio test, arrotondato all'intero più vicino,{' '}
+          <b>è minore di {formatNumber(testPassThreshold)}</b>.<br />
+          L'attribuzione di <b>OFA TENG</b> avviene quando, considerando la sola
+          sezione di {sectionInfo.ing.name}, il numero di risposte corrette{' '}
+          <b>è inferiore a {formatNumber(tengPassThreshold)}</b>.
+          <br />
+          <br />
+          Il <b>punteggio</b> della prova viene calcolato attribuendo:
+          <ul>
+            <li>
+              {formatNumber(correctionWeight.correct)} punto ad ogni risposta
+              esatta
             </li>
-          ))}
-        </ul>
-        Il <b>punteggio</b> complessivo viene arrotondato all'intero più vicino
-        (es: il punteggio 59,49 viene arrotondato a 59, il punteggio 59,50 a 60)
-      </p>
-      <div style={styles.restartDiv}>
-        <h3 style={styles.restartTitle}>
-          Ricordati di salvare i tuoi risultati prima di iniziare un nuovo test,
-          o andranno persi!
-        </h3>
-        <Button
-          label="Inizia un nuovo test"
-          style={styles.restartButton}
-          onClick={() => {
-            window.location.reload()
-          }}
-        />
+            <li>
+              {formatNumber(correctionWeight.wrong)} punti ad ogni risposta
+              errata
+            </li>
+            <li>
+              {formatNumber(correctionWeight.notGiven)} punti per ogni risposta
+              non data
+            </li>
+          </ul>
+          e assegnando
+          <ul>
+            {Object.entries(sectionInfo).map(([, info], index) => (
+              <li key={index}>
+                peso{' '}
+                {typeof info.coeff == 'number'
+                  ? formatNumber(info.coeff)
+                  : info.coeff.toFraction()}{' '}
+                ad ogni quesito di {info.name}
+              </li>
+            ))}
+          </ul>
+          Il <b>punteggio</b> complessivo viene arrotondato all'intero più
+          vicino (es: il punteggio 59,49 viene arrotondato a 59, il punteggio
+          59,50 a 60)
+        </p>
+        <div style={styles.restartDiv}>
+          <h3 style={styles.restartTitle}>
+            Ricordati di salvare i tuoi risultati prima di iniziare un nuovo
+            test, o andranno persi!
+          </h3>
+          <Button
+            label="Inizia un nuovo test"
+            style={styles.restartButton}
+            onClick={() => {
+              window.location.reload()
+            }}
+          />
+        </div>
       </div>
     </div>
   )

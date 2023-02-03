@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { StyleSheet } from '../../utils/style'
 
 const styles = StyleSheet.create({
