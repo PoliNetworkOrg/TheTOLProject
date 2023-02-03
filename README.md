@@ -1,5 +1,7 @@
 # The TOL Project
 
+[![All Contributors](https://img.shields.io/github/all-contributors/PoliNetworkOrg/TheTOLProject)](#contributors-)
+
 ## Goal of the project
 
 This website is supposed to give students that want to enroll at Politecnico di Milano a new way to train for the TOL admission test.  
@@ -20,3 +22,18 @@ The project is entirely managed by students, it is not affiliated with Politecni
 ## Contributing
 
 If you want to contribute to this repo, make sure to check out the [contributing guidelines](docs/CONTRIBUTING.md).
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
