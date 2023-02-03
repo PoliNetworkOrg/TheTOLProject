@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import { createRef, forwardRef, ReactNode, useEffect } from 'react'
+import { createRef, forwardRef, ReactNode, useEffect, useState } from 'react'
 import ReactToPrint from 'react-to-print'
 import { Question, QuestionsData, section } from '../../../utils/database'
 import { AnswersData } from '../../App'
@@ -54,6 +53,10 @@ const styles = StyleSheet.create({
   nowrap: { whiteSpace: 'nowrap' }
 })
 
+// using 'other' as fallback because
+// other browsers may no longer support the api
+type Browser = 'FirefoxAndroid' | 'other'
+
 interface ExtendedCorrectionProps {
   answers: AnswersData
   questions: QuestionsData
@@ -63,49 +66,71 @@ interface ExtendedCorrectionProps {
 export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = createRef<HTMLDivElement>()
-  const printSupported = 'print' in window
+  // save date to variable to keep the date
+  // when the test was taken
+  const resultsDate = new Date()
+  const [printSupported, setPrintSupported] = useState<boolean | undefined>()
+  const [browser, setBrowser] = useState<Browser | undefined>()
 
   const getTitle = () =>
-    `The TOL Project ${new Date()
+    `The TOL Project ${resultsDate
       .toLocaleString()
       .replace(/\/|:/g, '-')
       .replace(/,/g, '')}`
 
   useEffect(() => {
-    if (!printSupported) {
+    if (!window) return
+    const userAgent = navigator.userAgent
+    if (userAgent.includes('Firefox') && userAgent.includes('Android')) {
+      setBrowser('FirefoxAndroid')
+    } else {
+      // fallback
+      setBrowser('other')
+    }
+
+    const exists = 'print' in window
+    setPrintSupported(exists)
+    if (!exists) {
       document.title = getTitle()
     }
-  }, [])
+  }, [window])
 
-  return (
-    <div style={styles.collapsible}>
-      {printSupported ? (
-        <div style={styles.printButton} className="do-not-print">
-          <ReactToPrint
-            documentTitle={getTitle()}
-            content={() => ref.current}
-            trigger={() => <Button label="Salva risultati della simulazione" />}
-            onAfterPrint={() => {
-              // remove the onbeforeunload listener since results are saved
-              window.onbeforeunload = null
-            }}
-          />
-        </div>
-      ) : (
-        <FirefoxInstructions />
-      )}
-      <PrintDocument
-        ref={ref}
-        resultTable={props.resultTable}
-        questions={props.questions}
-        answers={props.answers}
-      />
-    </div>
-  )
+  if (printSupported === undefined || browser === undefined) return <></>
+  else
+    return (
+      <div style={styles.collapsible}>
+        {printSupported ? (
+          <div style={styles.printButton} className="do-not-print">
+            <ReactToPrint
+              documentTitle={getTitle()}
+              content={() => ref.current}
+              trigger={() => (
+                <Button label="Salva risultati della simulazione" />
+              )}
+              onAfterPrint={() => {
+                // remove the onbeforeunload listener since results are saved
+                window.onbeforeunload = null
+              }}
+            />
+          </div>
+        ) : (
+          <>
+            {browser === 'FirefoxAndroid' && <FirefoxInstructions />}
+            {browser === 'other' && <FallbackInstructions />}
+          </>
+        )}
+        <PrintDocument
+          ref={ref}
+          resultTable={props.resultTable}
+          questions={props.questions}
+          answers={props.answers}
+        />
+      </div>
+    )
 }
 
 const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
-  (props, ref) => {
+  (props: ExtendedCorrectionProps, ref) => {
     const { resultTable, questions, answers } = props
     return (
       <div className="print-only" ref={ref} style={styles.doc}>
@@ -214,6 +239,30 @@ function FirefoxInstructions() {
         <li>Nel menu che si apre, premi su "Salva come PDF"</li>
         <img src={firefoxImg3} style={styles.img} />
       </ol>
+    </div>
+  )
+}
+
+function FallbackInstructions() {
+  return (
+    <div className="do-not-print">
+      <h3>Salva i tuoi risultati</h3>
+      <p>
+        Per il tuo browser non è supportata la stampa automatica del PDF con i
+        risultati.
+      </p>
+      <p>
+        Puoi provare ad utilizzare la funzione "Sala come PDF" del tuo browser
+        che potrebbe essere nel menu di condivisione oppure nel menu principale
+        del browser.
+      </p>
+      <p>
+        Ti invitiamo a segnalare il tuo browser{' '}
+        <a href="https://github.com/PoliNetworkOrg/TheTOLProject/issues/35">
+          qui
+        </a>{' '}
+        in modo da poter risolvere il problema{' '}
+      </p>
     </div>
   )
 }
