@@ -19,11 +19,13 @@ const styles = StyleSheet.create({
   attachment: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'flex-start',
     gap: '5px'
   },
   image: {
     maxHeight: '500px',
-    width: 'fit-content'
+    maxWidth: '100%',
+    objectFit: 'contain'
   }
 })
 
