@@ -1,16 +1,20 @@
 import { createRef, forwardRef, ReactNode } from 'react'
 import ReactToPrint from 'react-to-print'
-import { Question, QuestionsData, section } from '../../../utils/database'
+import {
+  Question as IQuestion,
+  QuestionsData,
+  section
+} from '../../../utils/database'
 import { AnswersData } from '../../App'
 import { links, sectionInfo } from '../../../utils/constants'
 import { StyleSheet, theme } from '../../../utils/style'
-import RenderedText from '../../Util/RenderedText'
 import Button from '../../Util/Button'
 import './ExtendedCorrection.css'
 import DocumentHeader from './DocumentHeader'
 import firefoxImg1 from '../../../static/firefox_1.png'
 import firefoxImg2 from '../../../static/firefox_2.png'
 import firefoxImg3 from '../../../static/firefox_3.png'
+import Question from '../../Util/Question'
 
 const styles = StyleSheet.create({
   collapsible: {
@@ -116,93 +120,65 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
   )
 }
 
+const docStyles = StyleSheet.create({
+  firstPage: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 4
+  },
+  li: {
+    marginBottom: 10
+  }
+})
+
 const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
   (props: ExtendedCorrectionProps, ref) => {
+    const dateTime = `${new Date().toLocaleDateString()} alle ${new Date().toLocaleTimeString(
+      [],
+      { timeStyle: 'short' }
+    )}`
     const { resultTable, questions, answers } = props
     return (
       <div className="print-only" ref={ref} style={styles.doc}>
-        <div>
-          <div>
-            <DocumentHeader />
-            <p style={styles.centered}>
-              Simulazione del {new Date().toLocaleString()}
-            </p>
-            {resultTable}
-          </div>
-          <br />
-          Hai delle domande sui quesiti e la loro risoluzione? Falle sul{' '}
-          <a
-            href={links.telegramPreparazioneTOL}
-            target="_blank"
-            rel="noreferrer noopener"
-            style={styles.link}
-          >
-            Gruppo preparazione TOL
-          </a>{' '}
-          di PoliNetwork!
-          <br />
-          <br />
-          <br />
-          <span>
+        <div style={docStyles.firstPage}>
+          <DocumentHeader />
+          <p style={styles.centered}>Simulazione del {dateTime}</p>
+          {resultTable}
+          <p>
+            Hai delle domande sui quesiti e la loro risoluzione? Falle sul{' '}
+            <a
+              href={links.telegramPreparazioneTOL}
+              target="_blank"
+              rel="noreferrer noopener"
+              style={styles.link}
+            >
+              Gruppo preparazione TOL
+            </a>{' '}
+            di PoliNetwork!
+          </p>
+          <p>
             Nelle pagine successive troverai, suddivisi per sezione, i quesiti
             che ti sono stati proposti con il relativo esito.
-          </span>
+          </p>
         </div>
-        {(Object.entries(questions) as [section, Question[]][])
+        {(Object.entries(questions) as [section, IQuestion[]][])
           .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)
           .map(([section, values]) => (
-            <>
-              <div className="page-break" />
-              <div key={section}>
-                <div>
-                  <b>{sectionInfo[section].name}</b>
-                  <ol>
-                    {values.map((question) => {
-                      const letter = answers[section].find(
-                          (a) => a?.id == question.id && a?.sub == question.sub
-                        )?.letter,
-                        result = letter
-                          ? letter == question.correct
-                            ? 'Esatta'
-                            : 'Errata'
-                          : 'Senza risposta'
-
-                      return (
-                        <div key={question.id + (question.sub || 0)}>
-                          <li style={styles.li}>
-                            <RenderedText
-                              text={`
-                            ${question.text} 
-                            `.trim()}
-                            />
-                            &emsp;
-                            <u style={styles.nowrap}>{result}</u>{' '}
-                            <ul style={styles.ul}>
-                              {result == 'Errata' && letter && (
-                                <li>
-                                  <RenderedText
-                                    text={`R. data: ${question.answers[letter]}`}
-                                  />
-                                </li>
-                              )}
-                              {result != 'Esatta' && (
-                                <li>
-                                  <RenderedText
-                                    text={`R. esatta: ${
-                                      question.answers[question.correct]
-                                    }`}
-                                  />
-                                </li>
-                              )}
-                            </ul>
-                          </li>
-                        </div>
-                      )
-                    })}
-                  </ol>
-                </div>
-              </div>
-            </>
+            <div key={section}>
+              <b>{sectionInfo[section].name}</b>
+              <ol>
+                {values.map((q) => {
+                  const letter = answers[section].find(
+                    (a) => a?.id == q.id && a?.sub == q.sub
+                  )?.letter
+                  return (
+                    <li key={q.id + (q.sub || '')} style={docStyles.li}>
+                      <Question q={q} choice={letter} isTest />
+                    </li>
+                  )
+                })}
+              </ol>
+            </div>
           ))}
       </div>
     )
