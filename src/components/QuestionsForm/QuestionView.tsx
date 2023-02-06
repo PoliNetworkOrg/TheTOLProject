@@ -1,7 +1,6 @@
-import { getImageURL, Question } from '../../utils/database'
+import { Question } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import CollapsibleText from '../Util/CollapsibleText'
-import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
 import QuestionAttachments from '../Util/QuestionAttachments'
 import RenderedText from '../Util/RenderedText'
 
