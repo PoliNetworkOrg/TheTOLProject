@@ -1,5 +1,6 @@
 import { Question as IQuestion } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
+import QuestionAttachments from './QuestionAttachments'
 import RenderedText from './RenderedText'
 
 const styles = StyleSheet.create({
@@ -18,20 +19,28 @@ const styles = StyleSheet.create({
   }
 })
 
+const TickSign = () => <>&#10003;</>
+const CrossSign = () => <>&#10007;</>
+
 interface Props {
   q: IQuestion
   isDebug?: boolean
   choice?: string
   isTest?: boolean
+  showAttachments?: boolean
+  dbRef?: 'stable' | 'main'
 }
 
 export default function Question({
   q,
   isDebug = false,
   choice = '',
-  isTest = false
+  isTest = false,
+  showAttachments = false,
+  dbRef = 'stable'
 }: Props) {
-  const id = q.sub ? `[${q.id}-${q.sub}] ` : `[${q.id}] `
+  const id = q.id && (q.sub ? `[${q.id}-${q.sub}] ` : `[${q.id}] `)
+  const valid = q.validated !== undefined && `Valid: ${String(q.validated)}`
   let result = 'Senza risposta'
   if (choice.length === 1) {
     result = choice === q.correct ? 'Corretta' : 'Errata'
@@ -44,20 +53,17 @@ export default function Question({
         <RenderedText text={q.text} />
         {isTest && <span style={styles.result}>{result}</span>}
       </p>
+      {showAttachments && <QuestionAttachments q={q} dbRef={dbRef} />}
 
-      {isDebug && <p>Valid: {String(q.validated)}</p>}
+      {isDebug && <p>{valid}</p>}
       {Object.entries(q.answers).map(([letter, text]) => {
         const isCorrect = q.correct === letter
-        const visibility = isCorrect ? 'visible' : 'hidden'
+        const visibility = isCorrect || choice === letter ? 'visible' : 'hidden'
         return (
-          <p
-            key={letter}
-            style={{
-              ...styles.option,
-              fontWeight: letter === choice ? 'bold' : 'normal'
-            }}
-          >
-            <span style={{ visibility }}>→</span>
+          <p key={letter} style={styles.option}>
+            <span style={{ visibility }}>
+              {isCorrect ? <TickSign /> : <CrossSign />}
+            </span>
             <span>{letter.toUpperCase()}. </span>
             <RenderedText text={text} />
           </p>

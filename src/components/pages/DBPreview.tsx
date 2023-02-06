@@ -34,7 +34,7 @@ export default function DBPreview({ db }: DBPreviewProps) {
                 .filter((q) => q.text || key == 'com')
                 .map((q) => (
                   <li key={key + q.id + (q.sub || '')}>
-                    <Question q={q} isDebug={true} />
+                    <Question q={q} isDebug={true} showAttachments />
                   </li>
                 ))}
             </ul>
