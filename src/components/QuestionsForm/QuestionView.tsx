@@ -1,7 +1,7 @@
-import { getImageURL, Question } from '../../utils/database'
+import { Question } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import CollapsibleText from '../Util/CollapsibleText'
-import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
+import QuestionAttachments from '../Util/QuestionAttachments'
 import RenderedText from '../Util/RenderedText'
 
 const styles = StyleSheet.create({
@@ -49,20 +49,7 @@ export default function QuestionView({ question }: QuestionViewProps) {
       )}
       <div style={styles.container}>
         <RenderedText text={question.text}></RenderedText>
-
-        {question.attachments?.length && (
-          <GeneralPurposeCollapsible
-            label="mostra/nascondi immagini"
-            contentStyle={styles.collapsible}
-          >
-            {question.attachments.map((fileName, index) => (
-              <span key={index + 1} style={styles.attachment}>
-                <p style={styles.container}>Immagine {index + 1}:</p>
-                <img src={getImageURL(fileName)} style={styles.image} />
-              </span>
-            ))}
-          </GeneralPurposeCollapsible>
-        )}
+        <QuestionAttachments q={question} dbRef="stable" />
       </div>
     </div>
   )

@@ -4,7 +4,6 @@ import { links } from '../../../utils/constants'
 
 const styles = StyleSheet.create({
   div: {
-    height: '70px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between'

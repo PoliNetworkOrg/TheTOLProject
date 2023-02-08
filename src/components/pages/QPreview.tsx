@@ -1,42 +1,17 @@
 import { useEffect, useState } from 'react'
 import {
   Database,
-  getImageURL,
-  Question,
+  Question as IQuestion,
   readDatabase,
   section,
   sheetDict
 } from '../../utils/database'
-import { baseStyle, StyleSheet } from '../../utils/style'
-import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
-import RenderedText from '../Util/RenderedText'
+import { baseStyle } from '../../utils/style'
+import Question from '../Util/Question'
 import Select from '../Util/Select'
 
-const styles = StyleSheet.create({
-  container: {
-    marginBlock: 0,
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  collapsible: {
-    padding: '10px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '15px'
-  },
-  attachment: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '5px'
-  },
-  image: {
-    maxHeight: '500px',
-    width: 'fit-content'
-  }
-})
-
 export default function QPreview() {
-  const [questionType, setQuestionType] = useState('custom')
+  const [isCustom, setIsCustom] = useState(true)
 
   return (
     <div style={baseStyle}>
@@ -46,16 +21,16 @@ export default function QPreview() {
           { value: 'custom', label: 'Custom' },
           { value: 'database', label: 'Database' }
         ]}
-        defaultValue={questionType}
-        onChange={setQuestionType}
+        defaultValue="custom"
+        onChange={(v) => setIsCustom(v === 'custom')}
       />
-      {questionType == 'custom' ? <CustomQ /> : <DatabaseQ />}
+      {isCustom ? <CustomQ /> : <DatabaseQ />}
     </div>
   )
 }
 
 function DatabaseQ() {
-  const [dbRef, setDbRef] = useState('main')
+  const [dbRef, setDbRef] = useState<'main' | 'stable'>('main')
   const [dbs, setDbs] = useState({} as Record<string, Database | Error>)
   const [section, setSection] = useState('')
   const [id, setID] = useState('')
@@ -81,7 +56,7 @@ function DatabaseQ() {
           { value: 'main', label: 'Development' }
         ]}
         defaultValue={dbRef}
-        onChange={setDbRef}
+        onChange={(v) => setDbRef(v as 'main' | 'stable')}
       />
       <Select
         label="Section"
@@ -127,10 +102,10 @@ function DatabaseQ() {
             const [i, s] = id.split(' - ')
             return q.id == i && (s ? q.sub == s : true)
           }),
-          ref: dbRef
+          dbRef
         })
       ) : (
-        <div />
+        <></>
       )}
     </div>
   )
@@ -191,54 +166,17 @@ function CustomQ() {
       </label>
       <br />
       <br />
-      <QuestionRender q={{ text, answers: { a, b, c, d, e } } as Question} />
+      <QuestionRender q={{ text, answers: { a, b, c, d, e } } as IQuestion} />
     </div>
   )
 }
 
 interface QuestionRenderProps {
-  q?: Question
-  ref?: string
+  q?: IQuestion
+  dbRef?: 'stable' | 'main'
 }
 function QuestionRender(props: QuestionRenderProps) {
-  const { q, ref } = props
+  const { q, dbRef } = props
 
-  return q ? (
-    <div>
-      <RenderedText text={q.text || q.sub || ''} />
-      <br />
-      {q.attachments?.length && (
-        <GeneralPurposeCollapsible
-          label="mostra/nascondi immagini"
-          contentStyle={styles.collapsible}
-        >
-          {q.attachments.map((fileName, index) => (
-            <span key={index + 1} style={styles.attachment}>
-              <p style={styles.container}>Immagine {index + 1}:</p>
-              <img
-                src={getImageURL(fileName, ref || 'stable')}
-                style={styles.image}
-              />
-            </span>
-          ))}
-        </GeneralPurposeCollapsible>
-      )}
-      <br />
-      <p>Valid: {q.validated + ''}</p>
-      {Object.entries(q.answers).map(([letter, text]) => (
-        <p key={letter}>
-          <span
-            style={{
-              visibility: letter == q.correct ? 'visible' : 'hidden'
-            }}
-          >
-            →{' '}
-          </span>
-          <RenderedText text={text} />
-        </p>
-      ))}
-    </div>
-  ) : (
-    <div />
-  )
+  return <>{q && <Question q={q} isDebug showAttachments dbRef={dbRef} />}</>
 }
