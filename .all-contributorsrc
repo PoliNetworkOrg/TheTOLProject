@@ -86,8 +86,22 @@
       "contributions": [
         "promotion"
       ]
+    },
+    {
+      "login": "lorenzocorallo",
+      "name": "Lorenzo Corallo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/66379281?v=4",
+      "profile": "http://instagram.com/corallo_lorenzo",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "repoType": "github",
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "files": [
+    "README.md"
+  ],
+  "contributorsPerLine": 7
 }
