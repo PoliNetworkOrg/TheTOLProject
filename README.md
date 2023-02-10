@@ -21,7 +21,9 @@ The project is entirely managed by students, it is not affiliated with Politecni
 
 ## Contributing
 
-If you want to contribute to this repo, make sure to check out the [contributing guidelines](docs/CONTRIBUTING.md).
+If you want to contribute to this repo, make sure to check out the [contributing guidelines](docs/CONTRIBUTING.md).  
+This project follows the [all-contributors](https://allcontributors.org/) specification. Contributions of any kind welcome!  
+If you've contributed to this project and you're not in the contributors list, please open an issue or a PR to fix it.
 
 ## Contributors ✨
 
