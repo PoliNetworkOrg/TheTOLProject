@@ -1,0 +1,93 @@
+{
+  "projectName": "TheTOLProject",
+  "projectOwner": "PoliNetworkOrg",
+  "contributors": [
+    {
+      "login": "zagbc",
+      "name": "Gabriele Zanini",
+      "avatar_url": "https://avatars.githubusercontent.com/u/92105630?v=4",
+      "profile": "https://github.com/zagbc",
+      "contributions": [
+        "projectManagement",
+        "content",
+        "ideas"
+      ]
+    },
+    {
+      "name": "Prof.ssa Clelia Di Leo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "EndBug",
+      "name": "Federico Grandi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26386270?v=4",
+      "profile": "https://github.com/EndBug",
+      "contributions": [
+        "code",
+        "content",
+        "doc",
+        "ideas"
+      ]
+    },
+    {
+      "name": "Giovanni Menicucci",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "name": "Ilaria Corcelli",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "name": "Matteo Salicandro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "name": "Nicolas Facchin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "login": "toto04",
+      "name": "Tommaso Morganti",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34661230?v=4",
+      "profile": "https://github.com/toto04",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas"
+      ]
+    },
+    {
+      "login": "Eliaxie",
+      "name": "Elia Maggioni",
+      "avatar_url": "https://avatars.githubusercontent.com/u/27226791?v=4",
+      "profile": "https://github.com/Eliaxie",
+      "contributions": [
+        "promotion"
+      ]
+    },
+    {
+      "name": "Diego Aldarese",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "contributions": [
+        "promotion"
+      ]
+    }
+  ],
+  "repoType": "github",
+  "commitConvention": "angular"
+}

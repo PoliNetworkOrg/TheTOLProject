@@ -1,5 +1,7 @@
 # The TOL Project
 
+[![All Contributors](https://img.shields.io/github/all-contributors/PoliNetworkOrg/TheTOLProject)](#contributors-)
+
 ## Goal of the project
 
 This website is supposed to give students that want to enroll at Politecnico di Milano a new way to train for the TOL admission test.  
@@ -19,4 +21,39 @@ The project is entirely managed by students, it is not affiliated with Politecni
 
 ## Contributing
 
-If you want to contribute to this repo, make sure to check out the [contributing guidelines](docs/CONTRIBUTING.md).
+If you want to contribute to this repo, make sure to check out the [contributing guidelines](docs/CONTRIBUTING.md).  
+This project follows the [all-contributors](https://allcontributors.org/) specification. Contributions of any kind welcome!  
+If you've contributed to this project and you're not in the contributors list, please open an issue or a PR to fix it.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/zagbc"><img src="https://avatars.githubusercontent.com/u/92105630?v=4?s=100" width="100px;" alt="Gabriele Zanini"/><br /><sub><b>Gabriele Zanini</b></sub></a><br /><a href="#projectManagement-zagbc" title="Project Management">📆</a> <a href="#content-zagbc" title="Content">🖋</a> <a href="#ideas-zagbc" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><img src="https://avatars.githubusercontent.com/u/9919?v=4?s=100" width="100px;" alt="Prof.ssa Clelia Di Leo"/><br /><sub><b>Prof.ssa Clelia Di Leo</b></sub><br /><a href="#content" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/EndBug"><img src="https://avatars.githubusercontent.com/u/26386270?v=4?s=100" width="100px;" alt="Federico Grandi"/><br /><sub><b>Federico Grandi</b></sub></a><br /><a href="https://github.com/PoliNetworkOrg/TheTOLProject/commits?author=EndBug" title="Code">💻</a> <a href="#content-EndBug" title="Content">🖋</a> <a href="https://github.com/PoliNetworkOrg/TheTOLProject/commits?author=EndBug" title="Documentation">📖</a> <a href="#ideas-EndBug" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><img src="https://avatars.githubusercontent.com/u/9919?v=4?s=100" width="100px;" alt="Giovanni Menicucci"/><br /><sub><b>Giovanni Menicucci</b></sub><br /><a href="#content" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><img src="https://avatars.githubusercontent.com/u/9919?v=4?s=100" width="100px;" alt="Ilaria Corcelli"/><br /><sub><b>Ilaria Corcelli</b></sub><br /><a href="#content" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><img src="https://avatars.githubusercontent.com/u/9919?v=4?s=100" width="100px;" alt="Matteo Salicandro"/><br /><sub><b>Matteo Salicandro</b></sub><br /><a href="#content" title="Content">🖋</a></td>
+      <td align="center" valign="top" width="14.28%"><img src="https://avatars.githubusercontent.com/u/9919?v=4?s=100" width="100px;" alt="Nicolas Facchin"/><br /><sub><b>Nicolas Facchin</b></sub><br /><a href="#content" title="Content">🖋</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/toto04"><img src="https://avatars.githubusercontent.com/u/34661230?v=4?s=100" width="100px;" alt="Tommaso Morganti"/><br /><sub><b>Tommaso Morganti</b></sub></a><br /><a href="https://github.com/PoliNetworkOrg/TheTOLProject/commits?author=toto04" title="Code">💻</a> <a href="https://github.com/PoliNetworkOrg/TheTOLProject/commits?author=toto04" title="Documentation">📖</a> <a href="#ideas-toto04" title="Ideas, Planning, & Feedback">🤔</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Eliaxie"><img src="https://avatars.githubusercontent.com/u/27226791?v=4?s=100" width="100px;" alt="Elia Maggioni"/><br /><sub><b>Elia Maggioni</b></sub></a><br /><a href="#promotion-Eliaxie" title="Promotion">📣</a></td>
+      <td align="center" valign="top" width="14.28%"><img src="https://avatars.githubusercontent.com/u/9919?v=4?s=100" width="100px;" alt="Diego Aldarese"/><br /><sub><b>Diego Aldarese</b></sub><br /><a href="#promotion" title="Promotion">📣</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
