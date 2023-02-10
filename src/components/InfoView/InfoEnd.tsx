@@ -127,7 +127,8 @@ export default function InfoEnd(props: InfoEndProps) {
     .map(([, correction]) => correction.score.mul(correction.weight))
     .reduce((acc, curr) => acc.add(curr), new Fraction(0))
 
-  const testPassed = score.compare(testPassThreshold) >= 0,
+  const roundedScore = parseInt(score.round(0).toString(0))
+  const testPassed = roundedScore >= testPassThreshold,
     tengPassed = correctionGrid.ing?.correct >= tengPassThreshold
 
   const resultTable = () => (
