@@ -1,0 +1,13 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "/.all-contributorsrc"
+      ],
+      "url": "https://json.schemastore.org/all-contributors"
+    }
+  ],
+  "files.associations": {
+    ".all-contributorsrc": "json"
+  }
+}
