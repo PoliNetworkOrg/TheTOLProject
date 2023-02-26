@@ -38,7 +38,7 @@ export const sectionInfo: Record<section, sectionInfoElement> = {
     name: 'Matematica',
     order: 2,
     sample: 25,
-    minutes: 75,
+    minutes: 65,
     coeff: 2.6
   },
   com: {
