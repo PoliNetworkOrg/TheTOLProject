@@ -20,50 +20,38 @@ interface SectionRecapProps {
   sectionAnswers: AnswersData[section]
   sectionQuestions: QuestionsData[section]
   secondsUsed: number
+  minutes: number
 }
-export default function SectionRecap(props: SectionRecapProps) {
-  const info = sectionInfo[props.section]
-
+export default function SectionRecap({
+  minutes,
+  secondsUsed,
+  ...props
+}: SectionRecapProps) {
+  const order = sectionInfo[props.section].order
+  const seconds = minutes * 60
   return (
     <div style={styles.container}>
       <p>
-        Tempo utilizzato:{' '}
-        {Math.floor((props.secondsUsed / 60) % 60).toLocaleString(undefined, {
-          minimumIntegerDigits: 2
-        })}
-        :
-        {Math.floor(props.secondsUsed / 60).toLocaleString(undefined, {
-          minimumIntegerDigits: 2
-        })}
-        :
-        {(props.secondsUsed % 60).toLocaleString(undefined, {
-          minimumIntegerDigits: 2
-        })}{' '}
-        / {Math.floor(info.minutes / 60)}:{info.minutes % 60}:00 (
-        {Math.floor(
-          (info.minutes * 60 - props.secondsUsed) / 60 / 60
-        ).toLocaleString(undefined, {
-          minimumIntegerDigits: 2
-        })}
-        :
-        {Math.floor(
-          ((info.minutes * 60 - props.secondsUsed) / 60) % 60
-        ).toLocaleString(undefined, {
-          minimumIntegerDigits: 2
-        })}
-        :
-        {((info.minutes * 60 - props.secondsUsed) % 60).toLocaleString(
-          undefined,
-          {
-            minimumIntegerDigits: 2
-          }
-        )}{' '}
-        rimanente)
+        {'Tempo utilizzato: '}
+        <span>
+          {displayTime((secondsUsed / 60) % 60)}:{displayTime(secondsUsed / 60)}
+          :{displayTime(secondsUsed % 60)}
+        </span>
+        {' / '}
+        <span>
+          {displayTime(minutes / 60)}:{displayTime(minutes % 60)}:
+          {displayTime(seconds % 60)}
+        </span>
+        {' ('}
+        <span>
+          {displayTime((seconds - secondsUsed) / 60 / 60)}:
+          {displayTime(((seconds - secondsUsed) / 60) % 60)}:
+          {displayTime((seconds - secondsUsed) % 60)} rimanente)
+        </span>
       </p>
       <Button
         label={
-          info.order ==
-          Math.max(...Object.values(sectionInfo).map((i) => i.order))
+          order == Math.max(...Object.values(sectionInfo).map((i) => i.order))
             ? 'Vedi esito del test'
             : 'Prossima sezione'
         }
@@ -71,4 +59,10 @@ export default function SectionRecap(props: SectionRecapProps) {
       />
     </div>
   )
+}
+
+function displayTime(time: number) {
+  return Math.floor(time).toLocaleString(undefined, {
+    minimumIntegerDigits: 2
+  })
 }

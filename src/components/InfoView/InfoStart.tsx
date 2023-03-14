@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { TestContext } from '../../utils/contexts'
 import { StyleSheet } from '../../utils/style'
 import Button from '../Util/Button'
 
@@ -14,7 +16,13 @@ const styles = StyleSheet.create({
     display: 'block'
   },
   buttonDiv: {
-    margin: '16px'
+    margin: '16px',
+    display: 'flex',
+    fontSize: 12,
+    gap: 6
+  },
+  dsaInfo: {
+    maxWidth: 600
   }
 })
 
@@ -22,6 +30,7 @@ interface InfoStartProps {
   startTest: () => void
 }
 export default function InfoStart(props: InfoStartProps) {
+  const { isDsa, toggleDsa } = useContext(TestContext)
   return (
     <div style={styles.div}>
       <p>
@@ -46,6 +55,26 @@ export default function InfoStart(props: InfoStartProps) {
       </p>
       <div style={styles.buttonDiv}>
         <Button label="Inizia il test" onClick={props.startTest} />
+        <label htmlFor="dsa_toggle">
+          <input
+            id="dsa_toggle"
+            type="checkbox"
+            checked={isDsa}
+            onChange={toggleDsa}
+          />
+          Studente con DSA
+        </label>
+      </div>
+      <div style={{ ...styles.dsaInfo, display: isDsa ? 'block' : 'none' }}>
+        <p>
+          Gli studenti con Disturbi Specifici dell'Apprendimento (DSA) che
+          affrontano il TOL, possono usufruire di un tempo supplementare pari al
+          30%, previa segnalazione in fase di iscrizione al test. <br />
+          E' inoltre richiesta una certificazione attestante la diagnosi di DSA.{' '}
+          <br />
+          Selezionando "Studente con DSA" viene applicato il tempo bonus anche
+          in questa simulazione.
+        </p>
       </div>
     </div>
   )

@@ -58,6 +58,8 @@ export const sectionInfo: Record<section, sectionInfoElement> = {
   }
 }
 
+export const DSATimeModifier = 1.3
+
 export const testTotalScore = 100
 /** Minimum score to pass the test */
 export const testPassThreshold = 60
