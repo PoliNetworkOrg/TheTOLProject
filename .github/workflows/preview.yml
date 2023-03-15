@@ -79,7 +79,7 @@ jobs:
           PUBLIC_URL: ${{ steps.baseurl.outputs.relative }}
 
       # This will trigger the action. Make sure to change the build_dir input to the correct directory
-      - uses: EndBug/pages-preview@11-deployments-fork
+      - uses: EndBug/pages-preview@v1
         with:
           build_dir: build # Change this!
           preview_base_url: ${{ env.PAGES_BASE }}
