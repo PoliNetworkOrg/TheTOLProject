@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import Collapsible from 'react-collapsible'
 import { TestContext } from '../../utils/contexts'
 import { StyleSheet } from '../../utils/style'
 import Button from '../Util/Button'
@@ -8,28 +9,26 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '10px',
-    marginBlock: '16px'
+    margin: '10px auto',
+    marginBlock: '16px',
+    maxWidth: 600,
+    textAlign: 'center'
   },
   centered: {
-    textAlign: 'center',
     display: 'block'
   },
   buttonDiv: {
     margin: '16px',
     display: 'flex',
-    fontSize: 12,
+    fontSize: 14,
     gap: 6
-  },
-  dsaInfo: {
-    maxWidth: 600
   }
 })
 
 interface InfoStartProps {
   startTest: () => void
 }
-export default function InfoStart(props: InfoStartProps) {
+export default function InfoStart({ startTest }: InfoStartProps) {
   const { isDsa, toggleDsa } = useContext(TestContext)
   return (
     <div style={styles.div}>
@@ -54,8 +53,12 @@ export default function InfoStart(props: InfoStartProps) {
         Milano.
       </p>
       <div style={styles.buttonDiv}>
-        <Button label="Inizia il test" onClick={props.startTest} />
-        <label htmlFor="dsa_toggle">
+        <Button
+          style={{ fontSize: 14 }}
+          label="Inizia il test"
+          onClick={startTest}
+        />
+        <label htmlFor="dsa_toggle" style={{ userSelect: 'none' }}>
           <input
             id="dsa_toggle"
             type="checkbox"
@@ -65,17 +68,17 @@ export default function InfoStart(props: InfoStartProps) {
           Studente con DSA
         </label>
       </div>
-      <div style={{ ...styles.dsaInfo, display: isDsa ? 'block' : 'none' }}>
+      <Collapsible trigger={<></>} open={isDsa} transitionTime={150}>
         <p>
           Gli studenti con Disturbi Specifici dell'Apprendimento (DSA) che
           affrontano il TOL, possono usufruire di un tempo supplementare pari al
-          30%, previa segnalazione in fase di iscrizione al test. <br />
-          E' inoltre richiesta una certificazione attestante la diagnosi di DSA.{' '}
+          30%, previa segnalazione in fase di iscrizione al test. <br />È
+          inoltre richiesta una certificazione attestante la diagnosi di DSA.{' '}
           <br />
           Selezionando "Studente con DSA" viene applicato il tempo bonus anche
           in questa simulazione.
         </p>
-      </div>
+      </Collapsible>
     </div>
   )
 }
