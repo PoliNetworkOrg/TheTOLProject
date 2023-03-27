@@ -8,7 +8,9 @@ export const links = {
   polinetwork: 'https://polinetwork.org',
   privacyPanelbear: 'https://panelbear.com/cookie-free-analytics/',
   telegramPreparazioneTOL: 'https://t.me/joinchat/_zugEikozmcyMzA0',
-  telegramTheTOLProject: 'https://t.me/+amLdTd-EoHw1MWRk'
+  telegramTheTOLProject: 'https://t.me/+amLdTd-EoHw1MWRk',
+  localStorageMDN:
+    'https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage'
 }
 
 interface sectionInfoElement {
