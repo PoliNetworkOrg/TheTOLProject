@@ -1,11 +1,13 @@
 import { links, members } from '../../utils/constants'
 import { StyleSheet, theme } from '../../utils/style'
 import telegramLogo from '../../static/telegram_logo.svg'
+import Wrapper from '../Util/Wrapper'
 
 const styles = StyleSheet.create({
   p: {
     margin: '20px',
-    textAlign: 'justify'
+    textAlign: 'justify',
+    width: '100%'
   },
   centered: {
     textAlign: 'center'
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
 
 export default function About() {
   return (
-    <>
+    <Wrapper title="About">
       <p style={styles.p}>
         Per poter essere ammessi alla scuola di Ingegneria del Politecnico di
         Milano (PoliMi), le aspiranti matricole devono superare il test di
@@ -168,6 +170,6 @@ export default function About() {
           </li>
         </ul>
       </p>
-    </>
+    </Wrapper>
   )
 }

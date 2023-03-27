@@ -3,17 +3,9 @@ import Collapsible from 'react-collapsible'
 import { TestContext } from '../../utils/contexts'
 import { StyleSheet } from '../../utils/style'
 import Button from '../Util/Button'
+import Wrapper from '../Util/Wrapper'
 
 const styles = StyleSheet.create({
-  div: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    margin: '10px auto',
-    marginBlock: '16px',
-    maxWidth: 600,
-    textAlign: 'center'
-  },
   centered: {
     display: 'block'
   },
@@ -31,9 +23,11 @@ interface InfoStartProps {
 export default function InfoStart({ startTest }: InfoStartProps) {
   const { isDsa, toggleDsa } = useContext(TestContext)
   return (
-    <div style={styles.div}>
+    <Wrapper>
       <p>
-        <span style={styles.centered}>DISCLAIMER</span>
+        <span style={styles.centered}>
+          <b>DISCLAIMER</b>
+        </span>
         <br />
         "The TOL Project" (Progetto) non è in alcun modo collegato al
         Politecnico di Milano ma è gestito gratuitamente da studenti. Gli autori
@@ -79,6 +73,6 @@ export default function InfoStart({ startTest }: InfoStartProps) {
           in questa simulazione.
         </p>
       </Collapsible>
-    </div>
+    </Wrapper>
   )
 }

@@ -1,12 +1,14 @@
 import { links } from '../../utils/constants'
 import { StyleSheet } from '../../utils/style'
+import Wrapper from '../Util/Wrapper'
 
 const styles = StyleSheet.create({
   div: {
     paddingBlock: '15px'
   },
   centered: {
-    textAlign: 'center'
+    textAlign: 'center',
+    margin: 0
   },
   licenseImg: {
     borderWidth: 0,
@@ -18,18 +20,7 @@ const styles = StyleSheet.create({
 
 export function License() {
   return (
-    <div style={styles.div}>
-      <a
-        rel="license noreferrer noopener"
-        href="https://creativecommons.org/licenses/by-sa/4.0/"
-        target="_blank"
-      >
-        <img
-          alt="Creative Commons License"
-          style={styles.licenseImg}
-          src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
-        />
-      </a>
+    <Wrapper title="License">
       <p>
         <span
           {...{ 'xmlns:dct': 'https://purl.org/dc/terms/' }}
@@ -104,6 +95,18 @@ export function License() {
         </a>
         .
       </p>
-    </div>
+      <a
+        rel="license noreferrer noopener"
+        href="https://creativecommons.org/licenses/by-sa/4.0/"
+        target="_blank"
+        style={{ margin: 10 }}
+      >
+        <img
+          alt="Creative Commons License"
+          style={styles.licenseImg}
+          src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
+        />
+      </a>
+    </Wrapper>
   )
 }
