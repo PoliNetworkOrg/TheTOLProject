@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { links } from '../utils/constants'
 import { MobileContext } from '../utils/contexts'
 import { StyleSheet, theme } from '../utils/style'
-import githubLogo from '../static/github_logo.svg'
 import { view } from './App'
 
 const styles = StyleSheet.create({
@@ -23,10 +22,6 @@ const styles = StyleSheet.create({
     color: 'inherit',
     fontSize: '11pt',
     alignItems: 'center'
-  },
-  githubLogo: {
-    height: '17px',
-    marginLeft: 3
   }
 })
 
@@ -58,7 +53,6 @@ export default function Footer(props: { view: view }) {
         rel="noreferrer noopener"
       >
         Source
-        <img src={githubLogo} style={styles.githubLogo}></img>
       </a>
       <Link to="about" style={linkStyle} replace>
         About
