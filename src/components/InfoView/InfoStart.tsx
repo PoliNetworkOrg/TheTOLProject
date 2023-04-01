@@ -52,9 +52,9 @@ export default function InfoStart({ startTest }: InfoStartProps) {
         </label>
       </div>
       <Collapsible trigger={<></>} open={isDsa} transitionTime={150}>
-        <Trans>
-          <p>{t('home.dsaInfo')}</p>
-        </Trans>
+        <p>
+          <Trans>home.dsaInfo</Trans>
+        </p>
       </Collapsible>
     </Wrapper>
   )

@@ -37,9 +37,9 @@ export default function About() {
   const { t } = useTranslation()
   return (
     <Wrapper title="About">
-      <Trans>
-        <p style={styles.p}>{t('about.main')}</p>
-      </Trans>
+      <p style={styles.p}>
+        <Trans>about.main</Trans>
+      </p>
       <p style={styles.p}>
         <b>{t('about.projectTeam')}</b>
         <br />
