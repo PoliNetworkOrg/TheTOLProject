@@ -1,3 +1,10 @@
 {
-  "language": "italian"
+  "language": "Italian",
+  "home": {
+    "disclaimer": "\"The TOL Project\" (Progetto) non è in alcun modo collegato al Politecnico di Milano ma è gestito gratuitamente da studenti. Gli autori del Progetto non si assumono alcuna responsabilità, né garantiscono espressamente o implicitamente l'accuratezza o l'affidabilità dei contenuti di questo sito ai fini del superamento del test di ammissione del Politecnico di Milano",
+    "languageInfo": "",
+    "startBtn": "Inizia il test",
+    "dsaBtn": "Studente con DSA",
+    "dsaInfo": "Gli studenti con Disturbi Specifici dell'Apprendimento (DSA) che affrontano il TOL, possono usufruire di un tempo supplementare pari al 30%, previa segnalazione in fase di iscrizione al test. È inoltre richiesta una certificazione attestante la diagnosi di DSA. <br /> Selezionando \"Studente con DSA\" verrà applicato il tempo bonus in questa simulazione."
+  }
 }

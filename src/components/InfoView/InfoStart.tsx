@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import Collapsible from 'react-collapsible'
+import { Trans, useTranslation } from 'react-i18next'
 import { TestContext } from '../../utils/contexts'
 import { StyleSheet } from '../../utils/style'
 import Button from '../Util/Button'
@@ -22,6 +23,8 @@ interface InfoStartProps {
 }
 export default function InfoStart({ startTest }: InfoStartProps) {
   const { isDsa, toggleDsa } = useContext(TestContext)
+  const { t } = useTranslation()
+
   return (
     <Wrapper>
       <p>
@@ -29,27 +32,13 @@ export default function InfoStart({ startTest }: InfoStartProps) {
           <b>DISCLAIMER</b>
         </span>
         <br />
-        "The TOL Project" (Progetto) non è in alcun modo collegato al
-        Politecnico di Milano ma è gestito gratuitamente da studenti. Gli autori
-        del Progetto non si assumono alcuna responsabilità, né garantiscono
-        espressamente o implicitamente l'accuratezza o l'affidabilità dei
-        contenuti di questo sito ai fini del superamento del test di ammissione
-        del Politecnico di Milano.
-        <br />
-        <br />
-        <span style={styles.centered}>---</span>
-        <br />
-        "The TOL Project" (Project) is in no way connected to Politecnico di
-        Milano but is managed free of charge by students. The authors of the
-        Project do not assume any responsibility, nor do they expressly or
-        implicitly guarantee the accuracy or reliability of the contents of this
-        site for the purpose of passing the admission test at Politecnico di
-        Milano.
+        {t('home.disclaimer')}
       </p>
+      <i>{t('home.languageInfo')}</i>
       <div style={styles.buttonDiv}>
         <Button
           style={{ fontSize: 14 }}
-          label="Inizia il test"
+          label={t('home.startBtn')}
           onClick={startTest}
         />
         <label htmlFor="dsa_toggle" style={{ userSelect: 'none' }}>
@@ -59,19 +48,13 @@ export default function InfoStart({ startTest }: InfoStartProps) {
             checked={isDsa}
             onChange={toggleDsa}
           />
-          Studente con DSA
+          {t('home.dsaBtn')}
         </label>
       </div>
       <Collapsible trigger={<></>} open={isDsa} transitionTime={150}>
-        <p>
-          Gli studenti con Disturbi Specifici dell'Apprendimento (DSA) che
-          affrontano il TOL, possono usufruire di un tempo supplementare pari al
-          30%, previa segnalazione in fase di iscrizione al test. <br />È
-          inoltre richiesta una certificazione attestante la diagnosi di DSA.{' '}
-          <br />
-          Selezionando "Studente con DSA" viene applicato il tempo bonus anche
-          in questa simulazione.
-        </p>
+        <Trans>
+          <p>{t('home.dsaInfo')}</p>
+        </Trans>
       </Collapsible>
     </Wrapper>
   )
