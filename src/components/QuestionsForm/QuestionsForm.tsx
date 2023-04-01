@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useTimer } from 'react-timer-hook'
 import { PanelBear } from '../..'
-import { getNextSection, sectionInfo } from '../../utils/constants'
+import {
+  DSATimeModifier,
+  getNextSection,
+  sectionInfo
+} from '../../utils/constants'
+import { TestContext } from '../../utils/contexts'
 import { section, QuestionsData } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import { statePair } from '../../utils/types'
@@ -27,6 +32,8 @@ interface QuestionsFormProps {
   viewState: statePair<view>
 }
 export default function QuestionsForm(props: QuestionsFormProps) {
+  const { isDsa } = useContext(TestContext)
+  const minutesCoeff = isDsa ? DSATimeModifier : 1
   const [qIndex, originalSetQIndex] = useState(0),
     tmpFlaggedState = useState(false),
     tmpAnswerState = useState<Answer['letter']>(),
@@ -89,7 +96,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
 
     const nextTR = timeRecord
     nextTR[currentSection] =
-      sectionInfo[currentSection].minutes * 60 -
+      sectionInfo[currentSection].minutes * minutesCoeff * 60 -
       ((timer.hours * 60 + timer.minutes) * 60 + timer.seconds)
     setTimeRecord(nextTR)
 
@@ -120,7 +127,9 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   }
 
   const timer = useTimer({
-    expiryTimestamp: getTimerExpDate(sectionInfo[currentSection].minutes),
+    expiryTimestamp: getTimerExpDate(
+      sectionInfo[currentSection].minutes * minutesCoeff
+    ),
     onExpire: () => {
       timer.seconds = 0
       closeSection()
@@ -168,7 +177,9 @@ export default function QuestionsForm(props: QuestionsFormProps) {
             const nextSection = getNextSection(currentSection)
             if (nextSection) {
               setSection(nextSection)
-              timer.restart(getTimerExpDate(sectionInfo[nextSection].minutes))
+              timer.restart(
+                getTimerExpDate(sectionInfo[nextSection].minutes * minutesCoeff)
+              )
               setView('TOL-testing')
             } else {
               setView('INFO-end')
@@ -180,6 +191,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
           secondsUsed={timeRecord[currentSection] || 0}
           sectionAnswers={answers[currentSection]}
           sectionQuestions={props.questions[currentSection]}
+          minutes={sectionInfo[currentSection].minutes * minutesCoeff}
         />
       )
     else return <div />

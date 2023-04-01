@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
     color: 'inherit',
-    fontSize: '11pt'
+    fontSize: '11pt',
+    alignItems: 'center'
   }
 })
 
@@ -74,7 +75,7 @@ export default function Footer(props: { view: view }) {
         License
       </Link>
       <Link to="privacy" style={linkStyle} replace>
-        Privacy & cookies
+        Privacy & Cookies
       </Link>
     </div>
   )
