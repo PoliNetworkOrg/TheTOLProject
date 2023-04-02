@@ -17,7 +17,12 @@ i18n
         translation: itLocale
       }
     },
-    fallbackLng: 'it'
+    fallbackLng: 'it',
+    detection: {
+      order: ['localStorage', 'navigator', 'htmlTag'],
+      lookupLocalStorage: 'tol_i18n_lng',
+      caches: ['localStorage']
+    }
   })
 
 export default i18n
