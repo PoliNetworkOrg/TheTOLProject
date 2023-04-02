@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { StyleSheet } from '../utils/style'
 import { statePair } from '../utils/types'
 import { view } from './App'
@@ -43,9 +43,11 @@ interface HeaderProps {
 export default function Header({ viewState }: HeaderProps) {
   const { i18n } = useTranslation()
   const { mobile } = useContext(MobileContext)
+  const [lang, setLang] = useState(i18n.resolvedLanguage)
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value
     i18n.changeLanguage(lang)
+    setLang(lang)
   }
 
   return (
@@ -71,7 +73,7 @@ export default function Header({ viewState }: HeaderProps) {
       </div>
 
       <div style={{ ...styles.col, justifyContent: 'flex-end' }}>
-        <select value={i18n.language} onChange={handleLanguageChange}>
+        <select value={lang} onChange={handleLanguageChange}>
           <option value="it">IT</option>
           <option value="en">EN</option>
         </select>
