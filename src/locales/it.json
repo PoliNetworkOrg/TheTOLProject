@@ -15,5 +15,8 @@
       "1": "Segnalazioni e informazioni sul progetto: ",
       "2": "Quesiti TOL e loro risoluzione: "
     }
-  } 
+  },
+  "license": {
+    "main": "<title>The TOL Project</title> by <network>PoliNetwork</network> è rilasciato sotto una licenza <cc4>Creative Commons Attribution-ShareAlike 4.0 International License</cc4>. <br /> Permessi che vanno oltre l'ambito di questa licenza posso essere disponibili <githubLicense>qui</githubLicense>."
+  }
 }
