@@ -34,11 +34,11 @@ const styles = StyleSheet.create({
 })
 
 export default function About() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   return (
     <Wrapper title="About">
       <p style={styles.p}>
-        <Trans>about.main</Trans>
+        <Trans i18n={i18n}>about.main</Trans>
       </p>
       <p style={styles.p}>
         <b>{t('about.projectTeam')}</b>

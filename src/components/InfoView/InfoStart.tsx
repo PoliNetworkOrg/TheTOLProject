@@ -23,7 +23,7 @@ interface InfoStartProps {
 }
 export default function InfoStart({ startTest }: InfoStartProps) {
   const { isDsa, toggleDsa } = useContext(TestContext)
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   return (
     <Wrapper>
@@ -53,7 +53,7 @@ export default function InfoStart({ startTest }: InfoStartProps) {
       </div>
       <Collapsible trigger={<></>} open={isDsa} transitionTime={150}>
         <p>
-          <Trans>home.dsaInfo</Trans>
+          <Trans i18n={i18n}>home.dsaInfo</Trans>
         </p>
       </Collapsible>
     </Wrapper>
