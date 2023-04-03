@@ -148,3 +148,9 @@ export const members: Member[] = [
     prefix: 'Prof.ssa'
   }
 ]
+
+export const STORAGE = {
+  DSA: 'tol_is_dsa',
+  LANG: 'tol_i18n_lng',
+  LAST_CHANGE: 'tol_last_change'
+} as const

@@ -6,6 +6,7 @@ import logo from '../static/logo3000.webp'
 import { links } from '../utils/constants'
 import { MobileContext } from '../utils/contexts'
 import { useTranslation } from 'react-i18next'
+import { LocalStorage } from '../utils/storage'
 
 const styles = StyleSheet.create({
   div: {
@@ -47,6 +48,7 @@ export default function Header({ viewState }: HeaderProps) {
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value
     i18n.changeLanguage(lang)
+    LocalStorage.handleChange() // language saved to LocalStorage
     setLang(lang)
   }
 

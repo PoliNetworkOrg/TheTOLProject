@@ -4,6 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 
 import enLocale from './locales/en.json'
 import itLocale from './locales/it.json'
+import { STORAGE } from './utils/constants'
 
 i18n
   .use(LanguageDetector)
@@ -20,7 +21,7 @@ i18n
     fallbackLng: 'it',
     detection: {
       order: ['localStorage', 'navigator', 'htmlTag'],
-      lookupLocalStorage: 'tol_i18n_lng',
+      lookupLocalStorage: STORAGE.LANG,
       caches: ['localStorage']
     }
   })
