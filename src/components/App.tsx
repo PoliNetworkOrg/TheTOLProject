@@ -23,6 +23,7 @@ import Separator from './Util/Separator'
 import QPreview from './pages/QPreview'
 
 import { MobileContext, TestProvider } from '../utils/contexts'
+import { LocalStorage } from '../utils/storage'
 
 export type view = 'INFO-start' | 'TOL-testing' | 'TOL-secRecap' | 'INFO-end'
 
@@ -58,6 +59,7 @@ export default function App() {
   const [mobile, setMobile] = useState<boolean>(false)
 
   useEffect(() => {
+    LocalStorage.checkLastChange() // privacy check
     if (!database)
       readDatabase()
         .then((db) => {

@@ -1,0 +1,26 @@
+{
+  "language": "English",
+  "home": {
+    "disclaimer": "\"The TOL Project\" (Project) is in no way connected to Politecnico di Milano but is managed free of charge by students. The authors of the Project do not assume any responsibility, nor do they expressly or implicitly guarantee the accuracy or reliability of the contents of this site for the purpose of passing the admission test at Politecnico di Milano.",
+    "languageInfo": "*The test simulation will be in Italian",
+    "startBtn": "Start the test",
+    "dsaBtn": "Student with SLD",
+    "dsaInfo": "Students with Specific Learning Disorders (SLD) taking the TOL are eligible for an additional 30 percent time, provided they disclose it when registering for the test. A certification stating the SLD diagnosis is also required. <br /> Selecting \"Student with SLD\" will apply the bonus time in this simulation as well."
+  },
+  "about": {
+    "main": "In order to be admitted to the Engineering school of Politecnico di Milano (PoliMi), the aspiring freshmen must pass the admission test (TOL). <br /> Among the resources that PoliMi offers for free to prepare, you can find: the Politest, a collection of commented and solved exercises, the DOL, an online demo with a limited number of questions, and two complete self-assessment tests (pdf with questions, xls with exact answers). <br /> <br /> Thus, we did not have a complete, web-based TOL simulation, that is, in the same environment in which the future freshmen will take the admission test. <br /> We have set ourself the goal of creating a complete and free TOL simulation, in order to provide aspiring freshmen with a familiar environment in which to practice, very similar to the one they will encounter at the admission test. <br /> The project is fully managed by students, from developing the web application to creating the TOL questions.",
+    "projectTeam": "Project team",
+    "supportGroups": {
+      "head": "Support groups",
+      "1": "Project feedback & info: ",
+      "2": "TOL questions and their resolution: "
+    }
+  },
+  "license": {
+    "main": "<title>The TOL Project</title> by <network>PoliNetwork</network> is licensed under a <cc4>Creative Commons Attribution-ShareAlike 4.0 International License</cc4> <br/> Permissions beyond the scope of this license may be available <githubLicense>here</githubLicense>."
+  },
+  "privacy": {
+    "tracker": "This website uses a non-invasive tracker to keep track of its performance, complying with GDPR. <br />The website does not store any permanent cookie: transmitted data is anonymized and not traceable to the user. <br />For more info, check out <link />",
+    "localStorage": "It uses the browser <link /> to save user preferences, for example the test mode (regular or DSA) or the website language. These settings are never sent to any server, instead they are handled locally by the browser. Moreover, preferences are deleted after 6 months from the last change."
+  }
+}

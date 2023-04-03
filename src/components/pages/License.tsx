@@ -1,3 +1,4 @@
+import { Trans, useTranslation } from 'react-i18next'
 import { links } from '../../utils/constants'
 import { StyleSheet } from '../../utils/style'
 import Wrapper from '../Util/Wrapper'
@@ -19,81 +20,44 @@ const styles = StyleSheet.create({
 })
 
 export function License() {
+  const { i18n } = useTranslation()
+  const components = {
+    title: (
+      <span
+        {...{ 'xmlns:dct': 'https://purl.org/dc/terms/' }}
+        property="dct:title"
+      />
+    ),
+    network: (
+      <a
+        href="https://polinetwork.org/it/projects/"
+        property="cc:attributionName"
+        rel="cc:attributionURL noreferrer noopener"
+        target="_blank"
+      />
+    ),
+    cc4: (
+      <a
+        rel="license noreferrer noopener"
+        href="https://creativecommons.org/licenses/by-sa/4.0/"
+        target="_blank"
+      />
+    ),
+    githubLicense: (
+      <a
+        {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
+        href={links.githubLicense}
+        rel="cc:morePermissions noreferrer noopener"
+        target="_blank"
+      />
+    )
+  }
   return (
     <Wrapper title="License">
       <p>
-        <span
-          {...{ 'xmlns:dct': 'https://purl.org/dc/terms/' }}
-          property="dct:title"
-        >
-          The TOL Project
-        </span>{' '}
-        by{' '}
-        <a
-          {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
-          href="https://polinetwork.org/it/projects/"
-          property="cc:attributionName"
-          rel="cc:attributionURL noreferrer noopener"
-          target="_blank"
-        >
-          PoliNetwork
-        </a>{' '}
-        è rilasciato sotto una licenza{' '}
-        <a
-          rel="license noreferrer noopener"
-          href="https://creativecommons.org/licenses/by-sa/4.0/"
-          target="_blank"
-        >
-          Creative Commons Attribution-ShareAlike 4.0 International License
-        </a>
-        . Permessi che vanno oltre l'ambito di questa licenza posso essere
-        disponibili{' '}
-        <a
-          {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
-          href={links.githubLicense}
-          rel="cc:morePermissions noreferrer noopener"
-          target="_blank"
-        >
-          qui
-        </a>
-        .
-      </p>
-      <p style={styles.centered}>---</p>
-      <p>
-        <span
-          {...{ 'xmlns:dct': 'https://purl.org/dc/terms/' }}
-          property="dct:title"
-        >
-          The TOL Project
-        </span>{' '}
-        by{' '}
-        <a
-          {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
-          href="https://polinetwork.org/it/projects/"
-          property="cc:attributionName"
-          rel="cc:attributionURL noreferrer noopener"
-          target="_blank"
-        >
-          PoliNetwork
-        </a>{' '}
-        is licensed under a{' '}
-        <a
-          rel="license noreferrer noopener"
-          href="https://creativecommons.org/licenses/by-sa/4.0/"
-          target="_blank"
-        >
-          Creative Commons Attribution-ShareAlike 4.0 International License
-        </a>
-        . Permissions beyond the scope of this license may be available{' '}
-        <a
-          {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
-          href={links.githubLicense}
-          rel="cc:morePermissions noreferrer noopener"
-          target="_blank"
-        >
-          here
-        </a>
-        .
+        <Trans i18n={i18n} components={components}>
+          license.main
+        </Trans>
       </p>
       <a
         rel="license noreferrer noopener"

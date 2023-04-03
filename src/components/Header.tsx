@@ -1,10 +1,12 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { StyleSheet } from '../utils/style'
 import { statePair } from '../utils/types'
 import { view } from './App'
 import logo from '../static/logo3000.webp'
 import { links } from '../utils/constants'
 import { MobileContext } from '../utils/contexts'
+import { useTranslation } from 'react-i18next'
+import { LocalStorage } from '../utils/storage'
 
 const styles = StyleSheet.create({
   div: {
@@ -14,41 +16,25 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   text: {
-    flex: 1,
-    fontSize: '18pt',
-    display: 'inline-block'
+    fontSize: '18pt'
   },
   get centeredText() {
-    return StyleSheet.compose(this.text, this.spacer, {
-      justifyContent: 'center'
+    return StyleSheet.compose(this.text, {
+      textAlign: 'center',
+      flex: 1
     })
   },
-  get rightText() {
-    return StyleSheet.compose(this.text, this.spacer, {
-      justifyContent: 'flex-end',
-      marginRight: 8
-    })
-  },
-  get logoDiv() {
-    return StyleSheet.compose(this.spacer, {
-      alignItems: 'center',
-      gap: '10px',
-      margin: '5px',
-      textDecoration: 'none'
-    })
+  logoDiv: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    margin: '5px',
+    textDecoration: 'none'
   },
   logo: {
     height: '60px'
   },
-  buttonDiv: {
-    display: 'flex',
-    flex: 1,
-    justifyContent: 'flex-end'
-  },
-  spacer: {
-    display: ' flex',
-    flex: 1
-  }
+  col: { flex: 1, display: 'flex' }
 })
 
 interface HeaderProps {
@@ -56,27 +42,44 @@ interface HeaderProps {
 }
 
 export default function Header({ viewState }: HeaderProps) {
+  const { i18n } = useTranslation()
   const { mobile } = useContext(MobileContext)
+  const [lang, setLang] = useState(i18n.resolvedLanguage)
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const lang = e.target.value
+    i18n.changeLanguage(lang)
+    LocalStorage.handleChange() // language saved to LocalStorage
+    setLang(lang)
+  }
 
   return (
     <div className="do-not-print" style={styles.div}>
-      <a
-        style={StyleSheet.compose(styles.logoDiv, { flex: mobile ? 0 : 1 })}
-        {...(!viewState[0].startsWith('TOL')
-          ? {
-              rel: 'noreferrer noopener',
-              target: '_blank',
-              href: links.polinetwork
-            }
-          : {})}
-      >
-        <img src={logo} alt="logo" style={styles.logo} />
-        {mobile ? undefined : <h1 style={styles.text}>PoliNetwork</h1>}
-      </a>
-      <h1 style={mobile ? styles.rightText : styles.centeredText}>
-        The TOL Project
-      </h1>
-      {mobile ? undefined : <div style={styles.spacer} />}
+      <div style={styles.col}>
+        <a
+          style={{
+            ...styles.logoDiv,
+            // disable logo link when doing the test
+            pointerEvents: viewState[0].startsWith('TOL') ? 'none' : 'all'
+          }}
+          rel="noreferrer noopener"
+          target="_blank"
+          href={links.polinetwork}
+        >
+          <img src={logo} alt="logo" style={styles.logo} />
+          {!mobile && <h1 style={styles.text}>PoliNetwork</h1>}
+        </a>
+      </div>
+
+      <div style={{ ...styles.col, flex: mobile ? 3 : 1 }}>
+        <h1 style={styles.centeredText}>The TOL Project</h1>
+      </div>
+
+      <div style={{ ...styles.col, justifyContent: 'flex-end' }}>
+        <select value={lang} onChange={handleLanguageChange}>
+          <option value="it">IT</option>
+          <option value="en">EN</option>
+        </select>
+      </div>
     </div>
   )
 }
