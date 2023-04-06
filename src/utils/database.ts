@@ -2,7 +2,7 @@ import axios from 'axios'
 import fromEntries from 'fromentries'
 import _ from 'underscore'
 import packageJson from '../../package.json'
-import { sectionInfo } from './constants'
+import { DATABASE_REF, sectionInfo } from './constants'
 
 export const sheetDict = {
   quesiti_ING: 'ing',
@@ -10,15 +10,15 @@ export const sheetDict = {
   quesiti_COM: 'com',
   quesiti_FIS: 'fis'
 } as const
-export type section = typeof sheetDict[keyof typeof sheetDict]
+export type Section = typeof sheetDict[keyof typeof sheetDict]
 
-export type answerLetter = 'a' | 'b' | 'c' | 'd' | 'e'
+export type AnswerLetter = 'a' | 'b' | 'c' | 'd' | 'e'
 
 export interface Question {
   id: string
   text: string
-  answers: Record<answerLetter, string>
-  correct: answerLetter
+  answers: Record<AnswerLetter, string>
+  correct: AnswerLetter
   attachments: string[]
   validated: boolean
 
@@ -27,7 +27,7 @@ export interface Question {
   track?: string
 }
 
-export type QuestionsData = Record<section, Question[]>
+export type QuestionsData = Record<Section, Question[]>
 
 export interface Database extends QuestionsData {
   meta: {
@@ -35,7 +35,7 @@ export interface Database extends QuestionsData {
   }
 }
 
-export async function readDatabase(ref = 'stable') {
+export async function readDatabase(ref: DATABASE_REF = DATABASE_REF.STABLE) {
   const db = (
     await axios.get(
       `https://raw.githubusercontent.com/PoliNetworkOrg/TheTOLProjectData/${ref}/database.json`
@@ -53,7 +53,7 @@ export async function readDatabase(ref = 'stable') {
 export function selectRandomQuestions(db: Database): QuestionsData {
   return fromEntries(
     // Manipulate db entries
-    (Object.entries(db) as [section /* or "meta" */, Question[]][])
+    (Object.entries(db) as [Section /* or "meta" */, Question[]][])
       // Select only entries associated with a section <=> exclude "meta"
       .filter(([key]) => (Object.values(sheetDict) as string[]).includes(key))
       .map(([key, questions]) => {
@@ -75,6 +75,11 @@ export function selectRandomQuestions(db: Database): QuestionsData {
   ) as QuestionsData
 }
 
-export function getImageURL(fileName: string, ref = 'stable') {
+export function getImageURL(
+  fileName: string,
+  ref: DATABASE_REF = DATABASE_REF.STABLE
+) {
   return `https://raw.githubusercontent.com/PoliNetworkOrg/TheTOLProjectData/${ref}/img/${fileName}`
 }
+
+export type DatabaseStore = Record<DATABASE_REF, Database>

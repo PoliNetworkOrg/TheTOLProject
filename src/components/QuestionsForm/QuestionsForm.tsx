@@ -8,7 +8,7 @@ import {
   sectionInfo
 } from '../../utils/constants'
 import { TestContext } from '../../utils/contexts'
-import { section, QuestionsData } from '../../utils/database'
+import { Section, QuestionsData } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import { statePair } from '../../utils/types'
 import { Answer, AnswersData, TimeRecord, view } from '../App'
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 interface QuestionsFormProps {
   answersState: statePair<AnswersData>
   questions: QuestionsData
-  sectionState: statePair<section>
+  sectionState: statePair<Section>
   timeRecordState: statePair<TimeRecord>
   viewState: statePair<view>
 }

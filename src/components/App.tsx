@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { RibbonContainer, RightCornerRibbon } from 'react-ribbons'
 import {
-  answerLetter,
-  section,
-  Database,
+  AnswerLetter,
+  Section,
   QuestionsData,
   readDatabase,
-  selectRandomQuestions
+  selectRandomQuestions,
+  DatabaseStore
 } from '../utils/database'
 import { StyleSheet } from '../utils/style'
 import DBPreview from './pages/DBPreview'
@@ -24,19 +24,20 @@ import QPreview from './pages/QPreview'
 
 import { MobileContext, TestProvider } from '../utils/contexts'
 import { LocalStorage } from '../utils/storage'
+import { DATABASE_REF } from '../utils/constants'
 
 export type view = 'INFO-start' | 'TOL-testing' | 'TOL-secRecap' | 'INFO-end'
 
 export interface Answer {
   id: string
   sub?: string
-  letter: answerLetter | undefined
+  letter: AnswerLetter | undefined
   flagged: boolean
 }
 
-export type AnswersData = Record<section, Answer[]>
+export type AnswersData = Record<Section, Answer[]>
 
-export type TimeRecord = Partial<Record<section, number>>
+export type TimeRecord = Partial<Record<Section, number>>
 
 const styles = StyleSheet.create({
   app: { paddingInline: '8px' },
@@ -44,10 +45,10 @@ const styles = StyleSheet.create({
 })
 
 export default function App() {
-  const [database, loadDatabase] = useState<Database>()
+  const [dbs, setDbs] = useState<DatabaseStore>()
   const [questions, setQuestions] = useState<QuestionsData>()
   const [view, setView] = useState<view>('INFO-start')
-  const sectionState = useState<section>('ing')
+  const sectionState = useState<Section>('ing')
   const answersState = useState<AnswersData>({
     ing: [],
     mat: [],
@@ -58,20 +59,26 @@ export default function App() {
   const [loadingError, showError] = useState<[string, Error] | []>([])
   const [mobile, setMobile] = useState<boolean>(false)
 
+  async function loadDatabases() {
+    try {
+      const stable = await readDatabase(DATABASE_REF.STABLE)
+      const main = await readDatabase(DATABASE_REF.MAIN)
+      setDbs({
+        [DATABASE_REF.STABLE]: stable,
+        [DATABASE_REF.MAIN]: main
+      })
+      setQuestions(selectRandomQuestions(stable))
+    } catch (e) {
+      showError([
+        'There has been an issue while fetching the database data. Please retry later.',
+        e as Error
+      ])
+    }
+  }
+
   useEffect(() => {
     LocalStorage.checkLastChange() // privacy check
-    if (!database)
-      readDatabase()
-        .then((db) => {
-          loadDatabase(db)
-          setQuestions(selectRandomQuestions(db))
-        })
-        .catch((e) => {
-          showError([
-            'There has been an issue while fetching the database data. Please retry later.',
-            e
-          ])
-        })
+    loadDatabases()
 
     setMobile(window.innerWidth < 768)
     window.addEventListener('resize', () => {
@@ -152,11 +159,8 @@ export default function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/license" element={<License />} />
                 <Route path="/privacy" element={<Privacy />} />
-                <Route
-                  path="/dbpreview"
-                  element={<DBPreview db={database} />}
-                />
-                <Route path="/qpreview" element={<QPreview />} />
+                <Route path="/dbpreview" element={<DBPreview dbs={dbs} />} />
+                <Route path="/qpreview" element={<QPreview dbs={dbs} />} />
               </Routes>
             </div>
             <Separator />

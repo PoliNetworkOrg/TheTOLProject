@@ -8,7 +8,7 @@ import {
   testPassThreshold,
   testTotalScore
 } from '../../utils/constants'
-import { Question, QuestionsData, section } from '../../utils/database'
+import { Question, QuestionsData, Section } from '../../utils/database'
 import { formatNumber, StyleSheet, theme } from '../../utils/style'
 import { AnswersData } from '../App'
 import Button from '../Util/Button'
@@ -79,7 +79,7 @@ export default function InfoEnd(props: InfoEndProps) {
   const { answers, questions } = props
 
   const correctionGrid = fromEntries(
-    (Object.entries(questions) as [section, Question[]][]).map(
+    (Object.entries(questions) as [Section, Question[]][]).map(
       ([section, secQuestions]) => {
         let correct = 0,
           notGiven = 0,
@@ -122,7 +122,7 @@ export default function InfoEnd(props: InfoEndProps) {
   )
 
   const score = (
-    Object.entries(correctionGrid) as [section, typeof correctionGrid[string]][]
+    Object.entries(correctionGrid) as [Section, typeof correctionGrid[string]][]
   )
     .map(([, correction]) => correction.score.mul(correction.weight))
     .reduce((acc, curr) => acc.add(curr), new Fraction(0))
@@ -157,8 +157,8 @@ export default function InfoEnd(props: InfoEndProps) {
           </tr>
           {(
             Object.entries(correctionGrid) as [
-              section,
-              typeof correctionGrid[section]
+              Section,
+              typeof correctionGrid[Section]
             ][]
           )
             .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)

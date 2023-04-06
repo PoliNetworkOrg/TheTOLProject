@@ -1,4 +1,4 @@
-import { section } from './database'
+import { Section } from './database'
 import Fraction from 'fraction.js'
 
 export const links = {
@@ -28,7 +28,7 @@ interface sectionInfoElement {
   coeff: number | Fraction
 }
 
-export const sectionInfo: Record<section, sectionInfoElement> = {
+export const sectionInfo: Record<Section, sectionInfoElement> = {
   ing: {
     name: 'Inglese',
     order: 1,
@@ -74,14 +74,14 @@ export const correctionWeight = {
   notGiven: 0
 }
 
-export function getSectionName(key: section) {
+export function getSectionName(key: Section) {
   return sectionInfo[key].name
 }
 
-export function getNextSection(currentSection: section): section | undefined {
+export function getNextSection(currentSection: Section): Section | undefined {
   const sortedInfo = Object.entries(sectionInfo).sort(
     (a, b) => a[1].order - b[1].order
-  ) as [section, sectionInfoElement][]
+  ) as [Section, sectionInfoElement][]
   const i = sortedInfo.findIndex((e) => e[0] == currentSection)
   return (sortedInfo[i + 1] || [])[0]
 }
@@ -154,3 +154,8 @@ export const STORAGE = {
   LANG: 'tol_i18n_lng',
   LAST_CHANGE: 'tol_last_change'
 } as const
+
+export enum DATABASE_REF {
+  STABLE = 'stable',
+  MAIN = 'main'
+}

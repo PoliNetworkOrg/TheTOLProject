@@ -1,8 +1,14 @@
-import { sectionInfo } from '../../utils/constants'
-import { section, Database, Question as IQuestion } from '../../utils/database'
+import { useState } from 'react'
+import { DATABASE_REF, sectionInfo } from '../../utils/constants'
+import {
+  Section,
+  Question as IQuestion,
+  DatabaseStore
+} from '../../utils/database'
 import { baseStyle, StyleSheet } from '../../utils/style'
 import GeneralPurposeCollapsible from '../Util/GeneralPurposeCollapsible'
 import Question from '../Util/Question'
+import Select from '../Util/Select'
 
 const styles = StyleSheet.create({
   ul: {
@@ -12,15 +18,27 @@ const styles = StyleSheet.create({
 })
 
 interface DBPreviewProps {
-  db?: Database
+  dbs?: DatabaseStore
 }
 
-export default function DBPreview({ db }: DBPreviewProps) {
-  return db ? (
+export default function DBPreview({ dbs }: DBPreviewProps) {
+  if (!dbs) return <div style={baseStyle}>Loading...</div>
+  const [db, setDb] = useState(dbs.stable)
+
+  return (
     <div>
+      <Select
+        label="Database"
+        entries={[
+          { value: DATABASE_REF.STABLE, label: 'Production' },
+          { value: DATABASE_REF.MAIN, label: 'Development' }
+        ]}
+        defaultValue={DATABASE_REF.STABLE}
+        onChange={(v) => setDb(dbs[v as DATABASE_REF])}
+      />
       {(
         Object.entries(db).filter(([key]) => key != 'meta') as [
-          section,
+          Section,
           IQuestion[]
         ][]
       ).map(([key, questions]) => (
@@ -42,7 +60,5 @@ export default function DBPreview({ db }: DBPreviewProps) {
         </div>
       ))}
     </div>
-  ) : (
-    <div style={baseStyle}>Loading...</div>
   )
 }
