@@ -1,3 +1,4 @@
+import { DATABASE_REF } from '../../utils/constants'
 import { Question } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import CollapsibleText from '../Util/CollapsibleText'
@@ -49,7 +50,7 @@ export default function QuestionView({ question }: QuestionViewProps) {
       )}
       <div style={styles.container}>
         <RenderedText text={question.text}></RenderedText>
-        <QuestionAttachments q={question} dbRef="stable" />
+        <QuestionAttachments q={question} dbRef={DATABASE_REF.STABLE} />
       </div>
     </div>
   )
