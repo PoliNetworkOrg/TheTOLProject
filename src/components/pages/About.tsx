@@ -40,7 +40,7 @@ export default function About() {
       <p style={styles.p}>
         <Trans i18n={i18n}>about.main</Trans>
       </p>
-      <p style={styles.p}>
+      <div style={styles.p}>
         <b>{t('about.projectTeam')}</b>
         <br />
         <ul>
@@ -124,7 +124,7 @@ export default function About() {
             </div>
           </li>
         </ul>
-      </p>
+      </div>
     </Wrapper>
   )
 }
