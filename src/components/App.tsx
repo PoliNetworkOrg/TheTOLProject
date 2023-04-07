@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import {
+  Route,
+  useLocation,
+  createHashRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Outlet,
+  Navigate
+} from 'react-router-dom'
 import { RibbonContainer, RightCornerRibbon } from 'react-ribbons'
 import {
   AnswerLetter,
@@ -25,6 +33,7 @@ import QPreview from './pages/QPreview'
 import { MobileContext, TestProvider } from '../utils/contexts'
 import { LocalStorage } from '../utils/storage'
 import { DATABASE_REF } from '../utils/constants'
+import { statePair } from '../utils/types'
 
 export type view = 'INFO-start' | 'TOL-testing' | 'TOL-secRecap' | 'INFO-end'
 
@@ -86,29 +95,64 @@ export default function App() {
     })
   }, [])
 
-  const location = useLocation()
-
-  useEffect(() => {
-    const testPaths = ['/', '/test', '/results']
-    const testingURL = testPaths.includes(location.pathname)
-    if (!testingURL || view === 'INFO-start') {
-      // in other pages or on the start of the test, the listener shouldn't be set
-      window.onbeforeunload = null
-    } else if (view.startsWith('TOL')) {
-      // set the listener only if view is during a test, at the recap it is set in ExtendedCorrection.tsx
-      window.onbeforeunload = () => {
-        return 'Sicuro di voler uscire? Il test è ancora in corso'
-      }
-    }
-
-    if (location.pathname !== '/results') {
-      // restore default title
-      // title was changed in '/results' to save pdf
-      // on firefox android with date in filename
-      document.title = 'The TOL Project'
-    }
-  }, [view, location])
-
+  const router = createHashRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Layout viewState={[view, setView]} />}>
+        <Route
+          index
+          element={
+            // Don't ever think about moving this to an external component.
+            <div>
+              <ErrorView
+                hidden={!loadingError[0]}
+                display={loadingError[0] || ''}
+                internal={loadingError[1]}
+              />
+              {view.startsWith('TOL') && questions ? (
+                <QuestionsForm
+                  answersState={answersState}
+                  questions={questions as QuestionsData}
+                  sectionState={sectionState}
+                  timeRecordState={timeRecordState}
+                  viewState={[view, setView]}
+                />
+              ) : view.startsWith('INFO') && questions ? (
+                <InfoView
+                  answers={answersState[0]}
+                  questions={questions}
+                  viewState={[view, setView]}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
+          }
+        />
+        <Route
+          path="/test"
+          element={
+            questions && view.startsWith('TOL') ? (
+              <QuestionsForm
+                answersState={answersState}
+                questions={questions as QuestionsData}
+                sectionState={sectionState}
+                timeRecordState={timeRecordState}
+                viewState={[view, setView]}
+              />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+        <Route path="/results" element={<div />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/license" element={<License />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/dbpreview" element={<DBPreview dbs={dbs} />} />
+        <Route path="/qpreview" element={<QPreview dbs={dbs} />} />
+      </Route>
+    )
+  )
   return (
     <MobileContext.Provider value={{ mobile }}>
       <TestProvider>
@@ -120,56 +164,43 @@ export default function App() {
                 DEV
               </RightCornerRibbon>
             )}
-          <div style={styles.app}>
-            <Header viewState={[view, setView]} />
-            <Separator />
-            <div style={styles.routeContainer}>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    // Don't ever think about moving this to an external component.
-                    <div>
-                      <ErrorView
-                        hidden={!loadingError[0]}
-                        display={loadingError[0] || ''}
-                        internal={loadingError[1]}
-                      />
-                      {view.startsWith('TOL') && questions ? (
-                        <QuestionsForm
-                          answersState={answersState}
-                          questions={questions as QuestionsData}
-                          sectionState={sectionState}
-                          timeRecordState={timeRecordState}
-                          viewState={[view, setView]}
-                        />
-                      ) : view.startsWith('INFO') && questions ? (
-                        <InfoView
-                          answers={answersState[0]}
-                          questions={questions}
-                          viewState={[view, setView]}
-                        />
-                      ) : undefined}
-                    </div>
-                  }
-                >
-                  <Route path="/test" element={<div />} />
-                  <Route path="/results" element={<div />} />
-                </Route>
-                <Route path="/about" element={<About />} />
-                <Route path="/license" element={<License />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/dbpreview" element={<DBPreview dbs={dbs} />} />
-                <Route path="/qpreview" element={<QPreview dbs={dbs} />} />
-              </Routes>
-            </div>
-            <Separator />
-            {!view.startsWith('TOL') && view != 'INFO-end' && (
-              <Footer view={view} />
-            )}
-          </div>
+          <RouterProvider router={router} />
         </RibbonContainer>
       </TestProvider>
     </MobileContext.Provider>
+  )
+}
+
+interface LayoutProps {
+  viewState: statePair<view>
+}
+function Layout({ viewState }: LayoutProps) {
+  const [view] = viewState
+  const location = useLocation()
+  const testPaths = ['/', '/test', '/results']
+
+  useEffect(() => {
+    const testingURL = testPaths.includes(location.pathname)
+    if (!testingURL || view === 'INFO-start') {
+      // in other pages or on the start of the test, the listener shouldn't be set
+      window.onbeforeunload = null
+    } else if (view.startsWith('TOL')) {
+      // set the listener only if view is during a test, at the recap it is set in ExtendedCorrection.tsx
+      window.onbeforeunload = () => {
+        return 'Sicuro di voler uscire? Il test è ancora in corso'
+      }
+    }
+  }, [location])
+
+  return (
+    <div style={styles.app}>
+      <Header viewState={viewState} />
+      <Separator />
+      <div style={styles.routeContainer}>
+        <Outlet />
+      </div>
+      <Separator />
+      {!view.startsWith('TOL') && view != 'INFO-end' && <Footer view={view} />}
+    </div>
   )
 }
