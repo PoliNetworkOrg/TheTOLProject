@@ -3,7 +3,7 @@ import ReactToPrint from 'react-to-print'
 import {
   Question as IQuestion,
   QuestionsData,
-  section
+  Section
 } from '../../../utils/database'
 import { AnswersData } from '../../App'
 import { links, sectionInfo } from '../../../utils/constants'
@@ -161,7 +161,7 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
             che ti sono stati proposti con il relativo esito.
           </p>
         </div>
-        {(Object.entries(questions) as [section, IQuestion[]][])
+        {(Object.entries(questions) as [Section, IQuestion[]][])
           .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)
           .map(([section, values]) => (
             <div key={section}>

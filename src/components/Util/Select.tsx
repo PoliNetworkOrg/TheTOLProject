@@ -17,6 +17,7 @@ interface SelectEntry {
 
 interface ButtonProps {
   defaultValue?: string
+  value?: string
   disabled?: boolean
   entries: SelectEntry[]
   label?: string
@@ -25,16 +26,16 @@ interface ButtonProps {
 }
 
 export default function Select(props: ButtonProps) {
-  const [value, setValue] = useState(props.defaultValue)
+  const [localValue, setLocalValue] = useState(props.defaultValue)
 
   return (
     <label>
       {props.label || ''}
       <select
-        value={value}
+        value={props.value || localValue}
         onChange={(e) => {
           const newValue = e.target.value
-          setValue(newValue)
+          setLocalValue(newValue)
           props.onChange && props.onChange(newValue)
         }}
         style={styles.select}

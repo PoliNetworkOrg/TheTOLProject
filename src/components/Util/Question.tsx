@@ -1,3 +1,4 @@
+import { DATABASE_REF } from '../../utils/constants'
 import { Question as IQuestion } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import QuestionAttachments from './QuestionAttachments'
@@ -28,7 +29,7 @@ interface Props {
   choice?: string
   isTest?: boolean
   showAttachments?: boolean
-  dbRef?: 'stable' | 'main'
+  dbRef?: DATABASE_REF
 }
 
 export default function Question({
@@ -37,7 +38,7 @@ export default function Question({
   choice = '',
   isTest = false,
   showAttachments = false,
-  dbRef = 'stable'
+  dbRef = DATABASE_REF.STABLE
 }: Props) {
   const id = q.id && (q.sub ? `[${q.id}-${q.sub}] ` : `[${q.id}] `)
   const valid = q.validated !== undefined && `Valid: ${String(q.validated)}`

@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { TimerResult } from 'react-timer-hook'
 import { getSectionName } from '../../utils/constants'
 import { MobileContext } from '../../utils/contexts'
-import { section, QuestionsData } from '../../utils/database'
+import { Section, QuestionsData } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import { AnswersData } from '../App'
 import Button from '../Util/Button'
@@ -37,7 +37,7 @@ interface TopControlsProps {
   active: boolean
   answers: AnswersData
   closeSection: () => void
-  currentSection: section
+  currentSection: Section
   timer: TimerResult
   questions: QuestionsData
 }

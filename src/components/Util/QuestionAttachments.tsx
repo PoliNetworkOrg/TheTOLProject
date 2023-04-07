@@ -1,3 +1,4 @@
+import { DATABASE_REF } from '../../utils/constants'
 import { getImageURL, Question } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import GeneralPurposeCollapsible from './GeneralPurposeCollapsible'
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
 
 interface Props {
   q: Question
-  dbRef: 'stable' | 'main'
+  dbRef: DATABASE_REF
 }
 
 export default function QuestionAttachments({ q, dbRef }: Props) {

@@ -1,4 +1,4 @@
-import { answerLetter, section, QuestionsData } from '../../utils/database'
+import { AnswerLetter, Section, QuestionsData } from '../../utils/database'
 import { StyleSheet, theme } from '../../utils/style'
 import { statePair } from '../../utils/types'
 import { AnswersData } from '../App'
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
 interface RecapBarProps {
   active: boolean
   currentQuestionIndexState: statePair<number>
-  sectionAnswers: AnswersData[section]
-  sectionQuestions: QuestionsData[section]
+  sectionAnswers: AnswersData[Section]
+  sectionQuestions: QuestionsData[Section]
 }
 export default function RecapBar(props: RecapBarProps) {
   return (
@@ -80,7 +80,7 @@ export default function RecapBar(props: RecapBarProps) {
 
 interface AnswerCellProps {
   index: number
-  letter: answerLetter | undefined
+  letter: AnswerLetter | undefined
   flagged: boolean
   onClick: () => void
   selected: boolean

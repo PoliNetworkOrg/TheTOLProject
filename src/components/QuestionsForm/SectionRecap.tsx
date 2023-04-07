@@ -1,5 +1,5 @@
 import { sectionInfo } from '../../utils/constants'
-import { QuestionsData, section } from '../../utils/database'
+import { QuestionsData, Section } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import { AnswersData } from '../App'
 import Button from '../Util/Button'
@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
 
 interface SectionRecapProps {
   goToNextSection: () => void
-  section: section
-  sectionAnswers: AnswersData[section]
-  sectionQuestions: QuestionsData[section]
+  section: Section
+  sectionAnswers: AnswersData[Section]
+  sectionQuestions: QuestionsData[Section]
   secondsUsed: number
   minutes: number
 }

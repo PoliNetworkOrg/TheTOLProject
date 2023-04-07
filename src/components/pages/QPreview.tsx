@@ -1,16 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { DATABASE_REF } from '../../utils/constants'
 import {
-  Database,
+  DatabaseStore,
   Question as IQuestion,
-  readDatabase,
-  section,
+  Section,
   sheetDict
 } from '../../utils/database'
 import { baseStyle } from '../../utils/style'
 import Question from '../Util/Question'
 import Select from '../Util/Select'
 
-export default function QPreview() {
+interface Props {
+  dbs?: DatabaseStore
+}
+export default function QPreview(props: Props) {
   const [isCustom, setIsCustom] = useState(true)
 
   return (
@@ -24,88 +27,75 @@ export default function QPreview() {
         defaultValue="custom"
         onChange={(v) => setIsCustom(v === 'custom')}
       />
-      {isCustom ? <CustomQ /> : <DatabaseQ />}
+      {isCustom ? <CustomQ /> : <DatabaseQ {...props} />}
     </div>
   )
 }
 
-function DatabaseQ() {
-  const [dbRef, setDbRef] = useState<'main' | 'stable'>('main')
-  const [dbs, setDbs] = useState({} as Record<string, Database | Error>)
-  const [section, setSection] = useState('')
-  const [id, setID] = useState('')
+const sections = Object.entries(sheetDict).map(([key, value]) => ({
+  label: key,
+  value
+}))
+const createID = (q: IQuestion) => q.id + (q.sub ? ' - ' + q.sub : '')
+
+function DatabaseQ({ dbs }: Props) {
+  if (!dbs) return <div style={baseStyle}>Loading...</div>
+  const [dbRef, setDbRef] = useState<DATABASE_REF>(DATABASE_REF.STABLE)
+  const db = useMemo(() => dbs[dbRef], [dbRef])
+
+  const [section, setSection] = useState<Section>(sections[0].value)
+
+  const ids = useMemo(
+    () => db[section].filter((q) => q.id).map((q) => createID(q)),
+    [db, section]
+  )
+  const [id, setID] = useState(ids[0])
+
+  const question = useMemo(
+    () =>
+      db[section].find((q) => {
+        const [i, s] = id.split(' - ')
+        return q.id == i && (s ? q.sub == s : true)
+      }),
+    [id, section, db]
+  )
 
   useEffect(() => {
-    if (!dbs[dbRef] && !(dbs.dbRef instanceof Error)) {
-      readDatabase(dbRef)
-        .then((db) => {
-          setDbs({ ...dbs, [dbRef]: db })
-        })
-        .catch((e) => {
-          setDbs({ ...dbs, [dbRef]: e })
-        })
-    }
-  }, [dbRef])
+    if (!ids.includes(id)) setID(ids[0])
+  }, [ids])
 
   return (
     <div>
       <Select
         label="Database"
         entries={[
-          { value: 'stable', label: 'Production' },
-          { value: 'main', label: 'Development' }
+          { value: DATABASE_REF.STABLE, label: 'Production' },
+          { value: DATABASE_REF.MAIN, label: 'Development' }
         ]}
         defaultValue={dbRef}
-        onChange={(v) => setDbRef(v as 'main' | 'stable')}
-      />
-      <Select
-        label="Section"
-        entries={[
-          ...Object.entries(sheetDict).map(([key, value]) => ({
-            label: key,
-            value
-          })),
-          ...(section ? [] : [{ label: '', value: '' }])
-        ]}
-        defaultValue={''}
-        onChange={(v) => {
-          setSection(v)
-          setID('')
-        }}
-        disabled={!dbs[dbRef] || dbs[dbRef] instanceof Error}
-      />
-      <Select
-        label="ID"
-        entries={[
-          ...(dbs[dbRef] && !(dbs[dbRef] instanceof Error) && section
-            ? (dbs[dbRef] as Database)[section as section]
-                .filter((q) => q.id)
-                .map((q) => ({
-                  label: q.id + (q.sub ? ' - ' + q.sub : ''),
-                  value: q.id + (q.sub ? ' - ' + q.sub : '')
-                }))
-            : []),
-          ...[{ label: '', value: '' }]
-        ]}
-        defaultValue={''}
-        onChange={setID}
-        disabled={!dbs[dbRef] || dbs[dbRef] instanceof Error || !section}
+        onChange={(v) => setDbRef(v as DATABASE_REF)}
       />
 
-      {!dbs[dbRef] ? (
-        'Loading database...'
-      ) : dbs[dbRef] instanceof Error ? (
-        'Error while loading database:\n' + dbs[dbRef]
-      ) : section && id ? (
-        QuestionRender({
-          q: (dbs[dbRef] as Database)[section as section].find((q) => {
-            const [i, s] = id.split(' - ')
-            return q.id == i && (s ? q.sub == s : true)
-          }),
-          dbRef
-        })
+      <Select
+        label="Section"
+        entries={sections}
+        value={section}
+        onChange={(v) => {
+          setSection(v as Section)
+        }}
+      />
+
+      <Select
+        label="ID"
+        entries={ids.map((id) => ({ label: id, value: id }))}
+        value={id}
+        onChange={setID}
+      />
+
+      {question ? (
+        <QuestionRender q={question} dbRef={dbRef} />
       ) : (
-        <></>
+        <p>Question not found</p>
       )}
     </div>
   )
@@ -172,11 +162,9 @@ function CustomQ() {
 }
 
 interface QuestionRenderProps {
-  q?: IQuestion
-  dbRef?: 'stable' | 'main'
+  q: IQuestion
+  dbRef?: DATABASE_REF
 }
-function QuestionRender(props: QuestionRenderProps) {
-  const { q, dbRef } = props
-
-  return <>{q && <Question q={q} isDebug showAttachments dbRef={dbRef} />}</>
+function QuestionRender({ q, dbRef }: QuestionRenderProps) {
+  return <Question q={q} isDebug showAttachments dbRef={dbRef} />
 }
