@@ -202,15 +202,18 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   }
 
   useBlocker(view.startsWith('TOL'))
+  const exit_warn =
+    'Sei sicuro di voler abbandonare il test? I progressi non verranno salvati.'
   const handleExitTest = () => {
-    if (
-      confirm(
-        'Sei sicuro di voler abbandonare il test? I progressi non verranno salvati.'
-      )
-    ) {
+    const confirmExit = confirm(exit_warn)
+    if (confirmExit) {
+      // user confirmed to exit the test
       // set onbeforeunload to null, otherwise the prompt is shown twice
       window.onbeforeunload = null
       location.reload()
+    } else {
+      // if aborted, set back the reload protection
+      window.onbeforeunload = () => exit_warn
     }
   }
 
