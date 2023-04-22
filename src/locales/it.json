@@ -21,6 +21,6 @@
   },
   "privacy": {
     "tracker": "Questo sito utilizza un tracker non invasivo per tener traccia della sua performance, nel rispetto delle norme GDPR. Il sito non salva nessun cookie permanente: ogni dato trasmesso è in forma anonima e non riconducibile all'utente. <br />Per maggiori informazioni, visita la pagina <link />",
-    "localStorage": "Utilizza il <link /> per salvare preferenze e impostazioni utente, utente, come la modalità del test (Regolare o DSA) o la lingua di visualizzazione del sito. Queste impostazioni non vengono mai inviate ad alcun server, ma vengono gestite localmente dal browser. Inoltre, queste vengono eliminate 6 mesi dopo l'ultima modifica."
+    "localStorage": "Questo sito utilizza il <link /> per salvare preferenze e impostazioni utente, utente, come la modalità del test (Regolare o DSA) o la lingua di visualizzazione del sito. Queste impostazioni non vengono mai inviate ad alcun server, ma vengono gestite localmente dal browser. Inoltre, queste vengono eliminate 6 mesi dopo l'ultima modifica."
   }
 }

@@ -20,26 +20,26 @@ function Link({
 export default function Privacy() {
   const { i18n } = useTranslation()
   const components = {
-    trackerLink: (
-      <Link
-        href={links.privacyPanelbear}
-        title={`"Cookie Free Website Analytics" di PanelBear`}
-      />
-    ),
+    trackerLink: <Link href={''} title={''} />, // insert here new tracker data
     localStorage: <Link title="local storage" href={links.localStorageMDN} />
   }
   return (
     <Wrapper title="Privacy & Cookies">
-      <p>
-        <Trans
-          i18n={i18n}
-          components={{
-            link: components.trackerLink
-          }}
-        >
-          privacy.tracker
-        </Trans>
-      </p>
+      {
+        // hidden until tracker is replaced
+        false && (
+          <p>
+            <Trans
+              i18n={i18n}
+              components={{
+                link: components.trackerLink
+              }}
+            >
+              privacy.tracker
+            </Trans>
+          </p>
+        )
+      }
       <p>
         <Trans
           i18n={i18n}
