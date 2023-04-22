@@ -1,5 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
+import {
+  useNavigate,
+  unstable_useBlocker as useBlocker,
+  Navigate
+} from 'react-router-dom'
 import { useTimer } from 'react-timer-hook'
 import { PanelBear } from '../..'
 import {
@@ -194,7 +198,23 @@ export default function QuestionsForm(props: QuestionsFormProps) {
           minutes={sectionInfo[currentSection].minutes * minutesCoeff}
         />
       )
-    else return <div />
+    else return <Navigate to="/" replace />
+  }
+
+  useBlocker(view.startsWith('TOL'))
+  const exit_warn =
+    'Sei sicuro di voler abbandonare il test? I progressi non verranno salvati.'
+  const handleExitTest = () => {
+    const confirmExit = confirm(exit_warn)
+    if (confirmExit) {
+      // user confirmed to exit the test
+      // set onbeforeunload to null, otherwise the prompt is shown twice
+      window.onbeforeunload = null
+      location.reload()
+    } else {
+      // if aborted, set back the reload protection
+      window.onbeforeunload = () => exit_warn
+    }
   }
 
   return (
@@ -202,9 +222,8 @@ export default function QuestionsForm(props: QuestionsFormProps) {
       <TopControls
         active={view == 'TOL-testing'}
         answers={answers}
-        closeSection={() => {
-          closeSection()
-        }}
+        closeSection={closeSection}
+        exitTest={handleExitTest}
         currentSection={currentSection}
         questions={props.questions}
         timer={timer}

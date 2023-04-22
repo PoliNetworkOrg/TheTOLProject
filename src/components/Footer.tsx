@@ -54,7 +54,7 @@ export default function Footer(props: { view: view }) {
       >
         Source
       </a>
-      <Link to="about" style={linkStyle} replace>
+      <Link to="about" style={linkStyle}>
         About
       </Link>
       <Link
@@ -67,14 +67,13 @@ export default function Footer(props: { view: view }) {
             window.location.reload()
           }
         }}
-        replace
       >
         Home
       </Link>
-      <Link to="license" style={linkStyle} replace>
+      <Link to="license" style={linkStyle}>
         License
       </Link>
-      <Link to="privacy" style={linkStyle} replace>
+      <Link to="privacy" style={linkStyle}>
         Privacy & Cookies
       </Link>
     </div>

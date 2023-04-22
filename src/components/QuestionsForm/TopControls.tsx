@@ -20,6 +20,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: '15px',
     fontSize: '11pt'
+  },
+  exitBtn: {
+    background: '#d81e11',
+    border: '2px solid #d81e11',
+    fontSize: '9.5pt',
+    color: 'white',
+    borderRadius: 2,
+    cursor: 'pointer'
   }
 })
 
@@ -37,6 +45,7 @@ interface TopControlsProps {
   active: boolean
   answers: AnswersData
   closeSection: () => void
+  exitTest: () => void
   currentSection: Section
   timer: TimerResult
   questions: QuestionsData
@@ -65,7 +74,12 @@ export default function TopControls(props: TopControlsProps) {
           </p>
         </div>
         {props.active && (
-          <Button label="Chiudi sezione" onClick={props.closeSection} />
+          <>
+            <Button label="Chiudi sezione" onClick={props.closeSection} />
+            <button style={styles.exitBtn} onClick={props.exitTest}>
+              Abbandona il test
+            </button>
+          </>
         )}
       </div>
       <Timer timer={props.timer} />
