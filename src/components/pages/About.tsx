@@ -92,7 +92,7 @@ export default function About() {
         <b>{t('about.supportGroups.head')}</b>
         <ul>
           <li>
-            <div style={styles.liDiv}>
+            <div>
               {t('about.supportGroups.1')}
               <a
                 href={links.telegramTheTOLProject}
@@ -108,7 +108,7 @@ export default function About() {
             </div>
           </li>
           <li>
-            <div style={styles.liDiv}>
+            <div>
               {t('about.supportGroups.2')}
               <a
                 href={links.telegramPreparazioneTOL}
