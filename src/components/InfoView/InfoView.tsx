@@ -28,8 +28,6 @@ export default function InfoView(props: InfoViewProps) {
       startTest={() => {
         setView('TOL-testing')
         navigate('/test')
-        // insert new tracker here
-        // .track('TestStart')
       }}
     />
   ) : view == 'INFO-end' ? (

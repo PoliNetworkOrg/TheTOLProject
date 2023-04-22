@@ -187,8 +187,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
             } else {
               setView('INFO-end')
               navigate('/results', { replace: true })
-              // insert new tracker here
-              // .track('ViewResults')
             }
           }}
           section={currentSection}
