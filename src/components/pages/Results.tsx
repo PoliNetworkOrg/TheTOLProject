@@ -78,12 +78,12 @@ const styles = StyleSheet.create({
   }
 })
 
-interface InfoEndProps {
+interface ResultsProps {
   answers: AnswersData
   questions: QuestionsData
   viewState: statePair<View>
 }
-export default function InfoEnd(props: InfoEndProps) {
+export default function Results(props: ResultsProps) {
   const [isResultSaved, setIsResultSaved] = useState(false)
   const blocker = useBlocker(!isResultSaved)
 
