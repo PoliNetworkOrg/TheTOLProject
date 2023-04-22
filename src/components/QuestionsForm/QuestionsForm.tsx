@@ -5,7 +5,6 @@ import {
   Navigate
 } from 'react-router-dom'
 import { useTimer } from 'react-timer-hook'
-import { PanelBear } from '../..'
 import {
   DSATimeModifier,
   getNextSection,
@@ -188,7 +187,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
             } else {
               setView('INFO-end')
               navigate('/results', { replace: true })
-              PanelBear.track('ViewResults')
             }
           }}
           section={currentSection}
