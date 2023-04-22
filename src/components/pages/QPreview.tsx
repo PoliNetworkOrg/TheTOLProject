@@ -1,12 +1,15 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { DATABASE_REF } from '../../utils/constants'
+import { MobileContext } from '../../utils/contexts'
 import {
+  Database,
   DatabaseStore,
   Question as IQuestion,
   Section,
   sheetDict
 } from '../../utils/database'
 import { baseStyle } from '../../utils/style'
+import CollapsibleText from '../Util/CollapsibleText'
 import Question from '../Util/Question'
 import Select from '../Util/Select'
 
@@ -36,7 +39,6 @@ const sections = Object.entries(sheetDict).map(([key, value]) => ({
   label: key,
   value
 }))
-const createID = (q: IQuestion) => q.id + (q.sub ? ' - ' + q.sub : '')
 
 function DatabaseQ({ dbs }: Props) {
   if (!dbs) return <div style={baseStyle}>Loading...</div>
@@ -45,20 +47,17 @@ function DatabaseQ({ dbs }: Props) {
 
   const [section, setSection] = useState<Section>(sections[0].value)
 
-  const ids = useMemo(
-    () => db[section].filter((q) => q.id).map((q) => createID(q)),
-    [db, section]
-  )
-  const [id, setID] = useState(ids[0])
+  const ids = useMemo(() => {
+    const list: string[] = []
+    db[section]
+      .filter((q) => q.id)
+      .map((q) => {
+        if (!list.includes(q.id)) list.push(q.id)
+      })
+    return list
+  }, [db, section])
 
-  const question = useMemo(
-    () =>
-      db[section].find((q) => {
-        const [i, s] = id.split(' - ')
-        return q.id == i && (s ? q.sub == s : true)
-      }),
-    [id, section, db]
-  )
+  const [id, setID] = useState(ids[0])
 
   useEffect(() => {
     if (!ids.includes(id)) setID(ids[0])
@@ -91,13 +90,64 @@ function DatabaseQ({ dbs }: Props) {
         value={id}
         onChange={setID}
       />
-
-      {question ? (
-        <QuestionRender q={question} dbRef={dbRef} />
-      ) : (
-        <p>Question not found</p>
-      )}
+      <QuestionRender id={id} section={section} db={db} dbRef={dbRef} />
     </div>
+  )
+}
+
+interface QuestionRenderProps {
+  id: string
+  section: Section
+  db: Database
+  dbRef?: DATABASE_REF
+}
+function QuestionRender({ id, section, db, dbRef }: QuestionRenderProps) {
+  const { mobile } = useContext(MobileContext)
+  const gridTemplate = useMemo(
+    () => (mobile ? '1fr min-content / 100%' : '1fr / 50% 50%'),
+    [mobile]
+  )
+
+  const questions = useMemo(
+    () =>
+      db[section].filter((q) => {
+        return q.id == id
+      }),
+    [id, section, db]
+  )
+
+  return questions.length !== 0 ? (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplate
+      }}
+    >
+      <div style={{ order: mobile ? 2 : 1 }}>
+        {questions.map((q, idx) => (
+          <>
+            <Question
+              q={q}
+              isDebug
+              showAttachments
+              dbRef={dbRef}
+              key={`${section}-${q.id}-${q.sub || 0}`}
+            />
+            {idx < questions.length - 1 && <hr />}
+          </>
+        ))}
+      </div>
+      <div style={{ order: mobile ? 1 : 2 }}>
+        {questions[0].track && (
+          <CollapsibleText
+            label="mostra/nascondi brano"
+            longText={questions[0].track}
+          />
+        )}
+      </div>
+    </div>
+  ) : (
+    <p>Question not found</p>
   )
 }
 
@@ -156,15 +206,7 @@ function CustomQ() {
       </label>
       <br />
       <br />
-      <QuestionRender q={{ text, answers: { a, b, c, d, e } } as IQuestion} />
+      <Question q={{ text, answers: { a, b, c, d, e } } as IQuestion} isDebug />
     </div>
   )
-}
-
-interface QuestionRenderProps {
-  q: IQuestion
-  dbRef?: DATABASE_REF
-}
-function QuestionRender({ q, dbRef }: QuestionRenderProps) {
-  return <Question q={q} isDebug showAttachments dbRef={dbRef} />
 }

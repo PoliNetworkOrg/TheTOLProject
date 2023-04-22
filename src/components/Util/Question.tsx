@@ -50,13 +50,16 @@ export default function Question({
   return (
     <div style={styles.question}>
       <p style={{ margin: 4 }}>
-        {isDebug && <span>{id}</span>}
+        {isDebug && (
+          <p>
+            {id} {valid}
+          </p>
+        )}
         <RenderedText text={q.text} />
         {isTest && <span style={styles.result}>{result}</span>}
       </p>
       {showAttachments && <QuestionAttachments q={q} dbRef={dbRef} />}
 
-      {isDebug && <p>{valid}</p>}
       {Object.entries(q.answers).map(([letter, text]) => {
         const isCorrect = q.correct === letter
         const visibility = isCorrect || choice === letter ? 'visible' : 'hidden'
