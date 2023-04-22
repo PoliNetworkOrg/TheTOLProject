@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   link: {
-    display: 'flex',
+    display: 'inline-flex',
     color: theme.primary,
     gap: '5px',
     alignItems: 'center'
