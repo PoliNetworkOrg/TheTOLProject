@@ -112,7 +112,7 @@ export const members: Member[] = [
   },
   {
     name: 'Nicolas Facchin',
-    tg: 'RollyNoka'
+    tg: 'SuperRollyNoka'
   },
   {
     name: 'Elia Maggioni',
