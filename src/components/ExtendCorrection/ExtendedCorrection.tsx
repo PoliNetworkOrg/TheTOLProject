@@ -15,6 +15,7 @@ import firefoxImg1 from '../../static/firefox_1.png'
 import firefoxImg2 from '../../static/firefox_2.png'
 import firefoxImg3 from '../../static/firefox_3.png'
 import Question from '../Util/Question'
+import { Trans, useTranslation } from 'react-i18next'
 
 const styles = StyleSheet.create({
   collapsible: {
@@ -91,6 +92,8 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
     document.title = getTitle()
   }
 
+  const { t } = useTranslation()
+
   return (
     <div style={styles.collapsible}>
       {printSupported ? (
@@ -98,7 +101,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           <ReactToPrint
             documentTitle={getTitle()}
             content={() => ref.current}
-            trigger={() => <Button label="Salva risultati della simulazione" />}
+            trigger={() => <Button label={t('results.saveBtn')} />}
             onAfterPrint={props.onSave}
           />
         </div>
@@ -131,28 +134,31 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
       { timeStyle: 'short' }
     )}`
     const { resultTable, questions, answers } = props
+    const { t, i18n } = useTranslation()
+
     return (
       <div className="print-only" ref={ref} style={styles.doc}>
         <div style={docStyles.firstPage}>
           <DocumentHeader />
-          <p style={styles.centered}>Simulazione del {dateTime}</p>
+          <p style={styles.centered}>
+            <Trans i18n={i18n} values={{ date: dateTime }}>
+              results.pdfTitle
+            </Trans>
+          </p>
           {resultTable}
           <p>
-            Hai delle domande sui quesiti e la loro risoluzione? Falle sul{' '}
+            {t('results.pdfInfo1')}
             <a
               href={links.telegramPreparazioneTOL}
               target="_blank"
               rel="noreferrer noopener"
               style={styles.link}
             >
-              Gruppo preparazione TOL
-            </a>{' '}
-            di PoliNetwork!
+              {t('results.tgGroup')}
+            </a>
+            !
           </p>
-          <p>
-            Nelle pagine successive troverai, suddivisi per sezione, i quesiti
-            che ti sono stati proposti con il relativo esito.
-          </p>
+          <p>{t('results.pdfInfo2')}</p>
         </div>
         {(Object.entries(questions) as [Section, IQuestion[]][])
           .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)

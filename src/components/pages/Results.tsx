@@ -20,6 +20,7 @@ import {
 } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { statePair } from '../../utils/types'
+import { Trans, useTranslation } from 'react-i18next'
 
 const styles = StyleSheet.create({
   div: {
@@ -86,13 +87,14 @@ interface ResultsProps {
 export default function Results(props: ResultsProps) {
   const [isResultSaved, setIsResultSaved] = useState(false)
   const blocker = useBlocker(!isResultSaved)
+  const { t, i18n } = useTranslation()
 
   const navigate = useNavigate()
   const handleNewTest = () => {
     navigate('/', { replace: true })
   }
 
-  const exit_warn = 'Non hai salvato i tuoi risultati. Sicuro di voler uscire?'
+  const exit_warn = t('results.exitWarn')
   useEffect(() => {
     // set reload protection on first render
     window.onbeforeunload = () => exit_warn
@@ -170,11 +172,13 @@ export default function Results(props: ResultsProps) {
         <br />
         TOL{' '}
         {testPassed
-          ? `superato${!tengPassed ? ' (OFA TENG)' : ''}`
-          : `non superato: OFA TEST${!tengPassed ? ' + OFA TENG' : ''}`}
+          ? `${t('results.testPassed')} ${!tengPassed ? ' (OFA TENG)' : ''}`
+          : `${t('results.testFailed')}: OFA TEST${
+              !tengPassed ? ' + OFA TENG' : ''
+            }`}
         <br />
-        Punteggio: {formatNumber(score)} / {formatNumber(testTotalScore)} (
-        {formatNumber(score, true)})
+        {t('results.testPoints')}: {formatNumber(score)} /{' '}
+        {formatNumber(testTotalScore)} ({formatNumber(score, true)})
       </p>
       <br />
 
@@ -182,11 +186,11 @@ export default function Results(props: ResultsProps) {
         <table style={styles.table}>
           <tr>
             <td></td>
-            <td style={styles.tableHeader}>Punteggio sezione</td>
-            <td style={styles.tableHeader}>N° quesiti</td>
-            <td style={styles.tableHeader}>Esatti</td>
-            <td style={styles.tableHeader}>Errati</td>
-            <td style={styles.tableHeader}>Senza risposta</td>
+            <td style={styles.tableHeader}>{t('results.tableHeader1')}</td>
+            <td style={styles.tableHeader}>{t('results.tableHeader2')}</td>
+            <td style={styles.tableHeader}>{t('results.tableHeader3')}</td>
+            <td style={styles.tableHeader}>{t('results.tableHeader4')}</td>
+            <td style={styles.tableHeader}>{t('results.tableHeader5')}</td>
           </tr>
           {(
             Object.entries(correctionGrid) as [
@@ -225,58 +229,70 @@ export default function Results(props: ResultsProps) {
       />
 
       <div className="do-not-print">
-        <h3 style={styles.h3}>Come viene calcolato il punteggio</h3>
+        <h3 style={styles.h3}>{t('results.pointsCalcTitle')}</h3>
         <p style={styles.p}>
-          Il <b>punteggio massimo</b> conseguibile{' '}
-          <b>è di {formatNumber(testTotalScore, true)}</b> e viene espresso fino
-          alla seconda cifra decimale.
-          <br />
-          L'attribuzione di <b>OFA TEST</b> (Obblighi Formativi Aggiunti)
-          avviene quando il punteggio test, arrotondato all'intero più vicino,{' '}
-          <b>è minore di {formatNumber(testPassThreshold)}</b>.<br />
-          L'attribuzione di <b>OFA TENG</b> avviene quando, considerando la sola
-          sezione di {sectionInfo.ing.name}, il numero di risposte corrette{' '}
-          <b>è inferiore a {formatNumber(tengPassThreshold)}</b>.
-          <br />
-          <br />
-          Il <b>punteggio</b> della prova viene calcolato attribuendo:
+          <Trans
+            i18n={i18n}
+            values={{
+              v1: formatNumber(testTotalScore, true),
+              v2: formatNumber(testPassThreshold),
+              v3: sectionInfo.ing.name,
+              v4: formatNumber(tengPassThreshold)
+            }}
+          >
+            results.pointsCalcBody1
+          </Trans>
+          <Trans i18n={i18n}>{t('results.pointsCalcUl1')}</Trans>
           <ul>
             <li>
-              {formatNumber(correctionWeight.correct)} punto ad ogni risposta
-              esatta
+              <Trans
+                i18n={i18n}
+                values={{ v: formatNumber(correctionWeight.correct) }}
+              >
+                results.pointsCalcItem1
+              </Trans>
             </li>
             <li>
-              {formatNumber(correctionWeight.wrong)} punti ad ogni risposta
-              errata
+              <Trans
+                i18n={i18n}
+                values={{ v: formatNumber(correctionWeight.wrong) }}
+              >
+                results.pointsCalcItem2
+              </Trans>
             </li>
             <li>
-              {formatNumber(correctionWeight.notGiven)} punti per ogni risposta
-              non data
+              <Trans
+                i18n={i18n}
+                values={{ v: formatNumber(correctionWeight.notGiven) }}
+              >
+                results.pointsCalcItem3
+              </Trans>
             </li>
           </ul>
-          e assegnando
+          {t('results.pointsCalcUl2')}
           <ul>
             {Object.entries(sectionInfo).map(([, info], index) => (
               <li key={index}>
-                peso{' '}
                 {typeof info.coeff == 'number'
                   ? formatNumber(info.coeff)
-                  : info.coeff.toFraction()}{' '}
-                ad ogni quesito di {info.name}
+                  : info.coeff.toFraction()}
+                <Trans
+                  i18n={i18n}
+                  values={{
+                    sec: info.name
+                  }}
+                >
+                  results.pointsCalcItem4
+                </Trans>
               </li>
             ))}
           </ul>
-          Il <b>punteggio</b> complessivo viene arrotondato all'intero più
-          vicino (es: il punteggio 59,49 viene arrotondato a 59, il punteggio
-          59,50 a 60)
+          <Trans i18n={i18n}>results.pointsCalcBody2</Trans>
         </p>
         <div style={styles.restartDiv}>
-          <h3 style={styles.restartTitle}>
-            Ricordati di salvare i tuoi risultati prima di iniziare un nuovo
-            test, o andranno persi!
-          </h3>
+          <h3 style={styles.restartTitle}>{t('results.saveReminder')}</h3>
           <Button
-            label="Torna alla home"
+            label={t('results.homeBtn')}
             style={styles.restartButton}
             onClick={handleNewTest}
           />
