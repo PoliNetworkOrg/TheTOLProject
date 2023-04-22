@@ -4,17 +4,17 @@ import {
   Question as IQuestion,
   QuestionsData,
   Section
-} from '../../../utils/database'
-import { AnswersData } from '../../App'
-import { links, sectionInfo } from '../../../utils/constants'
-import { StyleSheet, theme } from '../../../utils/style'
-import Button from '../../Util/Button'
+} from '../../utils/database'
+import { AnswersData } from '../App'
+import { links, sectionInfo } from '../../utils/constants'
+import { StyleSheet, theme } from '../../utils/style'
+import Button from '../Util/Button'
 import './ExtendedCorrection.css'
 import DocumentHeader from './DocumentHeader'
-import firefoxImg1 from '../../../static/firefox_1.png'
-import firefoxImg2 from '../../../static/firefox_2.png'
-import firefoxImg3 from '../../../static/firefox_3.png'
-import Question from '../../Util/Question'
+import firefoxImg1 from '../../static/firefox_1.png'
+import firefoxImg2 from '../../static/firefox_2.png'
+import firefoxImg3 from '../../static/firefox_3.png'
+import Question from '../Util/Question'
 
 const styles = StyleSheet.create({
   collapsible: {
@@ -65,6 +65,7 @@ interface ExtendedCorrectionProps {
   answers: AnswersData
   questions: QuestionsData
   resultTable: ReactNode
+  onSave: () => void
 }
 
 export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
@@ -98,10 +99,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
             documentTitle={getTitle()}
             content={() => ref.current}
             trigger={() => <Button label="Salva risultati della simulazione" />}
-            onAfterPrint={() => {
-              // remove the onbeforeunload listener since results are saved
-              window.onbeforeunload = null
-            }}
+            onAfterPrint={props.onSave}
           />
         </div>
       ) : (
@@ -110,12 +108,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           {browser === 'other' && <FallbackInstructions />}
         </>
       )}
-      <PrintDocument
-        ref={ref}
-        resultTable={props.resultTable}
-        questions={props.questions}
-        answers={props.answers}
-      />
+      <PrintDocument ref={ref} {...props} />
     </div>
   )
 }

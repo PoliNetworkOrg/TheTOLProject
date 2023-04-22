@@ -1,9 +1,8 @@
 import { useContext, useState } from 'react'
 import { StyleSheet } from '../utils/style'
 import { statePair } from '../utils/types'
-import { view } from './App'
 import logo from '../static/logo3000.webp'
-import { links } from '../utils/constants'
+import { links, View } from '../utils/constants'
 import { MobileContext } from '../utils/contexts'
 import { useTranslation } from 'react-i18next'
 import { LocalStorage } from '../utils/storage'
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
 })
 
 interface HeaderProps {
-  viewState: statePair<view>
+  viewState: statePair<View>
 }
 
 export default function Header({ viewState }: HeaderProps) {

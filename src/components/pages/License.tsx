@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export function License() {
+export default function License() {
   const { i18n } = useTranslation()
   const components = {
     title: (

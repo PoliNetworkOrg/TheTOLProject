@@ -1,9 +1,8 @@
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { links } from '../utils/constants'
+import { links, View } from '../utils/constants'
 import { MobileContext } from '../utils/contexts'
 import { StyleSheet, theme } from '../utils/style'
-import { view } from './App'
 
 const styles = StyleSheet.create({
   container: {
@@ -38,9 +37,13 @@ const mobileStyles = StyleSheet.create({
   })
 })
 
-export default function Footer(props: { view: view }) {
+interface Props {
+  view: View
+}
+export default function Footer({ view }: Props) {
   const { mobile } = useContext(MobileContext)
   const linkStyle = mobile ? mobileStyles.link : styles.link
+  const replace = view.startsWith('TOL')
   return (
     <div
       className="do-not-print"
@@ -54,26 +57,16 @@ export default function Footer(props: { view: view }) {
       >
         Source
       </a>
-      <Link to="about" style={linkStyle}>
+      <Link to="about" style={linkStyle} replace={replace}>
         About
       </Link>
-      <Link
-        to="/"
-        style={linkStyle}
-        onClick={(e) => {
-          if (props.view === 'INFO-end') {
-            // reload the page if we are in the recap, easier then resetting the state
-            e.preventDefault()
-            window.location.reload()
-          }
-        }}
-      >
+      <Link to="/" style={linkStyle} replace={replace}>
         Home
       </Link>
-      <Link to="license" style={linkStyle}>
+      <Link to="license" style={linkStyle} replace={replace}>
         License
       </Link>
-      <Link to="privacy" style={linkStyle}>
+      <Link to="privacy" style={linkStyle} replace={replace}>
         Privacy & Cookies
       </Link>
     </div>

@@ -6,13 +6,20 @@ import {
   sectionInfo,
   tengPassThreshold,
   testPassThreshold,
-  testTotalScore
+  testTotalScore,
+  View
 } from '../../utils/constants'
 import { Question, QuestionsData, Section } from '../../utils/database'
 import { formatNumber, StyleSheet, theme } from '../../utils/style'
 import { AnswersData } from '../App'
 import Button from '../Util/Button'
-import ExtendedCorrection from './ExtendedCorrection/ExtendedCorrection'
+import ExtendedCorrection from '../ExtendCorrection/ExtendedCorrection'
+import {
+  unstable_useBlocker as useBlocker,
+  useNavigate
+} from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { statePair } from '../../utils/types'
 
 const styles = StyleSheet.create({
   div: {
@@ -74,8 +81,34 @@ const styles = StyleSheet.create({
 interface InfoEndProps {
   answers: AnswersData
   questions: QuestionsData
+  viewState: statePair<View>
 }
 export default function InfoEnd(props: InfoEndProps) {
+  const [isResultSaved, setIsResultSaved] = useState(false)
+  const blocker = useBlocker(!isResultSaved)
+
+  const navigate = useNavigate()
+  const handleNewTest = () => {
+    navigate('/', { replace: true })
+  }
+
+  const exit_warn = 'Non hai salvato i tuoi risultati. Sicuro di voler uscire?'
+  useEffect(() => {
+    // set reload protection on first render
+    window.onbeforeunload = () => exit_warn
+
+    if (blocker.state === 'blocked' && !isResultSaved) {
+      const confirmExit = confirm(exit_warn)
+      if (confirmExit) {
+        // user confirmed to leave the page
+        // set onbeforeunload to null, otherwise the prompt is shown twice
+        window.onbeforeunload = null
+        props.viewState[1]('INFO-start')
+        blocker.proceed?.()
+      }
+    }
+  }, [blocker, blocker.location])
+
   const { answers, questions } = props
 
   const correctionGrid = fromEntries(
@@ -188,6 +221,7 @@ export default function InfoEnd(props: InfoEndProps) {
         answers={props.answers}
         questions={props.questions}
         resultTable={resultTable()}
+        onSave={() => setIsResultSaved(true)}
       />
 
       <div className="do-not-print">
@@ -242,11 +276,9 @@ export default function InfoEnd(props: InfoEndProps) {
             test, o andranno persi!
           </h3>
           <Button
-            label="Inizia un nuovo test"
+            label="Torna alla home"
             style={styles.restartButton}
-            onClick={() => {
-              window.location.reload()
-            }}
+            onClick={handleNewTest}
           />
         </div>
       </div>

@@ -1,8 +1,11 @@
 import { useContext } from 'react'
 import Collapsible from 'react-collapsible'
 import { Trans, useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router'
+import { View } from '../../utils/constants'
 import { TestContext } from '../../utils/contexts'
 import { StyleSheet } from '../../utils/style'
+import { statePair } from '../../utils/types'
 import Button from '../Util/Button'
 import Wrapper from '../Util/Wrapper'
 
@@ -19,11 +22,18 @@ const styles = StyleSheet.create({
 })
 
 interface InfoStartProps {
-  startTest: () => void
+  viewState: statePair<View>
 }
-export default function InfoStart({ startTest }: InfoStartProps) {
+export default function Home({ viewState }: InfoStartProps) {
   const { isDsa, toggleDsa } = useContext(TestContext)
   const { t, i18n } = useTranslation()
+  const [, setView] = viewState
+
+  const navigate = useNavigate()
+  const handleStartTest = () => {
+    setView('TOL-testing')
+    navigate('/test')
+  }
 
   return (
     <Wrapper>
@@ -39,7 +49,7 @@ export default function InfoStart({ startTest }: InfoStartProps) {
         <Button
           style={{ fontSize: 14 }}
           label={t('home.startBtn')}
-          onClick={startTest}
+          onClick={handleStartTest}
         />
         <label htmlFor="dsa_toggle" style={{ userSelect: 'none' }}>
           <input

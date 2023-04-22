@@ -1,6 +1,6 @@
-import { StyleSheet } from '../../../utils/style'
-import logo from '../../../static/logo3000.webp'
-import { links } from '../../../utils/constants'
+import { StyleSheet } from '../../utils/style'
+import logo from '../../static/logo3000.webp'
+import { links } from '../../utils/constants'
 
 const styles = StyleSheet.create({
   div: {
