@@ -248,6 +248,7 @@ export default function Results(props: ResultsProps) {
               <Trans
                 i18n={i18n}
                 values={{ v: formatNumber(correctionWeight.correct) }}
+                count={correctionWeight.correct === 1 ? 1 : 2}
               >
                 results.pointsCalcItem1
               </Trans>
@@ -256,6 +257,7 @@ export default function Results(props: ResultsProps) {
               <Trans
                 i18n={i18n}
                 values={{ v: formatNumber(correctionWeight.wrong) }}
+                count={correctionWeight.wrong === 1 ? 1 : 2}
               >
                 results.pointsCalcItem2
               </Trans>
@@ -264,6 +266,7 @@ export default function Results(props: ResultsProps) {
               <Trans
                 i18n={i18n}
                 values={{ v: formatNumber(correctionWeight.notGiven) }}
+                count={correctionWeight.notGiven === 1 ? 1 : 2}
               >
                 results.pointsCalcItem3
               </Trans>
