@@ -36,7 +36,7 @@
     "gh-pages": "^3.2.3",
     "google-spreadsheet": "^3.1.15",
     "googleapis": "^39.2.0",
-    "i18next": "^22.4.13",
+    "i18next": "^22.4.15",
     "i18next-browser-languagedetector": "^7.0.1",
     "mkdirp": "^1.0.4",
     "prettier": "^2.4.1",
