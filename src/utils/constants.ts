@@ -167,3 +167,5 @@ export enum DATABASE_REF {
   STABLE = 'stable',
   MAIN = 'main'
 }
+
+export type View = 'INFO-start' | 'TOL-testing' | 'TOL-secRecap' | 'TOL-end'

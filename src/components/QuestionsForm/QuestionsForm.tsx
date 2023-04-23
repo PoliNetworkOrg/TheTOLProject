@@ -1,20 +1,17 @@
-import { useContext, useEffect, useState } from 'react'
-import {
-  useNavigate,
-  unstable_useBlocker as useBlocker,
-  Navigate
-} from 'react-router-dom'
+import { useContext, useEffect, useMemo, useState } from 'react'
+import { unstable_useBlocker as useBlocker, Navigate } from 'react-router-dom'
 import { useTimer } from 'react-timer-hook'
 import {
   DSATimeModifier,
   getNextSection,
-  sectionInfo
+  sectionInfo,
+  View
 } from '../../utils/constants'
 import { TestContext } from '../../utils/contexts'
 import { Section, QuestionsData } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import { statePair } from '../../utils/types'
-import { Answer, AnswersData, TimeRecord, view } from '../App'
+import { Answer, AnswersData, TimeRecord } from '../App'
 import AnswerForm from './AnswerForm'
 import BottomControls from './BottomControls'
 import QuestionHeader from './QuestionHeader'
@@ -32,7 +29,7 @@ interface QuestionsFormProps {
   questions: QuestionsData
   sectionState: statePair<Section>
   timeRecordState: statePair<TimeRecord>
-  viewState: statePair<view>
+  viewState: statePair<View>
 }
 export default function QuestionsForm(props: QuestionsFormProps) {
   const { isDsa } = useContext(TestContext)
@@ -143,8 +140,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   if (!props.questions) return <span>Loading...</span>
 
   const getViewElement = () => {
-    const navigate = useNavigate()
-
     if (view == 'TOL-testing')
       return (
         <div style={styles.testing}>
@@ -185,8 +180,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
               )
               setView('TOL-testing')
             } else {
-              setView('INFO-end')
-              navigate('/results', { replace: true })
+              setView('TOL-end')
             }
           }}
           section={currentSection}
@@ -196,10 +190,16 @@ export default function QuestionsForm(props: QuestionsFormProps) {
           minutes={sectionInfo[currentSection].minutes * minutesCoeff}
         />
       )
+    else if (view === 'TOL-end') return <Navigate to="/results" replace />
     else return <Navigate to="/" replace />
   }
 
-  useBlocker(view.startsWith('TOL'))
+  const isBlocked = useMemo(
+    () => ['TOL-testing', 'TOL-secRecap'].includes(view),
+    [view]
+  )
+  const blocker = useBlocker(isBlocked)
+
   const exit_warn =
     'Sei sicuro di voler abbandonare il test? I progressi non verranno salvati.'
   const handleExitTest = () => {
@@ -209,11 +209,24 @@ export default function QuestionsForm(props: QuestionsFormProps) {
       // set onbeforeunload to null, otherwise the prompt is shown twice
       window.onbeforeunload = null
       location.reload()
-    } else {
-      // if aborted, set back the reload protection
-      window.onbeforeunload = () => exit_warn
     }
   }
+
+  useEffect(() => {
+    // set reload protection on first render
+    window.onbeforeunload = () => exit_warn
+
+    if (blocker.state === 'blocked' && !isBlocked) {
+      const confirmExit = confirm(exit_warn)
+      if (confirmExit) {
+        // user confirmed to leave the page
+        // set onbeforeunload to null, otherwise the prompt is shown twice
+        window.onbeforeunload = null
+        props.viewState[1]('INFO-start')
+        blocker.proceed?.()
+      }
+    }
+  }, [])
 
   return (
     <div>

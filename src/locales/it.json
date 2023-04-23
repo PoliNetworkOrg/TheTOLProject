@@ -20,6 +20,36 @@
     "main": "<title>The TOL Project</title> by <network>PoliNetwork</network> è rilasciato sotto una licenza <cc4>Creative Commons Attribution-ShareAlike 4.0 International License</cc4>. <br /> Permessi che vanno oltre l'ambito di questa licenza posso essere disponibili <githubLicense>qui</githubLicense>."
   },
   "privacy": {
-    "localStorage": "Questo sito utilizza il <link /> per salvare preferenze e impostazioni utente, utente, come la modalità del test (Regolare o DSA) o la lingua di visualizzazione del sito. Queste impostazioni non vengono mai inviate ad alcun server, ma vengono gestite localmente dal browser. Inoltre, queste vengono eliminate 6 mesi dopo l'ultima modifica."
+    "localStorage": "Questo sito utilizza il <link /> per salvare preferenze e impostazioni utente, come la modalità del test (Regolare o DSA) o la lingua di visualizzazione del sito. Queste impostazioni non vengono mai inviate ad alcun server, ma vengono gestite localmente dal browser. Inoltre, queste vengono eliminate 6 mesi dopo l'ultima modifica."
+  },
+  "results": {
+    "exitWarn": "Non hai salvato i tuoi risultati. Sicuro di voler uscire?",
+    "testPassed": "passato",
+    "testFailed": "non passato",
+    "testPoints": "Punteggio",
+    "tableHeader1": "Punteggio sezione",
+    "tableHeader2": "N° quesiti",
+    "tableHeader3": "Esatti",
+    "tableHeader4": "Errati",
+    "tableHeader5": "Senza risposta",
+    "pointsCalcTitle": "Come viene calcolato il punteggio",
+    "pointsCalcBody1": "Il <strong>punteggio massimo</strong> conseguibile <strong>è di {{v1}} </strong> e viene espresso fino alla seconda cifra decimale. <br /> L'attribuzione di <strong>OFA TEST</strong> (Obblighi Formativi Aggiunti) avviene quando il punteggio test, arrotondato all'intero più vicino, <strong>è minore di {{v2}}</strong>.<br /> L'attribuzione di <strong>OFA TENG</strong> avviene quando, considerando la sola sezione di {{v3}}, il numero di risposte corrette <strong>è inferiore a {{v4}}</strong>. <br />",
+    "pointsCalcUl1": "Il <strong>punteggio</strong> della prova viene calcolato attribuendo:",
+    "pointsCalcItem1_one": "{{v}} punto ad ogni risposta esatta",
+    "pointsCalcItem2_one": "{{v}} punto ad ogni risposta errata",
+    "pointsCalcItem3_one": "{{v}} punto ad ogni risposta non data",
+    "pointsCalcItem1_other": "{{v}} punti ad ogni risposta esatta",
+    "pointsCalcItem2_other": "{{v}} punti ad ogni risposta errata",
+    "pointsCalcItem3_other": "{{v}} punti ad ogni risposta non data",
+    "pointsCalcUl2": "e assegnando peso di",
+    "pointsCalcItem4": " ad ogni quesito di {{sec}}",
+    "pointsCalcBody2": "Il <strong>punteggio</strong> complessivo viene arrotondato all'intero più vicino (es: il punteggio 59,49 viene arrotondato a 59, il punteggio 59,50 a 60)",
+    "saveReminder": "Ricordati di salvare i tuoi risultati prima di iniziare un nuovo test, o andranno persi!",
+    "homeBtn": "Torna alla home",
+    "saveBtn": "Salva risultati della simulazione",
+    "pdfTitle": "Simulazione del {{- date}} alle {{- time}}",
+    "pdfInfo1": "Hai delle domande sui quesiti e la loro risoluzione? Falle sul ",
+    "tgGroup": "Gruppo Preprazione TOL di PoliNetwork",
+    "pdfInfo2": "Nelle pagine successive troverai, suddivisi per sezione, i quesiti che ti sono stati proposti con il relativo esito."
   }
 }

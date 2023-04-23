@@ -1,20 +1,21 @@
-import { createRef, forwardRef, ReactNode } from 'react'
+import { createRef, forwardRef, ReactNode, useMemo } from 'react'
 import ReactToPrint from 'react-to-print'
 import {
   Question as IQuestion,
   QuestionsData,
   Section
-} from '../../../utils/database'
-import { AnswersData } from '../../App'
-import { links, sectionInfo } from '../../../utils/constants'
-import { StyleSheet, theme } from '../../../utils/style'
-import Button from '../../Util/Button'
+} from '../../utils/database'
+import { AnswersData } from '../App'
+import { links, sectionInfo } from '../../utils/constants'
+import { StyleSheet, theme } from '../../utils/style'
+import Button from '../Util/Button'
 import './ExtendedCorrection.css'
 import DocumentHeader from './DocumentHeader'
-import firefoxImg1 from '../../../static/firefox_1.png'
-import firefoxImg2 from '../../../static/firefox_2.png'
-import firefoxImg3 from '../../../static/firefox_3.png'
-import Question from '../../Util/Question'
+import firefoxImg1 from '../../static/firefox_1.png'
+import firefoxImg2 from '../../static/firefox_2.png'
+import firefoxImg3 from '../../static/firefox_3.png'
+import Question from '../Util/Question'
+import { Trans, useTranslation } from 'react-i18next'
 
 const styles = StyleSheet.create({
   collapsible: {
@@ -65,6 +66,7 @@ interface ExtendedCorrectionProps {
   answers: AnswersData
   questions: QuestionsData
   resultTable: ReactNode
+  onSave: () => void
 }
 
 export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
@@ -90,6 +92,8 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
     document.title = getTitle()
   }
 
+  const { t } = useTranslation()
+
   return (
     <div style={styles.collapsible}>
       {printSupported ? (
@@ -97,11 +101,8 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           <ReactToPrint
             documentTitle={getTitle()}
             content={() => ref.current}
-            trigger={() => <Button label="Salva risultati della simulazione" />}
-            onAfterPrint={() => {
-              // remove the onbeforeunload listener since results are saved
-              window.onbeforeunload = null
-            }}
+            trigger={() => <Button label={t('results.saveBtn')} />}
+            onAfterPrint={props.onSave}
           />
         </div>
       ) : (
@@ -110,12 +111,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           {browser === 'other' && <FallbackInstructions />}
         </>
       )}
-      <PrintDocument
-        ref={ref}
-        resultTable={props.resultTable}
-        questions={props.questions}
-        answers={props.answers}
-      />
+      <PrintDocument ref={ref} {...props} />
     </div>
   )
 }
@@ -133,33 +129,43 @@ const docStyles = StyleSheet.create({
 
 const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
   (props: ExtendedCorrectionProps, ref) => {
-    const dateTime = `${new Date().toLocaleDateString()} alle ${new Date().toLocaleTimeString(
-      [],
-      { timeStyle: 'short' }
-    )}`
     const { resultTable, questions, answers } = props
+    const { t, i18n } = useTranslation()
+
+    const resultsDate = new Date()
+    const date = useMemo(
+      () => ({
+        date: resultsDate.toLocaleDateString(i18n.language),
+        time: resultsDate.toLocaleTimeString(i18n.language, {
+          timeStyle: 'short'
+        })
+      }),
+      [i18n.language]
+    )
+
     return (
       <div className="print-only" ref={ref} style={styles.doc}>
         <div style={docStyles.firstPage}>
           <DocumentHeader />
-          <p style={styles.centered}>Simulazione del {dateTime}</p>
+          <p style={styles.centered}>
+            <Trans i18n={i18n} values={{ date: date.date, time: date.time }}>
+              results.pdfTitle
+            </Trans>
+          </p>
           {resultTable}
           <p>
-            Hai delle domande sui quesiti e la loro risoluzione? Falle sul{' '}
+            {t('results.pdfInfo1')}
             <a
               href={links.telegramPreparazioneTOL}
               target="_blank"
               rel="noreferrer noopener"
               style={styles.link}
             >
-              Gruppo preparazione TOL
-            </a>{' '}
-            di PoliNetwork!
+              {t('results.tgGroup')}
+            </a>
+            !
           </p>
-          <p>
-            Nelle pagine successive troverai, suddivisi per sezione, i quesiti
-            che ti sono stati proposti con il relativo esito.
-          </p>
+          <p>{t('results.pdfInfo2')}</p>
         </div>
         {(Object.entries(questions) as [Section, IQuestion[]][])
           .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)
