@@ -20,7 +20,7 @@
     "main": "<title>The TOL Project</title> by <network>PoliNetwork</network> è rilasciato sotto una licenza <cc4>Creative Commons Attribution-ShareAlike 4.0 International License</cc4>. <br /> Permessi che vanno oltre l'ambito di questa licenza posso essere disponibili <githubLicense>qui</githubLicense>."
   },
   "privacy": {
-    "localStorage": "Questo sito utilizza il <link /> per salvare preferenze e impostazioni utente, utente, come la modalità del test (Regolare o DSA) o la lingua di visualizzazione del sito. Queste impostazioni non vengono mai inviate ad alcun server, ma vengono gestite localmente dal browser. Inoltre, queste vengono eliminate 6 mesi dopo l'ultima modifica."
+    "localStorage": "Questo sito utilizza il <link /> per salvare preferenze e impostazioni utente, come la modalità del test (Regolare o DSA) o la lingua di visualizzazione del sito. Queste impostazioni non vengono mai inviate ad alcun server, ma vengono gestite localmente dal browser. Inoltre, queste vengono eliminate 6 mesi dopo l'ultima modifica."
   },
   "results": {
     "exitWarn": "Non hai salvato i tuoi risultati. Sicuro di voler uscire?",
