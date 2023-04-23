@@ -96,7 +96,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
 
   return (
     <div style={styles.collapsible}>
-      {!printSupported ? (
+      {printSupported ? (
         <div style={styles.printButton} className="do-not-print">
           <ReactToPrint
             documentTitle={getTitle()}
