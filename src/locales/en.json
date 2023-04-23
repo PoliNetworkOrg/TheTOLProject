@@ -40,7 +40,7 @@
     "pointsCalcItem3": "{{v}} point for each answer not given",
     "pointsCalcUl2": "and assigning a weight of",
     "pointsCalcItem4": " for each question of {{sec}}",
-    "pointsCalcBody2": "The <strong>total score</strong> is rounded to the nearest integer (ex: score 59.49 is rounded to 59, score 59.50 to 60)",
+    "pointsCalcBody2": "The <strong>total score</strong> gets rounded to the nearest integer (e.g., 59,49 gets rounded to 59, while 59,50 to 60)",
     "saveReminder": "Remember to save your results before starting a new test, or they will be lost!",
     "homeBtn": "Go back to home",
     "saveBtn": "Save test results",
