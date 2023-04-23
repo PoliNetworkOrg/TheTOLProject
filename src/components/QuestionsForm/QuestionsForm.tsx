@@ -221,7 +221,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
         active={view == 'TOL-testing'}
         answers={answers}
         closeSection={closeSection}
-        exitTest={handleExitTest}
+        onExitTest={handleExitTest}
         currentSection={currentSection}
         questions={props.questions}
         timer={timer}

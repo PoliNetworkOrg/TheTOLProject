@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
   outerDiv: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    gap: 10
   },
   innerDiv: {
     display: 'flex',
@@ -21,23 +22,31 @@ const styles = StyleSheet.create({
     gap: '15px',
     fontSize: '11pt'
   },
+  btnDiv: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flex: 1
+  },
   exitBtn: {
-    background: '#d81e11',
+    background: '#d81f11',
     border: '2px solid #d81e11',
     fontSize: '9.5pt',
     color: 'white',
     borderRadius: 2,
-    cursor: 'pointer'
+    cursor: 'pointer',
+    fontFamily: ' Arial'
   }
 })
 
 const mobileStyles = StyleSheet.create({
   outerDiv: StyleSheet.compose(styles.outerDiv, {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginBottom: '1em'
   }),
   innerDiv: StyleSheet.compose(styles.innerDiv, {
     width: '100%',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   })
 })
 
@@ -45,7 +54,7 @@ interface TopControlsProps {
   active: boolean
   answers: AnswersData
   closeSection: () => void
-  exitTest: () => void
+  onExitTest: () => void
   currentSection: Section
   timer: TimerResult
   questions: QuestionsData
@@ -53,36 +62,55 @@ interface TopControlsProps {
 
 export default function TopControls(props: TopControlsProps) {
   const { mobile } = useContext(MobileContext)
-  const { currentSection } = props
+  const { timer, active } = props
 
-  return (
-    <div style={mobile ? mobileStyles.outerDiv : styles.outerDiv}>
-      <div style={mobile ? mobileStyles.innerDiv : styles.innerDiv}>
-        <div>
-          <p>
-            Sezione: <b>{getSectionName(currentSection)}</b> <br />
-            Riposte:{' '}
-            {
-              props.answers[currentSection].filter((a) => !!a.letter).length
-            } / {props.questions[currentSection].length}
-            {mobile && <br />}
-            {props.active &&
-              ` (${props.answers[currentSection].reduce(
-                (acc, curr) => acc + (curr.flagged ? 1 : 0),
-                0
-              )} da rivedere)`}
-          </p>
-        </div>
-        {props.active && (
-          <>
-            <Button label="Chiudi sezione" onClick={props.closeSection} />
-            <button style={styles.exitBtn} onClick={props.exitTest}>
-              Abbandona il test
-            </button>
-          </>
-        )}
+  return mobile ? (
+    <div style={mobileStyles.outerDiv}>
+      <div style={mobileStyles.innerDiv}>
+        <SectionInfo {...props} />
+        <Timer timer={timer} />
       </div>
-      <Timer timer={props.timer} />
+
+      {active && (
+        <div style={mobileStyles.innerDiv}>
+          <Button label="Chiudi sezione" onClick={props.closeSection} />
+          <button style={styles.exitBtn} onClick={props.onExitTest}>
+            Abbandona il test
+          </button>
+        </div>
+      )}
     </div>
+  ) : (
+    <div style={styles.outerDiv}>
+      <SectionInfo {...props} />
+      {active && (
+        <div style={styles.btnDiv}>
+          <Button label="Chiudi sezione" onClick={props.closeSection} />
+          <button style={styles.exitBtn} onClick={props.onExitTest}>
+            Abbandona il test
+          </button>
+        </div>
+      )}
+      <Timer timer={timer} />
+    </div>
+  )
+}
+
+function SectionInfo(props: TopControlsProps) {
+  const { currentSection, answers, questions, active } = props
+  const { mobile } = useContext(MobileContext)
+  return (
+    <p>
+      Sezione: <b>{getSectionName(currentSection)}</b> <br />
+      Risposte: {
+        answers[currentSection].filter((a) => !!a.letter).length
+      } / {questions[currentSection].length}
+      {mobile && <br />}
+      {active &&
+        ` (${props.answers[currentSection].reduce(
+          (acc, curr) => acc + (curr.flagged ? 1 : 0),
+          0
+        )} da rivedere)`}
+    </p>
   )
 }
