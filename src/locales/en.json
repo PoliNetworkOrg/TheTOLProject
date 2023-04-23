@@ -23,7 +23,7 @@
     "localStorage": "This website uses the browser <link /> to save user preferences, for example the test mode (regular or DSA) or the website language. These settings are never sent to any server, instead they are handled locally by the browser. Moreover, preferences are deleted after 6 months from the last change."
   },
   "results": {
-    "exitWarn": "You did not save your results. Are you sure to exit?",
+    "exitWarn": "You did not save your results. Are you sure you want to exit?",
     "testPassed": "passed",
     "testFailed": "failed",
     "testPoints": "Score",
@@ -45,8 +45,8 @@
     "homeBtn": "Go back to home",
     "saveBtn": "Save test results",
     "pdfTitle": "Simulation of {{- date}}",
-    "pdfInfo1": "Do you have questions about the questions and their resolution? Ask them on the ",
-    "tgGroup": "TOL Prepration Group of PoliNetwork",
+    "pdfInfo1": "Do you have any doubts about the questions and their resolution? Ask on the ",
+    "tgGroup": "PoliNetwork's TOL Prepration Group",
     "pdfInfo2": "On the following pages you will find, divided by section, the questions that have been proposed to you with the related outcome."
   }
 }
