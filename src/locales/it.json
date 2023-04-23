@@ -47,7 +47,7 @@
     "saveReminder": "Ricordati di salvare i tuoi risultati prima di iniziare un nuovo test, o andranno persi!",
     "homeBtn": "Torna alla home",
     "saveBtn": "Salva risultati della simulazione",
-    "pdfTitle": "Simulazione del {{- date}}",
+    "pdfTitle": "Simulazione del {{- date}} alle {{- time}}",
     "pdfInfo1": "Hai delle domande sui quesiti e la loro risoluzione? Falle sul ",
     "tgGroup": "Gruppo Preprazione TOL di PoliNetwork",
     "pdfInfo2": "Nelle pagine successive troverai, suddivisi per sezione, i quesiti che ti sono stati proposti con il relativo esito."

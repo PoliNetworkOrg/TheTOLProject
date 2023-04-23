@@ -1,4 +1,4 @@
-import { createRef, forwardRef, ReactNode } from 'react'
+import { createRef, forwardRef, ReactNode, useMemo } from 'react'
 import ReactToPrint from 'react-to-print'
 import {
   Question as IQuestion,
@@ -129,19 +129,26 @@ const docStyles = StyleSheet.create({
 
 const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
   (props: ExtendedCorrectionProps, ref) => {
-    const dateTime = `${new Date().toLocaleDateString()} alle ${new Date().toLocaleTimeString(
-      [],
-      { timeStyle: 'short' }
-    )}`
     const { resultTable, questions, answers } = props
     const { t, i18n } = useTranslation()
+
+    const resultsDate = new Date()
+    const date = useMemo(
+      () => ({
+        date: resultsDate.toLocaleDateString(i18n.language),
+        time: resultsDate.toLocaleTimeString(i18n.language, {
+          timeStyle: 'short'
+        })
+      }),
+      [i18n.language]
+    )
 
     return (
       <div className="print-only" ref={ref} style={styles.doc}>
         <div style={docStyles.firstPage}>
           <DocumentHeader />
           <p style={styles.centered}>
-            <Trans i18n={i18n} values={{ date: dateTime }}>
+            <Trans i18n={i18n} values={{ date: date.date, time: date.time }}>
               results.pdfTitle
             </Trans>
           </p>

@@ -47,7 +47,7 @@
     "saveReminder": "Remember to save your results before starting a new test, or they will be lost!",
     "homeBtn": "Go back to home",
     "saveBtn": "Save test results",
-    "pdfTitle": "Simulation of {{- date}}",
+    "pdfTitle": "Simulation of {{- date}} at {{- time}}",
     "pdfInfo1": "Do you have any doubts about the questions and their resolution? Ask on the ",
     "tgGroup": "PoliNetwork's TOL Prepration Group",
     "pdfInfo2": "On the following pages you will find, divided by section, the questions that have been proposed to you with the related outcome."
