@@ -96,7 +96,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
 
   return (
     <div style={styles.collapsible}>
-      {printSupported ? (
+      {!printSupported ? (
         <div style={styles.printButton} className="do-not-print">
           <ReactToPrint
             documentTitle={getTitle()}
@@ -193,19 +193,20 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
 PrintDocument.displayName = 'Document'
 
 function FirefoxInstructions() {
+  const { t } = useTranslation()
   return (
     <div className="do-not-print">
-      <h3>Salva i tuoi risultati</h3>
-      <p>Il tuo browser (Firefox Android) non supporta la stampa automatica.</p>
-      <p>Per salvare i risultati segui questi passaggi: </p>
+      <h3>{t('results.saveTitle')}</h3>
+      <p>{t('results.saveFirefoxP1')}</p>
+      <p>{t('results.saveFirefoxP2')}</p>
       <ol style={styles.ol}>
-        <li>Apri il menu di Firefox</li>
+        <li>{t('results.saveFirefoxLi1')}</li>
         <img src={firefoxImg1} style={styles.img} />
 
-        <li>Premi il tasto per condividere</li>
+        <li>{t('results.saveFirefoxLi2')}</li>
         <img src={firefoxImg2} style={styles.img} />
 
-        <li>Nel menu che si apre, premi su "Salva come PDF"</li>
+        <li>{t('results.saveFirefoxLi3')}</li>
         <img src={firefoxImg3} style={styles.img} />
       </ol>
     </div>
@@ -213,24 +214,27 @@ function FirefoxInstructions() {
 }
 
 function FallbackInstructions() {
+  const { t, i18n } = useTranslation()
   return (
     <div className="do-not-print">
-      <h3>Salva i tuoi risultati</h3>
+      <h3>{t('results.saveTitle')}</h3>
+      <p>{t('results.saveFallbackP1')}</p>
+      <p>{t('results.saveFallbackP2')}</p>
       <p>
-        Per il tuo browser non è supportata la stampa automatica del PDF con i
-        risultati.
-      </p>
-      <p>
-        Puoi provare ad utilizzare la funzione "Sala come PDF" del tuo browser
-        che potrebbe essere nel menu di condivisione oppure nel menu principale
-        del browser.
-      </p>
-      <p>
-        Ti invitiamo a segnalare il tuo browser{' '}
-        <a href="https://github.com/PoliNetworkOrg/TheTOLProject/issues/35">
-          qui
-        </a>{' '}
-        in modo da poter risolvere il problema{' '}
+        <Trans
+          i18n={i18n}
+          components={{
+            issue: (
+              <a
+                href="https://github.com/PoliNetworkOrg/TheTOLProject/issues/35"
+                rel="noreferrer noopener"
+                target="_blank"
+              />
+            )
+          }}
+        >
+          results.saveFallbackP3
+        </Trans>
       </p>
     </div>
   )

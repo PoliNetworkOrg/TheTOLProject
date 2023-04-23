@@ -50,6 +50,15 @@
     "pdfTitle": "Simulation of {{- date}} at {{- time}}",
     "pdfInfo1": "Do you have any doubts about the questions and their resolution? Ask on the ",
     "tgGroup": "PoliNetwork's TOL Prepration Group",
-    "pdfInfo2": "On the following pages you will find, divided by section, the questions that have been proposed to you with the related outcome."
+    "pdfInfo2": "On the following pages you will find, divided by section, the questions that have been proposed to you with the related outcome.",
+    "saveTitle": "Save your results",
+    "saveFirefoxP1": "Your browser (Firefox Android) does not support automatic printing of the PDF with the results.",
+    "saveFirefoxP2": "Follow these instructions to save your results:",
+    "saveFirefoxLi1": "Open the Firefox menu",
+    "saveFirefoxLi2": "Click on the share button",
+    "saveFirefoxLi3": "In the menu that opens, press on \"Save as PDF\"",
+    "saveFallbackP1": "Your browser does not support automatic printing of the PDF with the results.",
+    "saveFallbackP2": "You can try using your browser's \"Save as PDF\" feature, which may be in the sharing menu or in the main browser menu.",
+    "saveFallbackP3": "Please report your browser <issue>here</issue> so we can fix the problem."
   }
 }
