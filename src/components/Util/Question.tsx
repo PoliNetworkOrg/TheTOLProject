@@ -10,18 +10,22 @@ const styles = StyleSheet.create({
   },
   option: {
     display: 'flex',
-    gap: 4,
-    margin: 4
+    gap: 8,
+    margin: '4px 0'
   },
   result: {
     textDecoration: 'underline',
     paddingTop: 4,
     display: 'block'
+  },
+  icon: {
+    width: '10px',
+    height: '10px'
   }
 })
 
 const TickSign = () => <>&#10003;</>
-const CrossSign = () => <>&#10007;</>
+const CrossSign = () => <>&#10005;</>
 
 interface Props {
   q: IQuestion
@@ -65,7 +69,7 @@ export default function Question({
         const visibility = isCorrect || choice === letter ? 'visible' : 'hidden'
         return (
           <p key={letter} style={styles.option}>
-            <span style={{ visibility }}>
+            <span style={{ visibility, ...styles.icon }}>
               {isCorrect ? <TickSign /> : <CrossSign />}
             </span>
             <span>{letter.toUpperCase()}. </span>

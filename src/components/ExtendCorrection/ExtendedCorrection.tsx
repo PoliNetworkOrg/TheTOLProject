@@ -54,7 +54,11 @@ const styles = StyleSheet.create({
     height: 'auto',
     objectFit: 'cover'
   },
-  nowrap: { whiteSpace: 'nowrap' }
+  nowrap: { whiteSpace: 'nowrap' },
+  printDoc: {
+    maxWidth: '210mm',
+    margin: '0 auto'
+  }
 })
 
 // using 'other' as fallback because
@@ -143,7 +147,7 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
     )
 
     return (
-      <div className="print-only" ref={ref}>
+      <div className="print-only" ref={ref} style={styles.printDoc}>
         <div style={docStyles.firstPage}>
           <DocumentHeader />
           <p style={styles.centered}>
