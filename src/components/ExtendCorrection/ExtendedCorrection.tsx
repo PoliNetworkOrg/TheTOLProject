@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     padding: '15px',
     gap: '10px'
   },
-  doc: {},
   printButton: {
     display: 'inline-flex',
     alignItems: 'center',
@@ -144,7 +143,7 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
     )
 
     return (
-      <div className="print-only" ref={ref} style={styles.doc}>
+      <div className="print-only" ref={ref}>
         <div style={docStyles.firstPage}>
           <DocumentHeader />
           <p style={styles.centered}>
