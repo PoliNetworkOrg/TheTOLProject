@@ -50,7 +50,7 @@
     "react-router-dom": "^6.10.0",
     "react-scripts": "4.0.3",
     "react-timer-hook": "^3.0.5",
-    "react-to-print": "^2.14.0",
+    "react-to-print": "^2.14.12",
     "rimraf": "^3.0.2",
     "ts-node": "^10.3.0",
     "ts-prune": "^0.10.1",
