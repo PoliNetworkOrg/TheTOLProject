@@ -153,16 +153,21 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
           </p>
           {resultTable}
           <p>
-            {t('results.pdfInfo1')}
-            <a
-              href={links.telegramPreparazioneTOL}
-              target="_blank"
-              rel="noreferrer noopener"
-              style={styles.link}
+            <Trans
+              i18n={i18n}
+              components={{
+                tg: (
+                  <a
+                    href={links.telegramPreparazioneTOL}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    style={styles.link}
+                  />
+                )
+              }}
             >
-              {t('results.tgGroup')}
-            </a>
-            !
+              results.pdfInfo1
+            </Trans>
           </p>
           <p>{t('results.pdfInfo2')}</p>
         </div>
