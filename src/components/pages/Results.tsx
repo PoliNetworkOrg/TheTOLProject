@@ -219,7 +219,7 @@ export default function Results(props: ResultsProps) {
   )
 
   return (
-    <Wrapper>
+    <Wrapper center={false}>
       <div style={styles.div}>
         <div className="do-not-print">{resultTable()}</div>
 

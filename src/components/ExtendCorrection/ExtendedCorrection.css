@@ -28,6 +28,9 @@
   .print-only {
     display: block;
   }
+  .print-only li {
+    page-break-inside: avoid;
+  }
   div {
     break-inside: avoid;
   }

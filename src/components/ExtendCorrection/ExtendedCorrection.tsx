@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   li: {
-    margin: '10px'
+    margin: '10px',
+    display: 'block'
   },
   ul: {
     listStyleType: 'none'
