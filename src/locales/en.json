@@ -16,8 +16,8 @@
     "projectTeam": "Project team",
     "supportGroups": {
       "head": "Support groups",
-      "1": "Project feedback & info: ",
-      "2": "TOL questions and their resolution: "
+      "1": "Project feedback & info: <tgProject>$t(tg.project) <tgLogo /></tgProject>",
+      "2": "TOL questions and their resolution: <tgHelp>$t(tg.help) <tgLogo /></tgHelp>"
     }
   },
   "license": {
