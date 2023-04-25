@@ -22,16 +22,9 @@ const styles = StyleSheet.create({
 export default function License() {
   const { i18n } = useTranslation()
   const components = {
-    title: (
-      <span
-        {...{ 'xmlns:dct': 'https://purl.org/dc/terms/' }}
-        property="dct:title"
-      />
-    ),
     network: (
       <a
         href="https://polinetwork.org/it/projects/"
-        property="cc:attributionName"
         rel="cc:attributionURL noreferrer noopener"
         target="_blank"
       />
@@ -45,7 +38,6 @@ export default function License() {
     ),
     githubLicense: (
       <a
-        {...{ 'xmlns:cc': 'https://creativecommons.org/ns#' }}
         href={links.githubLicense}
         rel="cc:morePermissions noreferrer noopener"
         target="_blank"
