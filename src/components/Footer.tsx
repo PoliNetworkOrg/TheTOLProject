@@ -9,9 +9,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'space-between',
     paddingInline: '15em',
-    margin: '15px',
+    margin: '15px auto',
     fontSize: '10pt',
-    color: theme.softBlack
+    color: theme.softBlack,
+    width: '100%',
+    maxWidth: 900
   },
   link: {
     display: 'flex',
