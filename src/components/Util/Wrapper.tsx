@@ -18,7 +18,6 @@ export default function Wrapper({
       flexDirection: 'column',
       alignItems: center ? 'center' : 'flex-start',
       margin: '10px auto',
-      marginBlock: '16px',
       maxWidth: 900,
       textAlign: center ? 'center' : 'initial',
       ...style
