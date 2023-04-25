@@ -173,8 +173,9 @@ export default function App() {
       <TestProvider>
         <RibbonContainer>
           {window &&
-            new URL(window.location.href).hostname ==
-              'polinetworkorg.github.io' && (
+            (new URL(window.location.href).hostname ==
+              'polinetworkorg.github.io' ||
+              process.env.NODE_ENV == 'development') && (
               <RightCornerRibbon backgroundColor="#cc0000" color="white">
                 DEV
               </RightCornerRibbon>
