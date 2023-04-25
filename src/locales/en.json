@@ -1,5 +1,9 @@
 {
   "language": "English",
+  "tg": {
+    "project": "The TOL Project",
+    "help": "Gruppo Preparazione TOL"
+  },
   "home": {
     "disclaimer": "\"The TOL Project\" (Project) is in no way connected to Politecnico di Milano but is managed free of charge by students. The authors of the Project do not assume any responsibility, nor do they expressly or implicitly guarantee the accuracy or reliability of the contents of this site for the purpose of passing the admission test at Politecnico di Milano.",
     "languageInfo": "*The test simulation will be in Italian",
@@ -24,40 +28,70 @@
   },
   "results": {
     "exitWarn": "You did not save your results. Are you sure you want to exit?",
-    "testPassed": "passed",
-    "testFailed": "failed",
-    "testPoints": "Score",
-    "tableHeader1": "Section score",
-    "tableHeader2": "Num. of questions",
-    "tableHeader3": "Correct",
-    "tableHeader4": "Wrong",
-    "tableHeader5": "Not given",
-    "pointsCalcTitle": "How the score is calculated",
-    "pointsCalcBody1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> The attribution of <strong>OFA TEST</strong> (Obblighi Formativi Aggiunti) occurs when the test score, rounded to the nearest integer, <strong>is less than {{v2}}</strong>.<br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v3}} section, the number of correct answers <strong>is less than {{v4}}</strong>. <br />",
-    "pointsCalcUl1": "The test <strong>score</strong> is calculated by assigning:",
-    "pointsCalcItem1_one": "{{v}} point for each correct answer",
-    "pointsCalcItem2_one": "{{v}} point for each wrong answer",
-    "pointsCalcItem3_one": "{{v}} point for each answer not given",
-    "pointsCalcItem1_other": "{{v}} points for each correct answer",
-    "pointsCalcItem2_other": "{{v}} points for each wrong answer",
-    "pointsCalcItem3_other": "{{v}} points for each answer not given",
-    "pointsCalcUl2": "and assigning a weight of",
-    "pointsCalcItem4": " for each question of {{sec}}",
-    "pointsCalcBody2": "The <strong>total score</strong> gets rounded to the nearest integer (e.g., 59,49 gets rounded to 59, while 59,50 to 60)",
+    "test": {
+      "passed": "passed",
+      "failed": "failed",
+      "points": "Score"
+    },
+    "table": {
+      "header": {
+        "score": "Section score",
+        "numQ": "Num. of questions",
+        "correct": "Correct",
+        "wrong": "Wrong",
+        "notGiven": "Not given"
+      }
+    },
+    "pointsCalc": {
+      "title": "How the score is calculated",
+      "body": {
+        "1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> The attribution of <strong>OFA TEST</strong> (Obblighi Formativi Aggiunti) occurs when the test score, rounded to the nearest integer, <strong>is less than {{v2}}</strong>.<br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v3}} section, the number of correct answers <strong>is less than {{v4}}</strong>. <br />",
+        "2": "The <strong>total score</strong> gets rounded to the nearest integer (e.g., 59,49 gets rounded to 59, while 59,50 to 60)"
+      },
+      "ul":{
+        "1": "The test <strong>score</strong> is calculated by assigning:",
+        "2": "and assigning a weight of",
+        "item": {
+          "1_one": "{{v}} point for each correct answer",
+          "1_other": "{{v}} points for each correct answer",
+          "2_one": "{{v}} point for each wrong answer",
+          "2_other": "{{v}} points for each wrong answer",
+          "3_one": "{{v}} point for each answer not given",
+          "3_other": "{{v}} points for each answer not given",
+          "4": " for each question of {{sec}}"
+        }
+      } 
+    },
     "saveReminder": "Remember to save your results before starting a new test, or they will be lost!",
-    "homeBtn": "Go back to home",
-    "saveBtn": "Save test results",
-    "pdfTitle": "Simulation of {{- date}} at {{- time}}",
-    "pdfInfo1": "Do you have any doubts about the questions and their resolution? Ask on the PoliNetwork's <tg>TOL Preparation Group</tg>!",
-    "pdfInfo2": "On the following pages you will find, divided by section, the questions that have been proposed to you with the related outcome.",
-    "saveTitle": "Save your results",
-    "saveFirefoxP1": "Your browser (Firefox Android) does not support automatic printing of the PDF with the results.",
-    "saveFirefoxP2": "Follow these instructions to save your results:",
-    "saveFirefoxLi1": "Open the Firefox menu",
-    "saveFirefoxLi2": "Click on the share button",
-    "saveFirefoxLi3": "In the menu that opens, press on \"Save as PDF\"",
-    "saveFallbackP1": "Your browser does not support automatic printing of the PDF with the results.",
-    "saveFallbackP2": "You can try using your browser's \"Save as PDF\" feature, which may be in the sharing menu or in the main browser menu.",
-    "saveFallbackP3": "Please report your browser <issue>here</issue> so we can fix the problem."
+    "btn": {
+      "home": "Go back to home",
+      "save": "Save test results"
+    },
+    "pdf": {
+      "title": "Simulation of {{- date}} at {{- time}}",
+      "info": {
+        "1": "Do you have any doubts about the questions and their resolution? Ask on the PoliNetwork's <tg>TOL Preparation Group</tg>!",
+        "2": "On the following pages you will find, divided by section, the questions that have been proposed to you with the related outcome."
+      }
+    },
+    "save": {
+      "title": "Save your results",
+      "firefox": {
+        "body": {
+          "1": "Your browser (Firefox Android) does not support automatic printing of the PDF with the results.",
+          "2": "Follow these instructions to save your results:"
+        },
+        "li": {
+          "1": "Open the Firefox menu",
+          "2": "Click on the share button",
+          "3": "In the menu that opens, press on \"Save as PDF\""
+        }
+      },
+      "fallback": {
+        "1": "Your browser does not support automatic printing of the PDF with the results.",
+        "2": "You can try using your browser's \"Save as PDF\" feature, which may be in the sharing menu or in the main browser menu.",
+        "3": "Please report your browser <issue>here</issue> so we can fix the problem."
+      }
+    }
   }
 }
