@@ -33,7 +33,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "fraction.js": "^4.1.2",
     "fromentries": "^1.3.2",
-    "gh-pages": "^3.2.3",
+    "gh-pages": "^4.0.0",
     "google-spreadsheet": "^3.1.15",
     "googleapis": "^39.2.0",
     "i18next": "^22.4.15",
