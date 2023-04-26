@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     fontSize: 14,
     gap: 6
+  },
+  dsaInfo: {
+    maxWidth: '755px'
   }
 })
 
@@ -62,7 +65,7 @@ export default function Home({ viewState }: InfoStartProps) {
         </label>
       </div>
       <Collapsible trigger={<></>} open={isDsa} transitionTime={150}>
-        <p>
+        <p style={styles.dsaInfo}>
           <Trans i18n={i18n}>home.dsaInfo</Trans>
         </p>
       </Collapsible>
