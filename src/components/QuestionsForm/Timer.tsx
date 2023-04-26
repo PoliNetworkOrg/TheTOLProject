@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   p: {
     display: 'flex',
-    fontSize: '0.75em',
+    fontSize: '0.8em',
     maxWidth: '12em',
     textAlign: 'left',
     wordWrap: 'normal'
@@ -56,16 +56,7 @@ export default function Timer(props: TimerProps) {
   const { timer } = props
 
   return (
-    <div
-      style={
-        mobile
-          ? StyleSheet.compose(styles.container, {
-              alignSelf: 'flex-end',
-              marginBottom: '1em'
-            })
-          : styles.container
-      }
-    >
+    <div style={styles.container}>
       <div
         style={StyleSheet.compose(
           styles.clockWrapper,
