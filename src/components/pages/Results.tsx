@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
   tableDiv: {
     alignSelf: 'center',
     width: '100%',
-    overflow: 'auto',
+    maxWidth: '90vw',
+    overflowX: 'auto',
     display: 'flex'
   },
   table: { borderSpacing: 0, margin: 'auto' },
