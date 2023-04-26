@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingInline: '15em',
     margin: '15px auto',
     fontSize: '10pt',
     color: theme.softBlack,
