@@ -70,7 +70,7 @@
     "pdf": {
       "title": "Simulation of {{- date}} at {{- time}}",
       "info": {
-        "1": "Do you have any doubts about the questions and their resolution? Ask on the PoliNetwork's <tg>TOL Preparation Group</tg>!",
+        "1": "Do you have any doubts about the questions and their resolution? Ask on the PoliNetwork's <tg>$t(tg.help)</tg>!",
         "2": "On the following pages you will find, divided by section, the questions that have been proposed to you with the related outcome."
       }
     },

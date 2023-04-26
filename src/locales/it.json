@@ -29,8 +29,8 @@
   "results": {
     "exitWarn": "Non hai salvato i tuoi risultati. Sicuro di voler uscire?",
     "test": {
-      "passed": "passato",
-      "failed": "non passato",
+      "passed": "superato",
+      "failed": "non superato",
       "points": "Punteggio"
     },
     "table": {
