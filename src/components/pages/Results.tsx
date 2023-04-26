@@ -21,6 +21,7 @@ import {
 import { useEffect, useState } from 'react'
 import { statePair } from '../../utils/types'
 import { Trans, useTranslation } from 'react-i18next'
+import Wrapper from '../Util/Wrapper'
 
 const styles = StyleSheet.create({
   div: {
@@ -218,89 +219,91 @@ export default function Results(props: ResultsProps) {
   )
 
   return (
-    <div style={styles.div}>
-      <div className="do-not-print">{resultTable()}</div>
+    <Wrapper center={false}>
+      <div style={styles.div}>
+        <div className="do-not-print">{resultTable()}</div>
 
-      <ExtendedCorrection
-        answers={props.answers}
-        questions={props.questions}
-        resultTable={resultTable()}
-        onSave={() => setIsResultSaved(true)}
-      />
+        <ExtendedCorrection
+          answers={props.answers}
+          questions={props.questions}
+          resultTable={resultTable()}
+          onSave={() => setIsResultSaved(true)}
+        />
 
-      <div className="do-not-print">
-        <h3 style={styles.h3}>{t('results.pointsCalcTitle')}</h3>
-        <p style={styles.p}>
-          <Trans
-            i18n={i18n}
-            values={{
-              v1: formatNumber(testTotalScore, true),
-              v2: formatNumber(testPassThreshold),
-              v3: sectionInfo.ing.name,
-              v4: formatNumber(tengPassThreshold)
-            }}
-          >
-            results.pointsCalcBody1
-          </Trans>
-          <Trans i18n={i18n}>{t('results.pointsCalcUl1')}</Trans>
-          <ul>
-            <li>
-              <Trans
-                i18n={i18n}
-                values={{ v: formatNumber(correctionWeight.correct) }}
-                count={correctionWeight.correct === 1 ? 1 : 2}
-              >
-                results.pointsCalcItem1
-              </Trans>
-            </li>
-            <li>
-              <Trans
-                i18n={i18n}
-                values={{ v: formatNumber(correctionWeight.wrong) }}
-                count={correctionWeight.wrong === 1 ? 1 : 2}
-              >
-                results.pointsCalcItem2
-              </Trans>
-            </li>
-            <li>
-              <Trans
-                i18n={i18n}
-                values={{ v: formatNumber(correctionWeight.notGiven) }}
-                count={correctionWeight.notGiven === 1 ? 1 : 2}
-              >
-                results.pointsCalcItem3
-              </Trans>
-            </li>
-          </ul>
-          {t('results.pointsCalcUl2')}
-          <ul>
-            {Object.entries(sectionInfo).map(([, info], index) => (
-              <li key={index}>
-                {typeof info.coeff == 'number'
-                  ? formatNumber(info.coeff)
-                  : info.coeff.toFraction()}
+        <div className="do-not-print">
+          <h3 style={styles.h3}>{t('results.pointsCalcTitle')}</h3>
+          <p style={styles.p}>
+            <Trans
+              i18n={i18n}
+              values={{
+                v1: formatNumber(testTotalScore, true),
+                v2: formatNumber(testPassThreshold),
+                v3: sectionInfo.ing.name,
+                v4: formatNumber(tengPassThreshold)
+              }}
+            >
+              results.pointsCalcBody1
+            </Trans>
+            <Trans i18n={i18n}>{t('results.pointsCalcUl1')}</Trans>
+            <ul>
+              <li>
                 <Trans
                   i18n={i18n}
-                  values={{
-                    sec: info.name
-                  }}
+                  values={{ v: formatNumber(correctionWeight.correct) }}
+                  count={correctionWeight.correct === 1 ? 1 : 2}
                 >
-                  results.pointsCalcItem4
+                  results.pointsCalcItem1
                 </Trans>
               </li>
-            ))}
-          </ul>
-          <Trans i18n={i18n}>results.pointsCalcBody2</Trans>
-        </p>
-        <div style={styles.restartDiv}>
-          <h3 style={styles.restartTitle}>{t('results.saveReminder')}</h3>
-          <Button
-            label={t('results.homeBtn')}
-            style={styles.restartButton}
-            onClick={handleNewTest}
-          />
+              <li>
+                <Trans
+                  i18n={i18n}
+                  values={{ v: formatNumber(correctionWeight.wrong) }}
+                  count={correctionWeight.wrong === 1 ? 1 : 2}
+                >
+                  results.pointsCalcItem2
+                </Trans>
+              </li>
+              <li>
+                <Trans
+                  i18n={i18n}
+                  values={{ v: formatNumber(correctionWeight.notGiven) }}
+                  count={correctionWeight.notGiven === 1 ? 1 : 2}
+                >
+                  results.pointsCalcItem3
+                </Trans>
+              </li>
+            </ul>
+            {t('results.pointsCalcUl2')}
+            <ul>
+              {Object.entries(sectionInfo).map(([, info], index) => (
+                <li key={index}>
+                  {typeof info.coeff == 'number'
+                    ? formatNumber(info.coeff)
+                    : info.coeff.toFraction()}
+                  <Trans
+                    i18n={i18n}
+                    values={{
+                      sec: info.name
+                    }}
+                  >
+                    results.pointsCalcItem4
+                  </Trans>
+                </li>
+              ))}
+            </ul>
+            <Trans i18n={i18n}>results.pointsCalcBody2</Trans>
+          </p>
+          <div style={styles.restartDiv}>
+            <h3 style={styles.restartTitle}>{t('results.saveReminder')}</h3>
+            <Button
+              label={t('results.homeBtn')}
+              style={styles.restartButton}
+              onClick={handleNewTest}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </Wrapper>
   )
 }
