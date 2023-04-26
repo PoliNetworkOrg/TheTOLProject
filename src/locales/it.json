@@ -72,7 +72,10 @@
       "info": {
         "1": "Hai delle domande sui quesiti e la loro risoluzione? Falle sul <tg>$t(tg.help)</tg> di PoliNetwork!",
         "2": "Nelle pagine successive troverai, suddivisi per sezione, i quesiti che ti sono stati proposti con il relativo esito."
-      },
+      }
+    },
+    "save": {
+      "title": "Salva i tuoi risultati",
       "firefox": {
         "body": {
           "1": "Il tuo browser (Firefox Android) non supporta la stampa automatica.",
