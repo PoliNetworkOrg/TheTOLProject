@@ -24,40 +24,70 @@
   },
   "results": {
     "exitWarn": "Non hai salvato i tuoi risultati. Sicuro di voler uscire?",
-    "testPassed": "passato",
-    "testFailed": "non passato",
-    "testPoints": "Punteggio",
-    "tableHeader1": "Punteggio sezione",
-    "tableHeader2": "N° quesiti",
-    "tableHeader3": "Esatti",
-    "tableHeader4": "Errati",
-    "tableHeader5": "Senza risposta",
-    "pointsCalcTitle": "Come viene calcolato il punteggio",
-    "pointsCalcBody1": "Il <strong>punteggio massimo</strong> conseguibile <strong>è di {{v1}} </strong> e viene espresso fino alla seconda cifra decimale. <br /> L'attribuzione di <strong>OFA TEST</strong> (Obblighi Formativi Aggiunti) avviene quando il punteggio test, arrotondato all'intero più vicino, <strong>è minore di {{v2}}</strong>.<br /> L'attribuzione di <strong>OFA TENG</strong> avviene quando, considerando la sola sezione di {{v3}}, il numero di risposte corrette <strong>è inferiore a {{v4}}</strong>. <br />",
-    "pointsCalcUl1": "Il <strong>punteggio</strong> della prova viene calcolato attribuendo:",
-    "pointsCalcItem1_one": "{{v}} punto ad ogni risposta esatta",
-    "pointsCalcItem2_one": "{{v}} punto ad ogni risposta errata",
-    "pointsCalcItem3_one": "{{v}} punto ad ogni risposta non data",
-    "pointsCalcItem1_other": "{{v}} punti ad ogni risposta esatta",
-    "pointsCalcItem2_other": "{{v}} punti ad ogni risposta errata",
-    "pointsCalcItem3_other": "{{v}} punti ad ogni risposta non data",
-    "pointsCalcUl2": "e assegnando peso di",
-    "pointsCalcItem4": " ad ogni quesito di {{sec}}",
-    "pointsCalcBody2": "Il <strong>punteggio</strong> complessivo viene arrotondato all'intero più vicino (es: il punteggio 59,49 viene arrotondato a 59, il punteggio 59,50 a 60)",
+    "test": {
+      "passed": "superato",
+      "failed": "non superato",
+      "points": "Punteggio"
+    },
+    "table": {
+      "header": {
+        "score": "Punteggio sezione",
+        "numQ": "N° quesiti",
+        "correct": "Esatti",
+        "wrong": "Errati",
+        "notGiven": "Senza risposta"
+      }
+    },
+    "pointsCalc": {
+      "title": "Come viene calcolato il punteggio",
+      "body": {
+        "1": "Il <strong>punteggio massimo</strong> conseguibile <strong>è di {{v1}} </strong> e viene espresso fino alla seconda cifra decimale. <br /> L'attribuzione di <strong>OFA TEST</strong> (Obblighi Formativi Aggiunti) avviene quando il punteggio test, arrotondato all'intero più vicino, <strong>è minore di {{v2}}</strong>.<br /> L'attribuzione di <strong>OFA TENG</strong> avviene quando, considerando la sola sezione di {{v3}}, il numero di risposte corrette <strong>è inferiore a {{v4}}</strong>. <br />",
+        "2": "Il <strong>punteggio</strong> complessivo viene arrotondato all'intero più vicino (es: il punteggio 59,49 viene arrotondato a 59, il punteggio 59,50 a 60)"
+      },
+      "ul": {
+        "1": "Il <strong>punteggio</strong> della prova viene calcolato attribuendo:",
+        "2": "e assegnando peso di",
+        "item": {
+          "1_one": "{{v}} punto ad ogni risposta esatta",
+          "2_one": "{{v}} punto ad ogni risposta errata",
+          "3_one": "{{v}} punto ad ogni risposta non data",
+          "1_other": "{{v}} punti ad ogni risposta esatta",
+          "2_other": "{{v}} punti ad ogni risposta errata",
+          "3_other": "{{v}} punti ad ogni risposta non data",
+          "4": " ad ogni quesito di {{sec}}"
+        }
+      }
+    },
     "saveReminder": "Ricordati di salvare i tuoi risultati prima di iniziare un nuovo test, o andranno persi!",
-    "homeBtn": "Torna alla home",
-    "saveBtn": "Salva risultati della simulazione",
-    "pdfTitle": "Simulazione del {{- date}} alle {{- time}}",
-    "pdfInfo1": "Hai delle domande sui quesiti e la loro risoluzione? Falle sul <tg>Gruppo Preprazione TOL</tg> di PoliNetwork!",
-    "pdfInfo2": "Nelle pagine successive troverai, suddivisi per sezione, i quesiti che ti sono stati proposti con il relativo esito.",
-    "saveTitle": "Salva i tuoi risultati",
-    "saveFirefoxP1": "Il tuo browser (Firefox Android) non supporta la stampa automatica.",
-    "saveFirefoxP2": "Per salvare i risultati segui questi passaggi:",
-    "saveFirefoxLi1": "Apri il menu di Firefox",
-    "saveFirefoxLi2": "Premi il tasto per condividere",
-    "saveFirefoxLi3": "Nel menu che si apre, premi su \"Salva come PDF\"",
-    "saveFallbackP1": "Per il tuo browser non è supportata la stampa automatica del PDF con i risultati.",
-    "saveFallbackP2": "Puoi provare ad utilizzare la funzione \"Salva come PDF\" del tuo browser che potrebbe essere nel menu di condivisione oppure nel menu principale del browser.",
-    "saveFallbackP3": "Ti invitiamo a segnalare il tuo browser <issue>qui</issue> in modo da poter risolvere il problema."
+    "btn": {
+      "home": "Torna alla home",
+      "save": "Salva risultati della simulazione"
+    },
+    "pdf": {
+      "title": "Simulazione del {{- date}} alle {{- time}}",
+      "info": {
+        "1": "Hai delle domande sui quesiti e la loro risoluzione? Falle sul <tg>$t(tg.help)</tg> di PoliNetwork!",
+        "2": "Nelle pagine successive troverai, suddivisi per sezione, i quesiti che ti sono stati proposti con il relativo esito."
+      }
+    },
+    "save": {
+      "title": "Salva i tuoi risultati",
+      "firefox": {
+        "body": {
+          "1": "Il tuo browser (Firefox Android) non supporta la stampa automatica.",
+          "2": "Per salvare i risultati segui questi passaggi:"
+        },
+        "li": {
+          "1": "Apri il menu di Firefox",
+          "2": "Premi il tasto per condividere",
+          "3": "Nel menu che si apre, premi su \"Salva come PDF\""
+        }
+      },
+      "fallback": {
+        "1": "Per il tuo browser non è supportata la stampa automatica del PDF con i risultati.",
+        "2": "Puoi provare ad utilizzare la funzione \"Salva come PDF\" del tuo browser che potrebbe essere nel menu di condivisione oppure nel menu principale del browser.",
+        "3": "Ti invitiamo a segnalare il tuo browser <issue>qui</issue> in modo da poter risolvere il problema."
+      }
+    }
   }
 }

@@ -108,7 +108,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           <ReactToPrint
             documentTitle={getTitle()}
             content={() => ref.current}
-            trigger={() => <Button label={t('results.saveBtn')} />}
+            trigger={() => <Button label={t('results.btn.save')} />}
             onAfterPrint={props.onSave}
           />
         </div>
@@ -156,7 +156,7 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
           <DocumentHeader />
           <p style={styles.centered}>
             <Trans i18n={i18n} values={{ date: date.date, time: date.time }}>
-              results.pdfTitle
+              results.pdf.title
             </Trans>
           </p>
           {resultTable}
@@ -174,10 +174,10 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
                 )
               }}
             >
-              results.pdfInfo1
+              results.pdf.info.1
             </Trans>
           </p>
-          <p>{t('results.pdfInfo2')}</p>
+          <p>{t('results.pdf.info.2')}</p>
         </div>
         {(Object.entries(questions) as [Section, IQuestion[]][])
           .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)
@@ -208,20 +208,20 @@ function FirefoxInstructions() {
   const { t, i18n } = useTranslation()
   return (
     <div className="do-not-print">
-      <h3>{t('results.saveTitle')}</h3>
-      <p>{t('results.saveFirefoxP1')}</p>
-      <p>{t('results.saveFirefoxP2')}</p>
+      <h3>{t('results.save.title')}</h3>
+      <p>{t('results.save.firefox.body.1')}</p>
+      <p>{t('results.save.firefox.body.2')}</p>
       <ol style={styles.ol}>
-        <li>{t('results.saveFirefoxLi1')}</li>
+        <li>{t('results.save.firefox.li.1')}</li>
         <img src={firefoxImg1} style={styles.img} />
 
-        <li>{t('results.saveFirefoxLi2')}</li>
+        <li>{t('results.save.firefox.li.2')}</li>
         <img
           src={i18n.language.startsWith('en') ? firefoxImg2En : firefoxImg2}
           style={styles.img}
         />
 
-        <li>{t('results.saveFirefoxLi3')}</li>
+        <li>{t('results.save.firefox.li.3')}</li>
         <img
           src={i18n.language.startsWith('en') ? firefoxImg3En : firefoxImg3}
           style={styles.img}
@@ -235,9 +235,9 @@ function FallbackInstructions() {
   const { t, i18n } = useTranslation()
   return (
     <div className="do-not-print">
-      <h3>{t('results.saveTitle')}</h3>
-      <p>{t('results.saveFallbackP1')}</p>
-      <p>{t('results.saveFallbackP2')}</p>
+      <h3>{t('results.save.title')}</h3>
+      <p>{t('results.save.fallback.1')}</p>
+      <p>{t('results.save.fallback.2')}</p>
       <p>
         <Trans
           i18n={i18n}
@@ -251,7 +251,7 @@ function FallbackInstructions() {
             )
           }}
         >
-          results.saveFallbackP3
+          results.save.fallback.3
         </Trans>
       </p>
     </div>
