@@ -14,9 +14,12 @@ import DocumentHeader from './DocumentHeader'
 import firefoxImg1 from '../../static/firefox_1.png'
 import firefoxImg2 from '../../static/firefox_2.png'
 import firefoxImg3 from '../../static/firefox_3.png'
+import firefoxImg2En from '../../static/firefox_2_en.png'
+import firefoxImg3En from '../../static/firefox_3_en.png'
 import Question from '../Util/Question'
 import { Trans, useTranslation } from 'react-i18next'
 
+const IMG_WIDTH = 320
 const styles = StyleSheet.create({
   collapsible: {
     display: 'flex',
@@ -45,12 +48,16 @@ const styles = StyleSheet.create({
     listStyleType: 'none'
   },
   ol: {
-    paddingLeft: 20
+    paddingLeft: 20,
+    maxWidth: IMG_WIDTH,
+    margin: '0 auto',
+    textAlign: 'left',
+    gap: 10
   },
   img: {
     marginTop: 5,
     marginBottom: 10,
-    maxWidth: 320,
+    maxWidth: IMG_WIDTH,
     width: '100%',
     height: 'auto',
     objectFit: 'cover'
@@ -198,7 +205,7 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
 PrintDocument.displayName = 'Document'
 
 function FirefoxInstructions() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   return (
     <div className="do-not-print">
       <h3>{t('results.saveTitle')}</h3>
@@ -209,10 +216,16 @@ function FirefoxInstructions() {
         <img src={firefoxImg1} style={styles.img} />
 
         <li>{t('results.saveFirefoxLi2')}</li>
-        <img src={firefoxImg2} style={styles.img} />
+        <img
+          src={i18n.language.startsWith('en') ? firefoxImg2En : firefoxImg2}
+          style={styles.img}
+        />
 
         <li>{t('results.saveFirefoxLi3')}</li>
-        <img src={firefoxImg3} style={styles.img} />
+        <img
+          src={i18n.language.startsWith('en') ? firefoxImg3En : firefoxImg3}
+          style={styles.img}
+        />
       </ol>
     </div>
   )
