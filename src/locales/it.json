@@ -48,8 +48,16 @@
     "homeBtn": "Torna alla home",
     "saveBtn": "Salva risultati della simulazione",
     "pdfTitle": "Simulazione del {{- date}} alle {{- time}}",
-    "pdfInfo1": "Hai delle domande sui quesiti e la loro risoluzione? Falle sul ",
-    "tgGroup": "Gruppo Preprazione TOL di PoliNetwork",
-    "pdfInfo2": "Nelle pagine successive troverai, suddivisi per sezione, i quesiti che ti sono stati proposti con il relativo esito."
+    "pdfInfo1": "Hai delle domande sui quesiti e la loro risoluzione? Falle sul <tg>Gruppo Preprazione TOL</tg> di PoliNetwork!",
+    "pdfInfo2": "Nelle pagine successive troverai, suddivisi per sezione, i quesiti che ti sono stati proposti con il relativo esito.",
+    "saveTitle": "Salva i tuoi risultati",
+    "saveFirefoxP1": "Il tuo browser (Firefox Android) non supporta la stampa automatica.",
+    "saveFirefoxP2": "Per salvare i risultati segui questi passaggi:",
+    "saveFirefoxLi1": "Apri il menu di Firefox",
+    "saveFirefoxLi2": "Premi il tasto per condividere",
+    "saveFirefoxLi3": "Nel menu che si apre, premi su \"Salva come PDF\"",
+    "saveFallbackP1": "Per il tuo browser non è supportata la stampa automatica del PDF con i risultati.",
+    "saveFallbackP2": "Puoi provare ad utilizzare la funzione \"Salva come PDF\" del tuo browser che potrebbe essere nel menu di condivisione oppure nel menu principale del browser.",
+    "saveFallbackP3": "Ti invitiamo a segnalare il tuo browser <issue>qui</issue> in modo da poter risolvere il problema."
   }
 }
