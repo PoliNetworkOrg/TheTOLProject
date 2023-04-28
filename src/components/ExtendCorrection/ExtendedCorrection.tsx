@@ -27,7 +27,10 @@ const styles = StyleSheet.create({
     padding: '15px',
     gap: '10px'
   },
-  doc: {},
+  printDoc: {
+    maxWidth: '210mm',
+    margin: '0 auto'
+  },
   printButton: {
     display: 'inline-flex',
     alignItems: 'center',
@@ -40,9 +43,6 @@ const styles = StyleSheet.create({
   },
   centered: {
     textAlign: 'center'
-  },
-  li: {
-    margin: '10px'
   },
   ul: {
     listStyleType: 'none'
@@ -151,7 +151,7 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
     )
 
     return (
-      <div className="print-only" ref={ref} style={styles.doc}>
+      <div className="print-only" ref={ref} style={styles.printDoc}>
         <div style={docStyles.firstPage}>
           <DocumentHeader />
           <p style={styles.centered}>

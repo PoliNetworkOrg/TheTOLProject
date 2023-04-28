@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
     paddingTop: '10px',
     paddingBottom: '20px',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    textAlign: 'center'
   }
 })
 

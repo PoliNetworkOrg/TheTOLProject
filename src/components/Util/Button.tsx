@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     fontFamily: ' Arial',
     fontSize: '9.5pt',
-    alignItems: 'center'
+    alignItems: 'center',
+    cursor: 'pointer'
   },
   p: {
     display: 'inline-block',
