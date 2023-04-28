@@ -10,7 +10,7 @@ export const sheetDict = {
   quesiti_COM: 'com',
   quesiti_FIS: 'fis'
 } as const
-export type Section = typeof sheetDict[keyof typeof sheetDict]
+export type Section = (typeof sheetDict)[keyof typeof sheetDict]
 
 export type AnswerLetter = 'a' | 'b' | 'c' | 'd' | 'e'
 

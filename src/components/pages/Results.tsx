@@ -157,7 +157,10 @@ export default function Results(props: ResultsProps) {
   )
 
   const score = (
-    Object.entries(correctionGrid) as [Section, typeof correctionGrid[string]][]
+    Object.entries(correctionGrid) as [
+      Section,
+      (typeof correctionGrid)[string]
+    ][]
   )
     .map(([, correction]) => correction.score.mul(correction.weight))
     .reduce((acc, curr) => acc.add(curr), new Fraction(0))
@@ -203,7 +206,7 @@ export default function Results(props: ResultsProps) {
           {(
             Object.entries(correctionGrid) as [
               Section,
-              typeof correctionGrid[Section]
+              (typeof correctionGrid)[Section]
             ][]
           )
             .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)
