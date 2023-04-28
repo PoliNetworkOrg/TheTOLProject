@@ -175,12 +175,12 @@ export default function Results(props: ResultsProps) {
         <br />
         TOL{' '}
         {testPassed
-          ? `${t('results.testPassed')} ${!tengPassed ? ' (OFA TENG)' : ''}`
-          : `${t('results.testFailed')}: OFA TEST${
+          ? `${t('results.test.passed')} ${!tengPassed ? ' (OFA TENG)' : ''}`
+          : `${t('results.test.failed')}: OFA TEST${
               !tengPassed ? ' + OFA TENG' : ''
             }`}
         <br />
-        {t('results.testPoints')}: {formatNumber(score)} /{' '}
+        {t('results.test.points')}: {formatNumber(score)} /{' '}
         {formatNumber(testTotalScore)} ({formatNumber(score, true)})
       </p>
       <br />
@@ -189,11 +189,19 @@ export default function Results(props: ResultsProps) {
         <table style={styles.table}>
           <tr>
             <td></td>
-            <td style={styles.tableHeader}>{t('results.tableHeader1')}</td>
-            <td style={styles.tableHeader}>{t('results.tableHeader2')}</td>
-            <td style={styles.tableHeader}>{t('results.tableHeader3')}</td>
-            <td style={styles.tableHeader}>{t('results.tableHeader4')}</td>
-            <td style={styles.tableHeader}>{t('results.tableHeader5')}</td>
+            <td style={styles.tableHeader}>
+              {t('results.table.header.score')}
+            </td>
+            <td style={styles.tableHeader}>{t('results.table.header.numQ')}</td>
+            <td style={styles.tableHeader}>
+              {t('results.table.header.correct')}
+            </td>
+            <td style={styles.tableHeader}>
+              {t('results.table.header.wrong')}
+            </td>
+            <td style={styles.tableHeader}>
+              {t('results.table.header.notGiven')}
+            </td>
           </tr>
           {(
             Object.entries(correctionGrid) as [
@@ -232,7 +240,7 @@ export default function Results(props: ResultsProps) {
       />
 
       <div className="do-not-print">
-        <h3 style={styles.h3}>{t('results.pointsCalcTitle')}</h3>
+        <h3 style={styles.h3}>{t('results.pointsCalc.title')}</h3>
         <p style={styles.p}>
           <Trans
             i18n={i18n}
@@ -243,9 +251,9 @@ export default function Results(props: ResultsProps) {
               v4: formatNumber(tengPassThreshold)
             }}
           >
-            results.pointsCalcBody1
+            results.pointsCalc.body.1
           </Trans>
-          <Trans i18n={i18n}>{t('results.pointsCalcUl1')}</Trans>
+          <Trans i18n={i18n}>{t('results.pointsCalc.ul.1')}</Trans>
           <ul>
             <li>
               <Trans
@@ -253,7 +261,7 @@ export default function Results(props: ResultsProps) {
                 values={{ v: formatNumber(correctionWeight.correct) }}
                 count={correctionWeight.correct === 1 ? 1 : 2}
               >
-                results.pointsCalcItem1
+                results.pointsCalc.ul.item.1
               </Trans>
             </li>
             <li>
@@ -262,7 +270,7 @@ export default function Results(props: ResultsProps) {
                 values={{ v: formatNumber(correctionWeight.wrong) }}
                 count={correctionWeight.wrong === 1 ? 1 : 2}
               >
-                results.pointsCalcItem2
+                results.pointsCalc.ul.item.2
               </Trans>
             </li>
             <li>
@@ -271,11 +279,11 @@ export default function Results(props: ResultsProps) {
                 values={{ v: formatNumber(correctionWeight.notGiven) }}
                 count={correctionWeight.notGiven === 1 ? 1 : 2}
               >
-                results.pointsCalcItem3
+                results.pointsCalc.ul.item.3
               </Trans>
             </li>
           </ul>
-          {t('results.pointsCalcUl2')}
+          {t('results.pointsCalc.ul.2')}
           <ul>
             {Object.entries(sectionInfo).map(([, info], index) => (
               <li key={index}>
@@ -288,17 +296,17 @@ export default function Results(props: ResultsProps) {
                     sec: info.name
                   }}
                 >
-                  results.pointsCalcItem4
+                  results.pointsCalc.ul.item.4
                 </Trans>
               </li>
             ))}
           </ul>
-          <Trans i18n={i18n}>results.pointsCalcBody2</Trans>
+          <Trans i18n={i18n}>results.pointsCalc.body.2</Trans>
         </p>
         <div style={styles.restartDiv}>
           <h3 style={styles.restartTitle}>{t('results.saveReminder')}</h3>
           <Button
-            label={t('results.homeBtn')}
+            label={t('results.btn.home')}
             style={styles.restartButton}
             onClick={handleNewTest}
           />

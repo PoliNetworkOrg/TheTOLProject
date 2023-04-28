@@ -14,9 +14,12 @@ import DocumentHeader from './DocumentHeader'
 import firefoxImg1 from '../../static/firefox_1.png'
 import firefoxImg2 from '../../static/firefox_2.png'
 import firefoxImg3 from '../../static/firefox_3.png'
+import firefoxImg2En from '../../static/firefox_2_en.png'
+import firefoxImg3En from '../../static/firefox_3_en.png'
 import Question from '../Util/Question'
 import { Trans, useTranslation } from 'react-i18next'
 
+const IMG_WIDTH = 320
 const styles = StyleSheet.create({
   collapsible: {
     display: 'flex',
@@ -45,12 +48,16 @@ const styles = StyleSheet.create({
     listStyleType: 'none'
   },
   ol: {
-    paddingLeft: 20
+    paddingLeft: 20,
+    maxWidth: IMG_WIDTH,
+    margin: '0 auto',
+    textAlign: 'left',
+    gap: 10
   },
   img: {
     marginTop: 5,
     marginBottom: 10,
-    maxWidth: 320,
+    maxWidth: IMG_WIDTH,
     width: '100%',
     height: 'auto',
     objectFit: 'cover'
@@ -101,7 +108,7 @@ export default function ExtendedCorrection(props: ExtendedCorrectionProps) {
           <ReactToPrint
             documentTitle={getTitle()}
             content={() => ref.current}
-            trigger={() => <Button label={t('results.saveBtn')} />}
+            trigger={() => <Button label={t('results.btn.save')} />}
             onAfterPrint={props.onSave}
           />
         </div>
@@ -149,23 +156,28 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
           <DocumentHeader />
           <p style={styles.centered}>
             <Trans i18n={i18n} values={{ date: date.date, time: date.time }}>
-              results.pdfTitle
+              results.pdf.title
             </Trans>
           </p>
           {resultTable}
           <p>
-            {t('results.pdfInfo1')}
-            <a
-              href={links.telegramPreparazioneTOL}
-              target="_blank"
-              rel="noreferrer noopener"
-              style={styles.link}
+            <Trans
+              i18n={i18n}
+              components={{
+                tg: (
+                  <a
+                    href={links.telegramPreparazioneTOL}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    style={styles.link}
+                  />
+                )
+              }}
             >
-              {t('results.tgGroup')}
-            </a>
-            !
+              results.pdf.info.1
+            </Trans>
           </p>
-          <p>{t('results.pdfInfo2')}</p>
+          <p>{t('results.pdf.info.2')}</p>
         </div>
         {(Object.entries(questions) as [Section, IQuestion[]][])
           .sort((a, b) => sectionInfo[a[0]].order - sectionInfo[b[0]].order)
@@ -193,44 +205,54 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
 PrintDocument.displayName = 'Document'
 
 function FirefoxInstructions() {
+  const { t, i18n } = useTranslation()
   return (
     <div className="do-not-print">
-      <h3>Salva i tuoi risultati</h3>
-      <p>Il tuo browser (Firefox Android) non supporta la stampa automatica.</p>
-      <p>Per salvare i risultati segui questi passaggi: </p>
+      <h3>{t('results.save.title')}</h3>
+      <p>{t('results.save.firefox.body.1')}</p>
+      <p>{t('results.save.firefox.body.2')}</p>
       <ol style={styles.ol}>
-        <li>Apri il menu di Firefox</li>
+        <li>{t('results.save.firefox.li.1')}</li>
         <img src={firefoxImg1} style={styles.img} />
 
-        <li>Premi il tasto per condividere</li>
-        <img src={firefoxImg2} style={styles.img} />
+        <li>{t('results.save.firefox.li.2')}</li>
+        <img
+          src={i18n.language.startsWith('en') ? firefoxImg2En : firefoxImg2}
+          style={styles.img}
+        />
 
-        <li>Nel menu che si apre, premi su "Salva come PDF"</li>
-        <img src={firefoxImg3} style={styles.img} />
+        <li>{t('results.save.firefox.li.3')}</li>
+        <img
+          src={i18n.language.startsWith('en') ? firefoxImg3En : firefoxImg3}
+          style={styles.img}
+        />
       </ol>
     </div>
   )
 }
 
 function FallbackInstructions() {
+  const { t, i18n } = useTranslation()
   return (
     <div className="do-not-print">
-      <h3>Salva i tuoi risultati</h3>
+      <h3>{t('results.save.title')}</h3>
+      <p>{t('results.save.fallback.1')}</p>
+      <p>{t('results.save.fallback.2')}</p>
       <p>
-        Per il tuo browser non è supportata la stampa automatica del PDF con i
-        risultati.
-      </p>
-      <p>
-        Puoi provare ad utilizzare la funzione "Sala come PDF" del tuo browser
-        che potrebbe essere nel menu di condivisione oppure nel menu principale
-        del browser.
-      </p>
-      <p>
-        Ti invitiamo a segnalare il tuo browser{' '}
-        <a href="https://github.com/PoliNetworkOrg/TheTOLProject/issues/35">
-          qui
-        </a>{' '}
-        in modo da poter risolvere il problema{' '}
+        <Trans
+          i18n={i18n}
+          components={{
+            issue: (
+              <a
+                href="https://github.com/PoliNetworkOrg/TheTOLProject/issues/35"
+                rel="noreferrer noopener"
+                target="_blank"
+              />
+            )
+          }}
+        >
+          results.save.fallback.3
+        </Trans>
       </p>
     </div>
   )
