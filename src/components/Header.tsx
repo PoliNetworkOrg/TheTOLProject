@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { StyleSheet } from '../utils/style'
 import { statePair } from '../utils/types'
 import logo from '../static/logo3000.webp'
@@ -51,6 +51,11 @@ export default function Header({ viewState }: HeaderProps) {
     setLang(lang)
   }
 
+  const isTestView = useMemo(
+    () => viewState[0] === 'TOL-testing' || viewState[0] === 'TOL-secRecap',
+    [viewState[0]]
+  )
+
   return (
     <div className="do-not-print" style={styles.div}>
       <div style={styles.col}>
@@ -58,7 +63,7 @@ export default function Header({ viewState }: HeaderProps) {
           style={{
             ...styles.logoDiv,
             // disable logo link when doing the test
-            pointerEvents: viewState[0].startsWith('TOL') ? 'none' : 'all'
+            pointerEvents: isTestView ? 'none' : 'all'
           }}
           rel="noreferrer noopener"
           target="_blank"
@@ -74,10 +79,12 @@ export default function Header({ viewState }: HeaderProps) {
       </div>
 
       <div style={{ ...styles.col, justifyContent: 'flex-end' }}>
-        <select value={lang} onChange={handleLanguageChange}>
-          <option value="it">IT</option>
-          <option value="en">EN</option>
-        </select>
+        {!isTestView && (
+          <select value={lang} onChange={handleLanguageChange}>
+            <option value="it">IT</option>
+            <option value="en">EN</option>
+          </select>
+        )}
       </div>
     </div>
   )
