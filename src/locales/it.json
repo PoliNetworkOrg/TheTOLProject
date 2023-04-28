@@ -12,8 +12,8 @@
     "projectTeam": "Team del progetto",
     "supportGroups": {
       "head": "Gruppi di supporto",
-      "1": "Segnalazioni e informazioni sul progetto: ",
-      "2": "Quesiti TOL e loro risoluzione: "
+      "1": "Segnalazioni e informazioni sul progetto: <tgProject>The TOL Project <tgLogo /></tgProject>",
+      "2": "Quesiti TOL e loro risoluzione: <tgHelp>Gruppo Preparazione TOL <tgLogo /></tgHelp>"
     }
   },
   "license": {

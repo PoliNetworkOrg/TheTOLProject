@@ -50,11 +50,12 @@ interface RecapBarProps {
 export default function RecapBar(props: RecapBarProps) {
   return (
     <div style={styles.barContainer} id="recap-bar-container">
-      <a
-        style={StyleSheet.compose(styles.bar, {
-          minWidth: props.sectionQuestions.length * 25 + 10
-        })}
-        {...(props.active ? { href: '#' } : {})}
+      <div
+        style={{
+          ...styles.bar,
+          minWidth: props.sectionQuestions.length * 25 + 10,
+          cursor: props.active ? 'pointer' : 'default'
+        }}
       >
         {props.sectionQuestions.map((q, i) => {
           const answer = props.sectionAnswers.find(
@@ -73,7 +74,7 @@ export default function RecapBar(props: RecapBarProps) {
             />
           )
         })}
-      </a>
+      </div>
     </div>
   )
 }
