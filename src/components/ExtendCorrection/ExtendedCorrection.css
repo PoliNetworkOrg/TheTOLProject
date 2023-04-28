@@ -8,23 +8,28 @@
 }
 
 @media print {
+  @page {
+    size: A4;
+    margin: 20mm !important;
+  }
   html,
   body {
     height: initial !important;
     overflow: initial !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-  }
-}
 
-@media print {
+  }
   .page-break {
     margin-top: 1rem;
     display: block;
-    page-break-before: always;
+    page-break-before: always !important;
   }
   .print-only {
     display: block;
+  }
+  .print-only li {
+    page-break-inside: avoid;
   }
   div {
     break-inside: avoid;
@@ -34,7 +39,3 @@
   }
 }
 
-@page {
-  size: auto;
-  margin: 20mm !important;
-}
