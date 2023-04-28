@@ -1,5 +1,9 @@
 {
   "language": "Italian",
+  "tg": {
+    "project": "The TOL Project",
+    "help": "Gruppo Preparazione TOL"
+  },
   "home": {
     "disclaimer": "\"The TOL Project\" (Progetto) non è in alcun modo collegato al Politecnico di Milano ma è gestito gratuitamente da studenti. Gli autori del Progetto non si assumono alcuna responsabilità, né garantiscono espressamente o implicitamente l'accuratezza o l'affidabilità dei contenuti di questo sito ai fini del superamento del test di ammissione del Politecnico di Milano",
     "languageInfo": "",
@@ -12,8 +16,8 @@
     "projectTeam": "Team del progetto",
     "supportGroups": {
       "head": "Gruppi di supporto",
-      "1": "Segnalazioni e informazioni sul progetto: <tgProject>The TOL Project <tgLogo /></tgProject>",
-      "2": "Quesiti TOL e loro risoluzione: <tgHelp>Gruppo Preparazione TOL <tgLogo /></tgHelp>"
+      "1": "Segnalazioni e informazioni sul progetto: <tgProject>$t(tg.project) <tgLogo /></tgProject>",
+      "2": "Quesiti TOL e loro risoluzione: <tgHelp>$t(tg.help) <tgLogo /></tgHelp>"
     }
   },
   "license": {

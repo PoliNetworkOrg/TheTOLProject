@@ -1,5 +1,9 @@
 {
   "language": "English",
+  "tg": {
+    "project": "The TOL Project",
+    "help": "Gruppo Preparazione TOL"
+  },
   "home": {
     "disclaimer": "\"The TOL Project\" (Project) is in no way connected to Politecnico di Milano but is managed free of charge by students. The authors of the Project do not assume any responsibility, nor do they expressly or implicitly guarantee the accuracy or reliability of the contents of this site for the purpose of passing the admission test at Politecnico di Milano.",
     "languageInfo": "*The test simulation will be in Italian",
@@ -12,8 +16,8 @@
     "projectTeam": "Project team",
     "supportGroups": {
       "head": "Support groups",
-      "1": "Project feedback & info: <tgProject>The TOL Project <tgLogo /></tgProject>",
-      "2": "TOL questions and their resolution: <tgHelp>Gruppo Preparazione TOL <tgLogo /></tgHelp>"
+      "1": "Project feedback & info: <tgProject>$t(tg.project) <tgLogo /></tgProject>",
+      "2": "TOL questions and their resolution: <tgHelp>$t(tg.help) <tgLogo /></tgHelp>"
     }
   },
   "license": {
@@ -66,7 +70,7 @@
     "pdf": {
       "title": "Simulation of {{- date}} at {{- time}}",
       "info": {
-        "1": "Do you have any doubts about the questions and their resolution? Ask on the PoliNetwork's <tg>Gruppo Preparazione TOL</tg>!",
+        "1": "Do you have any doubts about the questions and their resolution? Ask on the PoliNetwork's <tg>$t(tg.help)</tg>!",
         "2": "On the following pages you will find, divided by section, the questions that have been proposed to you with the related outcome."
       }
     },
