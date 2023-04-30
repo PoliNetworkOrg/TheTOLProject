@@ -7,10 +7,9 @@
   "scripts": {
     "build": "tsc && vite build",
     "build:db": "npx rimraf temp && npx mkdirp temp/img && ts-node scripts/database.ts",
-    "build:dev": "npm run build && rm build/CNAME",
-    "deploy:prod": "npm run build && gh-pages -d build",
+    "build:dev": "npm run build && rm dist/CNAME",
+    "deploy:prod": "npm run build && gh-pages -d dist",
     "depcheck": "depcheck",
-    "eject": "react-scripts eject",
     "exports": "ts-prune -e",
     "lint": "eslint ./src ./scripts",
     "lint:fix": "npm run lint -- --fix",
