@@ -53,7 +53,7 @@ export default function Header({ viewState }: HeaderProps) {
 
   const isTestView = useMemo(
     () => viewState[0] === 'TOL-testing' || viewState[0] === 'TOL-secRecap',
-    [viewState[0]]
+    [viewState]
   )
 
   return (

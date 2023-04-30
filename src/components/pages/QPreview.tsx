@@ -41,15 +41,14 @@ const sections = Object.entries(sheetDict).map(([key, value]) => ({
 }))
 
 function DatabaseQ({ dbs }: Props) {
-  if (!dbs) return <div style={baseStyle}>Loading...</div>
   const [dbRef, setDbRef] = useState<DATABASE_REF>(DATABASE_REF.STABLE)
-  const db = useMemo(() => dbs[dbRef], [dbRef])
+  const db = useMemo(() => dbs?.[dbRef], [dbRef, dbs])
 
   const [section, setSection] = useState<Section>(sections[0].value)
 
   const ids = useMemo(() => {
     const list: string[] = []
-    db[section]
+    db?.[section]
       .filter((q) => q.id)
       .map((q) => {
         if (!list.includes(q.id)) list.push(q.id)
@@ -61,8 +60,9 @@ function DatabaseQ({ dbs }: Props) {
 
   useEffect(() => {
     if (!ids.includes(id)) setID(ids[0])
-  }, [ids])
+  }, [id, ids])
 
+  if (!dbs || !db) return <div style={baseStyle}>Loading...</div>
   return (
     <div>
       <Select

@@ -137,7 +137,6 @@ export default function QuestionsForm(props: QuestionsFormProps) {
   })
 
   const currentQuestionIndexState: statePair<number> = [qIndex, setQIndex]
-  if (!props.questions) return <span>Loading...</span>
 
   const getViewElement = () => {
     if (view == 'TOL-testing')
@@ -226,9 +225,9 @@ export default function QuestionsForm(props: QuestionsFormProps) {
         blocker.proceed?.()
       }
     }
-  }, [])
+  }, [blocker, isBlocked, props.viewState])
 
-  return (
+  return props.questions ? (
     <div>
       <TopControls
         active={view == 'TOL-testing'}
@@ -247,6 +246,8 @@ export default function QuestionsForm(props: QuestionsFormProps) {
       />
       {getViewElement()}
     </div>
+  ) : (
+    <span>Loading...</span>
   )
 }
 

@@ -111,7 +111,7 @@ export default function Results(props: ResultsProps) {
         blocker.proceed?.()
       }
     }
-  }, [blocker, blocker.location])
+  }, [blocker, blocker.location, exit_warn, isResultSaved, props.viewState])
 
   const { answers, questions } = props
 

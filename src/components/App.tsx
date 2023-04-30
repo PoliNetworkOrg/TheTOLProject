@@ -92,26 +92,22 @@ export default function App() {
     })
   }, [])
 
-  const initialiseTest = () => {
-    if (!dbs) return
-    setQuestions(selectRandomQuestions(dbs.stable))
-    sectionState[1]('ing')
-    answersState[1]({
-      ing: [],
-      mat: [],
-      com: [],
-      fis: []
-    })
-    timeRecordState[1]({})
-  }
-
   useEffect(() => {
     // every time view changes from 'TOL-*' to 'INFO-start'
     // a new test is generated
     if (view === 'INFO-start') {
-      initialiseTest()
+      if (!dbs) return
+      setQuestions(selectRandomQuestions(dbs.stable))
+      sectionState[1]('ing')
+      answersState[1]({
+        ing: [],
+        mat: [],
+        com: [],
+        fis: []
+      })
+      timeRecordState[1]({})
     }
-  }, [dbs, view])
+  }, [answersState, dbs, sectionState, timeRecordState, view])
 
   const router = createHashRouter(
     createRoutesFromElements(
@@ -203,7 +199,7 @@ function Layout({ viewState }: LayoutProps) {
     ) {
       setView('INFO-start')
     }
-  }, [location])
+  }, [location, setView, view])
 
   return (
     <div style={styles.app}>

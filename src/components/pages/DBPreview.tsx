@@ -22,9 +22,9 @@ interface DBPreviewProps {
 }
 
 export default function DBPreview({ dbs }: DBPreviewProps) {
-  if (!dbs) return <div style={baseStyle}>Loading...</div>
-  const [db, setDb] = useState(dbs.stable)
+  const [db, setDb] = useState(dbs?.stable)
 
+  if (!db || !dbs) return <div style={baseStyle}>Loading...</div>
   return (
     <div>
       <Select
