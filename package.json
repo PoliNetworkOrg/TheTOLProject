@@ -3,7 +3,6 @@
   "version": "1.1.1",
   "private": true,
   "homepage": "https://tol.polinetwork.org/",
-  "type": "module",
   "scripts": {
     "build": "tsc && vite build",
     "build:db": "npx rimraf temp && npx mkdirp temp/img && ts-node scripts/database.ts",
