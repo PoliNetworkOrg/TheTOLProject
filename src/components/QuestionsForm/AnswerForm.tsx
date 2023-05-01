@@ -82,6 +82,8 @@ interface RadioRowProps {
   text: string
 }
 function RadioRow(props: RadioRowProps) {
+  const [letter, setLetter] = props.letterState
+
   return (
     <tr style={styles.baseText}>
       <label style={styles.label}>
@@ -92,10 +94,10 @@ function RadioRow(props: RadioRowProps) {
           <input
             type="radio"
             value={props.letter}
-            checked={props.letter == props.letterState[0]}
+            checked={props.letter == letter}
             onChange={(event) => {
               // @ts-expect-error The value is correct
-              props.letterState[1](event.target.value || undefined)
+              setLetter(event.target.value || undefined)
             }}
           />
         </td>

@@ -48,6 +48,9 @@ interface RecapBarProps {
   sectionQuestions: QuestionsData[Section]
 }
 export default function RecapBar(props: RecapBarProps) {
+  const [currentQuestionIndex, setCurrentQuestionIndex] =
+    props.currentQuestionIndexState
+
   return (
     <div style={styles.barContainer} id="recap-bar-container">
       <div
@@ -68,9 +71,9 @@ export default function RecapBar(props: RecapBarProps) {
               letter={answer?.letter}
               flagged={answer?.flagged || false}
               onClick={() => {
-                if (props.active) props.currentQuestionIndexState[1](i)
+                if (props.active) setCurrentQuestionIndex(i)
               }}
-              selected={props.active && props.currentQuestionIndexState[0] == i}
+              selected={props.active && currentQuestionIndex == i}
             />
           )
         })}

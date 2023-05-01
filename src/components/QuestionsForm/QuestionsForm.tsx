@@ -32,25 +32,25 @@ interface QuestionsFormProps {
   viewState: statePair<View>
 }
 export default function QuestionsForm(props: QuestionsFormProps) {
+  const [answers, setAnswers] = props.answersState
+  const [currentSection, setSection] = props.sectionState
+  const [timeRecord, setTimeRecord] = props.timeRecordState
+  const [view, setView] = props.viewState
+
   const { isDsa } = useContext(TestContext)
   const minutesCoeff = isDsa ? DSATimeModifier : 1
-  const [qIndex, originalSetQIndex] = useState(0),
-    tmpFlaggedState = useState(false),
-    tmpAnswerState = useState<Answer['letter']>(),
-    alertDisplayedState = useState(false)
+  const [qIndex, originalSetQIndex] = useState(0)
+  const [tmpFlagged, setTmpFlagged] = useState(false)
+  const [tmpAnswer, setTmpAnswer] = useState<Answer['letter']>()
+  const [alertDisplayed, setAlertDisplayed] = useState(false)
 
-  const [currentSection, setSection] = props.sectionState,
-    [view, setView] = props.viewState,
-    [answers, setAnswers] = props.answersState,
-    [timeRecord, setTimeRecord] = props.timeRecordState
-
-  const sectionQuestions = props.questions[props.sectionState[0]],
+  const sectionQuestions = props.questions[currentSection],
     currentQuestion = sectionQuestions[qIndex],
     currentAnswer = answers[currentSection][qIndex],
     shouldShowAlert =
-      !alertDisplayedState[0] &&
-      (tmpAnswerState[0] != currentAnswer?.letter ||
-        tmpFlaggedState[0] != (currentAnswer?.flagged || false))
+      !alertDisplayed &&
+      (tmpAnswer != currentAnswer?.letter ||
+        tmpFlagged != (currentAnswer?.flagged || false))
 
   useEffect(() => {
     // called when the qIndex is updated (the user changes question)
@@ -75,7 +75,7 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     alert(
       `Se prima non premi "Conferma e vai alla successiva" la risposta non verrà salvata.`
     )
-    alertDisplayedState[1](true)
+    setAlertDisplayed(true)
   }
 
   const closeSection = () => {
@@ -84,8 +84,8 @@ export default function QuestionsForm(props: QuestionsFormProps) {
 
     setView('TOL-secRecap')
     setQIndex(0)
-    tmpAnswerState[1](undefined)
-    tmpFlaggedState[1](false)
+    setTmpAnswer(undefined)
+    setTmpFlagged(false)
 
     const nextAnswers = answers
     nextAnswers[currentSection] = nextAnswers[currentSection].map((a) => ({
@@ -112,9 +112,9 @@ export default function QuestionsForm(props: QuestionsFormProps) {
     } else {
       const next = answers[currentSection][index as number]
 
-      tmpFlaggedState[1](next?.flagged || false)
-      tmpAnswerState[1](next?.letter || undefined)
-      alertDisplayedState[1](false)
+      setTmpFlagged(next?.flagged || false)
+      setTmpAnswer(next?.letter || undefined)
+      setAlertDisplayed(false)
 
       originalSetQIndex(index)
     }
@@ -152,12 +152,12 @@ export default function QuestionsForm(props: QuestionsFormProps) {
           <AnswerForm
             currentAnswer={currentAnswer}
             currentQuestion={currentQuestion}
-            tmpAnswerState={tmpAnswerState}
+            tmpAnswerState={[tmpAnswer, setTmpAnswer]}
           />
           <BottomControls
             currentQuestion={currentQuestion}
-            tmpAnswerState={tmpAnswerState}
-            tmpFlaggedState={tmpFlaggedState}
+            tmpAnswerState={[tmpAnswer, setTmpAnswer]}
+            tmpFlaggedState={[tmpFlagged, setTmpFlagged]}
             updateAnswer={(a) => {
               const next = answers
               next[currentSection][qIndex] = a
@@ -221,11 +221,11 @@ export default function QuestionsForm(props: QuestionsFormProps) {
         // user confirmed to leave the page
         // set onbeforeunload to null, otherwise the prompt is shown twice
         window.onbeforeunload = null
-        props.viewState[1]('INFO-start')
+        setView('INFO-start')
         blocker.proceed?.()
       }
     }
-  }, [blocker, isBlocked, props.viewState])
+  }, [blocker, isBlocked, setView])
 
   return props.questions ? (
     <div>

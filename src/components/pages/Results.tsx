@@ -90,6 +90,7 @@ export default function Results(props: ResultsProps) {
   const [isResultSaved, setIsResultSaved] = useState(false)
   const blocker = useBlocker(!isResultSaved)
   const { t, i18n } = useTranslation()
+  const [, setView] = props.viewState
 
   const navigate = useNavigate()
   const handleNewTest = () => {
@@ -107,11 +108,11 @@ export default function Results(props: ResultsProps) {
         // user confirmed to leave the page
         // set onbeforeunload to null, otherwise the prompt is shown twice
         window.onbeforeunload = null
-        props.viewState[1]('INFO-start')
+        setView('INFO-start')
         blocker.proceed?.()
       }
     }
-  }, [blocker, blocker.location, exit_warn, isResultSaved, props.viewState])
+  }, [blocker, blocker.location, exit_warn, isResultSaved, setView])
 
   const { answers, questions } = props
 

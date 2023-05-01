@@ -51,9 +51,11 @@ export default function Header({ viewState }: HeaderProps) {
     setLang(lang)
   }
 
+  const [view] = viewState
+
   const isTestView = useMemo(
-    () => viewState[0] === 'TOL-testing' || viewState[0] === 'TOL-secRecap',
-    [viewState]
+    () => view === 'TOL-testing' || view === 'TOL-secRecap',
+    [view]
   )
 
   return (
