@@ -1,15 +1,12 @@
-name: Deploy
+name: Release
 on:
-  push:
-    branches:
-      - 'stable'
-  workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   prod:
-    name: Production
+    name: Deploy production
     runs-on: ubuntu-20.04
-    if: github.ref == 'refs/heads/stable'
 
     steps:
       - uses: actions/checkout@v3
@@ -21,3 +18,13 @@ jobs:
       - run: npm run deploy:prod -- -r https://git:${DEPLOYMENT_PAT}@github.com/thetolproject/thetolproject.github.io.git -u "${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>"
         env:
           DEPLOYMENT_PAT: ${{ secrets.DEPLOYMENT_PAT }}
+
+  tags:
+    name: Update tags
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: EndBug/latest-tag@v1
+        with:
+          ref: stable
