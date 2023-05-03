@@ -139,11 +139,10 @@ const PrintDocument = forwardRef<HTMLDivElement, ExtendedCorrectionProps>(
     const { resultTable, questions, answers } = props
     const { t, i18n } = useTranslation()
 
-    const resultsDate = new Date()
     const date = useMemo(
       () => ({
-        date: resultsDate.toLocaleDateString(i18n.language),
-        time: resultsDate.toLocaleTimeString(i18n.language, {
+        date: new Date().toLocaleDateString(i18n.language),
+        time: new Date().toLocaleTimeString(i18n.language, {
           timeStyle: 'short'
         })
       }),

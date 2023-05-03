@@ -27,6 +27,7 @@ interface BottomControlsProps {
 }
 export default function BottomControls(props: BottomControlsProps) {
   const [flagged, setFlagged] = props.tmpFlaggedState
+  const [tmpAnswer] = props.tmpAnswerState
 
   if (!props.currentQuestion) return <div style={styles.controlsDiv} />
 
@@ -49,7 +50,7 @@ export default function BottomControls(props: BottomControlsProps) {
           props.updateAnswer({
             id: props.currentQuestion.id,
             sub: props.currentQuestion.sub,
-            letter: props.tmpAnswerState[0],
+            letter: tmpAnswer,
             flagged
           })
         }}

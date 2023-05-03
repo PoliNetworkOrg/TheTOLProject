@@ -4,17 +4,17 @@
   "private": true,
   "homepage": "https://tol.polinetwork.org/",
   "scripts": {
-    "build": "react-scripts build",
+    "build": "tsc && vite build",
     "build:db": "npx rimraf temp && npx mkdirp temp/img && ts-node scripts/database.ts",
-    "build:dev": "npm run build && rm build/CNAME",
-    "deploy:prod": "npm run build && gh-pages -d build",
+    "build:dev": "npm run build && rm dist/CNAME",
+    "deploy:prod": "npm run build && gh-pages -d dist",
     "depcheck": "depcheck",
-    "eject": "react-scripts eject",
     "exports": "ts-prune -e",
     "lint": "eslint ./src ./scripts",
     "lint:fix": "npm run lint -- --fix",
-    "start": "react-scripts start",
-    "test": "npm run build && npm run lint && npm run exports"
+    "start": "vite --open",
+    "test": "npm run build && npm run lint && npm run exports",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@types/google-spreadsheet": "^3.3.1",
@@ -25,12 +25,15 @@
     "@types/underscore": "^1.11.4",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
+    "@vitejs/plugin-react-swc": "^3.3.0",
     "axios": "^1.3.6",
     "depcheck": "^1.4.3",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.3",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.0",
     "fraction.js": "^4.1.2",
     "fromentries": "^1.3.2",
     "gh-pages": "^4.0.0",
@@ -48,14 +51,14 @@
     "react-latex": "^2.0.0",
     "react-ribbons": "github:EndBug/react-ribbons#custom",
     "react-router-dom": "^6.10.0",
-    "react-scripts": "^5.0.1",
     "react-timer-hook": "^3.0.5",
     "react-to-print": "^2.14.12",
     "rimraf": "^5.0.0",
     "ts-node": "^10.9.1",
     "ts-prune": "^0.10.3",
-    "typescript": "^4.9.5",
-    "underscore": "^1.13.6"
+    "typescript": "^5.0.4",
+    "underscore": "^1.13.6",
+    "vite": "^4.3.3"
   },
   "engines": {
     "node": "^16.0.0"

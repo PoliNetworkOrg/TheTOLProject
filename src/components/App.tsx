@@ -51,40 +51,42 @@ const styles = StyleSheet.create({
   routeContainer: { paddingInline: '7.5px' }
 })
 
+async function fetchDatabases() {
+  const stable = await readDatabase(DATABASE_REF.STABLE)
+  const main = await readDatabase(DATABASE_REF.MAIN)
+  return {
+    [DATABASE_REF.STABLE]: stable,
+    [DATABASE_REF.MAIN]: main
+  }
+}
+
 export default function App() {
   const [dbs, setDbs] = useState<DatabaseStore>()
   const [questions, setQuestions] = useState<QuestionsData>()
   const [view, setView] = useState<View>('INFO-start')
-  const sectionState = useState<Section>('ing')
-  const answersState = useState<AnswersData>({
+  const [section, setSection] = useState<Section>('ing')
+  const [answers, setAnswers] = useState<AnswersData>({
     ing: [],
     mat: [],
     com: [],
     fis: []
   })
-  const timeRecordState = useState<TimeRecord>({})
+  const [timeRecord, setTimeRecord] = useState<TimeRecord>({})
   const [loadingError, showError] = useState<[string, Error] | []>([])
   const [mobile, setMobile] = useState<boolean>(false)
 
-  async function loadDatabases() {
-    try {
-      const stable = await readDatabase(DATABASE_REF.STABLE)
-      const main = await readDatabase(DATABASE_REF.MAIN)
-      setDbs({
-        [DATABASE_REF.STABLE]: stable,
-        [DATABASE_REF.MAIN]: main
-      })
-    } catch (e) {
-      showError([
-        'There has been an issue while fetching the database data. Please retry later.',
-        e as Error
-      ])
-    }
-  }
-
   useEffect(() => {
     LocalStorage.checkLastChange() // privacy check
-    loadDatabases()
+    fetchDatabases()
+      .then((data) => {
+        setDbs(data)
+      })
+      .catch((e) => {
+        showError([
+          'There has been an issue while fetching the database data. Please retry later.',
+          e as Error
+        ])
+      })
 
     setMobile(window.innerWidth < 768)
     window.addEventListener('resize', () => {
@@ -92,24 +94,20 @@ export default function App() {
     })
   }, [])
 
-  const initialiseTest = () => {
-    if (!dbs) return
-    setQuestions(selectRandomQuestions(dbs.stable))
-    sectionState[1]('ing')
-    answersState[1]({
-      ing: [],
-      mat: [],
-      com: [],
-      fis: []
-    })
-    timeRecordState[1]({})
-  }
-
   useEffect(() => {
     // every time view changes from 'TOL-*' to 'INFO-start'
     // a new test is generated
+    if (!dbs) return
     if (view === 'INFO-start') {
-      initialiseTest()
+      setQuestions(selectRandomQuestions(dbs.stable))
+      setSection('ing')
+      setAnswers({
+        ing: [],
+        mat: [],
+        com: [],
+        fis: []
+      })
+      setTimeRecord({})
     }
   }, [dbs, view])
 
@@ -135,10 +133,10 @@ export default function App() {
           element={
             questions && view.startsWith('TOL') ? (
               <QuestionsForm
-                answersState={answersState}
+                answersState={[answers, setAnswers]}
                 questions={questions as QuestionsData}
-                sectionState={sectionState}
-                timeRecordState={timeRecordState}
+                sectionState={[section, setSection]}
+                timeRecordState={[timeRecord, setTimeRecord]}
                 viewState={[view, setView]}
               />
             ) : (
@@ -151,7 +149,7 @@ export default function App() {
           element={
             questions && view === 'TOL-end' ? (
               <Results
-                answers={answersState[0]}
+                answers={answers}
                 questions={questions as QuestionsData}
                 viewState={[view, setView]}
               />
@@ -203,7 +201,7 @@ function Layout({ viewState }: LayoutProps) {
     ) {
       setView('INFO-start')
     }
-  }, [location])
+  }, [location, setView, view])
 
   return (
     <div style={styles.app}>
