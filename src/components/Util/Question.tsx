@@ -1,4 +1,3 @@
-import { argv0 } from 'process'
 import { DATABASE_REF } from '../../utils/constants'
 import { Question as IQuestion } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
