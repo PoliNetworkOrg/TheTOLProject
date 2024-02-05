@@ -6,23 +6,36 @@ module.exports = {
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:react-hooks/recommended'
   ],
-  parser: '@typescript-eslint/parser', 
+  parser: '@typescript-eslint/parser',
   root: true,
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
     tsconfigRootDir: __dirname,
-    project: true,
+    project: true
   },
-  plugins: ['react-refresh'],
-  rules: {
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'react-refresh/only-export-components': 'warn'
-  },
+  plugins: ['react-refresh', 'unused-imports'],
   overrides: [
     {
-      extends: ["plugin:@typescript-eslint/disable-type-checked"],
-      files: ["./**/*.{js,cjs}"],
-    },
+      extends: ['plugin:@typescript-eslint/disable-type-checked'],
+      files: ['./**/*.{js,cjs}']
+    }
   ],
+  rules: {
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'react-refresh/only-export-components': 'warn',
+
+    // no unused vars/imports
+    '@typescript-eslint/no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_'
+      }
+    ],
+  }
 }
