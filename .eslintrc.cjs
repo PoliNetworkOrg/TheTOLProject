@@ -1,20 +1,28 @@
+/* eslint-env node */
 module.exports = {
   env: { browser: true, es2020: true },
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-    'plugin:react-hooks/recommended',
-    'plugin:prettier/recommended' // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+    'plugin:@typescript-eslint/recommended-type-checked',
+    'plugin:react-hooks/recommended'
   ],
-  parser: '@typescript-eslint/parser', // Specifies the ESLint parser
+  parser: '@typescript-eslint/parser', 
+  root: true,
   parserOptions: {
-    ecmaVersion: 'latest', // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module' // Allows for the use of imports
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    tsconfigRootDir: __dirname,
+    project: true,
   },
   plugins: ['react-refresh'],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'react-refresh/only-export-components': 'warn',
-    'prettier/prettier': 'warn',
-  }
+    'react-refresh/only-export-components': 'warn'
+  },
+  overrides: [
+    {
+      extends: ["plugin:@typescript-eslint/disable-type-checked"],
+      files: ["./**/*.{js,cjs}"],
+    },
+  ],
 }
