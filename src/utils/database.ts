@@ -21,6 +21,7 @@ export interface Question {
   correct: AnswerLetter
   attachments: string[]
   validated: boolean
+  tags: string[]
 
   // These are only present for COM questions
   sub?: string

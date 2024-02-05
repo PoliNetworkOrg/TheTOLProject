@@ -51,8 +51,6 @@ interface Props {
   dbRef?: DATABASE_REF
 }
 
-const TEST_TAGS = ['combinazioni e coefficienti binomiali', 'permutazioni']
-
 export default function Question({
   q,
   isDebug = false,
@@ -95,10 +93,12 @@ export default function Question({
         )
       })}
 
-      <div style={styles.tagsContainer}>
-        <FaAnchor />
-        <p style={styles.tags}>{concatTags(TEST_TAGS)}</p>
-      </div>
+      {q.tags.length > 0 && (
+        <div style={styles.tagsContainer}>
+          <FaAnchor />
+          <p style={styles.tags}>{concatTags(q.tags)}</p>
+        </div>
+      )}
     </div>
   )
 }
