@@ -46,7 +46,7 @@ export default function Header({ viewState }: HeaderProps) {
   const [lang, setLang] = useState(i18n.resolvedLanguage)
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value
-    i18n.changeLanguage(lang)
+    void i18n.changeLanguage(lang) // should we care about this promise?
     LocalStorage.handleChange() // language saved to LocalStorage
     setLang(lang)
   }

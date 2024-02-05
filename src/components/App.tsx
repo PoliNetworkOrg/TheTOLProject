@@ -134,7 +134,7 @@ export default function App() {
             questions && view.startsWith('TOL') ? (
               <QuestionsForm
                 answersState={[answers, setAnswers]}
-                questions={questions as QuestionsData}
+                questions={questions}
                 sectionState={[section, setSection]}
                 timeRecordState={[timeRecord, setTimeRecord]}
                 viewState={[view, setView]}
@@ -150,7 +150,7 @@ export default function App() {
             questions && view === 'TOL-end' ? (
               <Results
                 answers={answers}
-                questions={questions as QuestionsData}
+                questions={questions}
                 viewState={[view, setView]}
               />
             ) : (

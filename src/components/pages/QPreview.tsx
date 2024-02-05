@@ -1,4 +1,12 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react'
 import { DATABASE_REF } from '../../utils/constants'
 import { MobileContext } from '../../utils/contexts'
 import {
@@ -160,49 +168,53 @@ function CustomQ() {
   const [e, setE] = useState('')
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const t = (f: (..._: any[]) => any) => (e: any) => f(e.target.value)
+  const changeHelper =
+    (stateSetter: Dispatch<SetStateAction<string>>) =>
+    (e: ChangeEvent<HTMLTextAreaElement>) =>
+      stateSetter(e.target.value)
 
   return (
     <div>
       <label>
         Testo:
         <br />
-        <textarea value={text} onChange={t(setText)}></textarea>
+        <textarea value={text} onChange={changeHelper(setText)}></textarea>
+        <textarea onChange={(e) => e} />
       </label>
       <br />
 
       <label>
         A:
         <br />
-        <textarea value={a} onChange={t(setA)}></textarea>
+        <textarea value={a} onChange={changeHelper(setA)}></textarea>
       </label>
       <br />
 
       <label>
         B:
         <br />
-        <textarea value={b} onChange={t(setB)}></textarea>
+        <textarea value={b} onChange={changeHelper(setB)}></textarea>
       </label>
       <br />
 
       <label>
         C:
         <br />
-        <textarea value={c} onChange={t(setC)}></textarea>
+        <textarea value={c} onChange={changeHelper(setC)}></textarea>
       </label>
       <br />
 
       <label>
         D:
         <br />
-        <textarea value={d} onChange={t(setD)}></textarea>
+        <textarea value={d} onChange={changeHelper(setD)}></textarea>
       </label>
       <br />
 
       <label>
         E:
         <br />
-        <textarea value={e} onChange={t(setE)}></textarea>
+        <textarea value={e} onChange={changeHelper(setE)}></textarea>
       </label>
       <br />
       <br />
