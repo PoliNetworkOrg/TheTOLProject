@@ -138,7 +138,7 @@ async function getParsedSheets() {
       attachments:
         DriveClient.matchFileIds(r.immaginiQuesito || '') || undefined,
       validated: (r.validato as string | undefined)?.toLowerCase() == 'sì',
-      tags: r.tag ? r.tag.split(';') : []
+      tags: r.tag ? r.tag.split(';') : undefined
     }))
 
     res['com'] = res['com']?.map((q, _, arr) => {
