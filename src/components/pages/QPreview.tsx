@@ -39,6 +39,7 @@ export default function QPreview(props: Props) {
         onChange={(v) => setIsCustom(v === 'custom')}
       />
       {isCustom ? <CustomQ /> : <DatabaseQ {...props} />}
+      <br />
     </div>
   )
 }

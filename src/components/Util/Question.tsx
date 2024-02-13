@@ -3,6 +3,7 @@ import { Question as IQuestion } from '../../utils/database'
 import { StyleSheet } from '../../utils/style'
 import QuestionAttachments from './QuestionAttachments'
 import RenderedText from './RenderedText'
+import { FaAnchor } from 'react-icons/fa'
 
 const styles = StyleSheet.create({
   question: {
@@ -21,6 +22,20 @@ const styles = StyleSheet.create({
   icon: {
     width: '10px',
     height: '10px'
+  },
+  tagsContainer: {
+    borderTop: '1px solid #b1b1b1',
+    borderBottom: '1px solid #b1b1b1',
+    borderColor: 'gray',
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: 16,
+    padding: '12px 0',
+    gap: 8
+  },
+  tags: {
+    margin: 0,
+    fontStyle: 'italic'
   }
 })
 
@@ -77,6 +92,23 @@ export default function Question({
           </p>
         )
       })}
+
+      {q.tags && q.tags.length > 0 && (
+        <div style={styles.tagsContainer}>
+          <FaAnchor />
+          <p style={styles.tags}>{concatTags(q.tags)}</p>
+        </div>
+      )}
     </div>
   )
+}
+
+/**
+ * Creates a ready-to-print list of tags, including semicolons as delimiters and a final period.
+ * @param tagsArr The raw array of tags
+ * @example contatTags(['foo baR', 'baz']) // 'Foo BaR; baz.'
+ */
+function concatTags(tagsArr: string[]): string {
+  const res = tagsArr.join('; ').trim()
+  return res ? `${res[0].toUpperCase()}${res.slice(1)}.` : ''
 }
