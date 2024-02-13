@@ -103,14 +103,12 @@ export default function Question({
   )
 }
 
+/**
+ * Creates a ready-to-print list of tags, including semicolons as delimiters and a final period.
+ * @param tagsArr The raw array of tags
+ * @example contatTags(['foo baR', 'baz']) // 'Foo BaR; baz.'
+ */
 function concatTags(tagsArr: string[]): string {
-  return tagsArr
-    .map((tag, i) => {
-      const isFirstTag = i === 0
-      const isLastTag = i === tagsArr.length - 1
-      if (isFirstTag) return `${tag[0].toUpperCase()}${tag.slice(1)}; `
-      if (isLastTag) return `${tag}.`
-      return `${tag}; `
-    })
-    .join('')
+  const res = tagsArr.join('; ').trim()
+  return res ? `${res[0].toUpperCase()}${res.slice(1)}.` : ''
 }
