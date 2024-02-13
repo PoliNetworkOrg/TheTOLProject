@@ -10,7 +10,12 @@ import {
   GoogleSpreadsheet,
   GoogleSpreadsheetWorksheet
 } from 'google-spreadsheet'
-import { sheetDict, Database, QuestionsData, Question } from '../src/utils/database'
+import {
+  sheetDict,
+  Database,
+  QuestionsData,
+  Question
+} from '../src/utils/database'
 
 dotenv.config()
 
@@ -113,7 +118,7 @@ async function getParsedSheets() {
       'rispostaD',
       'rispostaE',
       'rispostaCorretta',
-      'immaginiQuesito',
+      'immaginiQuesito'
     ]
 
     const rows = await sheet.getRows()
@@ -143,9 +148,9 @@ async function getParsedSheets() {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           DriveClient.matchFileIds(r.immaginiQuesito || '') || undefined,
         validated: (r.validato as string | undefined)?.toLowerCase() == 'sì',
-      tags: r.tag
-        ? (r.tag as string).split(';').map((s) => s.trim())
-        : undefined
+        tags: r.tag
+          ? (r.tag as string).split(';').map((s) => s.trim())
+          : undefined
       }
       return row
     })

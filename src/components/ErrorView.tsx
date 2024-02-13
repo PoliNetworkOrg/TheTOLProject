@@ -12,7 +12,10 @@ export default function ErrorView({
   return (
     <div hidden={hidden}>
       <h3>{display}</h3>
-      <blockquote>{internal?.name} <br/>{internal?.message}</blockquote>
+      <blockquote>
+        {internal?.name} <br />
+        {internal?.message}
+      </blockquote>
     </div>
   )
 }
