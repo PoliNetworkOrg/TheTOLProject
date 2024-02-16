@@ -4,7 +4,8 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended-type-checked',
-    'plugin:react-hooks/recommended'
+    'plugin:react-hooks/recommended',
+    'prettier' // this prevents conflicts between eslint and prettier (eslint-config-prettier)
   ],
   parser: '@typescript-eslint/parser',
   root: true,
@@ -36,6 +37,6 @@ module.exports = {
         args: 'after-used',
         argsIgnorePattern: '^_'
       }
-    ],
+    ]
   }
 }
