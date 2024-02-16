@@ -62,7 +62,7 @@
     "vite": "^4.5.2"
   },
   "engines": {
-    "node": "^16.0.0"
+    "node": "^20.0.0"
   },
   "eslintConfig": {
     "extends": [
