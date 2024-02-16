@@ -15,7 +15,8 @@
     "lint:fix": "eslint ./src ./scripts --fix && npm run format",
     "start": "vite --open",
     "test": "npm run build && npm run lint && npm run exports",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky"
   },
   "dependencies": {
     "@types/google-spreadsheet": "^3.3.1",
@@ -40,6 +41,7 @@
     "gh-pages": "^4.0.0",
     "google-spreadsheet": "^3.3.0",
     "googleapis": "^39.2.0",
+    "husky": "^9.0.11",
     "i18next": "^22.4.15",
     "i18next-browser-languagedetector": "^7.0.1",
     "mkdirp": "^3.0.1",
