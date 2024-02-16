@@ -11,10 +11,10 @@
     "depcheck": "depcheck",
     "exports": "ts-prune -e",
     "format": "prettier --write \"{src,scripts}/**/*.{ts,tsx}\"",
-    "lint": "eslint ./src ./scripts --ext .ts,.tsx && prettier --check \"{src,scripts}/**/*.{ts,tsx}\"",
-    "lint:fix": "eslint ./src ./scripts --fix --ext .ts,.tsx && npm run format",
+    "lint": "eslint ./src ./scripts --ext .ts,.tsx && prettier --check \"{src,scripts}/**/*.{ts,tsx}\" && npm run exports",
+    "lint:fix": "eslint ./src ./scripts --fix --ext .ts,.tsx && npm run format && npm run exports",
     "start": "vite --open",
-    "test": "npm run build && npm run lint && npm run exports",
+    "test": "npm run build && npm run lint",
     "preview": "vite preview",
     "prepare": "husky"
   },

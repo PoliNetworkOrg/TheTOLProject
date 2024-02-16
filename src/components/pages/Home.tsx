@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Collapsible from 'react-collapsible'
 import { Trans, useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { View } from '../../utils/constants'
 import { TestContext } from '../../utils/contexts'
 import { StyleSheet } from '../../utils/style'
