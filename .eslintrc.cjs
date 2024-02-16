@@ -5,6 +5,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:react-hooks/recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
     'prettier' // this prevents conflicts between eslint and prettier (eslint-config-prettier)
   ],
   parser: '@typescript-eslint/parser',
@@ -38,5 +40,10 @@ module.exports = {
         argsIgnorePattern: '^_'
       }
     ]
+  },
+  settings: {
+    react: { // eslint-plugin-react
+      version: 'detect' 
+    }
   }
 }
