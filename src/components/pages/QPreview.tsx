@@ -168,7 +168,6 @@ function CustomQ() {
   const [d, setD] = useState('')
   const [e, setE] = useState('')
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const changeHelper =
     (stateSetter: Dispatch<SetStateAction<string>>) =>
     (e: ChangeEvent<HTMLTextAreaElement>) =>

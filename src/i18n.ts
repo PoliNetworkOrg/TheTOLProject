@@ -6,7 +6,6 @@ import enLocale from './locales/en.json'
 import itLocale from './locales/it.json'
 import { STORAGE } from './utils/constants'
 
-// should we care about this promise?
 void i18n
   .use(LanguageDetector)
   .use(initReactI18next)
