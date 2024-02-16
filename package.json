@@ -11,9 +11,8 @@
     "depcheck": "depcheck",
     "exports": "ts-prune -e",
     "format": "prettier --write \"{src,scripts}/**/*.{ts,tsx}\"",
-    "lint": "eslint ./src ./scripts",
-    "lint:fix": "npm run lint -- --fix",
-    "lint:fix:format": "npm run lint:fix && npm run format",
+    "lint": "eslint ./src ./scripts && prettier --check \"{src,scripts}/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint ./src ./scripts --fix && npm run format",
     "start": "vite --open",
     "test": "npm run build && npm run lint && npm run exports",
     "preview": "vite preview"
