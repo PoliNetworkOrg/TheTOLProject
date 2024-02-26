@@ -112,8 +112,8 @@ function AnswerCell(props: AnswerCellProps) {
           backgroundColor: props.flagged
             ? theme.questionYellow
             : props.letter
-            ? theme.questionGreen
-            : 'white'
+              ? theme.questionGreen
+              : 'white'
         })}
       >
         <p style={styles.p}>

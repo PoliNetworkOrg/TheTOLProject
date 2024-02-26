@@ -75,8 +75,8 @@ export default function QuestionHeader(props: QuestionHeaderProps) {
             backgroundColor: props.currentAnswer?.flagged
               ? theme.questionYellow
               : props.currentAnswer?.letter
-              ? theme.questionGreen
-              : 'inherit'
+                ? theme.questionGreen
+                : 'inherit'
           })}
         >
           {(props.currentAnswer?.letter?.toUpperCase() || '') +
