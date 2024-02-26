@@ -63,7 +63,9 @@ export const DSATimeModifier = 1.3
 
 export const testTotalScore = 100
 /** Minimum score to pass the test */
-export const testPassThreshold = 60
+export const standardTestPassThreshold = 30
+/** Minimun score to pass the test on the fourth year of high school */
+export const earlyTestPassThreshold = 75
 /** Minimum number of correct questions to pass the test */
 export const tengPassThreshold = 24
 /** How to weight answer when calculating the section score */

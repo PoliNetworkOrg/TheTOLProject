@@ -29,7 +29,8 @@
   "results": {
     "exitWarn": "Non hai salvato i tuoi risultati. Sicuro di voler uscire?",
     "test": {
-      "passed": "superato",
+      "standardPassed": "superato con accesso graduatoria standard*",
+      "earlyPassed": "superato",
       "failed": "non superato",
       "points": "Punteggio"
     },
@@ -45,7 +46,7 @@
     "pointsCalc": {
       "title": "Come viene calcolato il punteggio",
       "body": {
-        "1": "Il <strong>punteggio massimo</strong> conseguibile <strong>è di {{v1}} </strong> e viene espresso fino alla seconda cifra decimale. <br /> L'attribuzione di <strong>OFA TEST</strong> (Obblighi Formativi Aggiunti) avviene quando il punteggio test, arrotondato all'intero più vicino, <strong>è minore di {{v2}}</strong>.<br /> L'attribuzione di <strong>OFA TENG</strong> avviene quando, considerando la sola sezione di {{v3}}, il numero di risposte corrette <strong>è inferiore a {{v4}}</strong>. <br />",
+        "1": "Il <strong>punteggio massimo</strong> conseguibile <strong>è di {{v1}} </strong> e viene espresso fino alla seconda cifra decimale. <br /> Per accedere alla graduatoria <strong>standard</strong> bisogna ottenere un punteggio <strong>uguale o superiore a 30</strong>, arrotondato all'intero più vicino. <br /> Per ottenere il diritto di immatricolazione nel TOL <strong>Anticipato</strong> (se iscritto al penultimo anno di superiori) serve ottenere un punteggio <strong>maggiore o uguale a 75</strong>, arrotondato all'intero più vicino. <br /> L'attribuzione di <strong>OFA TENG</strong> avviene quando, considerando la sola sezione di {{v3}}, il numero di risposte corrette <strong>è inferiore a {{v4}}</strong>. <br />",
         "2": "Il <strong>punteggio</strong> complessivo viene arrotondato all'intero più vicino (es: il punteggio 59,49 viene arrotondato a 59, il punteggio 59,50 a 60)"
       },
       "ul": {

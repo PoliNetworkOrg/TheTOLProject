@@ -29,7 +29,8 @@
   "results": {
     "exitWarn": "You did not save your results. Are you sure you want to exit?",
     "test": {
-      "passed": "passed",
+      "standardPassed": "passed with access to standard rankings",
+      "earlyPassed": "passed",
       "failed": "failed",
       "points": "Score"
     },
@@ -45,10 +46,10 @@
     "pointsCalc": {
       "title": "How the score is calculated",
       "body": {
-        "1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> The attribution of <strong>OFA TEST</strong> (Obblighi Formativi Aggiunti) occurs when the test score, rounded to the nearest integer, <strong>is less than {{v2}}</strong>.<br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v3}} section, the number of correct answers <strong>is less than {{v4}}</strong>. <br />",
+        "1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> To gain access to the <strong>standard</strong> rankings, you need to get a score <strong>higher or equal to 30</strong>, rounded to the nearest integer. <br /> To gain eligibility for enrollment in the <strong>Early</strong> TOL (while enrolled in the penultimate year of upper secondary school) you need to get a score <strong>higher or equal to 75</strong>, rounded to the nearest integer. <br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v3}} section, the number of correct answers <strong>is less than {{v4}}</strong>. <br />",
         "2": "The <strong>total score</strong> gets rounded to the nearest integer (e.g., 59,49 gets rounded to 59, while 59,50 to 60)"
       },
-      "ul":{
+      "ul": {
         "1": "The test <strong>score</strong> is calculated by assigning:",
         "2": "and assigning a weight of",
         "item": {
@@ -60,7 +61,7 @@
           "3_other": "{{v}} points for each answer not given",
           "4": " for each question of {{sec}}"
         }
-      } 
+      }
     },
     "saveReminder": "Remember to save your results before starting a new test, or they will be lost!",
     "btn": {

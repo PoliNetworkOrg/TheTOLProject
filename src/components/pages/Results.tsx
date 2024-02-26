@@ -5,9 +5,10 @@ import {
   getSectionName,
   sectionInfo,
   tengPassThreshold,
-  testPassThreshold,
+  standardTestPassThreshold,
   testTotalScore,
-  View
+  View,
+  earlyTestPassThreshold
 } from '../../utils/constants'
 import { Question, QuestionsData, Section } from '../../utils/database'
 import { formatNumber, StyleSheet, theme } from '../../utils/style'
@@ -169,7 +170,8 @@ export default function Results(props: ResultsProps) {
     .reduce((acc, curr) => acc.add(curr), new Fraction(0))
 
   const roundedScore = parseInt(score.round(0).toString(0))
-  const testPassed = roundedScore >= testPassThreshold,
+  const standardTestPassed = roundedScore >= standardTestPassThreshold,
+    earlyTestPassed = roundedScore >= earlyTestPassThreshold,
     tengPassed = correctionGrid.ing?.correct >= tengPassThreshold
 
   const resultTable = () => (
@@ -177,11 +179,12 @@ export default function Results(props: ResultsProps) {
       <p style={styles.centeredText}>
         <br />
         TOL{' '}
-        {testPassed
-          ? `${t('results.test.passed')} ${!tengPassed ? ' (OFA TENG)' : ''}`
-          : `${t('results.test.failed')}: OFA TEST${
-              !tengPassed ? ' + OFA TENG' : ''
-            }`}
+        {earlyTestPassed
+          ? t('results.test.earlyPassed')
+          : standardTestPassed
+          ? t('results.test.standardPassed')
+          : t('results.test.failed')}
+        {!tengPassed && ' (OFA TENG)'}
         <br />
         {t('results.test.points')}: {formatNumber(score)} /{' '}
         {formatNumber(testTotalScore)} ({formatNumber(score, true)})
@@ -250,7 +253,7 @@ export default function Results(props: ResultsProps) {
               i18n={i18n}
               values={{
                 v1: formatNumber(testTotalScore, true),
-                v2: formatNumber(testPassThreshold),
+                v2: formatNumber(standardTestPassThreshold),
                 v3: sectionInfo.ing.name,
                 v4: formatNumber(tengPassThreshold)
               }}
