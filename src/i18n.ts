@@ -6,7 +6,7 @@ import enLocale from './locales/en.json'
 import itLocale from './locales/it.json'
 import { STORAGE } from './utils/constants'
 
-i18n
+void i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({

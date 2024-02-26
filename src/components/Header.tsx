@@ -41,14 +41,21 @@ interface HeaderProps {
 }
 
 export default function Header({ viewState }: HeaderProps) {
-  const { i18n } = useTranslation()
+  const { i18n, t } = useTranslation()
   const { mobile } = useContext(MobileContext)
   const [lang, setLang] = useState(i18n.resolvedLanguage)
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value
-    i18n.changeLanguage(lang)
-    LocalStorage.handleChange() // language saved to LocalStorage
-    setLang(lang)
+    i18n
+      .changeLanguage(lang)
+      .then(() => {
+        LocalStorage.handleChange() // language saved to LocalStorage
+        setLang(lang)
+      })
+      .catch((e) => {
+        console.error(e)
+        window.alert(t('i18n.languageChangeError'))
+      })
   }
 
   const [view] = viewState

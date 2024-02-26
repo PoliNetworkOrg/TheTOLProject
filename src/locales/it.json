@@ -94,5 +94,8 @@
         "3": "Ti invitiamo a segnalare il tuo browser <issue>qui</issue> in modo da poter risolvere il problema."
       }
     }
+  },
+  "i18n": {
+    "languageChangeError": "Si è verificato un problema durante la modifica della lingua."
   }
 }

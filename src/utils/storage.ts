@@ -16,7 +16,7 @@ export class LocalStorage {
   public static checkLastChange() {
     // according to privacy policy, if last change is older
     // than 6 months, then the localStorage has to be cleared
-    const date = this.getItem(STORAGE.LAST_CHANGE)
+    const date = this.getItem<string>(STORAGE.LAST_CHANGE)
     if (!date) return
     if (this.isDateOlderThanSixMonths(new Date(date))) {
       localStorage.clear()
@@ -30,10 +30,10 @@ export class LocalStorage {
     this.handleChange()
   }
 
-  public static getItem(key: string) {
+  public static getItem<T>(key: string): T | null {
     // custom getItem with JSON.parse and null check
     const value = localStorage.getItem(key)
     if (!value) return null
-    return JSON.parse(value)
+    return JSON.parse(value) as T
   }
 }

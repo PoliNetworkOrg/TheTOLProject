@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as dotenv from 'dotenv'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -7,7 +10,12 @@ import {
   GoogleSpreadsheet,
   GoogleSpreadsheetWorksheet
 } from 'google-spreadsheet'
-import { sheetDict, Database, QuestionsData } from '../src/utils/database'
+import {
+  sheetDict,
+  Database,
+  QuestionsData,
+  Question
+} from '../src/utils/database'
 
 dotenv.config()
 
@@ -122,26 +130,30 @@ async function getParsedSheets() {
         `Invalid database structure: check structure of the ${sheet.title} sheet.`
       )
 
-    res[sheetDict[sheet.title]] = rows.map((r) => ({
-      id: r.ID,
-      sub: r.sub,
-      track: r.brano,
-      text: r.quesito,
-      answers: {
-        a: r.rispostaA,
-        b: r.rispostaB,
-        c: r.rispostaC,
-        d: r.rispostaD,
-        e: r.rispostaE
-      },
-      correct: r.rispostaCorretta?.toLowerCase(),
-      attachments:
-        DriveClient.matchFileIds(r.immaginiQuesito || '') || undefined,
-      validated: (r.validato as string | undefined)?.toLowerCase() == 'sì',
-      tags: r.tag
-        ? (r.tag as string).split(';').map((s) => s.trim())
-        : undefined
-    }))
+    res[sheetDict[sheet.title]] = rows.map((r) => {
+      const row: Question = {
+        id: r.ID,
+        sub: r.sub,
+        track: r.brano,
+        text: r.quesito,
+        answers: {
+          a: r.rispostaA,
+          b: r.rispostaB,
+          c: r.rispostaC,
+          d: r.rispostaD,
+          e: r.rispostaE
+        },
+        correct: r.rispostaCorretta?.toLowerCase(),
+        attachments:
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          DriveClient.matchFileIds(r.immaginiQuesito || '') || undefined,
+        validated: (r.validato as string | undefined)?.toLowerCase() == 'sì',
+        tags: r.tag
+          ? (r.tag as string).split(';').map((s) => s.trim())
+          : undefined
+      }
+      return row
+    })
 
     res['com'] = res['com']?.map((q, _, arr) => {
       if (!q.track) {

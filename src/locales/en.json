@@ -94,5 +94,8 @@
         "3": "Please report your browser <issue>here</issue> so we can fix the problem."
       }
     }
+  },
+  "i18n": {
+    "languageChangeError": "There was an error changing the language"
   }
 }

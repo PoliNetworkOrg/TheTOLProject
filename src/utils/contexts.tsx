@@ -30,7 +30,7 @@ export const TestProvider = (props: TestProviderProps) => {
   }
 
   useEffect(() => {
-    const localValue = LocalStorage.getItem(STORAGE.DSA)
+    const localValue = LocalStorage.getItem<boolean>(STORAGE.DSA)
     if (localValue === null) return
     setIsDsa(localValue)
   }, [])
