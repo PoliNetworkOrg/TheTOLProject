@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { DATABASE_REF, sectionInfo } from '../../utils/constants'
 import {
   Section,
@@ -22,7 +22,8 @@ interface DBPreviewProps {
 }
 
 export default function DBPreview({ dbs }: DBPreviewProps) {
-  const [db, setDb] = useState(dbs?.stable)
+  const [dbRef, setDbRef] = useState<DATABASE_REF>(DATABASE_REF.STABLE)
+  const db = useMemo(() => dbs?.[dbRef], [dbRef, dbs])
 
   if (!db || !dbs) return <div style={baseStyle}>Loading...</div>
   return (
@@ -34,7 +35,7 @@ export default function DBPreview({ dbs }: DBPreviewProps) {
           { value: DATABASE_REF.MAIN, label: 'Development' }
         ]}
         defaultValue={DATABASE_REF.STABLE}
-        onChange={(v) => setDb(dbs[v as DATABASE_REF])}
+        onChange={(v) => setDbRef(v as DATABASE_REF)}
       />
       {(
         Object.entries(db).filter(([key]) => key != 'meta') as [
