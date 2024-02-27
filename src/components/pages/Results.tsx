@@ -79,6 +79,12 @@ const styles = StyleSheet.create({
   restartButton: {
     margin: '12px',
     marginBottom: '32px'
+  },
+  link: {
+    display: 'inline-flex',
+    color: theme.primary,
+    gap: '5px',
+    alignItems: 'center'
   }
 })
 
@@ -256,6 +262,16 @@ export default function Results(props: ResultsProps) {
                 v2: formatNumber(standardTestPassThreshold),
                 v3: sectionInfo.ing.name,
                 v4: formatNumber(tengPassThreshold)
+              }}
+              components={{
+                rankingsLink: (
+                  <a
+                    href="https://rankings.polinetwork.org/#/home/Ingegneria"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    style={styles.link}
+                  />
+                )
               }}
             >
               results.pointsCalc.body.1
