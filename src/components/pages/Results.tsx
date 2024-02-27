@@ -182,8 +182,8 @@ export default function Results(props: ResultsProps) {
         {earlyTestPassed
           ? t('results.test.earlyPassed')
           : standardTestPassed
-          ? t('results.test.standardPassed')
-          : t('results.test.failed')}
+            ? t('results.test.standardPassed')
+            : t('results.test.failed')}
         {!tengPassed && ' (OFA TENG)'}
         <br />
         {t('results.test.points')}: {formatNumber(score)} /{' '}
