@@ -260,8 +260,9 @@ export default function Results(props: ResultsProps) {
               values={{
                 v1: formatNumber(testTotalScore, true),
                 v2: formatNumber(standardTestPassThreshold),
-                v3: sectionInfo.ing.name,
-                v4: formatNumber(tengPassThreshold)
+                v3: formatNumber(earlyTestPassThreshold),
+                v4: sectionInfo.ing.name,
+                v5: formatNumber(tengPassThreshold)
               }}
               components={{
                 rankingsLink: (
