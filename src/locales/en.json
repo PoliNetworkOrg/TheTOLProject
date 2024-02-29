@@ -2,7 +2,7 @@
   "language": "English",
   "tg": {
     "project": "The TOL Project",
-    "help": "Gruppo Preparazione TOL"
+    "help": "TOL: preparazione test"
   },
   "home": {
     "disclaimer": "\"The TOL Project\" (Project) is in no way connected to Politecnico di Milano but is managed free of charge by students. The authors of the Project do not assume any responsibility, nor do they expressly or implicitly guarantee the accuracy or reliability of the contents of this site for the purpose of passing the admission test at Politecnico di Milano.",
@@ -48,7 +48,7 @@
         "1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> The attribution of <strong>OFA TEST</strong> (Obblighi Formativi Aggiunti) occurs when the test score, rounded to the nearest integer, <strong>is less than {{v2}}</strong>.<br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v3}} section, the number of correct answers <strong>is less than {{v4}}</strong>. <br />",
         "2": "The <strong>total score</strong> gets rounded to the nearest integer (e.g., 59,49 gets rounded to 59, while 59,50 to 60)"
       },
-      "ul":{
+      "ul": {
         "1": "The test <strong>score</strong> is calculated by assigning:",
         "2": "and assigning a weight of",
         "item": {
@@ -60,7 +60,7 @@
           "3_other": "{{v}} points for each answer not given",
           "4": " for each question of {{sec}}"
         }
-      } 
+      }
     },
     "saveReminder": "Remember to save your results before starting a new test, or they will be lost!",
     "btn": {
