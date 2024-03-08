@@ -4,6 +4,9 @@
     "project": "The TOL Project",
     "help": "TOL: preparazione test"
   },
+  "externalLinks": {
+    "rankings": "rankings.polinetwork.org"
+  },
   "home": {
     "disclaimer": "\"The TOL Project\" (Project) is in no way connected to Politecnico di Milano but is managed free of charge by students. The authors of the Project do not assume any responsibility, nor do they expressly or implicitly guarantee the accuracy or reliability of the contents of this site for the purpose of passing the admission test at Politecnico di Milano.",
     "languageInfo": "*The test simulation will be in Italian",
@@ -29,7 +32,8 @@
   "results": {
     "exitWarn": "You did not save your results. Are you sure you want to exit?",
     "test": {
-      "passed": "passed",
+      "standardPassed": "passed with access to standard rankings",
+      "earlyPassed": "passed",
       "failed": "failed",
       "points": "Score"
     },
@@ -45,7 +49,7 @@
     "pointsCalc": {
       "title": "How the score is calculated",
       "body": {
-        "1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> The attribution of <strong>OFA TEST</strong> (Obblighi Formativi Aggiunti) occurs when the test score, rounded to the nearest integer, <strong>is less than {{v2}}</strong>.<br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v3}} section, the number of correct answers <strong>is less than {{v4}}</strong>. <br />",
+        "1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> To gain access to the <strong>standard rankings</strong>, you need to get a score <strong>higher or equal to {{v2}}</strong>, rounded to the nearest integer. <br /> You can consult the rankings from the previous years on <rankingsLink>$t(externalLinks.rankings)</rankingsLink>. <br /> To gain eligibility for enrollment in the <strong>Early TOL</strong> (while enrolled in the penultimate year of upper secondary school) you need to get a score <strong>higher or equal to {{v3}}</strong>, rounded to the nearest integer. <br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v4}} section, the number of correct answers <strong>is less than {{v5}}</strong>. <br />",
         "2": "The <strong>total score</strong> gets rounded to the nearest integer (e.g., 59,49 gets rounded to 59, while 59,50 to 60)"
       },
       "ul": {

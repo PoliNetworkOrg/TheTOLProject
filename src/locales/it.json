@@ -4,6 +4,9 @@
     "project": "The TOL Project",
     "help": "TOL: preparazione test"
   },
+  "externalLinks": {
+    "rankings": "rankings.polinetwork.org"
+  },
   "home": {
     "disclaimer": "\"The TOL Project\" (Progetto) non è in alcun modo collegato al Politecnico di Milano ma è gestito gratuitamente da studenti. Gli autori del Progetto non si assumono alcuna responsabilità, né garantiscono espressamente o implicitamente l'accuratezza o l'affidabilità dei contenuti di questo sito ai fini del superamento del test di ammissione del Politecnico di Milano",
     "languageInfo": "",
@@ -29,7 +32,8 @@
   "results": {
     "exitWarn": "Non hai salvato i tuoi risultati. Sicuro di voler uscire?",
     "test": {
-      "passed": "superato",
+      "standardPassed": "superato con accesso graduatoria standard*",
+      "earlyPassed": "superato",
       "failed": "non superato",
       "points": "Punteggio"
     },
@@ -45,7 +49,7 @@
     "pointsCalc": {
       "title": "Come viene calcolato il punteggio",
       "body": {
-        "1": "Il <strong>punteggio massimo</strong> conseguibile <strong>è di {{v1}} </strong> e viene espresso fino alla seconda cifra decimale. <br /> L'attribuzione di <strong>OFA TEST</strong> (Obblighi Formativi Aggiunti) avviene quando il punteggio test, arrotondato all'intero più vicino, <strong>è minore di {{v2}}</strong>.<br /> L'attribuzione di <strong>OFA TENG</strong> avviene quando, considerando la sola sezione di {{v3}}, il numero di risposte corrette <strong>è inferiore a {{v4}}</strong>. <br />",
+        "1": "Il <strong>punteggio massimo</strong> conseguibile <strong>è di {{v1}} </strong> e viene espresso fino alla seconda cifra decimale. <br /> Per accedere alla <strong>graduatoria standard</strong> bisogna ottenere un punteggio <strong>uguale o superiore a {{v2}}</strong>, arrotondato all'intero più vicino. <br /> Puoi consultare le graduatorie degli anni precedenti su <rankingsLink>$t(externalLinks.rankings)</rankingsLink>. <br /> Per ottenere il diritto di immatricolazione nel <strong>TOL Anticipato</strong> (se iscritto al penultimo anno di superiori) serve ottenere un punteggio <strong>maggiore o uguale a {{v3}}</strong>, arrotondato all'intero più vicino. <br /> L'attribuzione di <strong>OFA TENG</strong> avviene quando, considerando la sola sezione di {{v4}}, il numero di risposte corrette <strong>è inferiore a {{v5}}</strong>. <br />",
         "2": "Il <strong>punteggio</strong> complessivo viene arrotondato all'intero più vicino (es: il punteggio 59,49 viene arrotondato a 59, il punteggio 59,50 a 60)"
       },
       "ul": {
