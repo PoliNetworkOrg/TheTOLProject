@@ -95,7 +95,9 @@ export default function Question({
 
       {q.tags && q.tags.length > 0 && (
         <div style={styles.tagsContainer}>
-          <FaAnchor />
+          <span>
+            <FaAnchor />
+          </span>
           <p style={styles.tags}>{concatTags(q.tags)}</p>
         </div>
       )}
