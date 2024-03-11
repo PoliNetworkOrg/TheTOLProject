@@ -1,7 +1,6 @@
 import { useContext, useMemo, useState } from 'react'
 import { StyleSheet } from '../utils/style'
 import { statePair } from '../utils/types'
-import logo from '../static/logo3000.webp'
 import { links, View } from '../utils/constants'
 import { MobileContext } from '../utils/contexts'
 import { useTranslation } from 'react-i18next'
@@ -78,7 +77,7 @@ export default function Header({ viewState }: HeaderProps) {
           target="_blank"
           href={links.polinetwork}
         >
-          <img src={logo} alt="logo" style={styles.logo} />
+          <img src={links.polinetworkLogoSvg} alt="logo" style={styles.logo} />
           {!mobile && <h1 style={styles.text}>PoliNetwork</h1>}
         </a>
       </div>

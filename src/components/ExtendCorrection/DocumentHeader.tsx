@@ -1,5 +1,4 @@
 import { StyleSheet } from '../../utils/style'
-import logo from '../../static/logo3000.webp'
 import { links } from '../../utils/constants'
 
 const styles = StyleSheet.create({
@@ -40,7 +39,7 @@ export default function DocumentHeader() {
         target="_blank"
         href={links.polinetwork}
       >
-        <img src={logo} alt="logo" style={styles.logo} />
+        <img src={links.polinetworkLogoSvg} alt="logo" style={styles.logo} />
         <h1 style={styles.text}>PoliNetwork</h1>
       </a>
       <h1 style={styles.rightText}>The TOL Project</h1>

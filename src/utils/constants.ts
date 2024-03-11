@@ -6,6 +6,8 @@ export const links = {
     'https://github.com/PoliNetworkOrg/TheTOLProject/blob/main/LICENSE',
   githubSource: 'https://github.com/PoliNetworkOrg/TheTOLProject/',
   polinetwork: 'https://polinetwork.org',
+  polinetworkLogoSvg:
+    'https://raw.githubusercontent.com/PoliNetworkOrg/Logo/1bf5ca6d64658d33d0159c0f526b57a6a31b9fc6/Logo.svg',
   telegramPreparazioneTOL: 'https://t.me/joinchat/_zugEikozmcyMzA0',
   telegramTheTOLProject: 'https://t.me/+amLdTd-EoHw1MWRk',
   localStorageMDN:
