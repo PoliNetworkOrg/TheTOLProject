@@ -99,7 +99,7 @@ export default function App() {
     // a new test is generated
     if (!dbs) return
     if (view === 'INFO-start') {
-      setQuestions(selectRandomQuestions(dbs.stable))
+      setQuestions(selectRandomQuestions(dbs.main))
       setSection('ing')
       setAnswers({
         ing: [],
