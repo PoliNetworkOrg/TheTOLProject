@@ -49,8 +49,8 @@
     "pointsCalc": {
       "title": "How the score is calculated",
       "body": {
-        "1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> To gain access to the <strong>standard rankings</strong>, you need to get a score <strong>higher or equal to {{v2}}</strong>, rounded to the nearest integer. <br /> You can consult the rankings from the previous years on <rankingsLink>$t(externalLinks.rankings)</rankingsLink>. <br /> To gain eligibility for enrollment in the <strong>Early TOL</strong> (while enrolled in the penultimate year of upper secondary school) you need to get a score <strong>higher or equal to {{v3}}</strong>, rounded to the nearest integer. <br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v4}} section, the number of correct answers <strong>is less than {{v5}}</strong>. <br />",
-        "2": "The <strong>total score</strong> gets rounded to the nearest integer (e.g., 59,49 gets rounded to 59, while 59,50 to 60)"
+        "1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> To gain access to the <strong>standard rankings</strong>, you need to get a score <strong>higher or equal to {{v2}}</strong>. <br /> You can consult the rankings from the previous years on <rankingsLink>$t(externalLinks.rankings)</rankingsLink>. <br /> To gain eligibility for enrollment in the <strong>Early TOL</strong> (while enrolled in the penultimate year of upper secondary school) you need to get a score <strong>higher or equal to {{v3}}</strong>. <br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v4}} section, the number of correct answers <strong>is less than {{v5}}</strong>. <br />",
+        "2": "The <strong>total score</strong> gets rounded to the nearest integer (e.g., 74,49 gets rounded to 74, while 74,50 to 75)"
       },
       "ul": {
         "1": "The test <strong>score</strong> is calculated by assigning:",
