@@ -76,9 +76,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     maxWidth: 500
   },
-  restartButton: {
-    margin: '12px',
-    marginBottom: '32px'
+  restartButtons: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'wrap'
   },
   link: {
     display: 'inline-flex',
@@ -245,12 +247,18 @@ export default function Results(props: ResultsProps) {
       <div style={styles.div}>
         <div className="do-not-print">{resultTable()}</div>
 
-        <ExtendedCorrection
-          answers={props.answers}
-          questions={props.questions}
-          resultTable={resultTable()}
-          onSave={() => setIsResultSaved(true)}
-        />
+        <div style={styles.restartDiv}>
+          <h3 style={styles.restartTitle}>{t('results.saveReminder')}</h3>
+          <div style={styles.restartButtons}>
+            <ExtendedCorrection
+              answers={props.answers}
+              questions={props.questions}
+              resultTable={resultTable()}
+              onSave={() => setIsResultSaved(true)}
+            />
+            <Button label={t('results.btn.home')} onClick={handleNewTest} />
+          </div>
+        </div>
 
         <div className="do-not-print">
           <h3 style={styles.h3}>{t('results.pointsCalc.title')}</h3>
@@ -329,14 +337,6 @@ export default function Results(props: ResultsProps) {
             </ul>
             <Trans i18n={i18n}>results.pointsCalc.body.2</Trans>
           </p>
-          <div style={styles.restartDiv}>
-            <h3 style={styles.restartTitle}>{t('results.saveReminder')}</h3>
-            <Button
-              label={t('results.btn.home')}
-              style={styles.restartButton}
-              onClick={handleNewTest}
-            />
-          </div>
         </div>
       </div>
     </Wrapper>
