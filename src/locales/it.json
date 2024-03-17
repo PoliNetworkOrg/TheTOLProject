@@ -68,8 +68,8 @@
     },
     "saveReminder": "Ricordati di salvare i tuoi risultati prima di iniziare un nuovo test, o andranno persi!",
     "btn": {
-      "home": "Torna alla home",
-      "save": "Salva risultati della simulazione"
+      "home": "Inizia un nuovo test",
+      "save": "Salva i miei risultati"
     },
     "pdf": {
       "title": "Simulazione del {{- date}} alle {{- time}}",
