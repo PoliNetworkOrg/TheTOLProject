@@ -16,7 +16,12 @@
   },
   "about": {
     "main": "Abbiamo sviluppato un simulatore TOL completo, open source e gratuito per fornire alle aspiranti matricole di Ingegneria un ambiente familiare in cui esercitarsi, molto simile a quello che incontreranno al test di ammissione ufficiale del Politecnico di Milano. <br /><br /> È l'unico totalmente conforme ai requisiti formativi del TOL del Politecnico di Milano e completamente gestito da studenti, dallo sviluppo dell'applicazione web alla creazione dei quesiti TOL.",
-    "projectTeam": "Team del progetto",
+    "roles": {
+      "projectLeader": "Ideatore e Responsabile del Progetto",
+      "dev": "Sviluppatori",
+      "author": "Autori",
+      "adHoc": "Ad Hoc"
+    },
     "supportGroups": {
       "head": "Gruppi di supporto",
       "1": "Segnalazioni e informazioni sul progetto: <tgProject>$t(tg.project) <tgLogo /></tgProject>",

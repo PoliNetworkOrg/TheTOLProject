@@ -16,7 +16,12 @@
   },
   "about": {
     "main": "We have developed a comprehensive, open source and free TOL simulator to provide aspiring Engineering freshmen with a familiar environment in which to practice, very similar to what they will encounter on the official admission test of Politecnico di Milano. <br/><br/>It is the only one fully compliant with the TOL training requirements of the Politecnico di Milano and completely managed by students, from the development of the web application to the creation of the TOL questions.",
-    "projectTeam": "Project team",
+    "roles": {
+      "projectLeader": "Creator & Project Leader",
+      "dev": "Developers",
+      "author": "Authors",
+      "adHoc": "Ad Hoc"
+    },
     "supportGroups": {
       "head": "Support groups",
       "1": "Project feedback & info: <tgProject>$t(tg.project) <tgLogo /></tgProject>",
