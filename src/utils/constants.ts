@@ -89,75 +89,104 @@ export function getNextSection(currentSection: Section): Section | undefined {
   return (sortedInfo[i + 1] || [])[0]
 }
 
+export const MemberRole = {
+  ProjectLeader: 'PROJECT_LEADER',
+  Author: 'AUTHOR',
+  Dev: 'DEVELOPER',
+  AdHoc: 'AD_HOC'
+} as const
+
+export type MemberRoleKeys = (typeof MemberRole)[keyof typeof MemberRole]
+
 interface Member {
   name: string
   tg: string
-  ah?: boolean
+  roles: MemberRoleKeys[]
   prefix?: string
 }
 
 export const members: Member[] = [
   {
     name: 'Gabriele Zanini',
-    tg: 'zagbc'
+    tg: 'zagbc',
+    roles: [MemberRole.ProjectLeader, MemberRole.Author]
   },
   {
     name: 'Federico Grandi',
-    tg: 'federico_grandi'
+    tg: 'federico_grandi',
+    roles: [MemberRole.Author, MemberRole.Dev]
   },
   {
     name: 'Ilaria Corcelli',
-    tg: 'iilaria01'
+    tg: 'iilaria01',
+    roles: [MemberRole.Author]
   },
   {
     name: 'Matteo Salicandro',
-    tg: 'Mattysal'
+    tg: 'Mattysal',
+    roles: [MemberRole.Author]
   },
   {
     name: 'Nicolas Facchin',
-    tg: 'SuperRollyNoka'
+    tg: 'Noka_la_Foka',
+    roles: [MemberRole.Author]
   },
   {
     name: 'Elia Maggioni',
-    tg: 'EliaMaggioni',
-    ah: true
+    tg: 'maggelia',
+    roles: [MemberRole.AdHoc]
   },
   {
     name: 'Diego Aldarese',
     tg: 'diegoaldarese',
-    ah: true
+    roles: [MemberRole.AdHoc]
   },
   {
     name: 'Tommaso Morganti',
-    tg: 'toto04_1'
+    tg: 'toto04_1',
+    roles: [MemberRole.Dev]
   },
   {
     name: 'Giovanni Menicucci',
-    tg: 'giova1211'
+    tg: 'giova1211',
+    roles: [MemberRole.Author]
   },
   {
     name: 'Nadia Scappini',
     tg: 'nscapp',
-    prefix: 'Prof.ssa'
+    prefix: 'Prof.ssa',
+    roles: [MemberRole.Author]
   },
   {
     name: '@spyarect',
     tg: 'spyarect',
-    ah: true
+    roles: [MemberRole.AdHoc]
   },
   {
     name: 'Clelia Di Leo',
     tg: 'cloelia',
-    prefix: 'Prof.ssa'
+    prefix: 'Prof.ssa',
+    roles: [MemberRole.Author]
   },
   {
     name: 'Raif Muhammad',
     tg: 'Raif9',
-    ah: true
+    roles: [MemberRole.AdHoc]
   },
   {
     name: 'Lorenzo Corallo',
-    tg: 'lorenzocorallo'
+    tg: 'lorenzocorallo',
+    roles: [MemberRole.Dev]
+  },
+  {
+    name: 'Caleb Koomson',
+    tg: 'koomson1',
+    roles: [MemberRole.Author]
+  },
+  {
+    name: 'Lorenzo Matteo Salvatori',
+    tg: 'Lorenz02003',
+    roles: [MemberRole.Author]
   }
 ]
 
