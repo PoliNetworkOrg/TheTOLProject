@@ -109,7 +109,7 @@ export const members: Member[] = [
   {
     name: 'Gabriele Zanini',
     tg: 'zagbc',
-    roles: [MemberRole.ProjectLeader]
+    roles: [MemberRole.ProjectLeader, MemberRole.Author]
   },
   {
     name: 'Federico Grandi',
@@ -177,6 +177,16 @@ export const members: Member[] = [
     name: 'Lorenzo Corallo',
     tg: 'lorenzocorallo',
     roles: [MemberRole.Dev]
+  },
+  {
+    name: 'Caleb Koomson',
+    tg: 'koomson1',
+    roles: [MemberRole.Author]
+  },
+  {
+    name: 'Lorenzo Matteo Salvatori',
+    tg: 'Lorenz02003',
+    roles: [MemberRole.Author]
   }
 ]
 
