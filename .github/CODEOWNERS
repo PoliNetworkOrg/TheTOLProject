@@ -1,0 +1,5 @@
+# In general, requires PRs to be reviewd by tol-admins
+* @PoliNetworkOrg/tol-admins
+
+# The following are exceptions to the above rule
+/docs/
