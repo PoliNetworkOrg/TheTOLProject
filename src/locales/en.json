@@ -15,8 +15,13 @@
     "dsaInfo": "Students with Specific Learning Disorders (SLD) taking the TOL are eligible for an additional 30 percent time, provided they disclose it when registering for the test. A certification stating the SLD diagnosis is also required. Selecting \"Student with SLD\" will apply the bonus time in this simulation as well."
   },
   "about": {
-    "main": "In order to be admitted to the Engineering school of Politecnico di Milano (PoliMi), the aspiring freshmen must pass the admission test (TOL). <br /> Among the resources that PoliMi offers for free to prepare, you can find: the Politest, a collection of commented and solved exercises, the DOL, an online demo with a limited number of questions, and two complete self-assessment tests (pdf with questions, xls with exact answers). <br /> <br /> Thus, we did not have a complete, web-based TOL simulation, that is, in the same environment in which the future freshmen will take the admission test. <br /> We have set ourself the goal of creating a complete and free TOL simulation, in order to provide aspiring freshmen with a familiar environment in which to practice, very similar to the one they will encounter at the admission test. <br /> The project is fully managed by students, from developing the web application to creating the TOL questions.",
-    "projectTeam": "Project team",
+    "main": "We have developed a comprehensive, open source and free TOL simulator to provide aspiring Engineering freshmen with a familiar environment in which to practice, very similar to what they will encounter on the official admission test of Politecnico di Milano. <br/><br/>It is the only one fully compliant with the TOL training requirements of the Politecnico di Milano and completely managed by students, from the development of the web application to the creation of the TOL questions.",
+    "roles": {
+      "projectLeader": "Creator & Project Leader",
+      "dev": "Developers",
+      "author": "Authors",
+      "adHoc": "Ad Hoc"
+    },
     "supportGroups": {
       "head": "Support groups",
       "1": "Project feedback & info: <tgProject>$t(tg.project) <tgLogo /></tgProject>",
@@ -49,7 +54,7 @@
     "pointsCalc": {
       "title": "How the score is calculated",
       "body": {
-        "1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> To gain access to the <strong>standard rankings</strong>, you need to get a score <strong>higher or equal to {{v2}}</strong>. <br /> You can consult the rankings from the previous years on <rankingsLink>$t(externalLinks.rankings)</rankingsLink>. <br /> To gain eligibility for enrollment in the <strong>Early TOL</strong> (while enrolled in the penultimate year of upper secondary school) you need to get a score <strong>higher or equal to {{v3}}</strong>. <br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v4}} section, the number of correct answers <strong>is less than {{v5}}</strong>. <br />",
+        "1": "The <strong>maximum achievable score</strong> <strong>is {{v1}} </strong> and is expressed to the second decimal place. <br /> To gain access to the <strong>standard rankings</strong>, you need to get a score <strong>higher or equal to {{v2}}</strong>. <br /> <br />You can consult the rankings from the previous years on <rankingsLink>$t(externalLinks.rankings)</rankingsLink>. <br /> <br />To gain eligibility for enrollment in the <strong>Early TOL</strong> (while enrolled in the penultimate year of upper secondary school) you need to get a score <strong>higher or equal to {{v3}}</strong>. <br /> The attribution of <strong>OFA TENG</strong> occurs when, considering only the {{v4}} section, the number of correct answers <strong>is less than {{v5}}</strong>. <br />",
         "2": "The <strong>total score</strong> gets rounded to the nearest integer (e.g., 74,49 gets rounded to 74, while 74,50 to 75)"
       },
       "ul": {

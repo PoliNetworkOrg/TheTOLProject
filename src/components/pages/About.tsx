@@ -1,4 +1,9 @@
-import { links, members } from '../../utils/constants'
+import {
+  MemberRole,
+  MemberRoleKeys,
+  links,
+  members
+} from '../../utils/constants'
 import { StyleSheet, theme } from '../../utils/style'
 import telegramLogo from '../../static/telegram_logo.svg'
 import Wrapper from '../Util/Wrapper'
@@ -25,6 +30,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     height: '100%',
     gap: 10,
+    textAlign: 'left',
+    flex: 1
+  },
+  fullWidth: {
+    width: '100%',
     textAlign: 'left'
   },
   link: {
@@ -64,12 +74,22 @@ export default function About() {
       </p>
       <div style={{ ...styles.grid, flexDirection: mobile ? 'column' : 'row' }}>
         <div style={styles.col}>
-          <ProjectTeam />
+          <MembersByRole
+            role={MemberRole.ProjectLeader}
+            titleKey="about.roles.projectLeader"
+          />
+          <MembersByRole
+            role={MemberRole.Author}
+            titleKey="about.roles.author"
+          />
         </div>
         <div style={styles.col}>
-          <AdHoc />
-          <TgGroups />
+          <MembersByRole role={MemberRole.Dev} titleKey="about.roles.dev" />
+          <MembersByRole role={MemberRole.AdHoc} titleKey="about.roles.adHoc" />
         </div>
+      </div>
+      <div style={styles.fullWidth}>
+        <TgGroups />
       </div>
     </Wrapper>
   )
@@ -83,49 +103,25 @@ function TgLogo() {
   )
 }
 
-function ProjectTeam() {
+interface MembersByRoleProps {
+  role: MemberRoleKeys
+  titleKey: string
+}
+
+function MembersByRole({ role, titleKey }: MembersByRoleProps) {
   const { t } = useTranslation()
-  const team = members
-    .filter((m) => !m.ah)
+  const filteredByRole = members
+    .filter((m) => m.roles.includes(role))
     .sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1))
 
   return (
     <div>
-      <b>{t('about.projectTeam')}</b>
+      <b>{t(titleKey)}</b>
       <ul style={styles.list}>
-        {team.map((m, i) => (
+        {filteredByRole.map((m, i) => (
           <li key={i}>
             <p style={styles.liP}>
               {(m.prefix || '') + ' ' + m.name}{' '}
-              <a
-                href={`https://t.me/${m.tg}`}
-                target="_blank"
-                rel="noreferrer noopener"
-                style={styles.telegramLink}
-              >
-                <TgLogo />
-              </a>
-            </p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-}
-
-function AdHoc() {
-  const ah = members
-    .filter((m) => !!m.ah)
-    .sort((a, b) => (a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1))
-
-  return (
-    <div>
-      <span>Ad hoc</span>
-      <ul style={styles.list}>
-        {ah.map((m, i) => (
-          <li key={i}>
-            <p style={styles.liP}>
-              {m.name}{' '}
               <a
                 href={`https://t.me/${m.tg}`}
                 target="_blank"
