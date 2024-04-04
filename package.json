@@ -62,7 +62,7 @@
     "ts-prune": "^0.10.3",
     "typescript": "^5.0.4",
     "underscore": "^1.13.6",
-    "vite": "^4.5.2"
+    "vite": "^4.5.3"
   },
   "engines": {
     "node": "^20.0.0"
