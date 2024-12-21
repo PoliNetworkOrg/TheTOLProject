@@ -10,6 +10,7 @@
       "contributions": [
         "projectManagement",
         "content",
+        "doc",
         "ideas"
       ]
     },
@@ -101,7 +102,36 @@
       "profile": "https://github.com/lorenzocorallo",
       "contributions": [
         "code",
-        "bug"
+        "bug" ,
+        "ideas"
+      ]
+    },
+    {
+      "name": "Caleb Koomson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "name": "Lorenzo Matteo Salvatori",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "contributions": [
+        "content"
+      ]
+    },
+    {
+      "name": "@spyarect",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "contributions": [
+        "promotion"
+      ]
+    },
+    {
+      "name": "Raif Muhammad",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+      "contributions": [
+        "promotion"
       ]
     }
   ],
