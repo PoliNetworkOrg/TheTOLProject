@@ -8,7 +8,7 @@ export const links = {
   polinetwork: 'https://polinetwork.org',
   polinetworkLogoSvg:
     'https://raw.githubusercontent.com/PoliNetworkOrg/Logo/1bf5ca6d64658d33d0159c0f526b57a6a31b9fc6/Logo.svg',
-  telegramPreparazioneTOL: 'https://t.me/joinchat/_zugEikozmcyMzA0',
+  telegramPreparazioneTOL: 'https://t.me/+XiyiztAEwB4wYjQ0',
   telegramTheTOLProject: 'https://t.me/+amLdTd-EoHw1MWRk',
   localStorageMDN:
     'https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage'
