@@ -9,13 +9,13 @@ on:
 jobs:
   cache:
     name: Cache dependencies
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: cache
         with:
           path: ./node_modules
@@ -27,13 +27,13 @@ jobs:
   build:
     name: Build website
     needs: cache
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: cache
         with:
           path: ./node_modules
@@ -45,13 +45,13 @@ jobs:
   lint:
     name: Run linters
     needs: cache
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: cache
         with:
           path: ./node_modules
@@ -63,13 +63,13 @@ jobs:
   exports:
     name: Check unused exports
     needs: cache
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: cache
         with:
           path: ./node_modules
@@ -81,13 +81,13 @@ jobs:
   database:
     name: Build database
     needs: cache
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         id: cache
         with:
           path: ./node_modules
