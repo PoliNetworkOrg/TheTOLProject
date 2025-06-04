@@ -25,6 +25,10 @@ If you want to contribute to this repo, make sure to check out the [contributing
 This project follows the [all-contributors](https://allcontributors.org/) specification. Contributions of any kind welcome!  
 If you've contributed to this project and you're not in the contributors list, please open an issue or a PR to fix it.
 
+### Releasing the website
+
+If you're a core contributor and you want to push changes to production, follow the instructions in [docs/releasing.md](./docs/releasing.md)
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
